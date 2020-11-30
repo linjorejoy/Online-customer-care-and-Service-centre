@@ -4,7 +4,6 @@
 
 First Time
 ---------------
-
 git init
 
 git remote add origin https://github.com/linjorejoy/Online-customer-care-and-Service-centre.git
