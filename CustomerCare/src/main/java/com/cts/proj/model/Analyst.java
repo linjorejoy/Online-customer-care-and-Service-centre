@@ -1,6 +1,7 @@
 package com.cts.proj.model;
 
-import java.time.LocalDateTime;
+
+import java.util.Date;
 
 
 public class Analyst implements Comparable<Analyst>{
@@ -11,7 +12,7 @@ public class Analyst implements Comparable<Analyst>{
     private String lastName;
     private long phoneNumber;
     private String emailId;
-    private LocalDateTime dateOfBirth;
+    private Date dateOfBirth;
     private String gender;
     private String supportLevel;
     
@@ -20,7 +21,7 @@ public class Analyst implements Comparable<Analyst>{
     }
     
 	public Analyst(long analystId, String password, String tempPassword, String firstName, String lastName,
-			long phoneNumber, String emailId, LocalDateTime dateOfBirth, String gender, String supportLevel) {
+			long phoneNumber, String emailId, Date dateOfBirth, String gender, String supportLevel) {
 		super();
 		this.analystId = analystId;
 		this.password = password;
@@ -77,10 +78,10 @@ public class Analyst implements Comparable<Analyst>{
 	public void setEmailId(String emailId) {
 		this.emailId = emailId;
 	}
-	public LocalDateTime getDateOfBirth() {
+	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
-	public void setDateOfBirth(LocalDateTime dateOfBirth) {
+	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 	public String getGender() {
