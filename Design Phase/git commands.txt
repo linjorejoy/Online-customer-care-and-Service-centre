@@ -1,0 +1,47 @@
+
+
+########################################################
+
+First Time
+---------------
+git init
+
+git remote add origin https://github.com/linjorejoy/Online-customer-care-and-Service-centre.git
+
+git pull origin master
+
+git pull origin sprint1
+
+git checkout sprint1
+
+< do all the edits in eclipse >
+
+make sure current branch is "sprint1"
+git add .
+
+git commit -m "changes added"
+
+git push origin sprint1
+
+
+########################################################
+
+after 1st time
+---------------
+
+git add .
+
+git commit -m "chenges made"
+
+git pull origin sprint1
+
+git push origin sprint1
+
+
+
+
+
+########################################################
+
+
+

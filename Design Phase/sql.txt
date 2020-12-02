@@ -1,0 +1,14 @@
+questionair(
+id int(11) primary key,
+description varchar(255) not null,
+)
+
+
+response(
+id int(11) primary key auto_increment,
+complaint_id int(11) not null references complaint(id),
+user_id int(11) not null,
+questionari_id int(11) not null,
+answer varchar(50) not null
+)
+
