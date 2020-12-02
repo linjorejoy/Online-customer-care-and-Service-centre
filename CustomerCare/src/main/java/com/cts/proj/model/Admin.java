@@ -9,6 +9,10 @@ public class Admin {
 	private String lastName;
 	private String emailId;
 
+	public Admin() {
+		super();
+	}
+
 	public Admin(long adminId, String password, String tempPassword, String firstName, String lastName,
 			String emailId) {
 		super();

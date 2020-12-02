@@ -1,5 +1,9 @@
 package com.cts.proj.model;
 
+<<<<<<< HEAD
+public class User {
+     
+=======
 import java.util.Date;
 
 public class User implements Comparable<User> {
@@ -139,4 +143,5 @@ public class User implements Comparable<User> {
         return -1;
     }
 
+>>>>>>> a038dfe4e9d5f1e8034b458b44dca8e4e488566f
 }
