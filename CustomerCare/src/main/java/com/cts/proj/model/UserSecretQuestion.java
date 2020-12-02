@@ -1,6 +1,6 @@
 package com.cts.proj.model;
 
-public class SecretQuestion {
+public class UserSecretQuestion {
 
 	private long userSqId;
 	private long questionId;
