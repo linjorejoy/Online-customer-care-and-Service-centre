@@ -1,6 +1,13 @@
 package com.cts.proj.model;
 
 public class Feedback {
+	public Feedback(int responseId, int questionId, int complaintId, String answer) {
+		super();
+		this.responseId = responseId;
+		this.questionId = questionId;
+		this.complaintId = complaintId;
+		this.answer = answer;
+	}
 	int responseId;
 	int questionId;
 	int complaintId;
