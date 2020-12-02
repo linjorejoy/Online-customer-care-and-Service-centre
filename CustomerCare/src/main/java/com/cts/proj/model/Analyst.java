@@ -103,17 +103,9 @@ public class Analyst implements Comparable<Analyst>{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + (int) (analystId ^ (analystId >>> 32));
-		result = prime * result + ((dateOfBirth == null) ? 0 : dateOfBirth.hashCode());
-		result = prime * result + ((emailId == null) ? 0 : emailId.hashCode());
-		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
-		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + (int) (phoneNumber ^ (phoneNumber >>> 32));
-		result = prime * result + ((supportLevel == null) ? 0 : supportLevel.hashCode());
 		return result;
 	}
-	
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -125,41 +117,9 @@ public class Analyst implements Comparable<Analyst>{
 		Analyst other = (Analyst) obj;
 		if (analystId != other.analystId)
 			return false;
-		if (dateOfBirth == null) {
-			if (other.dateOfBirth != null)
-				return false;
-		} else if (!dateOfBirth.equals(other.dateOfBirth))
-			return false;
-		if (emailId == null) {
-			if (other.emailId != null)
-				return false;
-		} else if (!emailId.equals(other.emailId))
-			return false;
-		if (firstName == null) {
-			if (other.firstName != null)
-				return false;
-		} else if (!firstName.equals(other.firstName))
-			return false;
-		if (gender == null) {
-			if (other.gender != null)
-				return false;
-		} else if (!gender.equals(other.gender))
-			return false;
-		if (lastName == null) {
-			if (other.lastName != null)
-				return false;
-		} else if (!lastName.equals(other.lastName))
-			return false;
-		if (phoneNumber != other.phoneNumber)
-			return false;
-		if (supportLevel == null) {
-			if (other.supportLevel != null)
-				return false;
-		} else if (!supportLevel.equals(other.supportLevel))
-			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Analyst [analystId=" + analystId + ", firstName=" + firstName + ", lastName=" + lastName
