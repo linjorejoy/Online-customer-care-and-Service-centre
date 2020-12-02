@@ -51,12 +51,13 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `customer_care`.`analyst` (
   `analyst_id` INT NOT NULL AUTO_INCREMENT,
   `password` VARCHAR(256) NOT NULL,
-  `remp_password` VARCHAR(256) NOT NULL,
+  `temp_password` VARCHAR(256) NOT NULL,
   `first_name` VARCHAR(45) NOT NULL,
   `last_name` VARCHAR(45) NOT NULL,
   `phone_number` VARCHAR(15) NOT NULL,
   `email_id` VARCHAR(45) NOT NULL,
   `date_of_birth` DATETIME NOT NULL,
+  `gender` VARCHAR(45) NOT NULL,
   `support_level` VARCHAR(2) NOT NULL,
   PRIMARY KEY (`analyst_id`))
 ENGINE = InnoDB;
