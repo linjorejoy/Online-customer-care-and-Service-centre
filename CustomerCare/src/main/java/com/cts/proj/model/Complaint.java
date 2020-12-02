@@ -4,15 +4,15 @@ import java.util.Date;
 
 public class Complaint {
 
-    long complaintId;
-    long complaintUserId;
-    long assignedAnalystId;
-    String analystId;
-    long phoneNumber;
-    String description;
-    String status;
-    Date dateOfComplaint;
-    String suggestions;
+    private long complaintId;
+    private long complaintUserId;
+    private long assignedAnalystId;
+    private String analystId;
+    private long phoneNumber;
+    private String description;
+    private String status;
+    private Date dateOfComplaint;
+    private String suggestions;
 
     public Complaint() {
         super();

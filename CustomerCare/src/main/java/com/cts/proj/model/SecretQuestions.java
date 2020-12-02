@@ -2,8 +2,8 @@ package com.cts.proj.model;
 
 public class SecretQuestions {
 
-    long questionId;
-    String description;
+    private long questionId;
+    private String description;
 
     public SecretQuestions() {
         super();

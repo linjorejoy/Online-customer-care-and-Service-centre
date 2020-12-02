@@ -3,15 +3,15 @@ package com.cts.proj.model;
 import java.util.Date;
 
 public class User implements Comparable<User> {
-    long userId;
-    String password;
-    String tempPassword;
-    String firstName;
-    String lastName;
-    long phoneNumber;
-    String emailId;
-    Date dateOfBirth;
-    String gender;
+    private long userId;
+    private String password;
+    private String tempPassword;
+    private String firstName;
+    private String lastName;
+    private long phoneNumber;
+    private String emailId;
+    private Date dateOfBirth;
+    private String gender;
 
     public User() {
         super();
