@@ -1,6 +1,12 @@
 package com.cts.proj.model;
 
 public class Feedback {
+	private int responseId;
+	private int questionId;
+	private int complaintId;
+	private String answer;
+	
+	
 	public Feedback(int responseId, int questionId, int complaintId, String answer) {
 		super();
 		this.responseId = responseId;
@@ -8,10 +14,6 @@ public class Feedback {
 		this.complaintId = complaintId;
 		this.answer = answer;
 	}
-	int responseId;
-	int questionId;
-	int complaintId;
-	String answer;
 	
 	public Feedback() {
 		super();
@@ -40,4 +42,10 @@ public class Feedback {
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
+	@Override
+	public String toString() {
+		return "Feedback [responseId=" + responseId + ", questionId=" + questionId + ", complaintId=" + complaintId
+				+ ", answer=" + answer + "]";
+	}
+
 }
