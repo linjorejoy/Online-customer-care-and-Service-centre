@@ -13,7 +13,7 @@ import com.cts.proj.service.UserService;
 @SpringBootApplication
 @EnableAutoConfiguration
 @ComponentScan("com.cts.proj")
-@EnableJpaRepositories("com.cts.proj.repository")
+@EnableJpaRepositories(basePackages = {"com.cts.proj.repository"})
 @EntityScan("com.cts.proj.model")
 public class TrialTesting {
 

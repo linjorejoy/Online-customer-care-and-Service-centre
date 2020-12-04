@@ -2,16 +2,36 @@ package com.cts.proj.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "complaint")
 public class Complaint {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "complaint_id")
 	private long complaintId;
+	@Column(name = "complaint_user_id")
 	private long complaintUserId;
+	@Column(name = "complaint_analyst_id")
 	private long assignedAnalystId;
-	private String analystId;
+	@Column(name = "category")
+	private String category;
+	@Column(name = "phone_number")
 	private long phoneNumber;
+	@Column(name = "description")
 	private String description;
+	@Column(name = "status")
 	private String status;
+	@Column(name = "date_of_complaint")
 	private Date dateOfComplaint;
+	@Column(name = "suggestions")
 	private String suggestions;
 
 	public Complaint() {
@@ -24,7 +44,7 @@ public class Complaint {
 		this.complaintId = complaintId;
 		this.complaintUserId = complaintUserId;
 		this.assignedAnalystId = assignedAnalystId;
-		this.analystId = analystId;
+		this.category = analystId;
 		this.phoneNumber = phoneNumber;
 		this.description = description;
 		this.status = status;
@@ -56,12 +76,12 @@ public class Complaint {
 		this.assignedAnalystId = assignedAnalystId;
 	}
 
-	public String getAnalystId() {
-		return analystId;
+	public String getCategory() {
+		return category;
 	}
 
-	public void setAnalystId(String analystId) {
-		this.analystId = analystId;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	public long getPhoneNumber() {
@@ -108,7 +128,7 @@ public class Complaint {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((analystId == null) ? 0 : analystId.hashCode());
+		result = prime * result + ((category == null) ? 0 : category.hashCode());
 		return result;
 	}
 
@@ -121,10 +141,10 @@ public class Complaint {
 		if (getClass() != obj.getClass())
 			return false;
 		Complaint other = (Complaint) obj;
-		if (analystId == null) {
-			if (other.analystId != null)
+		if (category == null) {
+			if (other.category != null)
 				return false;
-		} else if (!analystId.equals(other.analystId))
+		} else if (!category.equals(other.category))
 			return false;
 		return true;
 	}
@@ -132,7 +152,7 @@ public class Complaint {
 	@Override
 	public String toString() {
 		return "Complaint [complaintId=" + complaintId + ", complaintUserId=" + complaintUserId + ", assignedAnalystId="
-				+ assignedAnalystId + ", analystId=" + analystId + ", phoneNumber=" + phoneNumber + ", description="
+				+ assignedAnalystId + ", analystId=" + category + ", phoneNumber=" + phoneNumber + ", description="
 				+ description + ", status=" + status + ", dateOfComplaint=" + dateOfComplaint + ", suggestions="
 				+ suggestions + "]";
 	}

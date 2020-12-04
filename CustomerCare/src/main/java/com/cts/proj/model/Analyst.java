@@ -3,17 +3,38 @@ package com.cts.proj.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "ANALYST")
 public class Analyst implements Comparable<Analyst>{
-    private long analystId;
+    
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "analyst_id")
+	private long analystId;
+	@Column(name = "password")
     private String password;
+	@Column(name = "temp_password")
     private String tempPassword;
+	@Column(name = "first_name")
     private String firstName;
+	@Column(name = "last_name")
     private String lastName;
+	@Column(name = "phone_number")
     private long phoneNumber;
+	@Column(name = "email_id")
     private String emailId;
+	@Column(name = "date_of_birth")
     private Date dateOfBirth;
+	@Column(name = "gender")
     private String gender;
+	@Column(name = "support_level")
     private String supportLevel;
     
     public Analyst() {

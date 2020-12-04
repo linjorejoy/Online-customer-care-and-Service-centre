@@ -1,9 +1,25 @@
 package com.cts.proj.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "responses")
 public class Feedback {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "response_id")
 	private int responseId;
+	@Column(name = "question_id")
 	private int questionId;
+	@Column(name = "complaint_complaint_id")
 	private int complaintId;
+	@Column(name = "answer")
 	private String answer;
 	
 	
