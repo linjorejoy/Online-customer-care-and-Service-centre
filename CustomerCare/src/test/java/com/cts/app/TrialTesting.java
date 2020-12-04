@@ -20,9 +20,9 @@ public class TrialTesting {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		SpringApplication.run(TrialTesting.class);
-		UserService userService = new UserService();
-		User user = userService.getUser(1);
-		System.out.println(user);
+//		UserService userService = new UserService();
+//		User user = userService.getUser(1);
+//		System.out.println(user);
 	}
 
 }
