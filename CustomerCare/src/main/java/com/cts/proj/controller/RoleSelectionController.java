@@ -8,6 +8,6 @@ public class RoleSelectionController {
 	
 	@RequestMapping(value="/roleSelectionPage", method=RequestMethod.GET)
 	public String roleSelectionPage() {
-		return "roleSelection";
+		return "role-selection";
 	}
 }
