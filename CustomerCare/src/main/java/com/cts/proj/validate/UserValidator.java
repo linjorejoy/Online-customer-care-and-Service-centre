@@ -25,7 +25,7 @@ public class UserValidator implements Validator {
 		// TODO Auto-generated method stub
 		User user = (User) target;
 		try {
-			if(!SecureWithSHA256.getSHA(user.getTempPassword()).equals("")) {
+			if(!SecureWithSHA256.getSHA(user.getTempPassword()).equals(userService.getPasswordSHA(user.getUserId()))) {
 				errors.rejectValue("tempPassword", "passwordError", "Please Enter Correct Password");
 			}
 		} catch (NoSuchAlgorithmException e) {
