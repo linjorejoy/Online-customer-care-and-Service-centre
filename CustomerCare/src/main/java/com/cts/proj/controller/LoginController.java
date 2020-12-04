@@ -31,7 +31,7 @@ public class LoginController {
 			return "admin-login";
 		}
 
-		return "complaint-notification-admin";
+		return "admin-login";
 	}
 
 	@RequestMapping(value = "/analyst-login", method = RequestMethod.GET)
