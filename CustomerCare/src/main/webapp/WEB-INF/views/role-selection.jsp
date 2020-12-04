@@ -2,9 +2,9 @@
 <div class="container">
 	<%@ include file="common/nav-bar-role-selection.jspf"%>
 	<div class="center-div">
-		<div class="role-div"><a href="/adminLogin">Admin</a></div>
-		<div class="role-div"><a href="/analystRegistration">Analyst</a></div>
-		<div class="role-div"><a href="/userRegistration">User</a></div>
+		<div class="role-div"><a href="/admin-login">Admin</a></div>
+		<div class="role-div"><a href="/analyst-registration">Analyst</a></div>
+		<div class="role-div"><a href="/user-registration">User</a></div>
 	</div>	
 	<%@ include file="common/footer-role-selection.jspf"%>
 </div>
