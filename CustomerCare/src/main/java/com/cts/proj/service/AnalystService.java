@@ -1,9 +1,6 @@
 package com.cts.proj.service;
 
-<<<<<<< HEAD
-=======
 import org.springframework.stereotype.Service;
->>>>>>> 3c10f9091d1bfbcce3316d6a674e17b8475aa0d9
 
 import java.util.List;
 

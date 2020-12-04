@@ -1,5 +1,5 @@
 <%@ include file="common/header-role-selection.jspf"%>
-<div class="container">
+<div class="container d-flex align-items-center justify-content-center">
 	<%@ include file="common/nav-bar-role-selection.jspf"%>
 	<div class="center-div">
 		<div class="role-div"><a href="/admin-login">Admin</a></div>
