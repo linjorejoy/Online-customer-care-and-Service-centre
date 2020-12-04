@@ -10,7 +10,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -36,24 +36,32 @@ public class RegistrationController {
 		return "analyst-reg";
 	}
 
-	@RequestMapping(value="/register-analyst" , method=RequestMethod.GET)
-	public String registerAnalyst(@Validated @ModelAttribute Analyst analyst, BindingResult result) {
+	@RequestMapping(value="/register-analyst" , method=RequestMethod.POST)
+	public String registerAnalyst(@Validated @ModelAttribute Analyst analyst, BindingResult result,ModelMap model) {
 		if(result.hasErrors()) {
 			return "analyst-reg";
 		}
-		return "anayst-login";
+		
+		model.put("isRegisrered",true);
+		model.put("analystId", analyst.getAnalystId());
+		return "forward:/anayst-login";
 	}
+	
+	
 	
 	@RequestMapping(value = "/user-registration", method = RequestMethod.GET)
 	public String userRegistration(@ModelAttribute User user) {
 		return "user-reg";
 	}
-	@RequestMapping(value="/register-user" , method=RequestMethod.GET)
-	public String registerUser(@Validated @ModelAttribute User user, BindingResult result) {
+	@RequestMapping(value="/register-user" , method=RequestMethod.POST)
+	public String registerUser(@Validated @ModelAttribute User user, BindingResult result,ModelMap model) {
 		if(result.hasErrors()) {
 			return "user-reg";
 		}
-		return "user-login";
+		
+		model.put("isRegisrered",true);
+		model.put("analystId", user.getUserId());
+		return "forward:/user-login";
 	}
 	
 	@ModelAttribute("genderList")
