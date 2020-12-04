@@ -67,7 +67,7 @@
 
 					<input type="Submit" name="submit" value="Register" /> <input
 						type="reset" name="reset" value="Reset" />
-
+					
 				</div>
 			</form:form>
 

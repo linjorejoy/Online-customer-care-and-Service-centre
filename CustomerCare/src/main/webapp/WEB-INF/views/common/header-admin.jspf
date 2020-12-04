@@ -8,9 +8,13 @@
 <html>
 <head>
 <style>
-	<%@ include file="../styles/styles.css" %>
+	<%@ include file="../styles/styles-admin.css" %>
 </style>
 <link href="webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Righteous&display=swap"
 	rel="stylesheet">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>

@@ -1,8 +1,6 @@
-
 /* ###################################################### */
 /* This is Style Sheet for Role Selection and Admin Pages */
 /* ###################################################### */
-
 * {
 	margin: 0;
 	padding: 0;
@@ -10,84 +8,111 @@
 }
 
 /* HTML Elements */
-
-body{
+body {
 	background-color: #BEDCFA;
-	
+	text-align: center;
+	height: 100%;
 }
 
-h1{
-	
+a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+label{
+	color: #FFFFFF;
+	font-family: 'Righteous', cursive;
+}
+
+/* Div positioning */
+.container-my {
+	background-color: #BEDCFA;
+	height: 100vh;
+	margin: 0px;
+	padding: 0;
+	vertical-align: middle;
+	width: 100%;
+}
+.center-div-admin{
+	background-color: #98ACF8;
+	position: relative;
+	top: 50%;
+	text-align: center;
+	margin: auto;
+	height: 50%;
+	width: 50%;
+	align-content: center;
+	transform: translateY(-50%);
+}
+.center-div {
+	background-color: #98ACF8;
+	position: relative;
+	top: 50%;
+	text-align: center;
+	margin: auto;
+	height: 50%;
+	width: 50%;
+	align-content: center;
+	transform: translateY(-50%);
+}
+
+.centering{
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.role-div {
+	margin-top: 2;
+	margin-right: auto;
+	margin-bottom: 10;
+	margin-left: auto;
+	padding: 10px;
+	border-top: 5;
+	width: 45%;
+	background-color: #B088F9;
+	border-radius: 20px;
+}
+
+.spacing {
+	margin-top: 2;
+	margin-right: auto;
+	margin-bottom: 10;
+	margin-left: auto;
+	width: 35%;
+	height: 5px;
 }
 
 /* Header Elements */
 
 
-
-
-
-
-
-
-
-
 /* Body Elements */
-
-
-
-
-
-
-
-
-
-
-
 
 /* Heading Elements */
 
-
-
-
-
-
-
-
-
-
+.heading-admin-h1{
+	color: #FFFFFF;
+	font-family: 'Righteous', cursive;
+}
 
 /* Form Elements */
+.form-input-div-admin{
+	margin-top: 2;
+	margin-right: auto;
+	margin-bottom: 10;
+	margin-left: auto;
+	padding: 10px;
+	border-top: 5;
+	width: 45%;
+	background-color: #B088F9;
+	border-radius: 20px;
+}
 
-
-
-
-
-
-
-
-
-
-
+.label-form-admin{
+	padding-right: 10px;
+}
 
 
 /* Button Elements */
 
-
-
-
-
-
-
-
-
-
-
-
 /* Footer Elements */
-
-
-
-
-
-
-

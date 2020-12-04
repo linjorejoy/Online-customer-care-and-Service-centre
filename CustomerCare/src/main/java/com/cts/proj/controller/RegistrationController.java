@@ -32,11 +32,11 @@ public class RegistrationController {
 	@Autowired
 	private UserService userService;
 
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
-    }
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+	}
 
 	@RequestMapping(value = "/analyst-registration", method = RequestMethod.GET)
 	public String analystRegistration(@ModelAttribute Analyst analyst) {
@@ -44,14 +44,15 @@ public class RegistrationController {
 	}
 
 	@RequestMapping(value = "/register-analyst", method = RequestMethod.POST)
-	public String registerAnalyst(@Validated @ModelAttribute Analyst analyst, BindingResult result, ModelMap model) {
+	public String registerAnalyst(@Validated @ModelAttribute("analyst") Analyst analyst, BindingResult result,
+			ModelMap model) {
 		if (result.hasErrors()) {
 			return "analyst-reg";
 		}
 		analystService.addAnalyst(analyst);
 		model.put("isRegisrered", true);
 		model.put("analystId", analyst.getAnalystId());
-		return "forward:/anayst-login";
+		return "analyst-reg-status";
 	}
 
 	@RequestMapping(value = "/user-registration", method = RequestMethod.GET)
