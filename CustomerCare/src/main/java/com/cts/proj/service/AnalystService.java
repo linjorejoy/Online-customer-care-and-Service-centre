@@ -1,7 +1,6 @@
 package com.cts.proj.service;
 
-import org.springframework.stereotype.Service;
-
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,7 @@ public class AnalystService {
 	AnalystRepository analystRepository;
 
 	public boolean addAnalyst(Analyst analyst) {
+//		Analyst demo = new Analyst(1, "1234", "", "Analyst", "Demo", 12345, "email", new Date(), "Male", "L1");
 		analystRepository.save(analyst);
 		return true;
 	}

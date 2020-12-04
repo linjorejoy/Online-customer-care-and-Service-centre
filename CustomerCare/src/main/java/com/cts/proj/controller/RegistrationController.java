@@ -1,8 +1,5 @@
 package com.cts.proj.controller;
 
-
-
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,10 +24,9 @@ import com.cts.proj.model.User;
 import com.cts.proj.service.AnalystService;
 import com.cts.proj.service.UserService;
 
-
 @Controller
 public class RegistrationController {
-	
+
 	@Autowired
 	private AnalystService analystService;
 	@Autowired
@@ -38,58 +34,57 @@ public class RegistrationController {
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
     }
-    
-	
+
 	@RequestMapping(value = "/analyst-registration", method = RequestMethod.GET)
 	public String analystRegistration(@ModelAttribute Analyst analyst) {
 		return "analyst-reg";
 	}
 
-	@RequestMapping(value="/register-analyst" , method=RequestMethod.POST)
-	public String registerAnalyst(@Validated @ModelAttribute Analyst analyst, BindingResult result,ModelMap model) {
-		if(result.hasErrors()) {
+	@RequestMapping(value = "/register-analyst", method = RequestMethod.POST)
+	public String registerAnalyst(@Validated @ModelAttribute Analyst analyst, BindingResult result, ModelMap model) {
+		if (result.hasErrors()) {
 			return "analyst-reg";
 		}
 		analystService.addAnalyst(analyst);
-		model.put("isRegisrered",true);
+		model.put("isRegisrered", true);
 		model.put("analystId", analyst.getAnalystId());
 		return "forward:/anayst-login";
 	}
-	
-	
-	
+
 	@RequestMapping(value = "/user-registration", method = RequestMethod.GET)
 	public String userRegistration(@ModelAttribute User user) {
 		return "user-reg";
 	}
-	@RequestMapping(value="/register-user" , method=RequestMethod.POST)
-	public String registerUser(@Validated @ModelAttribute User user, BindingResult result,ModelMap model) {
-		if(result.hasErrors()) {
+
+	@RequestMapping(value = "/register-user", method = RequestMethod.POST)
+	public String registerUser(@Validated @ModelAttribute User user, BindingResult result, ModelMap model) {
+		if (result.hasErrors()) {
 			return "user-reg";
 		}
 		userService.addUser(user);
-		model.put("isRegisrered",true);
+		model.put("isRegisrered", true);
 		model.put("analystId", user.getUserId());
 		return "forward:/user-login";
 	}
-	
+
 	@ModelAttribute("genderList")
-	public List<String> populateGender(){
-		List<String> genderList=new ArrayList<String>();	
+	public List<String> populateGender() {
+		List<String> genderList = new ArrayList<String>();
 		genderList.add("Male");
 		genderList.add("Female");
 		genderList.add("Other");
 		return genderList;
 	}
+
 	@ModelAttribute("supportLevel")
-	public Map<String,String> populateSupportLevel(){
-		Map<String,String> supportLevel=new HashMap<String,String>();	
-		supportLevel.put("L1","L1");
-		supportLevel.put("L2","L2");
-		supportLevel.put("L3","L3");
+	public Map<String, String> populateSupportLevel() {
+		Map<String, String> supportLevel = new HashMap<String, String>();
+		supportLevel.put("L1", "L1");
+		supportLevel.put("L2", "L2");
+		supportLevel.put("L3", "L3");
 		return supportLevel;
 	}
 }

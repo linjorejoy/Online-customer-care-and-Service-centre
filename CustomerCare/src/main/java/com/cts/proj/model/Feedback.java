@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class Feedback {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "response_id")
 	private int responseId;
 	@Column(name = "question_id")

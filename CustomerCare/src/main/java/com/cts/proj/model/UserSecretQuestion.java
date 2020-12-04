@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class UserSecretQuestion {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "u_sq_id")
 	private long userSqId;
 	@Column(name = "question_id")

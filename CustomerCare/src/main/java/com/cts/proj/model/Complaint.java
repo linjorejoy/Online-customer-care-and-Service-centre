@@ -14,7 +14,7 @@ import javax.persistence.Table;
 public class Complaint {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "complaint_id")
 	private long complaintId;
 	@Column(name = "complaint_user_id")
