@@ -3,12 +3,12 @@
 	<%@ include file="common/nav-bar-admin.jspf"%>
 	<div class="center-div-admin">
 		<div class="heading-admin">
-			<center>Admin Login</center>
+			<h1>Admin Login</h1>
 		</div>
 		<div class="form-div-admin">
-			<form:form action="/" modelAttribute="admin" method="get">
+			<form:form action="/" modelAttribute="admin" method="post">
 				<div class="form-input-div-admin">
-					<form:label path="adminId"> AdminId</form:label>
+					<form:label path="adminId"> Admin Id</form:label>
 					<form:input path="adminId" id="adminId" />
 					<form:errors path="adminId"></form:errors>
 				</div>
