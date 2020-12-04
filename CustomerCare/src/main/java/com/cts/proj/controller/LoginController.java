@@ -15,35 +15,33 @@ import com.cts.proj.model.User;
 public class LoginController {
 
 	@RequestMapping(value = "/user-login", method = RequestMethod.GET)
-	public String userLogin(@Validated @ModelAttribute("user")  User user, BindingResult result ) {
-		
-		if(result.hasErrors()) {
+	public String userLogin(@Validated @ModelAttribute("user") User user, BindingResult result) {
+
+		if (result.hasErrors()) {
 			return "user-login";
 		}
-		
-		
-		
+
 		return "complaint-creation";
 	}
 
 	@RequestMapping(value = "/admin-login", method = RequestMethod.GET)
-	public String adminLogin(@Validated @ModelAttribute("admin") Admin admin, BindingResult result ) {
+	public String adminLogin(@Validated @ModelAttribute("admin") Admin admin, BindingResult result) {
 
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
 			return "admin-login";
 		}
-		
+
 		return "complaint-notification-admin";
 	}
 
 	@RequestMapping(value = "/analyst-login", method = RequestMethod.GET)
-	public String analystLogin(@Validated @ModelAttribute("analyst") Analyst analyst, BindingResult result ) {
+	public String analystLogin(@Validated @ModelAttribute("analyst") Analyst analyst, BindingResult result) {
 
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
 			return "analyst-login";
 		}
-		
+
 		return "";
 	}
-	
+
 }

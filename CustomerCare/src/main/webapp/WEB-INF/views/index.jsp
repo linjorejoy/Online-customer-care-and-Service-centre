@@ -1,9 +1,9 @@
-<%@ include file="common/header-reg-page.jspf"%>
+<%@ include file="common/header-role-selection.jspf"%>
 <div class="container">
-	<%@ include file="common/nav-bar-reg-page.jspf"%>
+	<%@ include file="common/nav-bar-role-selection.jspf"%>
 	
+		
 	
-	
-	<%@ include file="common/footer-reg-page.jspf"%>
+	<%@ include file="common/footer-role-selection.jspf"%>
 </div>
-<%@ include file="common/end-tags-reg-page.jspf"%>
+<%@ include file="common/end-tags-role-selection.jspf"%>
