@@ -6,7 +6,7 @@
 
 		<div class="heading-user">
 			<h1>
-				<center>User Registration</center>
+				User Registration
 			</h1>
 		</div>
 
