@@ -14,7 +14,7 @@ import com.cts.proj.model.User;
 @Controller
 public class LoginController {
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/user-login", method = RequestMethod.GET)
 	public String userLogin(@Validated @ModelAttribute("user")  User user, BindingResult result ) {
 		
 		if(result.hasErrors()) {
@@ -26,17 +26,17 @@ public class LoginController {
 		return "complaint-creation";
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin-login", method = RequestMethod.GET)
 	public String adminLogin(@Validated @ModelAttribute("admin") Admin admin, BindingResult result ) {
 
 		if(result.hasErrors()) {
 			return "admin-login";
 		}
 		
-		return "";
+		return "complaint-notification-admin";
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/analyst-login", method = RequestMethod.GET)
 	public String analystLogin(@Validated @ModelAttribute("analyst") Analyst analyst, BindingResult result ) {
 
 		if(result.hasErrors()) {
