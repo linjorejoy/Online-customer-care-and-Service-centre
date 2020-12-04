@@ -3,9 +3,7 @@
 	<%@ include file="common/nav-bar-analyst.jspf"%>
 	<div class="center-div-analyst">
 		<div class="heading-analyst">
-			<h2 class="body-heading">
-				<center>Analyst Registration</center>
-			</h2>
+			<h1 class="body-heading-analyst">Analyst Registration</h1>
 		</div>
 		<div class="form-div">
 			<form:form action="/" modelAttribute="analyst" method="get">

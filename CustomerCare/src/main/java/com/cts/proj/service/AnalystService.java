@@ -1,9 +1,6 @@
 package com.cts.proj.service;
 
-<<<<<<< HEAD
-import org.springframework.stereotype.Service;
 
-=======
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.cts.proj.model.Analyst;
 import com.cts.proj.repository.AnalystRepository;
 
->>>>>>> b4196abe8655acdd9a053b328bd5b56b79017b6e
 @Service
 public class AnalystService {
 	@Autowired
