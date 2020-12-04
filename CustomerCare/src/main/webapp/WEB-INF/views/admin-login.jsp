@@ -20,11 +20,13 @@
 						<form:errors path="password"></form:errors>
 					</div>
 					<div class="form-group">
-						<a href="/">Forgot User Id</a> <a href="/">Forgot Password</a>
+						<a href="/">Forgot User Id</a> 
+						<a href="/">Forgot Password</a>
 					</div>
+					
 					<div class="form-buttons-div-admin">
-						<input type="Submit" name="submit" value="Submit" /> <input
-							type="reset" name="reset" value="Cancel" />
+						<input type="Submit" class="button" name="submit" value="Submit" /> 
+						<input type="reset" class="button" name="reset" value="Cancel" />
 
 					</div>
 				</form:form>
