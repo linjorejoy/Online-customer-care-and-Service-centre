@@ -41,7 +41,7 @@ public class RegistrationController {
 		if(result.hasErrors()) {
 			return "analyst-reg";
 		}
-		
+		analystService.addAnalyst(analyst);
 		model.put("isRegisrered",true);
 		model.put("analystId", analyst.getAnalystId());
 		return "forward:/anayst-login";
@@ -58,7 +58,7 @@ public class RegistrationController {
 		if(result.hasErrors()) {
 			return "user-reg";
 		}
-		
+		userService.addUser(user);
 		model.put("isRegisrered",true);
 		model.put("analystId", user.getUserId());
 		return "forward:/user-login";
