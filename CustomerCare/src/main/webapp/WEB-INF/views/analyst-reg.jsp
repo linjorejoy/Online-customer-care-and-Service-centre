@@ -6,7 +6,7 @@
 			<h1 class="body-heading-analyst">Analyst Registration</h1>
 		</div>
 		<div class="form-div">
-			<form:form action="/" modelAttribute="analyst" method="get">
+			<form:form action="/register-analyst" modelAttribute="analyst" method="POST">
 				<div class="form-input-div">
 					<div class="form-div-inputs">
 						<form:label path="firstName">First Name</form:label>
