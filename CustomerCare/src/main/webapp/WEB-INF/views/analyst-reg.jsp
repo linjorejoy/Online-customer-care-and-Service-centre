@@ -52,12 +52,12 @@
 
 				<div class="form-div-inputs">
 					<form:label path="password">Password</form:label>
-					<form:input path="password" id="password" />
+					<form:input path="password" id="password" type="password" />
 					<form:errors path="password"></form:errors>
 				</div>
 				<div class="form-div-inputs">
 					<form:label path="tempPassword">Confirm Password</form:label>
-					<form:input path="tempPassword" id="tempPassword" />
+					<form:input path="tempPassword" id="tempPassword" type="password" />
 					<form:errors path="tempPassword"></form:errors>
 				</div>
 		</div>
