@@ -1,5 +1,9 @@
 package com.cts.proj.service;
 
+<<<<<<< HEAD
+=======
+import java.util.Date;
+>>>>>>> 477655974a5aa06585333ed5ded189e71ade2532
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +18,7 @@ public class AnalystService {
 	AnalystRepository analystRepository;
 
 	public boolean addAnalyst(Analyst analyst) {
+//		Analyst demo = new Analyst(1, "1234", "", "Analyst", "Demo", 12345, "email", new Date(), "Male", "L1");
 		analystRepository.save(analyst);
 		return true;
 	}

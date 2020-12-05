@@ -5,8 +5,10 @@
 		<div class="heading-analyst">
 			<h1 class="body-heading-analyst">Analyst Registration</h1>
 		</div>
+
 		<div class="form-div">
-			<form:form action="/" modelAttribute="analyst" method="get">
+			<form:form action="/register-analyst" modelAttribute="analyst"
+				method="POST">
 				<div class="form-input-div">
 					<div class="form-div-inputs">
 						<form:label path="firstName">First Name</form:label>
@@ -60,19 +62,18 @@
 					<form:input path="tempPassword" id="tempPassword" type="password" />
 					<form:errors path="tempPassword"></form:errors>
 				</div>
+
+				<div class="form-buttons-div">
+
+					<input type="Submit" name="submit" value="Register" /> <input
+						type="reset" name="reset" value="Reset" />
+					
+				</div>
+			</form:form>
+
 		</div>
-		<div class="form-buttons-div">
-
-			<input type="Submit" name="submit" value="Register" /> <input
-				type="reset" name="reset" value="Reset" />
-
-		</div>
-
-
-		</form:form>
 	</div>
-</div>
 
-<%@ include file="common/footer-analyst.jspf"%>
+	<%@ include file="common/footer-analyst.jspf"%>
 </div>
 <%@ include file="common/end-tags-analyst.jspf"%>
