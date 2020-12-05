@@ -8,7 +8,7 @@
 		<div class="form-complaint-user">
 			<form:form action="/" modelAttribute="complaint" method="get">
 				<div class="form-input-complaint-user">
-					<form:label path="complaintId">User ID:</form:label>
+					<form:label path="complaintId">Complaint ID:</form:label>
 				</div>
 
 				<div class="form-input-complaint-user">
@@ -20,13 +20,13 @@
 					<form:input path="phoneNumber" id="phoneNumber" value="${user.phoneNumber}"></form:input>
 				</div>
 				<div class="form-input-complaint-user">
-					<form:label path="">Category:</form:label>
+					<form:label path="category">Category:</form:label>
 					<form:select path="category" id="category">
 						<form:options items="${categoryList}" />
 					</form:select>
 				</div>
 				<div class="form-input-complaint-user-1">
-					<form:label path="description">Description</form:label>
+					<form:label path="description">Description:</form:label>
 					<form:textarea path="description" id="description" rows="5"
 						cols="20" />
 					<form:errors path="description"></form:errors>

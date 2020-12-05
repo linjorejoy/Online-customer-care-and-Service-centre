@@ -51,7 +51,7 @@
 					</div>
 					<div class="form-div-inputs">
 						<form:label path="tempPassword">Confirm Password</form:label>
-						<form:input path="tempPassword" />
+						<form:input type="password" path="tempPassword"  />
 						<form:errors path="tempPassword"></form:errors>
 					</div>
 				</div>
