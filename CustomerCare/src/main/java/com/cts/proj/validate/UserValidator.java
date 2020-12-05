@@ -27,10 +27,10 @@ public class UserValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		// TODO Auto-generated method stub
 		User user = (User) target;
-		if (!user.getFirstName().matches("^[A-Za-z ]$")) {
+		if (!user.getFirstName().matches("^[A-Za-z ]+$")) {
 			errors.rejectValue("firstName", "NameError", "First name is not in correct format");
 		}
-		if (!user.getLastName().matches("^[A-Za-z ]$")) {
+		if (!user.getLastName().matches("^[A-Za-z ]+$")) {
 			errors.rejectValue("lastName", "NameError", "Last name is not in correct format");
 		}
 		if (!user.getPassword().equals(user.getTempPassword())) {
@@ -41,12 +41,16 @@ public class UserValidator implements Validator {
 			errors.rejectValue("password", "PasswordvalidationError",
 					"Password Should contain atleast 1 UpperCase, 1 lowercase, 1 special Char and should be atleast 6 letter long");
 		}
-		LocalDate localDate = user.getDateOfBirth().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		Period period = Period.between(localDate, LocalDate.now());
-		if(period.getYears() < 18) {
-			errors.rejectValue("dateOfBirth", "AgeError", "User Has to be atleast 18 years of age");
+		if(user.getDateOfBirth() == null) {
+			errors.rejectValue("dateOfBirth", "DateNullError", "Date Cannot be left blank");
+		}else {
+			LocalDate localDate = user.getDateOfBirth().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			Period period = Period.between(localDate, LocalDate.now());
+			if(period.getYears() < 18) {
+				errors.rejectValue("dateOfBirth", "AgeError", "User Has to be atleast 18 years of age");
+			}
 		}
-		if(!(user.getEmailId().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)@"+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)(\\.[A-Za-z]{2,})$"))){
+		if(!(user.getEmailId().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"))){
 			errors.rejectValue("emailId", "EmailIdError","Should be a proper email ID format");
 		}
 
