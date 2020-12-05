@@ -16,7 +16,7 @@ import com.cts.proj.model.User;
 public class LoginController {
 
 	@RequestMapping(value = "/user-login", method = RequestMethod.GET)
-	public String userLogin(@Validated @ModelAttribute("admin") Admin admin, BindingResult result) {
+	public String userLogin(@Validated @ModelAttribute("user") User user, BindingResult result) {
 		return "user-login";
 	}
 
@@ -34,13 +34,13 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/admin-login", method = RequestMethod.POST)
-	public String adminAfterLogin(@Validated @ModelAttribute("analyst") Admin admin, BindingResult result,
+	public String adminAfterLogin(@Validated @ModelAttribute("admin") Admin admin, BindingResult result,
 			ModelMap model) {
 		return "complaint-notification-admin";
 	}
 
 	@RequestMapping(value = "/analyst-login", method = RequestMethod.GET)
-	public String analystLogin(@Validated @ModelAttribute("admin") Analyst analyst, BindingResult result) {
+	public String analystLogin(@Validated @ModelAttribute("analyst") Analyst analyst, BindingResult result) {
 		return "analyst-login";
 	}
 

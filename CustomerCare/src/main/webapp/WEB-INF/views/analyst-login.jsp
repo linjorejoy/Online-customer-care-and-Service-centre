@@ -6,7 +6,7 @@
 			<h1 class="heading-analyst-h1">Analyst Login</h1>
 		</div>
 		<div class="form-div-analyst">
-			<form:form action="/" modelAttribute="analyst" method="post">
+			<form:form action="/" modelAttribute="analyst" method="POST">
 				<div class="form-input-div-analyst">
 					<form:label path="analystId"> Analyst Id</form:label>
 					<form:input path="analystId" id="analystId" />
