@@ -1,5 +1,7 @@
 package com.cts.proj.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -33,6 +35,20 @@ public class ComplaintController {
 		model.put("isRegisrered", true);
 		model.put("complaintId", complaint.getComplaintId());
 		return "complaint-submission-user";
+	}
+	@RequestMapping(value = "/admin-view-complaint-list", method = RequestMethod.GET)
+	public String ViewAllComplaintAdmin(ModelMap model) {
+		
+		List<Complaint> complaintList= complaintService.getAllComplaint();
+		model.addAttribute("complaintList",complaintList);
+		return "complaint-notification-admin";
+	}
+	@RequestMapping(value = "/user-view-complaint-list", method = RequestMethod.GET)
+	public String ViewAllComplaintUser(ModelMap model) {
+		
+		List<Complaint> complaintList= complaintService.getAllComplaint();
+		model.addAttribute("complaintList",complaintList);
+		return "complaint-notification-user";
 	}
 
 }
