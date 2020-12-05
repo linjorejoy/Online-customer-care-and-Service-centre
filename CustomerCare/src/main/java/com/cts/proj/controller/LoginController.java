@@ -1,5 +1,6 @@
 package com.cts.proj.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -11,9 +12,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.cts.proj.model.Admin;
 import com.cts.proj.model.Analyst;
 import com.cts.proj.model.User;
+import com.cts.proj.service.ComplaintService;
+import com.cts.proj.validate.UserPasswordValidator;
 
 @Controller
 public class LoginController {
+	
+	@Autowired
+	ComplaintService complaintService;
+	
+	@Autowired
+	UserPasswordValidator userPasswordValidator;
 
 	@RequestMapping(value = "/user-login", method = RequestMethod.GET)
 	public String userLogin(@Validated @ModelAttribute("user") User user, BindingResult result) {
