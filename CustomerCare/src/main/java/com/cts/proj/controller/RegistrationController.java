@@ -1,5 +1,6 @@
 package com.cts.proj.controller;
 
+import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.cts.proj.model.Analyst;
 import com.cts.proj.model.User;
+import com.cts.proj.security.SecureWithSHA256;
 import com.cts.proj.service.AnalystService;
 import com.cts.proj.service.UserService;
 
@@ -34,7 +36,7 @@ public class RegistrationController {
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
 	}
 
@@ -48,6 +50,12 @@ public class RegistrationController {
 			ModelMap model) {
 		if (result.hasErrors()) {
 			return "analyst-reg";
+		}
+		try {
+			analyst.setPassword(SecureWithSHA256.getSHA(analyst.getPassword()));
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		analystService.addAnalyst(analyst);
 		model.put("isRegisrered", true);
@@ -64,6 +72,12 @@ public class RegistrationController {
 	public String registerUser(@Validated @ModelAttribute User user, BindingResult result, ModelMap model) {
 		if (result.hasErrors()) {
 			return "user-reg";
+		}
+		try {
+			user.setPassword(SecureWithSHA256.getSHA(user.getPassword()));
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		userService.addUser(user);
 		model.put("isRegisrered", true);
