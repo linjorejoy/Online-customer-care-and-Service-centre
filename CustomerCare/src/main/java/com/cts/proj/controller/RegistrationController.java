@@ -81,8 +81,8 @@ public class RegistrationController {
 		}
 		userService.addUser(user);
 		model.put("isRegisrered", true);
-		model.put("analystId", user.getUserId());
-		return "forward:/user-login";
+		model.put("userId", user.getUserId());
+		return "user-reg-status";
 	}
 
 	@ModelAttribute("genderList")
