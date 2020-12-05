@@ -20,4 +20,8 @@ public class AdminService {
 	   return admin.getPassword();
 	   
    }
+   public String getPasswordSHA(long analystId) {
+		return adminRepo.getOne(analystId).getPassword();
+	}
+   
 }
