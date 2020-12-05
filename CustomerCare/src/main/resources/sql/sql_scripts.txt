@@ -163,3 +163,23 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+
+-- -----------------------------------------------------
+-- Auto Increment From ______
+-- -----------------------------------------------------
+
+
+alter table admin auto_increment = 1000;
+alter table alanyst auto_increment = 2000;
+alter table user auto_increment = 3000;
+alter table complaint auto_increment = 4000;
+alter table feedback_question_table auto_increment = 5000;
+alter table responses auto_increment = 6000;
+alter table secret_questions auto_increment = 7000;
+alter table u_sq_questions auto_increment = 8000;
+
+
+
+
