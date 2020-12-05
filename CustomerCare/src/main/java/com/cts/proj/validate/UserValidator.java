@@ -1,22 +1,25 @@
 package com.cts.proj.validate;
 
-import java.security.NoSuchAlgorithmException;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 
+import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import com.cts.proj.model.User;
-import com.cts.proj.security.SecureWithSHA256;
 import com.cts.proj.service.UserService;
 
+@Service
 public class UserValidator implements Validator {
-	
+
 	UserService userService;
 
 	@Override
 	public boolean supports(Class<?> clazz) {
 		// TODO Auto-generated method stub
-		
+
 		return User.class.equals(clazz);
 	}
 
@@ -24,15 +27,29 @@ public class UserValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		// TODO Auto-generated method stub
 		User user = (User) target;
-		try {
-			if(!SecureWithSHA256.getSHA(user.getTempPassword()).equals(userService.getPasswordSHA(user.getUserId()))) {
-				errors.rejectValue("tempPassword", "passwordError", "Please Enter Correct Password");
-			}
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (!user.getFirstName().matches("^[A-Za-z ]$")) {
+			errors.rejectValue("firstName", "NameError", "First name is not in correct format");
 		}
-		
+		if (!user.getLastName().matches("^[A-Za-z ]$")) {
+			errors.rejectValue("lastName", "NameError", "Last name is not in correct format");
+		}
+		if (!user.getPassword().equals(user.getTempPassword())) {
+			errors.rejectValue("password", "PasswordMismatchError", "Password and Temporary Password Doesnt Match");
+			errors.rejectValue("tempPassword", "PasswordMismatchError", "Password and Temporary Password Doesnt Match");
+		}
+		if (!user.getPassword().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$@!%&*?])[A-Za-z\\d#$@!%&*?]{6,}$")) {
+			errors.rejectValue("password", "PasswordvalidationError",
+					"Password Should contain atleast 1 UpperCase, 1 lowercase, 1 special Char and should be atleast 6 letter long");
+		}
+		LocalDate localDate = user.getDateOfBirth().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		Period period = Period.between(localDate, LocalDate.now());
+		if(period.getYears() < 18) {
+			errors.rejectValue("dateOfBirth", "AgeError", "User Has to be atleast 18 years of age");
+		}
+		if(!(user.getEmailId().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)@"+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)(\\.[A-Za-z]{2,})$"))){
+			errors.rejectValue("emailId", "EmailIdError","Should be a proper email ID format");
+		}
+
 	}
 
 }
