@@ -23,9 +23,12 @@ public class ComplaintController {
 			ModelMap model) {
 		
 		if (result.hasErrors()) {
-			return "analyst-reg";
+			return "complaint-creation";
 		}
-		return null;
+		complaintService.addComplaint(complaint);
+		model.put("isRegisrered", true);
+		model.put("complaintId", complaint.getComplaintId());
+		return "complaint-submission-user";
 	}
 
 }
