@@ -1,0 +1,10 @@
+<nav class="navbar navbar-inverse navbar-my">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Customer Care</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="/analyst-login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
