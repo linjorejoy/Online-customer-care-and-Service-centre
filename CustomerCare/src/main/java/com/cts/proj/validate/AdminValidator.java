@@ -23,13 +23,9 @@ public class AdminValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		// TODO Auto-generated method stub
 		Admin admin = (Admin) target;
-		try {
-			if(!SecureWithSHA256.getSHA(admin.getTempPassword()).equals(adminService.getAdminPassword(admin.getAdminId())))
-				errors.rejectValue("tempPassword", "passwordError", "Enter the correct Password");
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//int length = (int) (Math.log10(admin.getAdminId())+1);
+		if(!(admin.getAdminId()>=1000 && admin.getAdminId()<=9999))
+			errors.rejectValue("adminId", "AdminIdError", "Enter the correct Admin ID");
 
 	}
 
