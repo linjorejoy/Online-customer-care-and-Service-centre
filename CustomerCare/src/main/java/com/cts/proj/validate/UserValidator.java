@@ -53,6 +53,9 @@ public class UserValidator implements Validator {
 		if(!(user.getEmailId().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"))){
 			errors.rejectValue("emailId", "EmailIdError","Should be a proper email ID format");
 		}
+		if(!Long.valueOf(user.getPhoneNumber()).toString().matches("^[1-9]{1}[0-9]{9}$")) {
+			errors.rejectValue("phoneNumber", "PhoneNUmberError", "Phone Number Should be 10 digits long");
+		}
 
 	}
 
