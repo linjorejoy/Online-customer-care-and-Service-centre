@@ -7,7 +7,7 @@
 				<h1 class="heading-admin-h1">Admin Login</h1>
 			</div>
 			<div class="form-div-admin">
-				<form:form action="/" modelAttribute="admin" method="post"
+				<form:form action="/admin-login" modelAttribute="admin" method="POST"
 					cssClass="form">
 					<div class="form-input-div-admin form-group">
 						<form:label cssClass="label-form-admin" path="adminId"> Admin Id</form:label>
