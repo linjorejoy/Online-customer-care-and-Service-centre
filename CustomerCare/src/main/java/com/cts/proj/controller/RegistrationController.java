@@ -73,10 +73,16 @@ public class RegistrationController {
 		if (result.hasErrors()) {
 			return "user-reg";
 		}
+		try {
+			user.setPassword(SecureWithSHA256.getSHA(user.getPassword()));
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		userService.addUser(user);
 		model.put("isRegisrered", true);
-		model.put("analystId", user.getUserId());
-		return "forward:/user-login";
+		model.put("userId", user.getUserId());
+		return "user-reg-status";
 	}
 
 	@ModelAttribute("genderList")
