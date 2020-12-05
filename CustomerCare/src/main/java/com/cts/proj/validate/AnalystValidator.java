@@ -50,6 +50,9 @@ public class AnalystValidator implements Validator {
 				errors.rejectValue("dateOfBirth", "AgeError", "User Has to be atleast 18 years of age");
 			}
 		}
+		if(!Long.valueOf(analyst.getPhoneNumber()).toString().matches("^[1-9]{1}[0-9]{9}$")) {
+			errors.rejectValue("phoneNumber", "PhoneNUmberError", "Phone Number Should be 10 digits long");
+		}
 	}
 
 }
