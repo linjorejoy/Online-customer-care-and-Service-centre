@@ -11,17 +11,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.cts.proj.model.Complaint;
 import com.cts.proj.service.ComplaintService;
+import com.cts.proj.validate.ComplaintValidator;
 
 @Controller
 public class ComplaintController {
 
 	@Autowired
 	private ComplaintService complaintService;
-
+	@Autowired
+	ComplaintValidator complaintValidator;
+	
 	@RequestMapping(value = "/register-complaint", method = RequestMethod.POST)
 	public String registerComplaint(@Validated @ModelAttribute("complaint") Complaint complaint, BindingResult result,
 			ModelMap model) {
 		
+		complaintValidator.validate(complaint, result);
 		if (result.hasErrors()) {
 			return "complaint-creation";
 		}
