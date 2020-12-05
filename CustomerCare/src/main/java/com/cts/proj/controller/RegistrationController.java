@@ -25,6 +25,8 @@ import com.cts.proj.model.User;
 import com.cts.proj.security.SecureWithSHA256;
 import com.cts.proj.service.AnalystService;
 import com.cts.proj.service.UserService;
+import com.cts.proj.validate.AnalystValidator;
+import com.cts.proj.validate.UserValidator;
 
 @Controller
 public class RegistrationController {
@@ -33,6 +35,10 @@ public class RegistrationController {
 	private AnalystService analystService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	AnalystValidator analystValidator;
+	@Autowired
+	UserValidator userValidator;
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -48,6 +54,9 @@ public class RegistrationController {
 	@RequestMapping(value = "/register-analyst", method = RequestMethod.POST)
 	public String registerAnalyst(@Validated @ModelAttribute("analyst") Analyst analyst, BindingResult result,
 			ModelMap model) {
+		
+		analystValidator.validate(analyst, result);
+		
 		if (result.hasErrors()) {
 			return "analyst-reg";
 		}
@@ -70,6 +79,8 @@ public class RegistrationController {
 
 	@RequestMapping(value = "/register-user", method = RequestMethod.POST)
 	public String registerUser(@Validated @ModelAttribute User user, BindingResult result, ModelMap model) {
+		
+		userValidator.validate(user, result);
 		if (result.hasErrors()) {
 			return "user-reg";
 		}

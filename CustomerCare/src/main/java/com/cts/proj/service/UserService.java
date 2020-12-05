@@ -38,7 +38,7 @@ public class UserService {
 		return true;
 	}
 
-	public boolean updateuser(User user) {
+	public boolean updateUser(User user) {
 		userRepository.save(user);
 		return true;
 	}
