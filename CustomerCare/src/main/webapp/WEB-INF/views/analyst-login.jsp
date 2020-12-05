@@ -8,9 +8,9 @@
 		<div class="form-div-analyst">
 			<form:form action="/" modelAttribute="analyst" mthod="post">
 				<div class="form-input-div-analyst">
-					<form:label path="adminId"> Analyst Id</form:label>
-					<form:input path="adminId" id="adminId" />
-					<form:errors path="adminId"></form:errors>
+					<form:label path="analystId"> Analyst Id</form:label>
+					<form:input path="analystId" id="analystId" />
+					<form:errors path="analystId"></form:errors>
 				</div>
 				<div class="form-input-div-analyst">
 					<form:label path="password">Password</form:label>

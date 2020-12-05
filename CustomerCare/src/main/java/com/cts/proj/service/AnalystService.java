@@ -1,9 +1,6 @@
 package com.cts.proj.service;
 
-<<<<<<< HEAD
-=======
-import java.util.Date;
->>>>>>> 477655974a5aa06585333ed5ded189e71ade2532
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
