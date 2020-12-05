@@ -11,7 +11,7 @@
 		</div>
 
 		<div class="form-div">
-			<form:form action="/" method="get" modelAttribute="user">
+			<form:form action="/register-user" modelAttribute="user" method="POST">
 				<div class="form-input-div">
 
 					<div class="form-div-inputs">
