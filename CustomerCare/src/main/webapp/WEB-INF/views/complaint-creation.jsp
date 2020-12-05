@@ -13,11 +13,13 @@
 
 				<div class="form-input-complaint-user">
 					<form:label path="complaintUserId">User ID:</form:label>
-					<form:input path="complaintUserId" id="complaintUserId" value="${user.userId}"></form:input>
+					<form:input path="complaintUserId" id="complaintUserId"
+						value="${user.userId}"></form:input>
 				</div>
 				<div class="form-input-complaint-user">
 					<form:label path="phoneNumber">Phone Number:</form:label>
-					<form:input path="phoneNumber" id="phoneNumber" value="${user.phoneNumber}"></form:input>
+					<form:input path="phoneNumber" id="phoneNumber"
+						value="${user.phoneNumber}"></form:input>
 				</div>
 				<div class="form-input-complaint-user">
 					<form:label path="category">Category:</form:label>
@@ -32,23 +34,11 @@
 					<form:errors path="description"></form:errors>
 				</div>
 				<div class="form-buttons-complaint-user">
-				<input type="Submit" class="button" name="submit" value="Submit" />				
+					<input type="Submit" class="button" name="submit" value="Submit" />
 				</div>
-
-
-
 			</form:form>
-
 		</div>
-
-
-
-
-
-
 	</div>
-
-
 	<%@ include file="common/footer-user.jspf"%>
 </div>
 <%@ include file="common/end-tags-user.jspf"%>
