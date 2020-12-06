@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cts.proj.security.SecureWithSHA256;
+import com.cts.proj.service.ComplaintService;
 import com.cts.proj.service.UserService;
 
 @Controller
@@ -16,6 +17,9 @@ public class TestController {
 
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	ComplaintService complaintService;
 
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	@ResponseBody
@@ -34,6 +38,13 @@ public class TestController {
 			e.printStackTrace();
 		}
 		return userService.getPasswordSHA(1);
+	}
+	
+	@RequestMapping(value = "/testAnalystList", method = RequestMethod.GET)
+	@ResponseBody
+	public String customJPATest() {
+		
+		return complaintService.getAllComplaintForAnalyst(1).toString();
 	}
 
 }

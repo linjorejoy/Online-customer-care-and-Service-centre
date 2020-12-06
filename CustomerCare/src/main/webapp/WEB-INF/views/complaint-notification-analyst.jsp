@@ -9,6 +9,9 @@
 			Sort By:
 			<div class="div-drop-down"></div>
 		</div>
+		<div>
+			${complaintListAnalyst}
+		</div>
 		<div class="div-complaints-notification-analyst">
 			<div class="div-complaint-notification">
 				Complaint ID:

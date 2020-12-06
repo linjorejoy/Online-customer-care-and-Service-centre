@@ -82,6 +82,7 @@ public class LoginController {
 		if(result.hasErrors()) {
 			return "analyst-login";
 		}
+		model.put("complaintListAnalyst", complaintService.getAllComplaintForAnalyst(complaint.getAnalyst().getAnalystId()));
 		return "complaint-notification-analyst";
 	}
 	

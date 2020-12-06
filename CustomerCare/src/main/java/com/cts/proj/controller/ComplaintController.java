@@ -22,17 +22,17 @@ public class ComplaintController {
 
 	@Autowired
 	private ComplaintService complaintService;
-	
+
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
 	ComplaintValidator complaintValidator;
-	
+
 	@RequestMapping(value = "/register-complaint", method = RequestMethod.POST)
 	public String registerComplaint(@Validated @ModelAttribute("complaint") Complaint complaint, BindingResult result,
 			ModelMap model) {
-		
+
 		complaintValidator.validate(complaint, result);
 		if (result.hasErrors()) {
 			System.out.println(result.getAllErrors());
@@ -47,19 +47,29 @@ public class ComplaintController {
 		System.out.println(complaint.getUser());
 		return "complaint-submission-user";
 	}
-	@RequestMapping(value = "/admin-view-complaint-list", method = RequestMethod.GET)
-	public String ViewAllComplaintAdmin(ModelMap model) {
-		
-		List<Complaint> complaintList= complaintService.getAllComplaint();
-		model.addAttribute("complaintList",complaintList);
-		return "complaint-notification-admin";
-	}
-	@RequestMapping(value = "/user-view-complaint-list", method = RequestMethod.GET)
-	public String ViewAllComplaintUser(ModelMap model) {
-		
-		List<Complaint> complaintList= complaintService.getAllComplaint();
-		model.addAttribute("complaintList",complaintList);
-		return "complaint-notification-user";
+
+//	@RequestMapping(value = "/admin-view-complaint-list", method = RequestMethod.GET)
+//	public String viewAllComplaintAdmin(ModelMap model) {
+//
+//		List<Complaint> complaintList = complaintService.getAllComplaint();
+//		model.addAttribute("complaintList", complaintList);
+//		return "complaint-notification-admin";
+//	}
+//
+//	@RequestMapping(value = "/user-view-complaint-list", method = RequestMethod.GET)
+//	public String viewAllComplaintUser(ModelMap model) {
+//
+//		List<Complaint> complaintList = complaintService.getAllComplaint();
+//		model.addAttribute("complaintList", complaintList);
+//		return "complaint-notification-user";
+//	}
+//
+	@RequestMapping(value = "/analyst-view-complaint-list", method = RequestMethod.GET)
+	public String viewAllComplaintAnalyst( @ModelAttribute("complaint") Complaint complaint, BindingResult result, ModelMap model) {
+
+		List<Complaint> complaintList = complaintService.getAllComplaintForAnalyst(complaint.getAnalyst().getAnalystId());
+		model.addAttribute("complaintListAnalyst", complaintList);
+		return "complaint-notification-analyst";
 	}
 
 }

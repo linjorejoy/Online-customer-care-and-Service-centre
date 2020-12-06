@@ -10,12 +10,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
+//@NamedQuery(name = "Complaint.findComplaintsByAnalyst", query = "SELECT c FROM Complaint c where c.analyst.analystId = 1")
 @Table(name = "complaint")
 public class Complaint {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "complaint_id")

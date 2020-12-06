@@ -1,0 +1,35 @@
+create TABLE demo (
+id int ,
+date_of_birth DATE,
+date_time_of_birth DATETIME
+
+);
+
+
+insert into user(user_id, password, temp_password, first_name, last_name, phone_number, email_id, date_of_birth, gender) 
+values (1, 'a65f369f6d1723676476353142f65964349b15021fd178fc319d058b2c1d24a3', '', 'Linjo', 'Rejoy', '9876543210', 'linjo@cts.com', '1998-05-31 12:55:50', 'Male');
+
+
+insert into user(password, temp_password, first_name, last_name, phone_number, email_id, date_of_birth, gender) 
+values ('a65f369f6d1723676476353142f65964349b15021fd178fc319d058b2c1d24a3', '', 'Linjo', 'Rejoy', '9876543210', 'linjo@cts.com', '1998-05-31 12:55:50', 'Male');
+
+
+insert into admin (admin_id, password, temp_password, first_name, last_name, email_id)
+values (1001, '226392211f45668cc073ec9e8bd037ed40ca1a10589d5ec08721900e1670f329', 'Aa1@qwerty', 'admin', 'adminLN', 'admin@customercare.com');
+
+
+insert into analyst (analyst_id, password, temp_password, first_name, last_name, phone_number, email_id, date_of_birth, gender, support_level) 
+values (1, '226392211f45668cc073ec9e8bd037ed40ca1a10589d5ec08721900e1670f329', "Aa1@qwerty", "Unasigned", "Unasigned", '1212121212', 'analyst@customercare.com', '1999-05-05 00:00:00', 'Unassigned', 'L0');
+
+
+insert into complaint (complaint_id, complaint_user_id, assigned_analyst_id, category, phone_number, description, status, date_of_complaint, suggestions)
+values
+(1, 1, 1, 'L0', '1212121212', 'Put description Here', 'Opened', now(), 'Provide any Suggestions');
+
+
+insert into user(user_id, password, temp_password, first_name, last_name, phone_number, email_id, date_of_birth, gender) 
+values (1, 'a65f369f6d1723676476353142f65964349b15021fd178fc319d058b2c1d24a3', '', 'Sample User', 'Sample User', '1212121212', 'user@customercare,com', now(), 'Unassigned');
+
+
+
+
