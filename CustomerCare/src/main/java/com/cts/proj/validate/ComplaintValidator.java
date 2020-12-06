@@ -20,13 +20,13 @@ public class ComplaintValidator implements Validator{
 		// TODO Auto-generated method stub
 		Complaint complaint = (Complaint) target;
 		
-		if(!(complaint.getComplaintUserId() >=1000)) {
+		if(!(complaint.getUser().getUserId() >=1000)) {
 			errors.rejectValue("complaintId", "complaintIdError", "Should be a valid id");
 		}
 		if(!Long.valueOf(complaint.getPhoneNumber()).toString().matches("^[1-9]{1}[0-9]{9}$")) {
 			errors.rejectValue("phoneNumber", "PhoneNUmberError", "Phone Number Should be 10 digits long");
 		}
-		if(!complaint.getDescription().matches("^[A-Za-z\\s]{10,}.*$")) {
+		if(!complaint.getDescription().matches("^[A-Za-z]{10,}.*$")) {
 			errors.rejectValue("description", "descriptionError", "Minimum 10 charecters required");
 		}
 	}
