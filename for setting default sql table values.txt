@@ -30,6 +30,6 @@ values
 insert into user(user_id, password, temp_password, first_name, last_name, phone_number, email_id, date_of_birth, gender) 
 values (1, 'a65f369f6d1723676476353142f65964349b15021fd178fc319d058b2c1d24a3', '', 'Sample User', 'Sample User', '1212121212', 'user@customercare,com', now(), 'Unassigned');
 
-
+select * from complaint where assigned_analyst_id = ?
 
 

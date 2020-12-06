@@ -11,7 +11,7 @@ import com.cts.proj.model.Complaint;
 @Repository
 public interface ComplaintRepository extends JpaRepository<Complaint, Long> {
 
-	@Query("FROM Complaint where assigned_analyst_id = ?1")
+	@Query("select c FROM Complaint c where assigned_analyst_id = ?1")
 	List<Complaint> findComplaintsByAnalyst(long analystId);
 
 }

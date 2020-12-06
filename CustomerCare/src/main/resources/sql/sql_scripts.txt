@@ -172,7 +172,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
 alter table admin auto_increment = 1000;
-alter table alanyst auto_increment = 2000;
+alter table analyst auto_increment = 2000;
 alter table user auto_increment = 3000;
 alter table complaint auto_increment = 4000;
 alter table feedback_question_table auto_increment = 5000;

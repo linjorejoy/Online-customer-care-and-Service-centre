@@ -27,7 +27,7 @@ label {
 	font-family: 'Righteous', cursive;
 }
 
-/* ###################################################### */
+/* ##################################################### */
 /*                 Div positioning						 */
 /* ##################################################### */
 .container-my {
@@ -39,34 +39,25 @@ label {
 	width: 100%;
 }
 
-.center-div-admin {
-	background-color: #98ACF8;
-	position: relative;
-	top: 50%;
-	text-align: center;
-	margin: auto;
-	height: 50%;
-	width: 50%;
-	align-content: center;
-	transform: translateY(-50%);
+.nav-div-my{
+	height: 10vh;
 }
 
-.center-div {
-	background-color: #98ACF8;
-	position: relative;
-	top: 50%;
-	text-align: center;
-	margin: auto;
-	height: 50%;
-	width: 50%;
-	align-content: center;
-	transform: translateY(-50%);
+.center-div-admin {
+	background-color: #BEDCFA;
+	height: 80vh;
 }
 
 .centering {
+	text-align: center;
 	position: relative;
+	padding: 0;
+	margin: auto;
 	top: 50%;
+	background-color: #98ACF8;
+	width: 40%;
 	transform: translateY(-50%);
+	border-radius: 50px;
 }
 
 .role-div {
@@ -81,13 +72,14 @@ label {
 	border-radius: 20px;
 }
 
-.spacing {
-	margin-top: 2;
-	margin-right: auto;
-	margin-bottom: 10;
-	margin-left: auto;
-	width: 35%;
-	height: 5px;
+.heading-admin{
+	
+	padding-top: 5px;
+}
+
+
+.footer-my{
+	height: 10vh;
 }
 
 /* Header Elements */
@@ -102,6 +94,7 @@ label {
 /*                 Heading Elements */
 /* ###################################################### */
 .heading-admin-h1 {
+	font-size: 5vh;
 	color: #FFFFFF;
 	font-family: 'Righteous', cursive;
 }
@@ -114,7 +107,7 @@ label {
 	margin-left: auto;
 	padding: 10px;
 	border-top: 5;
-	width: 45%;
+	width: 60%;
 	background-color: #B088F9;
 	border-radius: 20px;
 }
@@ -123,6 +116,10 @@ label {
 	padding-right: 10px;
 }
 
+
+.input-admin-login{
+	width: 80%;
+}
 /* ###################################################### */
 /*                   Button Elements */
 /* ###################################################### */
@@ -135,14 +132,8 @@ label {
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
-	font-size: 16px;
-	margin: 4px 2px;
-	cursor: pointer;
-	padding: 15px 32px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 16px;
+	font-size: 3vh;
+	font-weight: bold;
 	margin: 4px 2px;
 	cursor: pointer;
 	border-radius: 20px;
