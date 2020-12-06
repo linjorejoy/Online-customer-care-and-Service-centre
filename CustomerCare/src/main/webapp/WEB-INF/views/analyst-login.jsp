@@ -6,16 +6,16 @@
 			<h1 class="heading-analyst-h1">Analyst Login</h1>
 		</div>
 		<div class="form-div-analyst">
-			<form:form action="/" modelAttribute="analyst" method="POST">
+			<form:form action="/analyst-login" modelAttribute="complaint" method="POST">
 				<div class="form-input-div-analyst">
-					<form:label path="analystId"> Analyst Id</form:label>
-					<form:input path="analystId" id="analystId" />
-					<form:errors path="analystId"></form:errors>
+					<form:label path="analyst.analystId"> Analyst Id</form:label>
+					<form:input path="analyst.analystId" id="analystId" />
+					<form:errors path="analyst.analystId"></form:errors>
 				</div>
 				<div class="form-input-div-analyst">
-					<form:label path="password">Password</form:label>
-					<form:input path="password" id="password" type="password" />
-					<form:errors path="password"></form:errors>
+					<form:label path="analyst.tempPassword">Password</form:label>
+					<form:input path="analyst.tempPassword" id="password" type="password" />
+					<form:errors path="analyst.tempPassword"></form:errors>
 				</div>
 				<div class="form-group">
 					<a href="/">Forgot Analyst Id</a> <a href="/">Forgot Password</a>

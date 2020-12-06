@@ -15,9 +15,9 @@
 						<form:errors path="adminId"></form:errors>
 					</div>
 					<div class="form-input-div-admin form-group">
-						<form:label cssClass="label-form-admin" path="password">Password</form:label>
-						<form:input path="password" id="password" />
-						<form:errors path="password"></form:errors>
+						<form:label cssClass="label-form-admin" path="tempPassword">Password</form:label>
+						<form:input path="tempPassword" type="password" id="password" /><br>
+						<form:errors cssClass="text-warning" path="tempPassword"></form:errors>
 					</div>
 					<div class="form-group">
 						<a href="/">Forgot User Id</a> 

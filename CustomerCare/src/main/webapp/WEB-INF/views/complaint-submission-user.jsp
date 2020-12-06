@@ -14,7 +14,7 @@
 
 				<div class="form-input-complaint-status-user">
 					<form:label>User ID:</form:label>
-					<form:label>${complaint.complaintUserId}</form:label>
+					<form:label>${complaint.user.userId}</form:label>
 				</div>
 				<div class="form-input-complaint-status-user">
 					<form:label>Phone Number:</form:label>
