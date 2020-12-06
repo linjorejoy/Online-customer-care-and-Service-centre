@@ -67,6 +67,7 @@ public class LoginController {
 		if(result.hasErrors()) {
 			return "admin-login";
 		}
+		model.put("complaintListAdmin", complaintService.getAllComplaint());
 		return "complaint-notification-admin";
 	}
 

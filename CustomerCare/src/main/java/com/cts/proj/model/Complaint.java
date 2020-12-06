@@ -14,7 +14,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-//@NamedQuery(name = "Complaint.findComplaintsByAnalyst", query = "SELECT c FROM Complaint c where c.analyst.analystId = 1")
 @Table(name = "complaint")
 public class Complaint {
 	@Id
