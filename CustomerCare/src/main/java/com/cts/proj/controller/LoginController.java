@@ -1,5 +1,8 @@
 package com.cts.proj.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -10,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.cts.proj.model.Admin;
-import com.cts.proj.model.Analyst;
 import com.cts.proj.model.Complaint;
-import com.cts.proj.model.User;
 import com.cts.proj.service.ComplaintService;
 import com.cts.proj.validate.AdminPasswordValidator;
 import com.cts.proj.validate.AnalystPasswordValidator;
@@ -76,6 +77,15 @@ public class LoginController {
 			return "analyst-login";
 		}
 		return "complaint-notification-analyst";
+	}
+	
+	@ModelAttribute(name = "categories")
+	public Map<String, String> getCategories(){
+		Map<String, String> categories = new HashMap<>();
+		categories.put("L1", "Level 1");
+		categories.put("L2", "Level 2");
+		categories.put("L3", "Level 3");
+		return categories;
 	}
 
 }

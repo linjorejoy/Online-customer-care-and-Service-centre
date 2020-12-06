@@ -46,9 +46,7 @@
 				</div>
 				<div class="form-div-inputs">
 					<form:label path="supportLevel">Support Level</form:label>
-					<form:select path="supportLevel" id="supportLevel">
-						<form:options items="${supportLevel}" />
-					</form:select>
+					<form:select path="supportLevel" id="supportLevel" items="${supportLevel}"/>
 					<form:errors path="supportLevel"></form:errors>
 				</div>
 
