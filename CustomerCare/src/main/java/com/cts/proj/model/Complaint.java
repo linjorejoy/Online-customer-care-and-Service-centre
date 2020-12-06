@@ -4,9 +4,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,10 +20,6 @@ public class Complaint {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "complaint_id")
 	private long complaintId;
-	@Column(name = "complaint_user_id")
-	private long complaintUserId;
-	@Column(name = "complaint_analyst_id")
-	private long assignedAnalystId;
 	@Column(name = "category")
 	private String category;
 	@Column(name = "phone_number")
@@ -34,22 +33,30 @@ public class Complaint {
 	@Column(name = "suggestions")
 	private String suggestions;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "complaint_user_id")
+	private User user;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "assigned_analyst_id")
+	private Analyst analyst;
+
 	public Complaint() {
 		super();
 	}
 
-	public Complaint(long complaintId, long complaintUserId, long assignedAnalystId, String analystId, long phoneNumber,
-			String description, String status, Date dateOfComplaint, String suggestions) {
+	public Complaint(long complaintId, String category, long phoneNumber, String description, String status,
+			Date dateOfComplaint, String suggestions, User user, Analyst analyst) {
 		super();
 		this.complaintId = complaintId;
-		this.complaintUserId = complaintUserId;
-		this.assignedAnalystId = assignedAnalystId;
-		this.category = analystId;
+		this.category = category;
 		this.phoneNumber = phoneNumber;
 		this.description = description;
 		this.status = status;
 		this.dateOfComplaint = dateOfComplaint;
 		this.suggestions = suggestions;
+		this.user = user;
+		this.analyst = analyst;
 	}
 
 	public long getComplaintId() {
@@ -58,22 +65,6 @@ public class Complaint {
 
 	public void setComplaintId(long complaintId) {
 		this.complaintId = complaintId;
-	}
-
-	public long getComplaintUserId() {
-		return complaintUserId;
-	}
-
-	public void setComplaintUserId(long complaintUserId) {
-		this.complaintUserId = complaintUserId;
-	}
-
-	public long getAssignedAnalystId() {
-		return assignedAnalystId;
-	}
-
-	public void setAssignedAnalystId(long assignedAnalystId) {
-		this.assignedAnalystId = assignedAnalystId;
 	}
 
 	public String getCategory() {
@@ -124,6 +115,22 @@ public class Complaint {
 		this.suggestions = suggestions;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Analyst getAnalyst() {
+		return analyst;
+	}
+
+	public void setAnalyst(Analyst analyst) {
+		this.analyst = analyst;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -147,14 +154,6 @@ public class Complaint {
 		} else if (!category.equals(other.category))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Complaint [complaintId=" + complaintId + ", complaintUserId=" + complaintUserId + ", assignedAnalystId="
-				+ assignedAnalystId + ", analystId=" + category + ", phoneNumber=" + phoneNumber + ", description="
-				+ description + ", status=" + status + ", dateOfComplaint=" + dateOfComplaint + ", suggestions="
-				+ suggestions + "]";
 	}
 
 }
