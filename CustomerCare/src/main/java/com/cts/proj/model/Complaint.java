@@ -156,4 +156,13 @@ public class Complaint {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Complaint [complaintId=" + complaintId + ", category=" + category + ", phoneNumber=" + phoneNumber
+				+ ", description=" + description + ", status=" + status + ", dateOfComplaint=" + dateOfComplaint
+				+ ", suggestions=" + suggestions + ", user=" + user + ", analyst=" + analyst + "]";
+	}
+	
+	
+
 }

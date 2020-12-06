@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.cts.proj.model.Admin;
 import com.cts.proj.model.Complaint;
+import com.cts.proj.service.AnalystService;
 import com.cts.proj.service.ComplaintService;
 import com.cts.proj.validate.AdminPasswordValidator;
 import com.cts.proj.validate.AnalystPasswordValidator;
@@ -24,6 +25,9 @@ public class LoginController {
 	
 	@Autowired
 	ComplaintService complaintService;
+	
+	@Autowired
+	AnalystService analystService;
 	
 	@Autowired
 	UserPasswordValidator userPasswordValidator;
@@ -40,12 +44,14 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/user-login", method = RequestMethod.POST)
-	public String userAfterLogin(@Validated @ModelAttribute("complaint") Complaint complaint, BindingResult result) {
+	public String userAfterLogin(@Validated @ModelAttribute("complaint") Complaint complaint, BindingResult result, ModelMap model) {
 		
 		userPasswordValidator.validate(complaint, result);
 		if (result.hasErrors()) {
 			return "user-login";
 		}
+		Complaint initializedComplaint = complaintService.getComplaint(1);
+		model.put("initializedComplaint", initializedComplaint);
 		return "complaint-creation";
 	}
 
