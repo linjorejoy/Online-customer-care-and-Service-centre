@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -48,11 +49,21 @@ public class ComplaintController {
 		return "complaint-submission-user";
 	}
 
+//	@RequestMapping(value = "/admin-view-complaint-list", method = RequestMethod.GET)
+//	public String viewAllComplaintAdmin(@ModelAttribute("complaint") Complaint complaint, BindingResult result,
+//			ModelMap model) {
+//		Page<Complaint> pages = complaintService.getAllComplaint();
+//		List<Complaint> complaintList = pages.getContent();
+//		model.addAttribute("complaintList", complaintList);
+//		System.out.println(complaintList);
+//		return "complaint-notification-admin";
+//	}
+
 	@RequestMapping(value = "/user-view-complaint-list", method = RequestMethod.GET)
 	public String viewAllComplaintUser(@ModelAttribute("complaint") Complaint complaint, BindingResult result,
 			ModelMap model) {
 
-		List<Complaint> complaintList = complaintService.getAllComplaint();
+		List<Complaint> complaintList = complaintService.getAllComplaintOfUser(complaint.getUser().getUserId());
 		model.addAttribute("complaintList", complaintList);
 		return "complaint-notification-user";
 	}

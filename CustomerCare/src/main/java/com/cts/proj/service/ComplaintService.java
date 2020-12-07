@@ -1,9 +1,11 @@
 package com.cts.proj.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.cts.proj.model.Complaint;
@@ -20,8 +22,9 @@ public class ComplaintService {
 		return true;
 	}
 	
-	public List<Complaint> getAllComplaint(){
-		return complaintRepository.findAll();
+	public Page<Complaint> getAllComplaint(){
+		Pageable pageable = PageRequest.of(0, 10);
+		return complaintRepository.findAll(pageable);
 	}
 	
 	public Complaint getComplaint(long complaintId) {
@@ -48,5 +51,11 @@ public class ComplaintService {
 		
 		return complaintListAnalyst;
 		
+	}
+
+	public List<Complaint> getAllComplaintOfUser(long userId) {
+		// TODO Auto-generated method stub
+		
+		return complaintRepository.findComplaintForUser(userId);
 	}
 }

@@ -118,7 +118,7 @@ label {
 
 
 .input-admin-login{
-	width: 80%;
+	width: 90%;
 }
 /* ###################################################### */
 /*                   Button Elements */
@@ -134,7 +134,7 @@ label {
 	display: inline-block;
 	font-size: 3vh;
 	font-weight: bold;
-	margin: 4px 2px;
+	margin: 4px 5px;
 	cursor: pointer;
 	border-radius: 20px;
 }

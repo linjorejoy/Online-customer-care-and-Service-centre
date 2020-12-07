@@ -17,7 +17,9 @@
 						<input type="submit" id="Submit" value="View" onsubmit="/" />
 					</div>
 				</div>
-
+				<div>
+					${complaintListAdmin}
+				</div>
 			</div>
 
 		</div>

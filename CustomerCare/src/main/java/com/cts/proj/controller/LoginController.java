@@ -1,9 +1,11 @@
 package com.cts.proj.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -67,7 +69,10 @@ public class LoginController {
 		if(result.hasErrors()) {
 			return "admin-login";
 		}
-		model.put("complaintListAdmin", complaintService.getAllComplaint());
+		Page<Complaint> pages = complaintService.getAllComplaint();
+		List<Complaint> complaintList = pages.getContent();
+		System.out.println(complaintList);
+		model.put("complaintListAdmin", complaintList);
 		return "complaint-notification-admin";
 	}
 
@@ -90,9 +95,9 @@ public class LoginController {
 	@ModelAttribute(name = "categories")
 	public Map<String, String> getCategories(){
 		Map<String, String> categories = new HashMap<>();
-		categories.put("L1", "Level 1");
-		categories.put("L2", "Level 2");
-		categories.put("L3", "Level 3");
+		categories.put("software", "Software");
+		categories.put("firmware", "Firmware");
+		categories.put("hardware", "Hardware");
 		return categories;
 	}
 
