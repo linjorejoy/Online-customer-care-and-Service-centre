@@ -25,7 +25,7 @@
 					<form:label>${complaint.category}</form:label>
 				</div>
 				<div class="form-input-complaint-status-user-1">
-					<form:label>Description</form:label>
+					<form:label>Description:</form:label>
 					<form:label>${complaint.description}</form:label>
 				</div>
 				<div class="form-buttons-complaint-status-user">
