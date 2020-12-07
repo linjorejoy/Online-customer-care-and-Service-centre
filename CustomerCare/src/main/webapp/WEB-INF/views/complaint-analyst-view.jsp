@@ -29,7 +29,7 @@
 				</div>
 				<div>
 					<form:label path="">Assigned Analyst:</form:label>
-					<form:select path="" id="" items="${analyst}"/>
+					<form:select path="" id="" items="${supportLevel}"/>
 				</div>
 				<div>
 					<label>Description : </label>

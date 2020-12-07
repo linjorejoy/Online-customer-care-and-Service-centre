@@ -26,8 +26,8 @@
 				<form:select path="status" items="${status}"></form:select>
 			</div>
 			<div class="complaint-view-inputs">
-				<form:label path="supportLevel">Assigned Analyst</form:label>
-				<form:select path="supportLevel" items="${supportLevel}"></form:select>
+				<form:label path="analyst.supportLevel">Assigned Analyst</form:label>
+				<form:select path="analyst.supportLevel" items="${supportLevel}"/>
 			</div>
 			<div class="complaint-view-inputs">
 				<label>Description:</label> <label>${complaint.description}</label>

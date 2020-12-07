@@ -25,7 +25,7 @@ public class AnalystController {
 	public String viewComplaintAnalyst(@RequestParam long complaintId,ModelMap model){
 		
 		Complaint complaint = complaintService.getComplaint(complaintId);		
-		model.put("complaint", "complaint");
+		model.put("complaint", complaint);
 		return "complaint-analyst-view";
 	}
 	
