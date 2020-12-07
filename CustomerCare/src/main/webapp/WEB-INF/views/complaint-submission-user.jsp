@@ -12,7 +12,7 @@
 					<label>${submittedComplaint.complaintId}</label>
 				</div>
 				<div>
-					<label>Uder Id : </label>
+					<label>User Id : </label>
 					<label>${submittedComplaint.user.userId}</label>
 				</div>
 				<div>
@@ -23,15 +23,9 @@
 					<label>Category : </label>
 					<label>${submittedComplaint.category}</label>
 				</div>
-<<<<<<< HEAD
-				<div class="form-input-complaint-status-user-1">
-					<form:label>Description:</form:label>
-					<form:label>${complaint.description}</form:label>
-=======
 				<div>
 					<label>Description : </label>
 					<label>${submittedComplaint.description}</label>
->>>>>>> 6ecbaba582f780e03aefa97db6d3d7fb30c4433a
 				</div>
 				
 				<div>
