@@ -61,7 +61,15 @@ label {
 	border-radius: 50px;
 }
 
+
+
 .center-div-complaint-admin{
+	background-color: #BEDCFA;
+	height: 80vh;
+	
+}
+
+.centering-complaint-list{
 	text-align: center;
 	position: relative;
 	padding: 0;
