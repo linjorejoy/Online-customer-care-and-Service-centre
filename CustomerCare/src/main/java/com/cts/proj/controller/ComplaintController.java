@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -52,7 +53,6 @@ public class ComplaintController {
 		return "complaint-submission-user";
 	}
 
-
 	@RequestMapping(value = "/user-view-complaint-list", method = RequestMethod.GET)
 	public String viewAllComplaintUser(@ModelAttribute("complaint") Complaint complaint, BindingResult result,
 			ModelMap model) {
@@ -61,22 +61,27 @@ public class ComplaintController {
 		model.addAttribute("complaintList", complaintList);
 		return "complaint-notification-user";
 	}
-	
+
 	@RequestMapping(value = "/admin-login/page/{pageNumber}", method = RequestMethod.GET)
-	public String viewAnotherPageAdminComplaintList(@Validated @ModelAttribute("admin") Admin admin, BindingResult result,
-			ModelMap model, @PathVariable("pageNumber")int pageNumber) {
-		
-		Page<Complaint> pages = complaintService.getAllComplaint(pageNumber-1, 5);
+	public String viewAnotherPageAdminComplaintList(@Validated @ModelAttribute("admin") Admin admin,
+			BindingResult result, ModelMap model, @PathVariable("pageNumber") int pageNumber,
+			@Param("sortBy") String sortBy, @Param("sortDir") String sortDir) {
+
+		Page<Complaint> pages = complaintService.getAllComplaint(pageNumber - 1, 4, sortBy, sortDir);
 		List<Complaint> complaintList = pages.getContent();
 		long totalComplaints = pages.getTotalElements();
 		int totalPages = pages.getTotalPages();
-		
+
 		model.put("currentPage", pageNumber);
 		model.put("complaintListAdmin", complaintList);
 		model.put("totalComplaints", totalComplaints);
 		model.put("totalPages", totalPages);
+		model.put("sortBy", sortBy);
+		model.put("sortDir", sortDir);
+		String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
+		model.put("reverseSortDir", reverseSortDir);
 		return "complaint-notification-admin";
-		
+
 	}
 
 }

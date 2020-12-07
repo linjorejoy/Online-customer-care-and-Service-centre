@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.cts.proj.model.Complaint;
@@ -22,8 +23,16 @@ public class ComplaintService {
 		return true;
 	}
 	
-	public Page<Complaint> getAllComplaint(int pageNumber, int count){
-		Pageable pageable = PageRequest.of(pageNumber, count);
+	public Page<Complaint> getAllComplaint(int pageNumber, int count, String sortBy, String sortDir){
+		Sort sort = null;
+		if(sortDir.equalsIgnoreCase("asc")) {
+			sort = Sort.by(sortBy).ascending();
+		}else if(sortDir.equalsIgnoreCase("desc")) {
+			sort = Sort.by(sortBy).descending();
+		}else {
+			sort = Sort.by(sortBy).ascending();			
+		}
+		Pageable pageable = PageRequest.of(pageNumber, count, sort);
 		return complaintRepository.findAll(pageable);
 	}
 	

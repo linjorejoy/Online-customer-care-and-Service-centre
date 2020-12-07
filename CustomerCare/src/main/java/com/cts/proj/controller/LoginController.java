@@ -71,7 +71,7 @@ public class LoginController {
 		}
 		
 		int currentPage = 1;
-		Page<Complaint> pages = complaintService.getAllComplaint(currentPage - 1, 3);
+		Page<Complaint> pages = complaintService.getAllComplaint(currentPage - 1, 4, "complaintId", "asc");
 		List<Complaint> complaintList = pages.getContent();
 		long totalComplaints = pages.getTotalElements();
 		int totalPages = pages.getTotalPages();
@@ -83,6 +83,8 @@ public class LoginController {
 		model.put("complaintListAdmin", complaintList);
 		model.put("totalComplaints", totalComplaints);
 		model.put("totalPages", totalPages);
+		model.put("sortBy", "complaintId");
+		model.put("sortDir", "asc");
 		return "complaint-notification-admin";
 	}
 
