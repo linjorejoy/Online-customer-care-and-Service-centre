@@ -19,7 +19,7 @@
 				<label>Email ID:</label> <label>${complaint.user.emailId}</label>
 			</div>
 			<div class="complaint-view-inputs">
-				<label>Category:</label><label>${complaint.category }</label>
+				<label>Category:</label><label>${category}</label>
 			</div>
 			<div class="complaint-view-inputs">
 				<form:label path="status">Status</form:label>
