@@ -22,12 +22,8 @@ a {
 	padding-right: 20px;
 }
 
-label {
-	color: #FFFFFF;
-	font-family: 'Righteous', cursive;
-}
 
-/* ##################################################### */
+/* ###################################################### */
 /*                 Div positioning						 */
 /* ##################################################### */
 .container-my {
@@ -80,6 +76,7 @@ label {
 	width: 45%;
 	background-color: #B088F9;
 	border-radius: 20px;
+	text-align: center;
 }
 
 .spacing {
@@ -91,67 +88,14 @@ label {
 	height: 5px;
 }
 
-.footer-my{
-	height: 10vh;
-}
-
 /* Header Elements */
 
 .navbar-my{
 	background-color: #98ACF8; 
+	padding: 0;
 }
 
-/* Body Elements */
 
-/* ###################################################### */
-/*                 Heading Elements */
-/* ###################################################### */
-.heading-admin-h1 {
-	color: #FFFFFF;
-	font-family: 'Righteous', cursive;
-}
-
-/* Form Elements */
-.form-input-div-admin {
-	margin-top: 2;
-	margin-right: auto;
-	margin-bottom: 10;
-	margin-left: auto;
-	padding: 10px;
-	border-top: 5;
-	width: 45%;
-	background-color: #B088F9;
-	border-radius: 20px;
-}
-
-.label-form-admin {
-	padding-right: 10px;
-}
-
-/* ###################################################### */
-/*                   Button Elements */
-/* ###################################################### */
-.button {
-	background-color: #DA9FF9;
-	border: none;
-	color: white;
-	width: 30%;
-	padding: 15px 32px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 16px;
-	margin: 4px 2px;
-	cursor: pointer;
-	padding: 15px 32px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 16px;
-	margin: 4px 2px;
-	cursor: pointer;
-	border-radius: 20px;
-}
 
 /* ###################################################### */
 /*                Footer Elements */
@@ -159,6 +103,7 @@ label {
 
 .footer-my{
 	bottom: 0;
+	height: 10vh;
 }
 
 

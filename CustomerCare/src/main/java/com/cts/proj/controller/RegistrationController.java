@@ -106,11 +106,11 @@ public class RegistrationController {
 	}
 
 	@ModelAttribute("supportLevel")
-	public Map<String, String> populateSupportLevel() {
-		Map<String, String> supportLevel = new HashMap<String, String>();
-		supportLevel.put("L1", "L1");
-		supportLevel.put("L2", "L2");
-		supportLevel.put("L3", "L3");
-		return supportLevel;
+	public Map<String, String> getCategories(){
+		Map<String, String> categories = new HashMap<>();
+		categories.put("L1", "Level 1");
+		categories.put("L2", "Level 2");
+		categories.put("L3", "Level 3");
+		return categories;
 	}
 }

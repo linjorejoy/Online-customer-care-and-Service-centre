@@ -1,19 +1,14 @@
 <%@ include file="common/header-user.jspf"%>
-<div class="container">
+<div class="container-my">
 	<%@ include file="common/nav-bar-user.jspf"%>
-
 	<div class="center-div-user">
-
-		<div class="heading-user">
-			<h1>
-				User Registration
-			</h1>
-		</div>
-
-		<div class="form-div">
-			<form:form action="/register-user" modelAttribute="user" method="POST">
-				<div class="form-input-div">
-
+		<div class="centering">
+			<div class="heading-user">
+				<h1 class="body-heading-user">User Registration</h1>
+			</div>
+			<div class="form-div">
+				<form:form action="/register-user" modelAttribute="user"
+					method="POST" cssClass="form-div-my">
 					<div class="form-div-inputs">
 						<form:label path="firstName">First Name</form:label>
 						<form:input path="firstName" />
@@ -51,17 +46,16 @@
 					</div>
 					<div class="form-div-inputs">
 						<form:label path="tempPassword">Confirm Password</form:label>
-						<form:input path="tempPassword" />
+						<form:input type="password" path="tempPassword" />
 						<form:errors path="tempPassword"></form:errors>
 					</div>
-				</div>
-				<div class="form-buttons-div">
-				  <input type="submit" name="Submit" value="Register"/>
-				  <input type="reset" name="reset" value="Reset"/>
-				
-				</div>
-
-			</form:form>
+					<div class="form-buttons-div">
+						<input type="submit" class="button-my" name="Submit"
+							value="Register" /> <input type="reset" class="button-my"
+							name="reset" value="Reset" />
+					</div>
+				</form:form>
+			</div>
 		</div>
 	</div>
 	<%@ include file="common/footer-user.jspf"%>

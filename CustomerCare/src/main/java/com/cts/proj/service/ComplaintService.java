@@ -1,5 +1,6 @@
 package com.cts.proj.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,12 @@ public class ComplaintService {
 	public boolean deleteComplaint(Complaint complaint) {
 		complaintRepository.delete(complaint);
 		return true;
+	}
+	
+	public List<Complaint> getAllComplaintForAnalyst(long analystId){
+		List<Complaint> complaintListAnalyst = complaintRepository.findComplaintsByAnalyst(analystId);
+		
+		return complaintListAnalyst;
+		
 	}
 }

@@ -3,6 +3,7 @@ package com.cts.proj.validate;
 import java.security.NoSuchAlgorithmException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -10,7 +11,7 @@ import com.cts.proj.model.Admin;
 import com.cts.proj.security.SecureWithSHA256;
 import com.cts.proj.service.AdminService;
 
-
+@Service
 public class AdminPasswordValidator implements Validator {
 
 	@Autowired
