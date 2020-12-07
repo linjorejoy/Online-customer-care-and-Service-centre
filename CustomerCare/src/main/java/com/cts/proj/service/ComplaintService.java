@@ -22,8 +22,8 @@ public class ComplaintService {
 		return true;
 	}
 	
-	public Page<Complaint> getAllComplaint(){
-		Pageable pageable = PageRequest.of(0, 10);
+	public Page<Complaint> getAllComplaint(int pageNumber, int count){
+		Pageable pageable = PageRequest.of(pageNumber, count);
 		return complaintRepository.findAll(pageable);
 	}
 	

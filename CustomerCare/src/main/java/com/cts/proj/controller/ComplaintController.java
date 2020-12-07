@@ -10,9 +10,12 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.cts.proj.model.Admin;
 import com.cts.proj.model.Complaint;
 import com.cts.proj.service.ComplaintService;
 import com.cts.proj.service.UserService;
@@ -49,15 +52,6 @@ public class ComplaintController {
 		return "complaint-submission-user";
 	}
 
-//	@RequestMapping(value = "/admin-view-complaint-list", method = RequestMethod.GET)
-//	public String viewAllComplaintAdmin(@ModelAttribute("complaint") Complaint complaint, BindingResult result,
-//			ModelMap model) {
-//		Page<Complaint> pages = complaintService.getAllComplaint();
-//		List<Complaint> complaintList = pages.getContent();
-//		model.addAttribute("complaintList", complaintList);
-//		System.out.println(complaintList);
-//		return "complaint-notification-admin";
-//	}
 
 	@RequestMapping(value = "/user-view-complaint-list", method = RequestMethod.GET)
 	public String viewAllComplaintUser(@ModelAttribute("complaint") Complaint complaint, BindingResult result,
@@ -66,6 +60,23 @@ public class ComplaintController {
 		List<Complaint> complaintList = complaintService.getAllComplaintOfUser(complaint.getUser().getUserId());
 		model.addAttribute("complaintList", complaintList);
 		return "complaint-notification-user";
+	}
+	
+	@RequestMapping(value = "/admin-login/page/{pageNumber}", method = RequestMethod.GET)
+	public String viewAnotherPageAdminComplaintList(@Validated @ModelAttribute("admin") Admin admin, BindingResult result,
+			ModelMap model, @PathVariable("pageNumber")int pageNumber) {
+		
+		Page<Complaint> pages = complaintService.getAllComplaint(pageNumber-1, 5);
+		List<Complaint> complaintList = pages.getContent();
+		long totalComplaints = pages.getTotalElements();
+		int totalPages = pages.getTotalPages();
+		
+		model.put("currentPage", pageNumber);
+		model.put("complaintListAdmin", complaintList);
+		model.put("totalComplaints", totalComplaints);
+		model.put("totalPages", totalPages);
+		return "complaint-notification-admin";
+		
 	}
 
 }

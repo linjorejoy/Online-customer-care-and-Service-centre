@@ -69,10 +69,20 @@ public class LoginController {
 		if(result.hasErrors()) {
 			return "admin-login";
 		}
-		Page<Complaint> pages = complaintService.getAllComplaint();
+		
+		int currentPage = 1;
+		Page<Complaint> pages = complaintService.getAllComplaint(currentPage - 1, 3);
 		List<Complaint> complaintList = pages.getContent();
+		long totalComplaints = pages.getTotalElements();
+		int totalPages = pages.getTotalPages();
+		
+		
+		
 		System.out.println(complaintList);
+		model.put("currentPage", currentPage);
 		model.put("complaintListAdmin", complaintList);
+		model.put("totalComplaints", totalComplaints);
+		model.put("totalPages", totalPages);
 		return "complaint-notification-admin";
 	}
 
