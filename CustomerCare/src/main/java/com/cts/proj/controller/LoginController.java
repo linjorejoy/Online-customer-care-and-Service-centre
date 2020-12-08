@@ -1,15 +1,20 @@
 package com.cts.proj.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,6 +44,12 @@ public class LoginController {
 
 	@Autowired
 	AdminPasswordValidator adminPasswordValidator;
+	
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+	}
 
 	@RequestMapping(value = "/user-login", method = RequestMethod.GET)
 	public String userLogin(@Validated @ModelAttribute("complaint") Complaint complaint, BindingResult result) {
@@ -70,7 +81,7 @@ public class LoginController {
 		if (result.hasErrors()) {
 			return "admin-login";
 		}
-
+			
 		int currentPage = 1;
 		Page<Complaint> pages = complaintService.getAllComplaint(currentPage - 1, 4, "complaintId", "asc");
 		List<Complaint> complaintList = pages.getContent();
@@ -84,9 +95,27 @@ public class LoginController {
 		model.put("totalPages", totalPages);
 		model.put("sortBy", "complaintId");
 		model.put("sortDir", "asc");
+		
 		return "complaint-notification-admin";
 	}
-
+	@RequestMapping(value = "/admin-view-filter-category", method = RequestMethod.GET)
+	public String adminViewFilter(ModelMap model,String keyword) {
+		
+	if(keyword !=null) {
+		model.addAttribute("complaintListAdmin",complaintService.findByKeyword(keyword));
+	}
+		return "complaint-notification-admin";
+	}
+	
+	@RequestMapping(value = "/admin-view-filter-date", method = RequestMethod.GET)
+	public String adminViewFilterByDate(ModelMap model,String date) {
+		
+		if(date !=null) {
+			model.addAttribute("complaintListAdmin",complaintService.findDate(date));
+		}
+		return "complaint-notification-admin";
+	}
+	
 	@RequestMapping(value = "/analyst-login", method = RequestMethod.GET)
 	public String analystLogin(@Validated @ModelAttribute("complaint") Complaint complaint, BindingResult result) {
 		return "analyst-login";
@@ -119,6 +148,7 @@ public class LoginController {
 		model.put("sortDir", "asc");
 		return "complaint-notification-analyst";
 	}
+	
 
 	@ModelAttribute(name = "categories")
 	public Map<String, String> getCategories() {
