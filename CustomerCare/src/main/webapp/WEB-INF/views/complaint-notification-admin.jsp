@@ -28,6 +28,24 @@
 				</div>
 			</div>
 
+			<div class="div-filter-complaints-admin">
+				<div class="div-filter-complaints-admin-sub">
+					<form action="/admin-view-filter-category" method="get">
+						<input id="txtSearch" type="text" name="keyword"
+							placeholder="Enter category">
+						<button type="submit">Search</button>
+					</form>
+				</div>
+				<div class="div-filter-complaints-admin-sub">
+					<form action="/admin-view-filter-date" method="get">
+						<input id="txtSearch" type="text" name="date"
+							placeholder="YYYY-MM-DD" required>
+						<button type="submit">Search</button>
+					</form>
+				</div>
+			</div>
+
+
 			<div class="pagination-details">
 				<div>Total Complaints : ${totalComplaints}</div>
 				<div>Page ${currentPage} of ${totalPages}</div>
