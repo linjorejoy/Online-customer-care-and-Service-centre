@@ -78,4 +78,11 @@ public class ComplaintService {
 
 		return complaintRepository.findComplaintForUser(userId);
 	}
+	
+	public List<Complaint> findByKeyword(String keyword){
+		return complaintRepository.findByKeyword(keyword);
+	}
+	public List<Complaint> findDate(String date){
+		return complaintRepository.findByDate(date);
+	}
 }
