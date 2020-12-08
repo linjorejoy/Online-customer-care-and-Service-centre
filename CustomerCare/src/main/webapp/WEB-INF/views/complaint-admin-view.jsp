@@ -33,10 +33,13 @@
 				<label>Description:</label> <label>${complaint.description}</label>
 			</div>
 			<div class="complaint-view-inputs-assign">
-				<input type="submit" value="Assign">
+				<button onclick="#">Assign</button>
 			</div>
 			
 		</form:form>
+		 <div class="div-download-btn">
+		       <a href="/download/complaint.xlsx">Download</a>
+		    </div>
 	</div>
 	<%@ include file="common/footer-admin.jspf"%>
 </div>
