@@ -27,7 +27,7 @@
 			</div>
 			<div class="complaint-view-inputs">
 				<form:label path="analyst.supportLevel">Assigned Analyst</form:label>
-				<form:select path="analyst.supportLevel" items="${supportLevel}"/>
+				<form:select path="analyst.supportLevel" items="${supportLevel}" />
 			</div>
 			<div class="complaint-view-inputs">
 				<label>Description:</label> <label>${complaint.description}</label>
@@ -35,11 +35,11 @@
 			<div class="complaint-view-inputs-assign">
 				<button onclick="#">Assign</button>
 			</div>
-			
+			<div class="div-download-btn">
+				<a href="/download/complaint.xlsx">Download</a>
+			</div>
 		</form:form>
-		 <div class="div-download-btn">
-		       <a href="/download/complaint.xlsx">Download</a>
-		    </div>
+
 	</div>
 	<%@ include file="common/footer-admin.jspf"%>
 </div>
