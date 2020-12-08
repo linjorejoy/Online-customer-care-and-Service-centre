@@ -44,7 +44,7 @@ public class TestController {
 	@ResponseBody
 	public String customJPATest() {
 		
-		return complaintService.getAllComplaintForAnalyst(1).toString();
+		return complaintService.getAllComplaintForAnalyst(1, 1, 3, "complaintId", "asc").toString();
 	}
 
 }

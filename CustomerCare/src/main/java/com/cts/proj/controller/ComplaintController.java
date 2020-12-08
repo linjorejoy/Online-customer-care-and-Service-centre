@@ -84,4 +84,34 @@ public class ComplaintController {
 
 	}
 
+	@RequestMapping(value = "/analyst-login/page/{pageNumber}", method = RequestMethod.GET)
+	public String viewAnotherPageAnalystComplaintList(@Validated @ModelAttribute("complaint") Complaint complaint,
+			BindingResult result, ModelMap model, @PathVariable("pageNumber") int pageNumber,
+			@Param("analystId") long analystId, @Param("sortBy") String sortBy, @Param("sortDir") String sortDir) {
+
+		System.out.println("Analyst Id is : " + analystId);
+		Page<Complaint> pages = complaintService.getAllComplaintForAnalyst(analystId,
+				pageNumber - 1, 4, sortBy, sortDir);
+		List<Complaint> complaintList = pages.getContent();
+		long totalComplaints = pages.getTotalElements();
+		int totalPages = pages.getTotalPages();
+
+		System.out.println();
+		System.out.println();
+		System.out.println(complaintList);
+		System.out.println();
+		System.out.println();
+		model.put("analystId", analystId);
+		model.put("currentPage", pageNumber);
+		model.put("complaintListAnalyst", complaintList);
+		model.put("totalComplaints", totalComplaints);
+		model.put("totalPages", totalPages);
+		model.put("sortBy", sortBy);
+		model.put("sortDir", sortDir);
+		String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
+		model.put("reverseSortDir", reverseSortDir);
+		return "complaint-notification-analyst";
+
+	}
+
 }
