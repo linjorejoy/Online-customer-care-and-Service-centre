@@ -1,8 +1,13 @@
 package com.cts.proj.controller;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.compress.utils.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.cts.proj.exporter.ExcelFileExporter;
 import com.cts.proj.model.Complaint;
 import com.cts.proj.service.ComplaintService;
 
@@ -37,6 +43,13 @@ public class AdminController {
 		service.addComplaint(complaint);
 		return "/";
 		
+	}
+	@RequestMapping(value = "/download/complaint.xlsx")
+	public void downloadExcelSheet(HttpServletResponse response , @ModelAttribute("complaint") Complaint complaint) throws IOException {
+		response.setContentType("application/octet-stream");
+		response.setHeader("Content-Disposition", "attachment; filename=customers.xlsx");
+		ByteArrayInputStream stream = ExcelFileExporter.complaintToExcel(complaint);
+		IOUtils.copy(stream, response.getOutputStream());
 	}
 	@ModelAttribute(name="category")
 	public Map<String,String> getCategory(){
