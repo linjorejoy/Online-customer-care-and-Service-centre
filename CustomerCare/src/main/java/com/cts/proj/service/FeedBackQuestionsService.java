@@ -21,5 +21,13 @@ public class FeedBackQuestionsService {
 	public FeedBackQuestions getFeedBackQuestion(long feedbackQuestionId) {
 		return feedBackQuestionsRepository.findById(feedbackQuestionId).orElse(null);
 	}
+	public boolean addFeedBackQuestions(FeedBackQuestions feedBackQuestions) {
+		feedBackQuestionsRepository.save(feedBackQuestions);
+		return true;
+	}
+	public boolean deleteFeedBackQuestion(long feedbackQuestionId) {
+		feedBackQuestionsRepository.deleteById(feedbackQuestionId);
+		return true;
+	}
 
 }
