@@ -19,17 +19,17 @@ public class UserServiceTest {
 	UserService service;
 	User user;
     @Before
-    public void intializeService() {
-    	service = new UserService();
-    	String sDate1="31/12/1998";  
-        Date date1;
-		try {
-			date1 = new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
-			user = new User(3005l, "firstName", "lastName",9874456532l,"firstName@gmail.com",date1,"Male");
-		} catch (ParseException e) {
-		}
-    	
-    }
+//    public void intializeService() {
+//    	service = new UserService();
+//    	String sDate1="31/12/1998";  
+//        Date date1;
+//		try {
+//			date1 = new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
+//			user = new User(3005l, "firstName", "lastName",9874456532l,"firstName@gmail.com",date1,"Male");
+//		} catch (ParseException e) {
+//		}
+//    	
+//    }
     @Test
     public void testGetUser() {
     	

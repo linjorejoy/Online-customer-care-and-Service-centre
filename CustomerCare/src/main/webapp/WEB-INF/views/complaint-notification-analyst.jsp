@@ -70,6 +70,7 @@
 							<p>${complaint.description}</p>
 						</div>
 						<div class="complaint-view-analyst-each-submit">
+							<a href="/show-user-complaint?complaintId=${complaint.complaintId}">View</a>
 							<input type="submit" id="Submit" value="View" onsubmit="/" />
 						</div>
 					</div>
