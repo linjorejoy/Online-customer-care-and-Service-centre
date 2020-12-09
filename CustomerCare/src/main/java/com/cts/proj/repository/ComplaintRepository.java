@@ -26,4 +26,5 @@ public interface ComplaintRepository extends PagingAndSortingRepository<Complain
 	@Query(value="select * from complaint c where date(date_of_complaint)=:date", nativeQuery=true)
 	List<Complaint> findByDate(@Param("date") String date);
 		
+
 }
