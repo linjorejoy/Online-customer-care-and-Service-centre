@@ -5,6 +5,8 @@
     </div>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="/analyst-login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      <li><a href="/analyst-home"><span class="glyphicon glyphicon-log-in"></span> Home</a></li>
+      <li><a href="/analyst-emails?analystId=${analyst.analystId}"><span class="glyphicon glyphicon-log-in"></span> Emails</a></li>
     </ul>
   </div>
 </nav>
