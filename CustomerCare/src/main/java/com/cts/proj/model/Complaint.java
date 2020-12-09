@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
@@ -32,11 +31,9 @@ public class Complaint {
 	private Date dateOfComplaint;
 	@Column(name = "suggestions")
 	private String suggestions;
-
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "complaint_user_id")
 	private User user;
-
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "assigned_analyst_id")
 	private Analyst analyst;
@@ -158,11 +155,11 @@ public class Complaint {
 
 	@Override
 	public String toString() {
-		return "Complaint [complaintId=" + complaintId + ", category=" + category + ", phoneNumber=" + phoneNumber
-				+ ", description=" + description + ", status=" + status + ", dateOfComplaint=" + dateOfComplaint
-				+ ", suggestions=" + suggestions + ", user=" + user + ", analyst=" + analyst + "]";
+		return "Complaint [complaintId=" + complaintId + ", user=" + user + ", analyst=" + analyst + ", category="
+				+ category + ", phoneNumber=" + phoneNumber + ", description=" + description + ", status=" + status
+				+ ", dateOfComplaint=" + dateOfComplaint + ", suggestions=" + suggestions + "]";
 	}
-	
-	
+
+
 
 }

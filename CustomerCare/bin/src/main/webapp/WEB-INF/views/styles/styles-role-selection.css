@@ -1,0 +1,116 @@
+/* ###################################################### */
+/* This is Style Sheet for Role Selection and Admin Pages */
+/* ###################################################### */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+/* HTML Elements */
+body {
+	background-color: #BEDCFA;
+	text-align: center;
+	height: 100%;
+}
+
+a {
+	text-decoration: none;
+	font-family: 'Righteous', cursive;
+	color: #FFFFFF;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+
+/* ###################################################### */
+/*                 Div positioning						 */
+/* ##################################################### */
+.container-my {
+	background-color: #BEDCFA;
+	height: 100vh;
+	margin: 0px;
+	padding: 0;
+	vertical-align: middle;
+	width: 100%;
+}
+
+.nav-div-my{
+	height: 10vh;
+}
+
+.center-div-admin {
+	background-color: #98ACF8;
+	position: relative;
+	top: 50%;
+	text-align: center;
+	margin: auto;
+	height: 50%;
+	width: 50%;
+	align-content: center;
+	transform: translateY(-50%);
+}
+
+.center-div {
+	background-color: #BEDCFA;
+	height: 80vh;
+}
+
+.centering {
+	position: relative;
+	padding: 0;
+	margin: auto;
+	top: 50%;
+	background-color: #98ACF8;
+	width: 50%;
+	transform: translateY(-50%);
+}
+
+.role-div {
+	margin-top: 2;
+	margin-right: auto;
+	margin-bottom: 10;
+	margin-left: auto;
+	padding: 10px;
+	border-top: 5;
+	width: 45%;
+	background-color: #B088F9;
+	border-radius: 20px;
+	text-align: center;
+}
+
+.spacing {
+	margin-top: 2;
+	margin-right: auto;
+	margin-bottom: 10;
+	margin-left: auto;
+	width: 35%;
+	height: 5px;
+}
+
+/* Header Elements */
+
+.navbar-my{
+	background-color: #98ACF8; 
+	padding: 0;
+}
+
+
+
+/* ###################################################### */
+/*                Footer Elements */
+/* ###################################################### */
+
+.footer-my{
+	bottom: 0;
+	height: 10vh;
+}
+
+
+
+
+
+
+
+
+

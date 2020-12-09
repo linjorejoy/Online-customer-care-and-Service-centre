@@ -20,9 +20,9 @@ public class ComplaintValidator implements Validator{
 		// TODO Auto-generated method stub
 		Complaint complaint = (Complaint) target;
 		
-		if(!(complaint.getUser().getUserId() >=1000)) {
-			errors.rejectValue("complaintId", "complaintIdError", "Should be a valid id");
-		}
+//		if(!(complaint.getUser().getUserId() >=1000)) {
+//			errors.rejectValue("complaintId", "complaintIdError", "Should be a valid id");
+//		}
 		if(!Long.valueOf(complaint.getPhoneNumber()).toString().matches("^[1-9]{1}[0-9]{9}$")) {
 			errors.rejectValue("phoneNumber", "PhoneNUmberError", "Phone Number Should be 10 digits long");
 		}

@@ -17,6 +17,16 @@ public class ComplaintService {
 
 	@Autowired
 	ComplaintRepository complaintRepository;
+	
+	public long getLastId() {
+		Sort sort = Sort.by("complaintId").descending();
+		Pageable pageable = PageRequest.of(0, 1, sort);
+		List<Complaint> allComplaints = complaintRepository.findAll(pageable).getContent();
+		if(allComplaints.isEmpty()) {
+			return 4000;
+		}
+		return complaintRepository.findAll(pageable).getContent().get(0).getComplaintId();
+	}
 
 	public boolean addComplaint(Complaint complaint) {
 		complaintRepository.save(complaint);
@@ -47,7 +57,6 @@ public class ComplaintService {
 
 	public boolean deleteComplaint(long complaintId) {
 		complaintRepository.deleteById(complaintId);
-		;
 		return true;
 	}
 

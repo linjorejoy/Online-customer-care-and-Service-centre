@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "feedback_question")
-public class FeedBackQuestions implements Comparable<FeedBackQuestions> {
+public class FeedbackQuestions implements Comparable<FeedbackQuestions> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,13 +34,13 @@ public class FeedBackQuestions implements Comparable<FeedBackQuestions> {
 		this.description = description;
 	}
 
-	public FeedBackQuestions(long feedbackQuestionId, String description) {
+	public FeedbackQuestions(long feedbackQuestionId, String description) {
 		super();
 		this.feedbackQuestionId = feedbackQuestionId;
 		this.description = description;
 	}
 
-	public FeedBackQuestions() {
+	public FeedbackQuestions() {
 		super();
 	}
 
@@ -60,7 +60,7 @@ public class FeedBackQuestions implements Comparable<FeedBackQuestions> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		FeedBackQuestions other = (FeedBackQuestions) obj;
+		FeedbackQuestions other = (FeedbackQuestions) obj;
 		if (feedbackQuestionId != other.feedbackQuestionId)
 			return false;
 		return true;
@@ -72,7 +72,7 @@ public class FeedBackQuestions implements Comparable<FeedBackQuestions> {
 	}
 
 	@Override
-	public int compareTo(FeedBackQuestions o) {
+	public int compareTo(FeedbackQuestions o) {
 		// TODO Auto-generated method stub
 
 		if (this.feedbackQuestionId == o.getFeedbackQuestionId()) {
