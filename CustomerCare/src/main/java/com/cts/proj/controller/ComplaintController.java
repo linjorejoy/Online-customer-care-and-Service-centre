@@ -48,7 +48,7 @@ public class ComplaintController {
 			@RequestParam("userId") long userId, ModelMap model) {
 
 		User user =  userService.getUser(userId);
-		Analyst analyst = analystService.getAnalyst(1);
+		Analyst analyst = analystService.getAnalyst(2001);
 		
 		long complaintId = complaintService.getLastId() + 1;
 		Complaint baseComplaint = new Complaint(complaintId, "Select Category", 0, "Please Fill The Description",

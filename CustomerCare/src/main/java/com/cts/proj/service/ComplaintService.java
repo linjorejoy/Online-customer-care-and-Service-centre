@@ -23,7 +23,7 @@ public class ComplaintService {
 		Pageable pageable = PageRequest.of(0, 1, sort);
 		List<Complaint> allComplaints = complaintRepository.findAll(pageable).getContent();
 		if(allComplaints.isEmpty()) {
-			return 0;
+			return 4000;
 		}
 		return complaintRepository.findAll(pageable).getContent().get(0).getComplaintId();
 	}

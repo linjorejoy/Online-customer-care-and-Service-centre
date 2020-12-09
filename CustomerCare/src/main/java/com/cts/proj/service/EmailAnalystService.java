@@ -25,7 +25,7 @@ public class EmailAnalystService {
 		Pageable pageable = PageRequest.of(0, 1, sort);
 		List<EmailAnalyst> allComplaints = emailAnalystRepository.findAll(pageable).getContent();
 		if(allComplaints.isEmpty()) {
-			return 0;
+			return 9000;
 		}
 		return emailAnalystRepository.findAll(pageable).getContent().get(0).getEmailId();
 	}

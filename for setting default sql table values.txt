@@ -11,7 +11,7 @@ values (1, 'a65f369f6d1723676476353142f65964349b15021fd178fc319d058b2c1d24a3', '
 
 
 insert into user(password, temp_password, first_name, last_name, phone_number, email_id, date_of_birth, gender) 
-values ('a65f369f6d1723676476353142f65964349b15021fd178fc319d058b2c1d24a3', '', 'Linjo', 'Rejoy', '9876543210', 'linjo@cts.com', '1998-05-31 12:55:50', 'Male');
+values ( '226392211f45668cc073ec9e8bd037ed40ca1a10589d5ec08721900e1670f329', 'Aa1@qwerty',, 'Linjo', 'Rejoy', '9876543210', 'linjo@cts.com', '1998-05-31 12:55:50', 'Male');
 
 
 insert into admin (admin_id, password, temp_password, first_name, last_name, email_id)

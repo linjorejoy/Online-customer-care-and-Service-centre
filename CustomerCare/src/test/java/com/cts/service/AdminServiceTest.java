@@ -18,7 +18,7 @@ public class AdminServiceTest {
     @Before
     public void intializeService() {
     	service = new AdminService();
-    	admin = new Admin(1002, "pass@123", "pass@123", "Test", "Name", "test@gmail.com");
+    	admin = new Admin(1002, "pass@123", "pass@123", "Test", "Name", "test@gmail.com", null, null);
     	
     	
     }

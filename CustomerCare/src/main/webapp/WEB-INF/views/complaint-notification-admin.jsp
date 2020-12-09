@@ -1,4 +1,4 @@
-<%@ include file="common/header-admin.jspf"%> demo
+<%@ include file="common/header-admin.jspf"%> 
 <div class="container-my">
 	<%@ include file="common/nav-bar-admin.jspf"%>
 	<div class="center-div-complaint-admin">
