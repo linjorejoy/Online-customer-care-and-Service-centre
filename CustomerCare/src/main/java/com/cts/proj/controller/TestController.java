@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cts.proj.security.SecureWithSHA256;
+import com.cts.proj.service.AnalystService;
 import com.cts.proj.service.ComplaintService;
 import com.cts.proj.service.UserService;
 
@@ -20,6 +22,18 @@ public class TestController {
 	
 	@Autowired
 	ComplaintService complaintService;
+	
+	@Autowired
+	AnalystService analystService;
+	
+
+
+	@RequestMapping(value = "/testSupportLevel", method = RequestMethod.GET)
+	@ResponseBody
+	public String testAnalystOfSupportLevel() {
+
+		return analystService.getAnalystOfSupportLevel("L2").toString();
+	}
 
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	@ResponseBody

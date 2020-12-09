@@ -1,5 +1,8 @@
 package com.cts.proj.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,9 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.ManyToAny;
 
 @Entity
 @Table(name = "u_sq_questions")
@@ -24,13 +26,11 @@ public class UserSecretQuestion {
 	@Column(name = "answer")
 	private String answer;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "question_id")
 	private SecretQuestions secretQuestions;
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
-	private User user;
-
+	
+	
 	public long getUserSqId() {
 		return userSqId;
 	}
@@ -55,12 +55,5 @@ public class UserSecretQuestion {
 		this.secretQuestions = secretQuestions;
 	}
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
 
 }

@@ -1,4 +1,4 @@
-<%@ include file="common/header-admin.jspf"%>
+<%@ include file="common/header-admin.jspf"%> 
 <div class="container-my">
 	<%@ include file="common/nav-bar-admin.jspf"%>
 	<div class="center-div-complaint-admin">
@@ -15,11 +15,6 @@
 				</div>
 				<div class="sort-btn">
 					<a
-						href="/admin-login/page/${currentPage}?sortBy=analyst.analystId&sortDir=${reverseSortDir}">Analyst
-						Id</a>
-				</div>
-				<div class="sort-btn">
-					<a
 						href="/admin-login/page/${currentPage}?sortBy=dateOfComplaint&sortDir=${reverseSortDir}">Date</a>
 				</div>
 				<div class="sort-btn">
@@ -27,7 +22,7 @@
 						href="/admin-login/page/${currentPage}?sortBy=category&sortDir=${reverseSortDir}">Category</a>
 				</div>
 			</div>
-
+			
 			<div class="div-filter-complaints-admin">
 				<div class="div-filter-complaints-admin-sub">
 					<form action="/admin-view-filter-category" method="get">
@@ -44,7 +39,6 @@
 					</form>
 				</div>
 			</div>
-
 
 			<div class="pagination-details">
 				<div>Total Complaints : ${totalComplaints}</div>
@@ -69,7 +63,7 @@
 							<p>${complaint.description}</p>
 						</div>
 						<div class="complaint-view-admin-each-submit">
-							<input type="submit" id="Submit" value="View" onsubmit="/" />
+							<a href="/show-user-complaint?complaintId=${complaint.complaintId}">View</a>
 						</div>
 					</div>
 				</c:forEach>

@@ -18,6 +18,10 @@ public class AnalystService {
 		return true;
 	}
 
+	public List<Analyst> getAnalystOfSupportLevel(String supportLevel){
+		return analystRepository.getAnalystOfSupportLevel(supportLevel);
+	}
+	
 	public Analyst getAnalyst(long analystId) {
 		return analystRepository.getOne(analystId);
 	}
