@@ -17,6 +17,10 @@ public class AnalystService {
 		analystRepository.save(analyst);
 		return true;
 	}
+	
+	public List<Analyst> getAllAnalystNotOfSupportLevel(String supportLevel){
+		return analystRepository.getAllAnalystNotOfSupportLevel(supportLevel);
+	}
 
 	public List<Analyst> getAnalystOfSupportLevel(String supportLevel){
 		return analystRepository.getAnalystOfSupportLevel(supportLevel);

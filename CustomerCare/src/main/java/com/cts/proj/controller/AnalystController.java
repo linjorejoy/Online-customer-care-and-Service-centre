@@ -60,7 +60,8 @@ public class AnalystController {
 	@RequestMapping(value = "/show-user-complaint-analyst", method = RequestMethod.GET)
 	public String showUserComplaint(@RequestParam long complaintId, ModelMap model) {
 		Complaint complaint = complaintService.getComplaint(complaintId);
-		List<Analyst> analystList = analystService.getAllAnalyst();
+		List<Analyst> analystList = analystService.getAllAnalystNotOfSupportLevel(
+				analystService.getAnalyst(complaint.getAnalyst().getAnalystId()).getSupportLevel());
 //		List<String> supportLevelWithId = new ArrayList<String>();
 		Map<String, String> supportLevelWithId = new HashMap<String, String>();
 
