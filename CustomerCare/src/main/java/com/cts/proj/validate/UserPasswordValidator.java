@@ -21,13 +21,12 @@ public class UserPasswordValidator implements Validator {
 	@Override
 	public boolean supports(Class<?> clazz) {
 		// TODO Auto-generated method stub
-		return Complaint.class.equals(clazz);
+		return User.class.equals(clazz);
 	}
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		Complaint complaint = (Complaint) target;
-		User user = complaint.getUser();
+		User user = (User) target;
 
 		try {
 			if (!SecureWithSHA256.getSHA(user.getTempPassword()).equals(userService.getPasswordSHA(user.getUserId()))) {

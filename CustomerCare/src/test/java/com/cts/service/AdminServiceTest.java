@@ -29,6 +29,7 @@ public class AdminServiceTest {
     @Before
     public void intializeService() {
     	service = new AdminService();
+
     	admin = new Admin();
     	admin.setAdminId(1000);
     	admin.setFirstName("Test");
@@ -36,6 +37,10 @@ public class AdminServiceTest {
     	admin.setEmailId("admin@gmail.com");
     	admin.setPassword("Pass@123");
     	admin.setTempPassword("Pass@123");    	
+
+    	admin = new Admin(1002, "pass@123", "pass@123", "Test", "Name", "test@gmail.com", null, null);
+    	
+
     }
     @Test
     public void testGetAdminNotNull() {
