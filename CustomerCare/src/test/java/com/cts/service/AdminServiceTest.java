@@ -7,20 +7,35 @@ import java.security.NoSuchAlgorithmException;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import com.cts.proj.model.Admin;
 import com.cts.proj.security.SecureWithSHA256;
 import com.cts.proj.service.AdminService;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class AdminServiceTest {
+	
+	@Autowired
 	AdminService service;
+	@MockBean
 	Admin admin;
+	
     @Before
     public void intializeService() {
     	service = new AdminService();
-    	admin = new Admin(1002, "pass@123", "pass@123", "Test", "Name", "test@gmail.com");
-    	
-    	
+    	admin = new Admin();
+    	admin.setAdminId(1000);
+    	admin.setFirstName("Test");
+    	admin.setLastName("Admin");
+    	admin.setEmailId("admin@gmail.com");
+    	admin.setPassword("Pass@123");
+    	admin.setTempPassword("Pass@123");    	
     }
     @Test
     public void testGetAdminNotNull() {
@@ -31,6 +46,10 @@ public class AdminServiceTest {
     public void testGetAdminNull() {
     	admin = service.getAdmin(10000);
     	assertTrue(admin == null);
+    }
+    @Test
+    public void testGetAdmin() {
+    	assertTrue(service.getAdmin(1000).equals(admin));
     }
     @Test
     public void testAdminPassword() {
@@ -47,6 +66,10 @@ public class AdminServiceTest {
     public void testPasswordNotNull() {
     	String password= service.getAdminPassword(1000);
     	assertTrue(password!=null);
+    }
+    @Test
+    public void testPasswordSHANotNull() {
+    	assertTrue(service.getPasswordSHA(1000)!=null);
     }
     
     
