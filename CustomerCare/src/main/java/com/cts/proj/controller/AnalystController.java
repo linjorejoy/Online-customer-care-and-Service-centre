@@ -14,12 +14,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cts.proj.model.Complaint;
+import com.cts.proj.service.AnalystService;
 import com.cts.proj.service.ComplaintService;
 
 @Controller
 public class AnalystController {
 	@Autowired
 	ComplaintService complaintService;
+	
+	@Autowired
+	AnalystService analystService;
 		
 	@RequestMapping(value="/view-complaint-analyst", method=RequestMethod.GET)
 	public String viewComplaintAnalyst(@RequestParam long complaintId,ModelMap model){
@@ -29,6 +33,14 @@ public class AnalystController {
 		return "complaint-analyst-view";
 	}
 	
+	@RequestMapping(value = "/analyst-emails")
+	public String viewAnalystEmails(@RequestParam("analystId") long analystId, ModelMap model) {
+		
+		model.put("analyst", analystService.getAnalyst(analystId));
+		
+		
+		return "emails-analyst";
+	}
 	
 	@RequestMapping(value="/update-complaint-analyst", method=RequestMethod.POST)
 	public String updateComplaintAnalyst(@Validated @ModelAttribute("complaint") Complaint complaint,BindingResult result){
