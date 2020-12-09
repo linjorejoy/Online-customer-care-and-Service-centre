@@ -51,6 +51,10 @@ public class AdminController {
 		ByteArrayInputStream stream = ExcelFileExporter.complaintToExcel(complaint);
 		IOUtils.copy(stream, response.getOutputStream());
 	}
+	@RequestMapping(value="/feedback-questions-admin",method=RequestMethod.GET)
+	public String updateFeedbackQuestions() {
+		return "feedback-creation-admin";
+	}
 	@ModelAttribute(name="category")
 	public Map<String,String> getCategory(){
 		Map<String,String> category=new HashMap<>();
