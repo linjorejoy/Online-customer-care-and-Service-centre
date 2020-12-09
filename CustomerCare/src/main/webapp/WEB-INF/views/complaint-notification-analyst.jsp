@@ -1,8 +1,27 @@
-<%@ include file="common/header-analyst.jspf"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<style>
+	<%@ include file="styles/styles-analyst.css" %>
+</style>
+<link
+	href="https://fonts.googleapis.com/css2?family=Righteous&display=swap"
+	rel="stylesheet">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Customer Care</title>
+</head>
+<body>
 <div class="container-my">
 	<%@ include file="common/nav-bar-analyst.jspf"%>
 	<div class="center-div-complaint-analyst">
-		<div class="centering-">
+		<div class="centering-my">
 			<div class="heading">
 				<h1>Complaint Notifications</h1>
 			</div>
@@ -73,4 +92,11 @@
 
 	<%@ include file="common/footer-analyst.jspf"%>
 </div>
-<%@ include file="common/end-tags-analyst.jspf"%>
+
+	<script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+	<script src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	
+		<script
+	src="webjars/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+</body>
+</html>
