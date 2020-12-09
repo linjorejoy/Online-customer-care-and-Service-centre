@@ -1,10 +1,15 @@
 package com.cts.proj.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -26,12 +31,20 @@ public class Admin {
 	@Column(name = "email_id")
 	private String emailId;
 
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "admin_id")
+	private List<EmailUser> emailListUser;
+
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "admin_id")
+	private List<EmailAnalyst> emailListAdmin;
+
 	public Admin() {
 		super();
 	}
 
-	public Admin(long adminId, String password, String tempPassword, String firstName, String lastName,
-			String emailId) {
+	public Admin(long adminId, String password, String tempPassword, String firstName, String lastName, String emailId,
+			List<EmailUser> emailListUser, List<EmailAnalyst> emailListAdmin) {
 		super();
 		this.adminId = adminId;
 		this.password = password;
@@ -39,6 +52,8 @@ public class Admin {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.emailId = emailId;
+		this.emailListUser = emailListUser;
+		this.emailListAdmin = emailListAdmin;
 	}
 
 	public long getAdminId() {
@@ -89,10 +104,27 @@ public class Admin {
 		this.emailId = emailId;
 	}
 
+	public List<EmailUser> getEmailListUser() {
+		return emailListUser;
+	}
+
+	public void setEmailListUser(List<EmailUser> emailListUser) {
+		this.emailListUser = emailListUser;
+	}
+
+	public List<EmailAnalyst> getEmailListAdmin() {
+		return emailListAdmin;
+	}
+
+	public void setEmailListAdmin(List<EmailAnalyst> emailListAdmin) {
+		this.emailListAdmin = emailListAdmin;
+	}
+
 	@Override
 	public String toString() {
-		return "Admin [adminId=" + adminId + ", firstName=" + firstName + ", lastName=" + lastName + ", emailId="
-				+ emailId + "]";
+		return "Admin [adminId=" + adminId + ", password=" + password + ", tempPassword=" + tempPassword
+				+ ", firstName=" + firstName + ", lastName=" + lastName + ", emailId=" + emailId + ", emailListUser="
+				+ emailListUser + ", emailListAdmin=" + emailListAdmin + "]";
 	}
 
 	@Override

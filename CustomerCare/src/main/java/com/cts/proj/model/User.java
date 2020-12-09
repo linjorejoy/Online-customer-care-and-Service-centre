@@ -1,12 +1,16 @@
 package com.cts.proj.model;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -34,20 +38,35 @@ public class User implements Comparable<User> {
 	@Column(name = "gender")
 	private String gender;
 
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "complaint_user_id")
+	private List<Complaint> complaintList;
+
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "user_id")
+	private List<EmailUser> emailList;
+
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "user_id")
+	private List<UserSecretQuestion> secretQuestionList;
+
 	public User() {
 		super();
 	}
 
-	public User(long userId, String firstName, String lastName, long phoneNumber, String emailId, Date dateOfBirth,
-			String gender) {
+	public User(long userId, String password, String tempPassword, String firstName, String lastName, long phoneNumber,
+			String emailId, Date dateOfBirth, String gender, List<Complaint> complaintList) {
 		super();
 		this.userId = userId;
+		this.password = password;
+		this.tempPassword = tempPassword;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
 		this.emailId = emailId;
 		this.dateOfBirth = dateOfBirth;
 		this.gender = gender;
+		this.complaintList = complaintList;
 	}
 
 	public long getUserId() {
@@ -122,10 +141,12 @@ public class User implements Comparable<User> {
 		this.gender = gender;
 	}
 
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber="
-				+ phoneNumber + ", emailId=" + emailId + ", dateOfBirth=" + dateOfBirth + ", gender=" + gender + "]";
+	public List<Complaint> getComplaintList() {
+		return complaintList;
+	}
+
+	public void setComplaintList(List<Complaint> complaintList) {
+		this.complaintList = complaintList;
 	}
 
 	@Override
@@ -158,6 +179,12 @@ public class User implements Comparable<User> {
 			return 1;
 		}
 		return -1;
+	}
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber="
+				+ phoneNumber + ", emailId=" + emailId + ", dateOfBirth=" + dateOfBirth + ", gender=" + gender + "]";
 	}
 
 }

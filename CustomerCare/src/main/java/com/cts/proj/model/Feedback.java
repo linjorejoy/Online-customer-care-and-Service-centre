@@ -1,44 +1,44 @@
 package com.cts.proj.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "responses")
+@Table(name = "feedback")
 public class Feedback {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "response_id")
 	private int responseId;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "question_id")
+	private FeedbackQuestions feedBackQuestion;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "complaint_id")
+	private Complaint complaint;
+
 	@Column(name = "answer")
 	private String answer;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "question_id")
-	private FeedBackQuestions feedbackQuestionTable;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "complaint_complaint_id")
-	private Complaint complaint;
 
 	public Feedback() {
 		super();
 	}
 
-	public Feedback(int responseId, String answer, FeedBackQuestions feedbackQuestionTable, Complaint complaint) {
+	public Feedback(int responseId, String answer, FeedbackQuestions feedBackQuestion) {
 		super();
 		this.responseId = responseId;
 		this.answer = answer;
-		this.feedbackQuestionTable = feedbackQuestionTable;
-		this.complaint = complaint;
+		this.feedBackQuestion = feedBackQuestion;
 	}
 
 	public int getResponseId() {
@@ -57,20 +57,42 @@ public class Feedback {
 		this.answer = answer;
 	}
 
-	public FeedBackQuestions getFeedbackQuestionTable() {
-		return feedbackQuestionTable;
+	public FeedbackQuestions getFeedBackQuestion() {
+		return feedBackQuestion;
 	}
 
-	public void setFeedbackQuestionTable(FeedBackQuestions feedbackQuestionTable) {
-		this.feedbackQuestionTable = feedbackQuestionTable;
+	public void setFeedBackQuestionList(FeedbackQuestions feedBackQuestion) {
+		this.feedBackQuestion = feedBackQuestion;
 	}
 
-	public Complaint getComplaint() {
-		return complaint;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + responseId;
+		return result;
 	}
 
-	public void setComplaint(Complaint complaint) {
-		this.complaint = complaint;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Feedback other = (Feedback) obj;
+		if (responseId != other.responseId)
+			return false;
+		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Feedback [responseId=" + responseId + ", feedBackQuestion=" + feedBackQuestion + ", complaint="
+				+ complaint + ", answer=" + answer + "]";
+	}
+
+
 
 }
