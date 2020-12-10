@@ -27,7 +27,7 @@ public class EmailAnalystService {
 		if(allComplaints.isEmpty()) {
 			return 9000;
 		}
-		return emailAnalystRepository.findAll(pageable).getContent().get(0).getEmailId();
+		return allComplaints.get(0).getEmailId();
 	}
 	
 	public boolean addEmail(EmailAnalyst email) {

@@ -83,7 +83,7 @@
 							<p>${complaint.description}</p>
 						</div>
 						<div class="complaint-view-admin-each-submit">
-							<a href="/show-user-complaint-analyst?complaintId=${complaint.complaintId}">View</a>
+							<a href="/show-user-complaint?complaintId=${complaint.complaintId}">View</a>
 						</div>
 					</div>
 				</c:forEach>
