@@ -67,7 +67,6 @@ public class ComplaintService {
 
 	public Page<Complaint> getAllComplaintForAnalyst(long analystId, int pageNumber, int count, String sortBy,
 			String sortDir) {
-		System.out.println("Analyst Id Service clsas : " + analystId);
 		Sort sort = null;
 		if (sortDir.equalsIgnoreCase("asc")) {
 			sort = Sort.by(sortBy).ascending();
@@ -77,7 +76,6 @@ public class ComplaintService {
 			sort = Sort.by(sortBy).ascending();
 		}
 		Pageable pageable = PageRequest.of(pageNumber, count, sort);
-		System.out.println("In service class : " + complaintRepository.findComplaintsByAnalyst(pageable, analystId).getContent());
 		return complaintRepository.findComplaintsByAnalyst(pageable, analystId);
 
 	}
