@@ -18,7 +18,6 @@ public class UserServiceTest {
 	UserService service;
 	User user;
     @Before
-<<<<<<< HEAD
     public void intializeService() {
     	service = new UserService();
     	String sDate1="31/12/1998";  
@@ -30,7 +29,6 @@ public class UserServiceTest {
 		}
     	
     }
-=======
 //    public void intializeService() {
 //    	service = new UserService();
 //    	String sDate1="31/12/1998";  
@@ -42,7 +40,6 @@ public class UserServiceTest {
 //		}
 //    	
 //    }
->>>>>>> defe05828b6d7a01d8e8c470f6e8f62acffd5349
     @Test
     public void testGetUser() {
     	
