@@ -3,6 +3,7 @@ package com.cts.service;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -11,6 +12,9 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.mockito.Matchers.*;
+
+import java.text.SimpleDateFormat;
+
 import com.cts.proj.model.Complaint;
 import com.cts.proj.repository.ComplaintRepository;
 import com.cts.proj.service.ComplaintService;
@@ -25,11 +29,40 @@ public class ComplaintServiceTest {
 	ComplaintService complaintService;
     
     Complaint complaint;
+    @Before
+    public void setUp() {
+    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    }
+    
+    
+    
 	@Test
 	public void TestGetComplaint() {
 		complaintService.getComplaint(4001);
 		 Mockito.verify(complaintRepository,Mockito.times(1)).findById(anyLong());
 	}
+	@Test
+	public void TestGetAllComplaint() {
+		
+	}
 	
+	@Test
+	public void TestUpdateComplaint() {
+		
+	}
 	
+	@Test
+	public void TestDeleteComplaint() {
+		
+	}
+	
+	@Test
+	public void TestDeleteComplaintById() {
+		
+	}
+	
+	@Test
+	public void TestGetAllComplaintOfUser() {
+		
+	}
 }
