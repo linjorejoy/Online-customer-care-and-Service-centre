@@ -55,6 +55,20 @@ public class User implements Comparable<User> {
 	}
 
 	public User(long userId, String password, String tempPassword, String firstName, String lastName, long phoneNumber,
+			String emailId, Date dateOfBirth, String gender) {
+		super();
+		this.userId = userId;
+		this.password = password;
+		this.tempPassword = tempPassword;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phoneNumber = phoneNumber;
+		this.emailId = emailId;
+		this.dateOfBirth = dateOfBirth;
+		this.gender = gender;
+	}
+
+	public User(long userId, String password, String tempPassword, String firstName, String lastName, long phoneNumber,
 			String emailId, Date dateOfBirth, String gender, List<Complaint> complaintList) {
 		super();
 		this.userId = userId;
