@@ -3,50 +3,91 @@ package com.cts.service;
 
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import com.cts.proj.model.Analyst;
+import com.cts.proj.repository.AnalystRepository;
 import com.cts.proj.service.AnalystService;
-
+@RunWith(MockitoJUnitRunner.class)
 public class AnalystServiceTest {
+	  @Mock
+	  AnalystRepository analystRepo;
+	  @InjectMocks
       AnalystService analystService;
-      Analyst analyst1,analyst2,analyst3;
+	  @Mock
+      Analyst analyst;
    
       @Before
-      public void intialise() throws ParseException {
-    	  analystService = new AnalystService();
-    	  SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+      public void SetUp() {
+    	  analyst = new Analyst(2001, "pass@231", "pass@231", "Test", "Name", 987654321,"test@gmail.com", new Date() , "Female" , "L1");
+    	 // when(analystService.getPasswordSHA(Mockito.anyLong())).thenReturn("pass@231");
     	  
-			 analyst1 = new Analyst(2002, "pass##23", "pass##23", "Test", "Name", 908978675, "test@gmail.com", format.parse("1998-10-23"), "Female", "L1");
-			 analyst2 = new Analyst(2003, "pass@#23", "pass@#23", "Test1", "Def", 988978475, "test1@gmail.com", format.parse("1998-12-31"), "Male", "L2");
-			 analyst3 = new Analyst(2004, "pass@234", "pass@234", "Test2", "Efg", 918975675, "test2@gmail.com", format.parse("1998-10-23"), "Female", "L3");
-			
       }
-      @Test
+      @SuppressWarnings("deprecation")
+	  @Test
       public void testAddAnalyst() {
-    	  assertTrue(analystService.addAnalyst(analyst1));
-    	  assertTrue(analystService.addAnalyst(analyst2));
-    	  assertTrue(analystService.addAnalyst(analyst3));
+    	  analystService.addAnalyst((Analyst)Mockito.anyObject());
+    	  Mockito.verify(analystRepo, Mockito.times(1)).save((Analyst)Mockito.anyObject());
+    	  
       }
       @Test
-      public void testgetAnalysNotNullt() {
-    	  Analyst analystTemp = analystService.getAnalyst(2002);
-    	  assertTrue(analystTemp!= null);
+      public void testgetAllAnalysNotOfSupportLevel() {
+    	  analystService.getAllAnalystNotOfSupportLevel(Mockito.anyString());
+    	  Mockito.verify(analystRepo, Mockito.times(1)).getAllAnalystNotOfSupportLevel(Mockito.anyString());
+    	  
       }
       @Test
-      public void testgetAnalyst() {
-    	  Analyst analystTemp = analystService.getAnalyst(2003);
-    	  assertTrue(analystTemp.equals(analyst2));
+      public void testGetAnalystOfSupportLevel() {
+    	  analystService.getAnalystOfSupportLevel(Mockito.anyString());
+    	  Mockito.verify(analystRepo, Mockito.times(1)).getAnalystOfSupportLevel(Mockito.anyString());
       }
       @Test
       public void testGetAllAnalyst() {
-    	  List<Analyst> list = analystService.getAllAnalyst();
-    	  assertTrue(list.size() == 3);
+    	  analystService.getAllAnalyst();
+    	  Mockito.verify(analystRepo, Mockito.times(1)).findAll();
       }
+      @Test
+      public void testGetAnalyst() {
+    	  analystService.getAnalyst(Mockito.anyLong());
+    	  Mockito.verify(analystRepo, Mockito.times(1)).getOne(Mockito.anyLong());
+      }
+      @Test
+      public void testDeleteAnalystById() {
+    	  analystService.deleteAnalyst(Mockito.anyLong());
+    	  Mockito.verify(analystRepo, Mockito.times(1)).deleteById(Mockito.anyLong());
+      }
+      @Test
+      public void testDeleteAnalyst() {
+    	  analystService.deleteAnalyst((Analyst)Mockito.anyObject());
+    	  Mockito.verify(analystRepo, Mockito.times(1)).delete((Analyst)Mockito.anyObject());
+      }
+      @Test
+      public void testUpdateAnalyst() {
+    	  analystService.updateAnalyst((Analyst)Mockito.anyObject());
+    	  Mockito.verify(analystRepo, Mockito.times(1)).save((Analyst)Mockito.anyObject());
+      }
+      //@Test
+      public void testGetPasswordSHA() {
+    	 System.out.println(analyst.toString());
+    	 analystService.addAnalyst(analyst);
+         when(analystService.getPasswordSHA(Mockito.anyLong())).thenReturn("pass@231");
+    	 String password = analystService.getPasswordSHA(2001);
+    	 System.out.println(password);
+    	 assertTrue(password.equals("pass@231"));    	  
+      }
+     
 }
