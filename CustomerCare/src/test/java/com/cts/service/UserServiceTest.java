@@ -1,10 +1,6 @@
 package com.cts.service;
 
-import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.when;
-
-import java.text.SimpleDateFormat;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,15 +50,6 @@ public class UserServiceTest {
     public void testUpdateUser() {
     	service.addUser((User) Mockito.anyObject());
     	Mockito.verify(userRepository,Mockito.times(1)).save((User)Mockito.anyObject());
-    }
-    @Test
-    public void testPassword() throws Exception {
-    	user=new User(3004l,"Password@123","Password@123","firstName","lastName",9874545641l,"abc@gmail.com",new SimpleDateFormat("yyyy-MM-dd").parse("1998-05-06"),"Male");
-    	service.addUser(user);
-    	service.getPasswordSHA(3004);
-    	when(service.getPasswordSHA(anyLong())).thenReturn("Password@1233");
-    	String password=service.getPasswordSHA(3004);
-    	assertTrue(password.equals("Password@123"));
     }
 
 }
