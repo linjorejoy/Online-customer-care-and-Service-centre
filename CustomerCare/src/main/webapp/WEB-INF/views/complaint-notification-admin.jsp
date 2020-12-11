@@ -22,7 +22,7 @@
 <div class="container-my">
 	<%@ include file="common/nav-bar-admin.jspf"%>
 	<div class="center-div-complaint-admin">
-		<div class="centering-">
+		<div class="centering">
 			<div class="heading">
 				<h1>Complaint Notifications</h1>
 			</div>
@@ -30,33 +30,40 @@
 				<div class="label-sort">Sort By</div>
 				<div class="sort-btn">
 					<a
-						href="/admin-login/page/${currentPage}?sortBy=complaintId&sortDir=${reverseSortDir}">Complaint
+						href="/admin-login/page/${currentPage}?sortBy=complaintId&sortDir=${reverseSortDir}&keyword=${keyword}&date=${date}">Complaint
 						Id</a>
 				</div>
 				<div class="sort-btn">
 					<a
-						href="/admin-login/page/${currentPage}?sortBy=dateOfComplaint&sortDir=${reverseSortDir}">Date</a>
+						href="/admin-login/page/${currentPage}?sortBy=dateOfComplaint&sortDir=${reverseSortDir}&keyword=${keyword}&date=${date}">Date</a>
 				</div>
 				<div class="sort-btn">
 					<a
-						href="/admin-login/page/${currentPage}?sortBy=category&sortDir=${reverseSortDir}">Category</a>
+						href="/admin-login/page/${currentPage}?sortBy=category&sortDir=${reverseSortDir}&keyword=${keyword}&date=${date}">Category</a>
 				</div>
 			</div>
 			
 			<div class="div-filter-complaints-admin">
 				<div class="div-filter-complaints-admin-sub">
-					<form action="/admin-view-filter-category" method="get">
+					<form:form action="/admin-login/page/${currentPage}" method="get">
 						<input id="txtSearch" type="text" name="keyword"
 							placeholder="Enter category">
-						<button type="submit">Search</button>
-					</form>
+						<input type="hidden" name="sortBy" value="${sortBy}"/>
+						<input type="hidden" name="sortDir" value="${reverseSortDir}"/>
+						<input type="hidden" name="date" value="${date}"/>
+						<input type="submit" value="Search"/>
+						<!-- <button type="submit">Search</button> -->
+					</form:form>
 				</div>
 				<div class="div-filter-complaints-admin-sub">
-					<form action="/admin-view-filter-date" method="get">
+					<form:form action="/admin-login/page/${currentPage}" method="get">
 						<input id="txtSearch" type="text" name="date"
 							placeholder="YYYY-MM-DD" required>
+						<input type="hidden" name="sortBy" value="${sortBy}"/>
+						<input type="hidden" name="sortDir" value="${reverseSortDir}"/>
+						<input type="hidden" name="keyword" value="${keyword}"/>
 						<button type="submit">Search</button>
-					</form>
+					</form:form>
 				</div>
 			</div>
 

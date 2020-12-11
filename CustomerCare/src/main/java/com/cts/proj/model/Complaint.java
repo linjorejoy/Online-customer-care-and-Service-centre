@@ -1,7 +1,9 @@
 package com.cts.proj.model;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -37,6 +40,10 @@ public class Complaint {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "assigned_analyst_id")
 	private Analyst analyst;
+	
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "complaint_id")
+	private List<Feedback> feedBackList;
 
 	public Complaint() {
 		super();
@@ -126,6 +133,14 @@ public class Complaint {
 
 	public void setAnalyst(Analyst analyst) {
 		this.analyst = analyst;
+	}
+
+	public List<Feedback> getFeedBackList() {
+		return feedBackList;
+	}
+
+	public void setFeedBackList(List<Feedback> feedBackList) {
+		this.feedBackList = feedBackList;
 	}
 
 	@Override
