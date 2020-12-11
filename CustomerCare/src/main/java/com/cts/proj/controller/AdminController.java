@@ -28,6 +28,7 @@ import com.cts.proj.exporter.ExcelFileExporter;
 import com.cts.proj.model.Analyst;
 import com.cts.proj.model.Complaint;
 import com.cts.proj.model.EmailAnalyst;
+import com.cts.proj.model.FeedbackQuestions;
 import com.cts.proj.service.AdminService;
 import com.cts.proj.service.AnalystService;
 import com.cts.proj.service.ComplaintService;
@@ -61,6 +62,11 @@ public class AdminController {
 	public String goToAdminHome() {
 		
 		return "admin-home";
+	}
+	@RequestMapping(value = "/admin-create-feedback", method = RequestMethod.GET)
+	public String gotoFeedBackAdmin(@ModelAttribute FeedbackQuestions feedbackQuestions ) {
+		return "feedback-creation-admin";
+		
 	}
 
 	@RequestMapping(value = "/show-user-complaint", method = RequestMethod.GET)
