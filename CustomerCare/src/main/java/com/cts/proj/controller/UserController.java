@@ -57,7 +57,7 @@ public class UserController {
 	@RequestMapping(value = "/user-complaint-list-view/page/{pageNumber}", method = RequestMethod.GET)
 	public String viewAnotherPageAdminComplaintList(@Validated @ModelAttribute("user") User user,
 			BindingResult result, ModelMap model, @PathVariable("pageNumber") int pageNumber,
-			@Param("sortBy") String sortBy, @Param("sortDir") String sortDir, String keyword, String date) {
+			@Param("sortBy") String sortBy, @Param("sortDir") String sortDir, String keyword, String date,String userId,String complaintId) {
 
 		Page<Complaint> pages = complaintService.getAllComplaint(pageNumber - 1, 4, sortBy, sortDir);
 		List<Complaint> complaintList = pages.getContent();
@@ -72,6 +72,12 @@ public class UserController {
 
 		if (date != null && !date.isEmpty()) {
 			model.addAttribute("complaintListAdmin", complaintService.findDate(date));
+		}
+		if (userId != null && !userId.isEmpty()) {
+			model.addAttribute("complaintListAdmin", complaintService.findByUserId(userId));
+		}
+		if (complaintId != null && !complaintId.isEmpty()) {
+			model.addAttribute("complaintListAdmin", complaintService.findByComplaintId(complaintId));
 		}
 		model.put("totalComplaints", totalComplaints);
 		model.put("totalPages", totalPages);

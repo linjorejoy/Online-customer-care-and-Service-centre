@@ -45,7 +45,30 @@
 					<button type="submit">Search</button>
 				</form:form>
 			</div>
+			
 		</div>
+		<div class="div-filter-complaints-admin-sub">
+				<form:form action="/user-complaint-list-view/page/${currentPage}" method="get">
+					<input id="txtSearch" type="text" name="userId"
+						placeholder="Enter UserId" required>
+					<input type="hidden" name="sortBy" value="${sortBy}" />
+					<input type="hidden" name="sortDir" value="${reverseSortDir}" />
+					<input type="hidden" name="userId" value="${userId}" />
+					<button type="submit">Search</button>
+				</form:form>
+			</div>
+			<div class="div-filter-complaints-admin-sub">
+				<form:form action="/user-complaint-list-view/page/${currentPage}" method="get">
+					<input id="txtSearch" type="text" name="complaintId"
+						placeholder="Enter complaintId" required>
+					<input type="hidden" name="sortBy" value="${sortBy}" />
+					<input type="hidden" name="sortDir" value="${reverseSortDir}" />
+					<input type="hidden" name="complaintId" value="${complaintId}" />
+					<button type="submit">Search</button>
+				</form:form>
+			</div>
+		</div>
+		
 
 		<div class="pagination-details">
 			<div>Total Complaints : ${totalComplaints}</div>

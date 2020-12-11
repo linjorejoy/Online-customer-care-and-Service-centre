@@ -92,4 +92,10 @@ public class ComplaintService {
 	public List<Complaint> findDate(String date){
 		return complaintRepository.findByDate(date);
 	}
+	public List<Complaint> findByUserId(String userId){
+		return complaintRepository.findByUserId(userId);
+	}
+	public List<Complaint> findByComplaintId(String complaintId){
+		return  complaintRepository.findComplaintId(complaintId);
+	}
 }
