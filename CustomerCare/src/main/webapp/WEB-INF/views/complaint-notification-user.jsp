@@ -2,7 +2,7 @@
 <div class="container">
 	<%@ include file="common/nav-bar-user.jspf"%>
 
-	<div class="centering">
+	<div class="centering-">
 		<div class="heading">
 			<h1>Complaint Notifications</h1>
 		</div>
@@ -10,22 +10,22 @@
 			<div class="label-sort">Sort By</div>
 			<div class="sort-btn">
 				<a
-					href="/admin-login/page/${currentPage}?sortBy=complaintId&sortDir=${reverseSortDir}&keyword=${keyword}&date=${date}">Complaint
+					href="/user-complaint-list-view/page/${currentPage}?sortBy=complaintId&sortDir=${reverseSortDir}&keyword=${keyword}&date=${date}">Complaint
 					Id</a>
 			</div>
 			<div class="sort-btn">
 				<a
-					href="/admin-login/page/${currentPage}?sortBy=dateOfComplaint&sortDir=${reverseSortDir}&keyword=${keyword}&date=${date}">Date</a>
+					href="/user-complaint-list-view/page/${currentPage}?sortBy=dateOfComplaint&sortDir=${reverseSortDir}&keyword=${keyword}&date=${date}">Date</a>
 			</div>
 			<div class="sort-btn">
 				<a
-					href="/admin-login/page/${currentPage}?sortBy=category&sortDir=${reverseSortDir}&keyword=${keyword}&date=${date}">Category</a>
+					href="/user-complaint-list-view/page/${currentPage}?sortBy=category&sortDir=${reverseSortDir}&keyword=${keyword}&date=${date}">Category</a>
 			</div>
 		</div>
 
 		<div class="div-filter-complaints-admin">
 			<div class="div-filter-complaints-admin-sub">
-				<form:form action="/admin-login/page/${currentPage}" method="get">
+				<form:form action="/user-complaint-list-view/page/${currentPage}" method="get">
 					<input id="txtSearch" type="text" name="keyword"
 						placeholder="Enter category">
 					<input type="hidden" name="sortBy" value="${sortBy}" />
@@ -36,7 +36,7 @@
 				</form:form>
 			</div>
 			<div class="div-filter-complaints-admin-sub">
-				<form:form action="/admin-login/page/${currentPage}" method="get">
+				<form:form action="/user-complaint-list-view/page/${currentPage}" method="get">
 					<input id="txtSearch" type="text" name="date"
 						placeholder="YYYY-MM-DD" required>
 					<input type="hidden" name="sortBy" value="${sortBy}" />
@@ -53,7 +53,7 @@
 			<div>
 				<c:forEach var="i" begin="1" end="${totalPages}">
 					<a
-						href="/admin-login/page/${i}?sortBy=${sortBy}&sortDir=${sortDir}">${i}</a>
+						href="/user-complaint-list-view/page/${i}?sortBy=${sortBy}&sortDir=${sortDir}">${i}</a>
 				</c:forEach>
 			</div>
 		</div>
@@ -84,7 +84,7 @@
 			<div>
 				<c:forEach var="i" begin="1" end="${totalPages}">
 					<a
-						href="/admin-login/page/${i}?sortBy=${sortBy}&sortDir=${sortDir}">${i}</a>
+						href="/user-complaint-list-view/page/${i}?sortBy=${sortBy}&sortDir=${sortDir}">${i}</a>
 				</c:forEach>
 			</div>
 		</div>

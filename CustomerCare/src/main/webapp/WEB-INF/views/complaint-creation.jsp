@@ -34,7 +34,7 @@
 				<div class="form-buttons-complaint-user">
 					<input type="Submit" class="button" name="submit" value="Submit" />
 				</div>
-				<a href="/"></a>
+				<a href="/user-complaint-list-view">View All Complaints</a>
 			</form:form>
 		</div>
 	</div>
