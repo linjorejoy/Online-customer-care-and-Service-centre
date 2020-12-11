@@ -14,4 +14,9 @@ public class UserController {
 		model.put("userId", userId);
 		return "user-home";
 	}
+	
+	
+	
+	
+	
 }
