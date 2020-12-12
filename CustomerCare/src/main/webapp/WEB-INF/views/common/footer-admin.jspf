@@ -1,3 +1,10 @@
-<div class="footer-my">
+<!-- Footer -->
+<footer class="page-footer font-small blue fixed-bottom">
 
-</div>
+  <!-- Copyright -->
+  <div class="footer-copyright text-left pl-3 pb-3">© 2020 Copyright:
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->

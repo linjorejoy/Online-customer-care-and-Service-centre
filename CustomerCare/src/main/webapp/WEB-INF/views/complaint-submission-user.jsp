@@ -1,7 +1,7 @@
 <%@ include file="common/header-user.jspf"%>
-<div class="container">
+<div class="container-fluid p-0">
 	<%@ include file="common/nav-bar-user.jspf"%>
-	<div class="center-user-complaint">
+	<div class="container mt-0">
 		<div class="heading-complaint-status-user">
 			<h1 class="heading-compliant-status-h1">Complaint Successful</h1>
 		</div>

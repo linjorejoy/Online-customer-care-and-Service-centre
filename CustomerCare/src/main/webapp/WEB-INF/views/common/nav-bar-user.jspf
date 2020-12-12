@@ -1,10 +1,10 @@
-<nav class="navbar navbar-inverse navbar-my">
+<nav class="navbar navbar-inverse navbar-dark bg-primary">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="/roleSelectionPage">Customer Care</a>
     </div>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="/user-login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      <li><a href="/user-login"><span class="glyphicon glyphicon-log-in nav-link text-light">Login</span> </a></li>
     </ul>
   </div>
 </nav>

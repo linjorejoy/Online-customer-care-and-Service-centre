@@ -1,7 +1,7 @@
 <%@ include file="common/header-analyst.jspf"%>
-<div class="container-fluid">
+<div class="container-fluid p-0">
 
-	<nav class="navbar navbar-inverse nav-div-my">
+	<nav class="navbar navbar-inverse navbar-dark bg-primary">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="/roleSelectionPage">Customer Care</a>
@@ -12,7 +12,7 @@
 						class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 			</ul> -->
 			<div class="dropdown">
-				<button class="btn btn-primary dropdown-toggle" type="button"
+				<button class="btn  btn-light dropdown-toggle" type="button"
 					id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false">
 					Menu<span class="badge badge-danger ml-2">${fn:length(analyst.emailList)}</span>
@@ -33,7 +33,7 @@
 
 
 	<div
-		class="container text-center d-flex align-items-center justify-content-center">
+		class="container text-center d-flex align-items-center justify-content-center mt-3">
 		<div class="centering">
 			<div class="heading">
 				<h1>Complaint Notifications</h1>

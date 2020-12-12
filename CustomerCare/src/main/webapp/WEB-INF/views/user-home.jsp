@@ -1,6 +1,6 @@
 <%@ include file="common/header-user.jspf"%>
-<div class="container-fluid">
-	<nav class="navbar navbar-inverse nav-div-my">
+<div class="container-fluid p-0">
+	<nav class="navbar navbar-inverse navbar-dark bg-primary">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="/roleSelectionPage">Customer Care</a>
@@ -11,7 +11,7 @@
 						class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 			</ul> -->
 			<div class="dropdown">
-				<button class="btn btn-primary dropdown-toggle" type="button"
+				<button class="btn btn-light dropdown-toggle" type="button"
 					id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false">Menu<span class="badge badge-danger ml-2">${emailCount}</span></button>
 				<div class="dropdown-menu dropdown-menu-right"
@@ -25,7 +25,7 @@
 			</div>
 		</div>
 	</nav>
-	<div class="container">
+	<div class="container mt-3">
 
 		<h2>Welcome ${user.firstName}</h2>
 		<%-- <a href="/create-complaint?userId=${user.userId}">Create Complaint</a> --%>
@@ -45,7 +45,7 @@
 					<div class="card-body">
 						<h5 class="card-title">View Submitted Complaints</h5>
 						<p class="card-text">Any Complaints which you may have previously submitted can be viewed here.</p>
-						<a href="#" class="btn btn-primary">View All Complaints</a>
+						<a href="/user-complaint-list-view?userId=${user.userId}" class="btn btn-primary">View All Complaints</a>
 					</div>
 				</div>
 			</div>

@@ -1,6 +1,6 @@
 <%@ include file="common/header-admin.jspf"%>
-<div class="container-fluid">
-	<%@ include file="common/nav-bar-admin.jspf"%>
+<div class="container-fluid p-0">
+	<%@ include file="common/nav-bar-analyst.jspf"%>
 
 	<div
 		class="container text-left d-flex align-items-center justify-content-center">
