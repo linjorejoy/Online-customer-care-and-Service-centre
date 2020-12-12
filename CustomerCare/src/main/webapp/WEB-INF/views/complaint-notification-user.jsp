@@ -1,120 +1,163 @@
-<%@ include file="common/header-user.jspf"%>
-<div class="container">
-	<%@ include file="common/nav-bar-user.jspf"%>
+<%@ include file="common/header-role-selection.jspf"%>
+<div class="container-fluid flex-column">
+	<%@ include file="common/nav-bar-role-selection.jspf"%>
 
-	<div class="centering-">
-		<div class="heading">
-			<h1>Complaint Notifications</h1>
-		</div>
-		<div class="div-sorting-complaints-admin">
-			<div class="label-sort">Sort By</div>
-			<div class="sort-btn">
-				<a
-					href="/user-complaint-list-view/page/${currentPage}?sortBy=complaintId&sortDir=${reverseSortDir}&keyword=${keyword}&date=${date}">Complaint
-					Id</a>
-			</div>
-			<div class="sort-btn">
-				<a
-					href="/user-complaint-list-view/page/${currentPage}?sortBy=dateOfComplaint&sortDir=${reverseSortDir}&keyword=${keyword}&date=${date}">Date</a>
-			</div>
-			<div class="sort-btn">
-				<a
-					href="/user-complaint-list-view/page/${currentPage}?sortBy=category&sortDir=${reverseSortDir}&keyword=${keyword}&date=${date}">Category</a>
-			</div>
-		</div>
 
-		<div class="div-filter-complaints-admin">
-			<div class="div-filter-complaints-admin-sub">
-				<form:form action="/user-complaint-list-view/page/${currentPage}" method="get">
-					<input id="txtSearch" type="text" name="keyword"
-						placeholder="Enter category">
-					<input type="hidden" name="sortBy" value="${sortBy}" />
-					<input type="hidden" name="sortDir" value="${reverseSortDir}" />
-					<input type="hidden" name="date" value="${date}" />
-					<input type="submit" value="Search" />
-					<!-- <button type="submit">Search</button> -->
-				</form:form>
+	<div
+		class="container text-center d-flex align-items-center justify-content-center">
+		<div class="centering">
+			<div class="heading">
+				<h1>Complaint Notifications</h1>
 			</div>
-			<div class="div-filter-complaints-admin-sub">
-				<form:form action="/user-complaint-list-view/page/${currentPage}" method="get">
-					<input id="txtSearch" type="text" name="date"
-						placeholder="YYYY-MM-DD" required>
-					<input type="hidden" name="sortBy" value="${sortBy}" />
-					<input type="hidden" name="sortDir" value="${reverseSortDir}" />
-					<input type="hidden" name="keyword" value="${keyword}" />
-					<button type="submit">Search</button>
-				</form:form>
-			</div>
-			
-		</div>
-		<div class="div-filter-complaints-admin-sub">
-				<form:form action="/user-complaint-list-view/page/${currentPage}" method="get">
-					<input id="txtSearch" type="text" name="userId"
-						placeholder="Enter UserId" required>
-					<input type="hidden" name="sortBy" value="${sortBy}" />
-					<input type="hidden" name="sortDir" value="${reverseSortDir}" />
-					<input type="hidden" name="userId" value="${userId}" />
-					<button type="submit">Search</button>
-				</form:form>
-			</div>
-			<div class="div-filter-complaints-admin-sub">
-				<form:form action="/user-complaint-list-view/page/${currentPage}" method="get">
-					<input id="txtSearch" type="text" name="complaintId"
-						placeholder="Enter complaintId" required>
-					<input type="hidden" name="sortBy" value="${sortBy}" />
-					<input type="hidden" name="sortDir" value="${reverseSortDir}" />
-					<input type="hidden" name="complaintId" value="${complaintId}" />
-					<button type="submit">Search</button>
-				</form:form>
-			</div>
-		</div>
-		
-
-		<div class="pagination-details">
-			<div>Total Complaints : ${totalComplaints}</div>
-			<div>Page ${currentPage} of ${totalPages}</div>
-			<div>
-				<c:forEach var="i" begin="1" end="${totalPages}">
-					<a
-						href="/user-complaint-list-view/page/${i}?sortBy=${sortBy}&sortDir=${sortDir}">${i}</a>
-				</c:forEach>
-			</div>
-		</div>
-
-		<div class="div-complaints-notification-admin">
-			<c:forEach var="complaint" items="${complaintListAdmin}">
-				<div class="div-complaint-notification">
-					<div class="each-complaint-heading">
-						<label class="id-heading">Complaint Id : </label> <label
-							class="id-heading">${complaint.complaintId}</label>
-					</div>
-					<div class="complaint-description-admin">
-						<label>Description</label>
-						<p>${complaint.description}</p>
-					</div>
-					<div class="complaint-view-admin-each-submit">
-						<a
-							href="/show-user-complaint?complaintId=${complaint.complaintId}">View</a>
-					</div>
+			<div class="card text-center">
+				<div class="card-header">
+					<ul class="nav nav-tabs card-header-tabs">
+						<li class="nav-item"><a class="nav-link disabled" href="#">Sort
+								by :</a></li>
+						<li class="nav-item"><a class="nav-link active"
+							href="/user-complaint-list-view/page/${currentPage}?sortBy=complaintId&sortDir=${reverseSortDir}&keyword=${keyword}&date=${date}">Complaint
+								Id</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="/user-complaint-list-view/page/${currentPage}?sortBy=dateOfComplaint&sortDir=${reverseSortDir}&keyword=${keyword}&date=${date}">Date</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="/user-complaint-list-view/page/${currentPage}?sortBy=category&sortDir=${reverseSortDir}&keyword=${keyword}&date=${date}">Category</a>
+							<!-- <li class="nav-item"><a class="nav-link" href="#">Link</a></li> -->
+					</ul>
 				</div>
-			</c:forEach>
+				<div class="card-body">
 
-		</div>
+					<div class="pagination-details">
+						<div class="form-row mb-0">
+							<div class="col">Total Complaints : ${totalComplaints}</div>
+							<div class="col">Page ${currentPage} of ${totalPages}</div>
+						</div>
+						<nav aria-label="Page navigation example">
+							<ul class="pagination pg-blue justify-content-center md-1">
+								<c:forEach var="i" begin="1" end="${totalPages}">
+									<li class="page-item"><h5>
+											<a class="page-link"
+												href="/user-complaint-list-view/page/${i}?sortBy=${sortBy}&sortDir=${sortDir}">${i}</a>
+										</h5></li>
+								</c:forEach>
+							</ul>
+						</nav>
+					</div>
 
-		<div class="pagination-details">
-			<div>Total Complaints : ${totalComplaints}</div>
-			<div>Page ${currentPage} of ${totalPages}</div>
-			<div>
-				<c:forEach var="i" begin="1" end="${totalPages}">
-					<a
-						href="/user-complaint-list-view/page/${i}?sortBy=${sortBy}&sortDir=${sortDir}">${i}</a>
-				</c:forEach>
+					<div
+						class="container text-center d-flex align-items-center justify-content-center">
+						<form:form action="/user-complaint-list-view/page/${currentPage}"
+							class="text-center border border-light" method="get">
+
+							<div class="form-row mb-4">
+								<div class="col">
+									<!-- First name -->
+									<input type="text" id="defaultRegisterFormFirstName"
+										class="form-control" placeholder="Search by Category"
+										name="keyword" value="${keyword}">
+								</div>
+								<input type="hidden" name="sortBy" value="${sortBy}" /> <input
+									type="hidden" name="sortDir" value="${reverseSortDir}" /> <input
+									type="hidden" name="date" value="${date}" />
+							</div>
+							<button type="submit" class="btn btn-primary mb-2">Search</button>
+						</form:form>
+
+						<form:form action="/user-complaint-list-view/page/${currentPage}"
+							class="text-center border border-light" method="get">
+
+							<div class="form-row mb-4">
+								<div class="col">
+									<!-- Last name -->
+									<input id="txtSearch" type="text" name="date"
+										placeholder="YYYY-MM-DD" class="form-control" value="${date}">
+								</div>
+								<input type="hidden" name="sortBy" value="${sortBy}" /> <input
+									type="hidden" name="sortDir" value="${reverseSortDir}" /> <input
+									type="hidden" name="keyword" value="${keyword}" />
+							</div>
+							<button type="submit" class="btn btn-primary mb-2">Search</button>
+						</form:form>
+						<form:form action="/user-complaint-list-view/page/${currentPage}"
+							class="text-center border border-light" method="get">
+
+							<div class="form-row mb-4">
+								<div class="col">
+									<!-- First name -->
+									<input type="text" id="defaultRegisterFormFirstName"
+										class="form-control" placeholder="Search by User Id"
+										 name="userId" value="${userId}">
+								</div>
+								<input type="hidden" name="sortBy" value="${sortBy}" /> <input
+									type="hidden" name="sortDir" value="${reverseSortDir}" /> <input
+									type="hidden" name="date" value="${date}" />
+							</div>
+							<button type="submit" class="btn btn-primary mb-2">Search</button>
+						</form:form>
+
+						<form:form action="/user-complaint-list-view/page/${currentPage}"
+							class="text-center border border-light" method="get">
+
+							<div class="form-row mb-4">
+								<div class="col">
+									<!-- Last name -->
+									<input id="txtSearch" type="text" name="complaintId"
+										placeholder="Enter complaintId" class="form-control" value="${complaintId}" required>
+								</div>
+								<input type="hidden" name="sortBy" value="${sortBy}" /> <input
+									type="hidden" name="sortDir" value="${reverseSortDir}" /> <input
+									type="hidden" name="keyword" value="${keyword}" />
+							</div>
+							<button type="submit" class="btn btn-primary mb-2">Search</button>
+						</form:form>
+					</div>
+
+					<c:forEach var="complaint" items="${complaintListAdmin}">
+
+
+						<!-- Card content -->
+						<div class="card card-body card-body-cascade text-center">
+
+							<!-- Title -->
+							<h4 class="card-title">
+								<strong>Complaint Id : ${complaint.complaintId}</strong>
+							</h4>
+							<!-- Subtitle -->
+							<h6 class="font-weight-bold indigo-text py-2">Description</h6>
+							<!-- Text -->
+							<p class="card-text">${complaint.description}</p>
+							<div class="span2 text-right">
+								<a
+									href="/show-user-complaint-admin?complaintId=${complaint.complaintId}"
+									class="btn btn-primary">View</a>
+								<!-- <a href="#"
+									class="btn btn-primary">Go somewhere</a> -->
+							</div>
+						</div>
+
+					</c:forEach>
+
+					<div class="pagination-details">
+						<div class="form-row mb-2">
+							<div class="col">Total Complaints : ${totalComplaints}</div>
+							<div class="col">Page ${currentPage} of ${totalPages}</div>
+						</div>
+						<nav aria-label="Page navigation example">
+							<ul class="pagination pg-blue justify-content-center">
+								<c:forEach var="i" begin="1" end="${totalPages}">
+									<li class="page-item"><h5>
+											<a class="page-link"
+												href="/user-complaint-list-view/page/${i}?sortBy=${sortBy}&sortDir=${sortDir}">${i}</a>
+										</h5></li>
+								</c:forEach>
+							</ul>
+						</nav>
+					</div>
+
+
+				</div>
 			</div>
 		</div>
 	</div>
+	<%@ include file="common/footer-role-selection.jspf"%>
 </div>
-
-
-<%@ include file="common/footer-user.jspf"%>
-</div>
-<%@ include file="common/end-tags-user.jspf"%>
+<%@ include file="common/end-tags-role-selection.jspf"%>

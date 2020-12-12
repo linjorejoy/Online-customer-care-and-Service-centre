@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -14,10 +15,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.WebRequest;
 
 import com.cts.proj.model.Analyst;
 import com.cts.proj.model.Complaint;
 import com.cts.proj.model.EmailAnalyst;
+import com.cts.proj.model.User;
 import com.cts.proj.service.AdminService;
 import com.cts.proj.service.AnalystService;
 import com.cts.proj.service.ComplaintService;
@@ -40,6 +43,19 @@ public class AnalystController {
 
 	@Autowired
 	EmailAnalystService emailAnalystService;
+
+	@RequestMapping(value = "/analyst-home")
+	public String analystGoToHome(@RequestParam("analystId") long analystId, ModelMap model) {
+
+		Analyst analyst = analystService.getAnalyst(analystId);
+		model.put("emailCount", analyst.getEmailList().size());
+		model.put("analystId", analystId);
+		model.put("analyst", analyst);
+//		User user = userService.getUser(userId);
+//		model.put("emailCount", user.getEmailList().size());
+//		model.put("userId", userId);
+		return "analyst-home";
+	}
 
 	@RequestMapping(value = "/view-complaint-analyst", method = RequestMethod.GET)
 	public String viewComplaintAnalyst(@RequestParam long complaintId, ModelMap model) {
@@ -118,11 +134,58 @@ public class AnalystController {
 
 	@RequestMapping(value = "/sent-email-analyst-to-analyst", method = RequestMethod.POST)
 	public String sentEmail(@ModelAttribute("emailAnalyst") EmailAnalyst emailAnalyst, BindingResult results,
-			ModelMap model) {
+			ModelMap model, @RequestParam("analystId") long analystId) {
 		EmailAnalyst originalEmail = emailAnalystService.getEmailAnalyst(emailAnalyst.getEmailId());
 		originalEmail.setDescription(emailAnalyst.getDescription());
 		emailAnalystService.addEmail(originalEmail);
+		Analyst analyst = analystService.getAnalyst(analystId);
+		model.put("analyst", analyst);
+		model.put("emailCount", analyst.getEmailList().size());
 		return "analyst-home";
+	}
+
+	@RequestMapping(value = "/view-email-analyst", method = RequestMethod.GET)
+	public String viewEachEmailAnalyst(@RequestParam("emailId") long emailId, @RequestParam("analystId") long analystId,
+			ModelMap model) {
+		EmailAnalyst email = emailAnalystService.getEmailAnalyst(emailId);
+
+		model.put("email", email);
+		model.put("analyst", analystService.getAnalyst(analystId));
+		return "each-email-analyst";
+	}
+
+	@RequestMapping(value = "/analyst-view-all", method = RequestMethod.GET)
+	public String analystAfterLogin(@Validated @ModelAttribute("analyst") Analyst analyst, BindingResult result,
+			ModelMap model) {
+//		System.out.println(complaint);
+//		System.out.println(complaint);
+		int currentPage = 1;
+		Page<Complaint> pages = complaintService.getAllComplaintForAnalyst(analyst.getAnalystId(), currentPage - 1, 4,
+				"complaintId", "asc");
+		List<Complaint> complaintList = pages.getContent();
+		long totalComplaints = pages.getTotalElements();
+		int totalPages = pages.getTotalPages();
+
+//		System.out.println(complaint);
+
+		model.put("analystId", analyst.getAnalystId());
+		model.put("currentPage", currentPage);
+		model.put("complaintListAnalyst", complaintList);
+		model.put("totalComplaints", totalComplaints);
+		model.put("totalPages", totalPages);
+		model.put("sortBy", "complaintId");
+		model.put("sortDir", "asc");
+		return "complaint-notification-analyst";
+	}
+
+	@ModelAttribute(name = "category")
+	public Map<String, String> getCategory() {
+		Map<String, String> category = new HashMap<>();
+		category.put("Software", "Software");
+		category.put("Hardware", "Hardware");
+		category.put("firmware", "firmware");
+
+		return category;
 	}
 
 	@ModelAttribute(name = "supportLevel")

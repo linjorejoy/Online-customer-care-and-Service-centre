@@ -20,6 +20,7 @@ import com.cts.proj.model.Complaint;
 import com.cts.proj.model.User;
 import com.cts.proj.service.AnalystService;
 import com.cts.proj.service.ComplaintService;
+import com.cts.proj.service.UserService;
 import com.cts.proj.validate.AdminPasswordValidator;
 import com.cts.proj.validate.AnalystPasswordValidator;
 import com.cts.proj.validate.UserPasswordValidator;
@@ -32,6 +33,9 @@ public class LoginController {
 
 	@Autowired
 	AnalystService analystService;
+	
+	@Autowired
+	UserService userService;
 
 	@Autowired
 	UserPasswordValidator userPasswordValidator;
@@ -55,7 +59,8 @@ public class LoginController {
 		if (result.hasErrors()) {
 			return "user-login";
 		}
-		model.put("userId", user.getUserId());
+		user = userService.getUser(user.getUserId());
+		model.put("user", user);
 //		Complaint initializedComplaint = complaintService.getComplaint(1);
 //		model.put("initializedComplaint", initializedComplaint);
 		return "user-home";
@@ -71,7 +76,12 @@ public class LoginController {
 			ModelMap model) {
 		adminPasswordValidator.validate(admin, result);
 		if (result.hasErrors()) {
-			return "admin-login";
+			model.put("analyst", new Analyst());
+			model.put("user", new User());
+			model.put("adminActive", true);
+			model.put("userActive", false);
+			model.put("analystActive", false);
+			return "role-selection";
 		}
 
 		int currentPage = 1;
@@ -103,6 +113,8 @@ public class LoginController {
 			return "analyst-login";
 		}
 //		System.out.println(complaint);
+		System.out.println(analyst);
+		long analystId = analyst.getAnalystId();
 		int currentPage = 1;
 		Page<Complaint> pages = complaintService.getAllComplaintForAnalyst(analyst.getAnalystId(),
 				currentPage - 1, 4, "complaintId", "asc");
@@ -111,7 +123,9 @@ public class LoginController {
 		int totalPages = pages.getTotalPages();
 
 //		System.out.println(complaint);
+		Analyst origialAnalyst = analystService.getAnalyst(analystId);
 		
+		model.put("analyst", origialAnalyst);
 		model.put("analystId", analyst.getAnalystId());
 		model.put("currentPage", currentPage);
 		model.put("complaintListAnalyst", complaintList);

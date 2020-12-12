@@ -13,7 +13,7 @@
 				</div>
 				<div>
 					<label>User Id : </label>
-					<label>${userId}</label>
+					<label>${user.userId}</label>
 				</div>
 				<div>
 					<label>Phone Number : </label>
@@ -30,7 +30,7 @@
 				
 				<div>
 					<a href="#">Edit</a>					
-					<a href="/user-home?userId=${userId}">Go To Home</a>
+					<a href="/user-home?userId=${user.userId}">Go To Home</a>
 				</div>
 			</div>
 		</div>

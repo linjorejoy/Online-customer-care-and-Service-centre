@@ -32,7 +32,7 @@ public class EmailUser implements Comparable<EmailUser> {
 	private Admin admin;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "complaint_user_id")
+    @JoinColumn(name = "user_id")
 	private User user;
 
 	public EmailUser() {

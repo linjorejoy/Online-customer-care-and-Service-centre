@@ -20,9 +20,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.cts.proj.model.Admin;
 import com.cts.proj.model.Analyst;
 import com.cts.proj.model.User;
 import com.cts.proj.security.SecureWithSHA256;
+import com.cts.proj.service.AdminService;
 import com.cts.proj.service.AnalystService;
 import com.cts.proj.service.UserService;
 import com.cts.proj.validate.AnalystValidator;
@@ -35,6 +37,8 @@ public class RegistrationController {
 	private AnalystService analystService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private AdminService adminService;
 	@Autowired
 	AnalystValidator analystValidator;
 	@Autowired
@@ -58,7 +62,12 @@ public class RegistrationController {
 		analystValidator.validate(analyst, result);
 		
 		if (result.hasErrors()) {
-			return "analyst-reg";
+			model.put("user", new User());
+			model.put("admin", new Admin());
+			model.put("analystActive", true);
+			model.put("userActive", false);
+			model.put("adminActive", false);
+			return "role-selection";
 		}
 		try {
 			analyst.setPassword(SecureWithSHA256.getSHA(analyst.getPassword()));
@@ -72,17 +81,26 @@ public class RegistrationController {
 		return "analyst-reg-status";
 	}
 
-	@RequestMapping(value = "/user-registration", method = RequestMethod.GET)
-	public String userRegistration(@ModelAttribute User user) {
-		return "user-reg";
-	}
+//	@RequestMapping(value = "/user-registration", method = RequestMethod.GET)
+//	public String userRegistration(@ModelAttribute User user) {
+//		return "user-reg";
+//	}
 
 	@RequestMapping(value = "/register-user", method = RequestMethod.POST)
 	public String registerUser(@Validated @ModelAttribute User user, BindingResult result, ModelMap model) {
 		
+		System.out.println("Hello");
+		System.out.println(user);
+		
 		userValidator.validate(user, result);
 		if (result.hasErrors()) {
-			return "user-reg";
+			System.out.println(result);
+			model.put("analyst", new Analyst());
+			model.put("admin", new Admin());
+			model.put("userActive", true);
+			model.put("analystActive", false);
+			model.put("adminActive", false);
+			return "role-selection";
 		}
 		try {
 			user.setPassword(SecureWithSHA256.getSHA(user.getPassword()));

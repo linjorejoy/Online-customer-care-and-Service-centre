@@ -63,13 +63,14 @@ public class AdminController {
 		
 		return "admin-home";
 	}
+	
 	@RequestMapping(value = "/admin-create-feedback", method = RequestMethod.GET)
 	public String gotoFeedBackAdmin(@ModelAttribute FeedbackQuestions feedbackQuestions ) {
 		return "feedback-creation-admin";
 		
 	}
 
-	@RequestMapping(value = "/show-user-complaint", method = RequestMethod.GET)
+	@RequestMapping(value = "/show-user-complaint-admin", method = RequestMethod.GET)
 	public String showUserComplaint(@RequestParam long complaintId, ModelMap model) {
 		Complaint complaint = complaintService.getComplaint(complaintId);
 		List<Analyst> analystList = analystService.getAllAnalyst();
@@ -144,27 +145,28 @@ public class AdminController {
 		response.setContentType("application/octet-stream");
 		response.setHeader("Content-Disposition", "attachment; filename=customers.xlsx");
 		Complaint complaint = complaintService.getComplaint(complaintId);
+		System.out.println(complaint);
 		ByteArrayInputStream stream = ExcelFileExporter.complaintToExcel(complaint);
 		IOUtils.copy(stream, response.getOutputStream());
 	}
 
-//	@RequestMapping(value = "/admin-view-filter-category", method = RequestMethod.GET)
-//	public String adminViewFilter(ModelMap model, String keyword) {
-//
-//		if (keyword != null) {
-//			model.addAttribute("complaintListAdmin", complaintService.findByKeyword(keyword));
-//		}
-//		return "complaint-notification-admin";
-//	}
-//
-//	@RequestMapping(value = "/admin-view-filter-date", method = RequestMethod.GET)
-//	public String adminViewFilterByDate(ModelMap model, String date) {
-//
-//		if (date != null) {
-//			model.addAttribute("complaintListAdmin", complaintService.findDate(date));
-//		}
-//		return "complaint-notification-admin";
-//	}
+	@RequestMapping(value = "/admin-view-filter-category", method = RequestMethod.GET)
+	public String adminViewFilter(ModelMap model, String keyword) {
+
+		if (keyword != null) {
+			model.addAttribute("complaintListAdmin", complaintService.findByKeyword(keyword));
+		}
+		return "complaint-notification-admin";
+	}
+
+	@RequestMapping(value = "/admin-view-filter-date", method = RequestMethod.GET)
+	public String adminViewFilterByDate(ModelMap model, String date) {
+
+		if (date != null) {
+			model.addAttribute("complaintListAdmin", complaintService.findDate(date));
+		}
+		return "complaint-notification-admin";
+	}
 
 	@ModelAttribute(name = "category")
 	public Map<String, String> getCategory() {

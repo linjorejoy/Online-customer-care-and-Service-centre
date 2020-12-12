@@ -15,28 +15,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.cts.proj.model.Admin;
 import com.cts.proj.model.Complaint;
 import com.cts.proj.model.User;
 import com.cts.proj.service.ComplaintService;
+import com.cts.proj.service.UserService;
 
 @Controller
 public class UserController {
+
+	@Autowired
+	UserService userService;
 	
 	@Autowired
 	ComplaintService complaintService;
 
-	
 	@RequestMapping(value = "/user-home")
 	public String userGoToHome(@RequestParam("userId") long userId, ModelMap model) {
+
+		User user = userService.getUser(userId);
+		model.put("emailCount", user.getEmailList().size());
 		model.put("userId", userId);
+		model.put("user", user);
 		return "user-home";
 	}
-	
 
 	@RequestMapping(value = "/user-complaint-list-view", method = RequestMethod.GET)
-	public String adminAfterLogin(@Validated @ModelAttribute("user") User user, BindingResult result,
-			ModelMap model) {
+	public String adminAfterLogin(@Validated @ModelAttribute("user") User user, BindingResult result, ModelMap model) {
 
 		int currentPage = 1;
 		Page<Complaint> pages = complaintService.getAllComplaint(currentPage - 1, 4, "complaintId", "asc");
@@ -53,11 +57,10 @@ public class UserController {
 		return "complaint-notification-user";
 	}
 
-
 	@RequestMapping(value = "/user-complaint-list-view/page/{pageNumber}", method = RequestMethod.GET)
-	public String viewAnotherPageAdminComplaintList(@Validated @ModelAttribute("user") User user,
-			BindingResult result, ModelMap model, @PathVariable("pageNumber") int pageNumber,
-			@Param("sortBy") String sortBy, @Param("sortDir") String sortDir, String keyword, String date,String userId,String complaintId) {
+	public String viewAnotherPageAdminComplaintList(@Validated @ModelAttribute("user") User user, BindingResult result,
+			ModelMap model, @PathVariable("pageNumber") int pageNumber, @Param("sortBy") String sortBy,
+			@Param("sortDir") String sortDir, String keyword, String date, String userId, String complaintId) {
 
 		Page<Complaint> pages = complaintService.getAllComplaint(pageNumber - 1, 4, sortBy, sortDir);
 		List<Complaint> complaintList = pages.getContent();
@@ -90,5 +93,4 @@ public class UserController {
 		return "complaint-notification-user";
 
 	}
-	
 }

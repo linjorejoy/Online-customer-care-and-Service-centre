@@ -163,6 +163,22 @@ public class User implements Comparable<User> {
 		this.complaintList = complaintList;
 	}
 
+	public List<EmailUser> getEmailList() {
+		return emailList;
+	}
+
+	public void setEmailList(List<EmailUser> emailList) {
+		this.emailList = emailList;
+	}
+
+	public List<UserSecretQuestion> getSecretQuestionList() {
+		return secretQuestionList;
+	}
+
+	public void setSecretQuestionList(List<UserSecretQuestion> secretQuestionList) {
+		this.secretQuestionList = secretQuestionList;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

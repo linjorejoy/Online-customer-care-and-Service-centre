@@ -1,32 +1,51 @@
 <%@ include file="common/header-user.jspf"%>
-<div class="container">
+<div class="container-fluid">
 	<%@ include file="common/nav-bar-user.jspf"%>
-	<div class="center-div-user">
-		<div class="heading-user">
-			<h1 class="heading-user-h1">User Login</h1>
-		</div>
-		<div class="form-div-user">
-			<form:form action="/user-login" modelAttribute="user" method="post">
-				<div class="form-input-div-user">
-					<form:label path="userId"> User Id</form:label>
-					<form:input path="userId" id="user-userid" />
-					<form:errors path="userId"></form:errors>
-				</div>
-				<div class="form-input-div-user">
-					<form:label path="tempPassword">Password</form:label>
-					<form:input path="tempPassword" id="tempPassword" type="password" />
-					<form:errors path="tempPassword"></form:errors>
-				</div>
-				<div class="form-group">
-					<a href="/">Forgot User Id</a> <a href="/">Forgot Password</a>
-				</div>
+	<div
+		class="container text-center d-flex align-items-center justify-content-center">
+		<!-- Default form login -->
+		<div class="card">
+			<form:form class="text-center border border-light p-5"
+				action="/user-login" modelAttribute="user" method="post">
 
-				<div class="form-buttons-div-user">
-					<input type="Submit" name="submit" value="Submit" /> <input
-						type="reset" name="reset" value="Cancel" />
+				<p class="h2 mb-4">User Sign in</p>
 
+				<!-- Email -->
+				<medium id="defaultRegisterFormPhoneHelpBlock"
+					class="form-text text-muted text-left mb-0">User Id</medium>
+				<form:input path="userId" type="input" id="defaultLoginFormEmail"
+					class="form-control mb-0" placeholder="User Id" />
+				<small id="defaultRegisterFormPhoneHelpBlock"
+					class="form-text text-warning mb-2"><form:errors
+						cssClass="mb-4" path="userId"></form:errors></small>
+				<!-- Password -->
+				<form:input path="tempPassword" type="password"
+					id="defaultLoginFormPassword" class="form-control mb-4"
+					placeholder="Password" />
+				<small id="defaultRegisterFormPhoneHelpBlock"
+					class="form-text text-warning mb-2"><form:errors
+						path="tempPassword"></form:errors> </small>
+
+				<div class="d-flex justify-content-around">
+					<input class="btn btn-info btn-block my-4" type="Submit"
+						name="submit" value="Submit" />	
 				</div>
+				<div class="d-flex justify-content-around p-4">
+					<div>
+						<!-- Forgot password -->
+						<a href="#" class="mb-4 p-2">Forgot user id?</a>
+					</div>
+					<div>
+						<!-- Forgot password -->
+						<a href="#" class="mb-4 p-2">Forgot password?</a>
+					</div>
+				</div>
+				<p>
+					You can <a href="/roleSelectionPage">Register</a> Here
+				</p>
+
 			</form:form>
+			<!-- Default form login -->
 		</div>
 	</div>
 	<%@ include file="common/footer-user.jspf"%>

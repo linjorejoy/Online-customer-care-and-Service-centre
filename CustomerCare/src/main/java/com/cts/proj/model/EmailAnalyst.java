@@ -119,10 +119,8 @@ public class EmailAnalyst {
 
 	@Override
 	public String toString() {
-		return "EmailAnalyst [emailId=" + emailId + ", admin=" + admin + ", analyst=" + analyst + ", sentDate="
-				+ sentDate + ", received=" + received + ", description=" + description + "]";
+		return "EmailAnalyst [emailId=" + emailId + ", sentDate=" + sentDate + ", received=" + received
+				+ ", description=" + description + "]";
 	}
-
-
 
 }

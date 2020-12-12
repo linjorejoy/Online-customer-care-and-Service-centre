@@ -20,7 +20,7 @@
 					<td><div class="overflow-hidden">${email.emailId}</div></td>
 					<td><div class="overflow-hidden">${email.sentDate}</div></td>
 					<td><div>${fn:substring(email.description,0, 80)}...............</div></td>
-					<td><a href="/view-email-analyst?emailId=${email.emailId}">View</a></td>
+					<td><a href="/view-email-analyst?emailId=${email.emailId}&analystId=${analyst.analystId}">View</a></td>
 				</tr>
 				<!-- end -->
 			</c:forEach>

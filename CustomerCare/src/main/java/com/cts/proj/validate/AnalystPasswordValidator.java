@@ -2,6 +2,8 @@ package com.cts.proj.validate;
 
 import java.security.NoSuchAlgorithmException;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
@@ -30,11 +32,14 @@ public class AnalystPasswordValidator implements Validator {
 		try {
 			if (!SecureWithSHA256.getSHA(analyst.getTempPassword())
 					.equals(analystService.getPasswordSHA(analyst.getAnalystId()))) {
-				errors.rejectValue("analyst.tempPassword", "passwordError", "Please Enter Correct Password");
+				errors.rejectValue("tempPassword", "passwordError", "Please Enter Correct Password");
 			}
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}catch (EntityNotFoundException e) {
+			// TODO: handle exception
+			errors.rejectValue("analystId", "Id Not Present", "This analyst has not registered yet");
 		}
 
 	}

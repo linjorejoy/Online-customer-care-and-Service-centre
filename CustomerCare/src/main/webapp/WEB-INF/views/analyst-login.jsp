@@ -1,31 +1,57 @@
 <%@ include file="common/header-analyst.jspf"%>
 <div class="container">
-	<%@ include file="common/nav-bar-analyst.jspf"%>
-	<div class="center-div-analyst">
-		<div class="heading-analyst">
-			<h1 class="heading-analyst-h1">Analyst Login</h1>
+	<nav class="navbar navbar-inverse navbar-my">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/roleSelectionPage">Customer Care</a>
+			</div>
 		</div>
-		<div class="form-div-analyst">
-			<form:form action="/analyst-login" modelAttribute="analyst" method="POST">
-				<div class="form-input-div-analyst">
-					<form:label path="analystId"> Analyst Id</form:label>
-					<form:input path="analystId" id="analystId" />
-					<form:errors path="analystId"></form:errors>
-				</div>
-				<div class="form-input-div-analyst">
-					<form:label path="tempPassword">Password</form:label>
-					<form:input path="tempPassword" id="password" type="password" />
-					<form:errors path="tempPassword"></form:errors>
-				</div>
-				<div class="form-group">
-					<a href="/">Forgot Analyst Id</a> <a href="/">Forgot Password</a>
-				</div>
-				<div class="form-buttons-div-analyst">
-					<input type="Submit" name="submit" value="Submit" /> <input
-						type="reset" name="reset" value="Cancel" />
+	</nav>
+	<div
+		class="container text-center d-flex align-items-center justify-content-center">
+		<!-- Default form login -->
+		<div class="card">
+			<form:form class="text-center border border-light p-5"
+				action="/analyst-login" modelAttribute="analyst" method="post">
 
+				<p class="h2 mb-4">Analyst Sign in</p>
+
+				<!-- Email -->
+				<medium id="defaultRegisterFormPhoneHelpBlock"
+					class="form-text text-muted text-left mb-0">analyst Id</medium>
+				<form:input path="analystId" type="input" id="defaultLoginFormEmail"
+					class="form-control mb-0" placeholder="analyst Id" />
+				<small id="defaultRegisterFormPhoneHelpBlock"
+					class="form-text text-warning mb-2"><form:errors
+						cssClass="mb-4" path="analystId"></form:errors></small>
+				<!-- Password -->
+				<form:input path="tempPassword" type="password"
+					id="defaultLoginFormPassword" class="form-control mb-4"
+					placeholder="Password" />
+				<small id="defaultRegisterFormPhoneHelpBlock"
+					class="form-text text-warning mb-2"><form:errors
+						path="tempPassword"></form:errors> </small>
+
+				<div class="d-flex justify-content-around">
+					<input class="btn btn-info btn-block my-4" type="Submit"
+						name="submit" value="Submit" />
 				</div>
+				<div class="d-flex justify-content-around p-4">
+					<div>
+						<!-- Forgot password -->
+						<a href="#" class="mb-4 p-2">Forgot analyst id?</a>
+					</div>
+					<div>
+						<!-- Forgot password -->
+						<a href="#" class="mb-4 p-2">Forgot password?</a>
+					</div>
+				</div>
+				<p>
+					You can <a href="/roleSelectionPage">Register</a> Here
+				</p>
+
 			</form:form>
+			<!-- Default form login -->
 		</div>
 	</div>
 	<%@ include file="common/footer-analyst.jspf"%>

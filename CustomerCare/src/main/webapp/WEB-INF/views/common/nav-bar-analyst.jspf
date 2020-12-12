@@ -1,12 +1,29 @@
-<nav class="navbar navbar-inverse navbar-my">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/roleSelectionPage">Customer Care</a>
-    </div>
-    <ul class="nav navbar-nav navbar-right nav-div-my">
-      <li><a href="/analyst-login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-      <li><a href="/analyst-home"><span class="glyphicon glyphicon-log-in"></span> Home</a></li>
-      <li><a href="/analyst-emails?analystId=${analyst.analystId}"><span class="glyphicon glyphicon-log-in"></span> Emails</a></li>
-    </ul>
-  </div>
+
+<nav class="navbar navbar-inverse nav-div-my">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="/roleSelectionPage">Customer Care</a>
+		</div>
+		<!-- <ul class="nav navbar-nav navbar-right">
+
+				<li><a href="/admin-login"><span
+						class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+			</ul> -->
+		<div class="dropdown">
+			<button class="btn btn-primary dropdown-toggle" type="button"
+				id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+				aria-expanded="false">
+				Menu<span class="badge badge-danger ml-2">${emailCount}</span>
+			</button>
+			<div class="dropdown-menu dropdown-menu-right"
+				aria-labelledby="dropdownMenuButton">
+				<a href="/analyst-login" class="dropdown-item"> Logout</a> <a
+					class="dropdown-item" href="/analyst-emails?analystId=${analyst.analystId}">Mail<span
+					class="badge badge-danger ml-2">${emailCount}</span></a>
+				<a class="dropdown-item" href="#">Show All Complaints</a> <a
+					class="dropdown-item" href="#">View Profile</a>
+				<!-- <a class="dropdown-item" href="#">Something	else here</a> -->
+			</div>
+		</div>
+	</div>
 </nav>

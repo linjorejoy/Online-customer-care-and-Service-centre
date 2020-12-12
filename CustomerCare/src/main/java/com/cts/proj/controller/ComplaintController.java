@@ -27,6 +27,7 @@ import com.cts.proj.service.ComplaintService;
 import com.cts.proj.service.UserService;
 import com.cts.proj.validate.ComplaintValidator;
 
+
 @Controller
 public class ComplaintController {
 
@@ -35,7 +36,7 @@ public class ComplaintController {
 
 	@Autowired
 	UserService userService;
-
+	
 	@Autowired
 	AnalystService analystService;
 
@@ -46,9 +47,9 @@ public class ComplaintController {
 	public String goToComplaintPage(@ModelAttribute("complaint") Complaint complaint, BindingResult result,
 			@RequestParam("userId") long userId, ModelMap model) {
 
-		User user = userService.getUser(userId);
+		User user =  userService.getUser(userId);
 		Analyst analyst = analystService.getAnalyst(2001);
-
+		
 		long complaintId = complaintService.getLastId() + 1;
 		Complaint baseComplaint = new Complaint(complaintId, "Select Category", 0, "Please Fill The Description",
 				"Active", new Date(), "please Fill Suggestios", user, analyst);
@@ -74,12 +75,13 @@ public class ComplaintController {
 		baseComplaint.setPhoneNumber(complaint.getPhoneNumber());
 		baseComplaint.setCategory(complaint.getCategory());
 		baseComplaint.setDescription(complaint.getDescription());
+		User user = userService.getUser(userId);
 		System.out.println(complaint);
 		complaintService.addComplaint(baseComplaint);
-
+		
 		model.put("submittedComplaint", baseComplaint);
-		model.put("userId", userId);
-
+		model.put("user", user);
+		
 		return "complaint-submission-user";
 	}
 
@@ -91,6 +93,7 @@ public class ComplaintController {
 		model.addAttribute("complaintList", complaintList);
 		return "complaint-notification-user";
 	}
+
 
 	@RequestMapping(value = "/admin-login/page/{pageNumber}", method = RequestMethod.GET)
 	public String viewAnotherPageAdminComplaintList(@Validated @ModelAttribute("admin") Admin admin,
@@ -123,7 +126,6 @@ public class ComplaintController {
 
 	}
 
-
 	@RequestMapping(value = "/analyst-login/page/{pageNumber}", method = RequestMethod.GET)
 	public String viewAnotherPageAnalystComplaintList(@Validated @ModelAttribute("analyst") Analyst analyst,
 			BindingResult result, ModelMap model, @PathVariable("pageNumber") int pageNumber,
@@ -141,7 +143,8 @@ public class ComplaintController {
 		System.out.println(complaintList);
 		System.out.println();
 		System.out.println();
-		model.put("analystId", analyst.getAnalystId());
+//		long analystId = analyst.getAnalystId();
+		model.put("analystId", analystId);
 		model.put("currentPage", pageNumber);
 		model.put("complaintListAnalyst", complaintList);
 		model.put("totalComplaints", totalComplaints);
@@ -150,6 +153,7 @@ public class ComplaintController {
 		model.put("sortDir", sortDir);
 		String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
 		model.put("reverseSortDir", reverseSortDir);
+		model.put("analyst", analystService.getAnalyst(analystId));
 		return "complaint-notification-analyst";
 
 	}

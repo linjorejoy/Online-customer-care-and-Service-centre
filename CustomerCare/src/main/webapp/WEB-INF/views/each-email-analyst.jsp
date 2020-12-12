@@ -10,17 +10,17 @@
 			<div class="info">
 
 				<label for="" class="label-email">Recipient : </label>
-				<label for="" class="output-email">${complaint.analyst.lastName}, ${complaint.analyst.firstName}</label>
+				<label for="" class="output-email">${email.analyst.lastName}, ${email.analyst.firstName}</label>
 			</div>
 			<div class="info">
 
 				<label for="" class="label-email">Date : </label>
-				<label for="" class="output-email">${complaint.dateOfComplaint}</label>
+				<label for="" class="output-email">${email.sentDate}</label>
 			</div>
 			<div class="info">
 
 				<label for="" class="label-email">Description</label>
-				<p>${complaint.description}</p>
+				<p>${email.description}</p>
 			</div>
 			<div class="info">
 
