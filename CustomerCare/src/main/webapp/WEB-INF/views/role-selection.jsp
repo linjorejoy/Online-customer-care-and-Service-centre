@@ -1,10 +1,10 @@
 <%@ include file="common/header-role-selection.jspf"%>
-<div class="container-fluid flex-column">
+<div class="container-fluid p-0">
 	<%@ include file="common/nav-bar-role-selection.jspf"%>
 
 
 	<div
-		class="container text-center d-flex align-items-center justify-content-center">
+		class="container text-center d-flex align-items-center justify-content-center mt-2">
 		<div>
 			<c:set var="isUser" value="${userActive}"></c:set>
 			<c:set var="isAnalyst" value="${analystActive}"></c:set>
@@ -114,9 +114,9 @@
 							</div>
 						</div>
 						<div class="form-buttons-div">
-							<input type="submit" class="btn btn-info my-4 btn-block"
-								name="Submit" value="Register" /> <a
-								class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0"
+							<input type="submit" class="btn btn-info my-4 btn-block bg-primary text-light"
+								name="Submit" value="Register" /> OR<a
+								class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect bg-success text-light"
 								href="/user-login">Login</a> 
 						</div>
 					</form:form>
@@ -232,9 +232,9 @@
 							</div>
 						</div>
 						<div class="form-buttons-div">
-							<input type="submit" class="btn btn-info my-4 btn-block"
-								name="Submit" value="Register" /> <a
-								class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0"
+							<input type="submit" class="btn btn-info my-4 btn-block bg-primary text-light"
+								name="Submit" value="Register" />OR <a
+								class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect bg-success text-light"
 								href="/analyst-login">Login</a> 
 						</div>
 					</form:form>
@@ -280,7 +280,7 @@
 						</div>
 
 						<div class="form-buttons-div">
-							<input type="submit" class="btn btn-info my-4 btn-block"
+							<input type="submit" class="btn btn-info my-4 btn-block bg-success text-light"
 								name="Submit" value="Login" />
 						</div>
 					</form:form>

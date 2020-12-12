@@ -1,5 +1,5 @@
 <%@ include file="common/header-role-selection.jspf"%>
-<div class="container-fluid flex-column">
+<div class="container-fluid flex-column p-0">
 	<%@ include file="common/nav-bar-role-selection.jspf"%>
 
 

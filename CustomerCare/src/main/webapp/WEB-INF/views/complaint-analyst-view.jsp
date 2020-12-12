@@ -1,5 +1,5 @@
 <%@ include file="common/header-analyst.jspf"%>
-<div class="container">
+<div class="container-fluid p-0">
 	<%@ include file="common/nav-bar-analyst.jspf"%>
 		<div
 		class="container text-center d-flex align-items-center justify-content-center">

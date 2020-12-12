@@ -1,8 +1,8 @@
 <%@ include file="common/header-user.jspf"%>
-<div class="container-fluid">
+<div class="container-fluid p-0">
 	<%@ include file="common/nav-bar-user.jspf"%>
 	<div
-		class="container text-center d-flex align-items-center justify-content-center">
+		class="container text-center d-flex align-items-center justify-content-center mt-3">
 		<!-- Default form login -->
 		<div class="card">
 			<form:form class="text-center border border-light p-5"
@@ -27,7 +27,7 @@
 						path="tempPassword"></form:errors> </small>
 
 				<div class="d-flex justify-content-around">
-					<input class="btn btn-info btn-block my-4" type="Submit"
+					<input class="btn btn-info btn-block my-4 bg-primary text-light" type="Submit"
 						name="submit" value="Submit" />	
 				</div>
 				<div class="d-flex justify-content-around p-4">

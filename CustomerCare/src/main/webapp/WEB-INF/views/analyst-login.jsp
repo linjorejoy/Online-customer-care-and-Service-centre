@@ -1,6 +1,6 @@
 <%@ include file="common/header-analyst.jspf"%>
-<div class="container">
-	<nav class="navbar navbar-inverse navbar-my">
+<div class="container-fluid p-0">
+	<nav class="navbar navbar-inverse navbar-dark bg-primary">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="/roleSelectionPage">Customer Care</a>
@@ -8,7 +8,7 @@
 		</div>
 	</nav>
 	<div
-		class="container text-center d-flex align-items-center justify-content-center">
+		class="container text-center d-flex align-items-center justify-content-center mt-3">
 		<!-- Default form login -->
 		<div class="card">
 			<form:form class="text-center border border-light p-5"
@@ -18,7 +18,7 @@
 
 				<!-- Email -->
 				<medium id="defaultRegisterFormPhoneHelpBlock"
-					class="form-text text-muted text-left mb-0">analyst Id</medium>
+					class="form-text text-muted text-left mb-0">Analyst Id</medium>
 				<form:input path="analystId" type="input" id="defaultLoginFormEmail"
 					class="form-control mb-0" placeholder="analyst Id" />
 				<small id="defaultRegisterFormPhoneHelpBlock"
@@ -33,7 +33,7 @@
 						path="tempPassword"></form:errors> </small>
 
 				<div class="d-flex justify-content-around">
-					<input class="btn btn-info btn-block my-4" type="Submit"
+					<input class="btn btn-info btn-block md-4 bg-primary" type="Submit"
 						name="submit" value="Submit" />
 				</div>
 				<div class="d-flex justify-content-around p-4">
