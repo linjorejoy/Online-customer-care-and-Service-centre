@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.compress.utils.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -25,10 +26,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cts.proj.exporter.ExcelFileExporter;
+import com.cts.proj.model.Admin;
 import com.cts.proj.model.Analyst;
 import com.cts.proj.model.Complaint;
 import com.cts.proj.model.EmailAnalyst;
 import com.cts.proj.model.FeedbackQuestions;
+import com.cts.proj.model.User;
 import com.cts.proj.service.AdminService;
 import com.cts.proj.service.AnalystService;
 import com.cts.proj.service.ComplaintService;
@@ -59,8 +62,8 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "/admin-home", method = RequestMethod.GET)
-	public String goToAdminHome() {
-		
+	public String goToAdminHome(ModelMap model) {
+		model.put("admin", adminService.getAdmin(1001));
 		return "admin-home";
 	}
 	
@@ -68,6 +71,25 @@ public class AdminController {
 	public String gotoFeedBackAdmin(@ModelAttribute FeedbackQuestions feedbackQuestions ) {
 		return "feedback-creation-admin";
 		
+	}
+	
+	@RequestMapping(value = "/show-all-complaint-admin", method = RequestMethod.GET)
+	public String adminAfterLogin(@Validated @ModelAttribute("admin") Admin admin, BindingResult result,
+			ModelMap model) {
+
+		int currentPage = 1;
+		Page<Complaint> pages = complaintService.getAllComplaint(currentPage - 1, 4, "complaintId", "asc");
+		List<Complaint> complaintList = pages.getContent();
+		long totalComplaints = pages.getTotalElements();
+		int totalPages = pages.getTotalPages();
+
+		model.put("currentPage", currentPage);
+		model.put("complaintListAdmin", complaintList);
+		model.put("totalComplaints", totalComplaints);
+		model.put("totalPages", totalPages);
+		model.put("sortBy", "complaintId");
+		model.put("sortDir", "asc");
+		return "complaint-notification-admin";
 	}
 
 	@RequestMapping(value = "/show-user-complaint-admin", method = RequestMethod.GET)

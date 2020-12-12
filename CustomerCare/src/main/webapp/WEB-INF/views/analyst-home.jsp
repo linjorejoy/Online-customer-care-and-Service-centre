@@ -1,6 +1,6 @@
 <%@ include file="common/header-analyst.jspf"%>
 <div class="container-fluid">
-	<nav class="navbar navbar-inverse nav-div-my">
+	<nav class="navbar navbar-inverse navbar-dark bg-primary">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="/roleSelectionPage">Customer Care</a>
