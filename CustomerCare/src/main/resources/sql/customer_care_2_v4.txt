@@ -1,0 +1,266 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema customer_care_2
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema customer_care_2
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `customer_care_2` DEFAULT CHARACTER SET utf8 ;
+USE `customer_care_2` ;
+
+-- -----------------------------------------------------
+-- Table `customer_care_2`.`user`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `customer_care_2`.`user` (
+  `user_id` INT NOT NULL AUTO_INCREMENT,
+  `first_name` VARCHAR(45) NOT NULL,
+  `last_name` VARCHAR(45) NOT NULL,
+  `phone_number` VARCHAR(15) NULL,
+  `email_id` VARCHAR(45) NOT NULL,
+  `date_of_birth` DATETIME NOT NULL,
+  `gender` VARCHAR(10) NOT NULL,
+  `password` VARCHAR(256) NOT NULL,
+  `temp_password` VARCHAR(256) NOT NULL,
+  PRIMARY KEY (`user_id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `customer_care_2`.`admin`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `customer_care_2`.`admin` (
+  `admin_id` INT NOT NULL AUTO_INCREMENT,
+  `first_name` VARCHAR(45) NOT NULL,
+  `last_name` VARCHAR(45) NOT NULL,
+  `email_id` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(256) NOT NULL,
+  `temp_password` VARCHAR(256) NOT NULL,
+  PRIMARY KEY (`admin_id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `customer_care_2`.`analyst`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `customer_care_2`.`analyst` (
+  `analyst_id` INT NOT NULL AUTO_INCREMENT,
+  `first_name` VARCHAR(45) NOT NULL,
+  `last_name` VARCHAR(45) NOT NULL,
+  `phone_number` VARCHAR(15) NOT NULL,
+  `email_id` VARCHAR(45) NOT NULL,
+  `date_of_birth` DATETIME NOT NULL,
+  `gender` VARCHAR(45) NOT NULL,
+  `support_level` VARCHAR(2) NOT NULL,
+  `password` VARCHAR(256) NOT NULL,
+  `temp_password` VARCHAR(256) NOT NULL,
+  PRIMARY KEY (`analyst_id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `customer_care_2`.`complaint`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `customer_care_2`.`complaint` (
+  `complaint_id` INT NOT NULL AUTO_INCREMENT,
+  `complaint_user_id` INT NOT NULL DEFAULT 1000,
+  `assigned_analyst_id` INT NOT NULL DEFAULT 1000,
+  `category` VARCHAR(45) NOT NULL,
+  `phone_number` VARCHAR(15) NOT NULL,
+  `status` VARCHAR(45) NOT NULL,
+  `date_of_complaint` DATETIME NOT NULL,
+  `description` VARCHAR(1024) NOT NULL,
+  `suggestions` VARCHAR(1024) NULL,
+  PRIMARY KEY (`complaint_id`),
+  INDEX `fk_complaint_user_idx` (`complaint_user_id` ASC) VISIBLE,
+  INDEX `fk_complaint_analyst1_idx` (`assigned_analyst_id` ASC) VISIBLE,
+  CONSTRAINT `fk_complaint_user`
+    FOREIGN KEY (`complaint_user_id`)
+    REFERENCES `customer_care_2`.`user` (`user_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_complaint_analyst1`
+    FOREIGN KEY (`assigned_analyst_id`)
+    REFERENCES `customer_care_2`.`analyst` (`analyst_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `customer_care_2`.`secret_questions`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `customer_care_2`.`secret_questions` (
+  `question_id` INT NOT NULL AUTO_INCREMENT,
+  `question_description` VARCHAR(1024) NOT NULL,
+  PRIMARY KEY (`question_id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `customer_care_2`.`u_sq_questions`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `customer_care_2`.`u_sq_questions` (
+  `u_sq_id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` INT NOT NULL,
+  `question_id` INT NOT NULL,
+  `answer` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`u_sq_id`),
+  INDEX `fk_u_sq_questions_user1_idx` (`user_id` ASC) VISIBLE,
+  INDEX `fk_u_sq_questions_secret_questions1_idx` (`question_id` ASC) VISIBLE,
+  CONSTRAINT `fk_u_sq_questions_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `customer_care_2`.`user` (`user_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_u_sq_questions_secret_questions1`
+    FOREIGN KEY (`question_id`)
+    REFERENCES `customer_care_2`.`secret_questions` (`question_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `customer_care_2`.`email_analyst`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `customer_care_2`.`email_analyst` (
+  `email_id` INT NOT NULL AUTO_INCREMENT,
+  `admin_id` INT NOT NULL,
+  `analyst_id` INT NOT NULL,
+  `sent_date` DATETIME NOT NULL,
+  `received` TINYINT NOT NULL,
+  `description` VARCHAR(1024) NOT NULL,
+  PRIMARY KEY (`email_id`),
+  INDEX `fk_email_analyst_admin1_idx` (`admin_id` ASC) VISIBLE,
+  INDEX `fk_email_analyst_analyst1_idx` (`analyst_id` ASC) VISIBLE,
+  CONSTRAINT `fk_email_analyst_admin1`
+    FOREIGN KEY (`admin_id`)
+    REFERENCES `customer_care_2`.`admin` (`admin_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_email_analyst_analyst1`
+    FOREIGN KEY (`analyst_id`)
+    REFERENCES `customer_care_2`.`analyst` (`analyst_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `customer_care_2`.`email_user`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `customer_care_2`.`email_user` (
+  `email_id` INT NOT NULL AUTO_INCREMENT,
+  `admin_id` INT NOT NULL,
+  `user_id` INT NOT NULL,
+  `sent_date` DATETIME NOT NULL,
+  `received` TINYINT NOT NULL,
+  `description` VARCHAR(1024) NOT NULL,
+  PRIMARY KEY (`email_id`),
+  INDEX `fk_email_user_admin1_idx` (`admin_id` ASC) VISIBLE,
+  INDEX `fk_email_user_user1_idx` (`user_id` ASC) VISIBLE,
+  CONSTRAINT `fk_email_user_admin1`
+    FOREIGN KEY (`admin_id`)
+    REFERENCES `customer_care_2`.`admin` (`admin_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_email_user_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `customer_care_2`.`user` (`user_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `customer_care_2`.`feedback_response`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `customer_care_2`.`feedback_response` (
+  `feedback_response_id` INT NOT NULL AUTO_INCREMENT,
+  `complaint_complaint_id` INT NOT NULL,
+  `question` VARCHAR(1024) NULL,
+  `answer` VARCHAR(1024) NULL,
+  PRIMARY KEY (`feedback_response_id`),
+  INDEX `fk_feedback_response_complaint1_idx` (`complaint_complaint_id` ASC) VISIBLE,
+  CONSTRAINT `fk_feedback_response_complaint1`
+    FOREIGN KEY (`complaint_complaint_id`)
+    REFERENCES `customer_care_2`.`complaint` (`complaint_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+
+
+
+
+-- -----------------------------------------------------
+-- Auto Increment From ______
+-- -----------------------------------------------------
+
+
+alter table admin auto_increment = 1000;
+alter table analyst auto_increment = 2000;
+alter table user auto_increment = 3000;
+alter table complaint auto_increment = 4000;
+alter table feedback_response auto_increment = 6000;
+alter table secret_questions auto_increment = 7000;
+alter table u_sq_questions auto_increment = 8000;
+alter table email_analyst auto_increment = 9000;
+alter table email_user auto_increment = 10000;
+
+
+
+
+
+-- -----------------------------------------------------
+-- Setting Some required values
+-- -----------------------------------------------------
+
+
+
+
+
+
+insert into user(password, temp_password, first_name, last_name, phone_number, email_id, date_of_birth, gender) 
+values ( '226392211f45668cc073ec9e8bd037ed40ca1a10589d5ec08721900e1670f329', 'Aa1@qwerty','Linjo', 'Rejoy', '9876543210', 'linjo@cts.com', '1998-05-31 12:55:50', 'Male');
+
+
+
+insert into admin (admin_id, password, temp_password, first_name, last_name, email_id)
+values (1001, '226392211f45668cc073ec9e8bd037ed40ca1a10589d5ec08721900e1670f329', 'Aa1@qwerty', 'admin', 'adminLN', 'admin@customercare.com');
+
+
+
+insert into analyst (analyst_id, password, temp_password, first_name, last_name, phone_number, email_id, date_of_birth, gender, support_level) 
+values (2001, '226392211f45668cc073ec9e8bd037ed40ca1a10589d5ec08721900e1670f329', "Aa1@qwerty", "Unasigned", "Unasigned", '1212121212', 'analyst@customercare.com', '1999-05-05 00:00:00', 'Unassigned', 'L0');
+
+
+
+insert into complaint (complaint_id, complaint_user_id, assigned_analyst_id, category, phone_number, description, status, date_of_complaint, suggestions)
+values
+(4001, 3001, 2001, 'L0', '1212121212', 'Put description Here', 'Opened', now(), 'Provide any Suggestions');
+
+
+
+-- -----------------------------------------------------
+-- Some default Values
+-- -----------------------------------------------------
+
+
+
+
+
+
+
+
