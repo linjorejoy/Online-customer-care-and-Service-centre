@@ -280,7 +280,7 @@
 						</div>
 
 						<div class="form-buttons-div">
-							<input type="submit" class="btn btn-info my-4 btn-block bg-primary text-light"
+							<input type="submit" class="btn btn-info my-4 btn-block bg-success text-light"
 								name="Submit" value="Login" />
 						</div>
 					</form:form>
