@@ -93,34 +93,18 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `customer_care`.`secret_questions`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `customer_care`.`secret_questions` (
-  `question_id` INT NOT NULL AUTO_INCREMENT,
-  `question_description` VARCHAR(1024) NOT NULL,
-  PRIMARY KEY (`question_id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `customer_care`.`u_sq_questions`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `customer_care`.`u_sq_questions` (
   `u_sq_id` INT NOT NULL AUTO_INCREMENT,
   `user_id` INT NOT NULL,
-  `question_id` INT NOT NULL,
-  `answer` VARCHAR(45) NOT NULL,
+  `question` VARCHAR(1024) NULL,
+  `answer` VARCHAR(1024) NOT NULL,
   PRIMARY KEY (`u_sq_id`),
   INDEX `fk_u_sq_questions_user1_idx` (`user_id` ASC) VISIBLE,
-  INDEX `fk_u_sq_questions_secret_questions1_idx` (`question_id` ASC) VISIBLE,
   CONSTRAINT `fk_u_sq_questions_user1`
     FOREIGN KEY (`user_id`)
     REFERENCES `customer_care`.`user` (`user_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_u_sq_questions_secret_questions1`
-    FOREIGN KEY (`question_id`)
-    REFERENCES `customer_care`.`secret_questions` (`question_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -205,6 +189,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
 
+
 -- -----------------------------------------------------
 -- Auto Increment From ______
 -- -----------------------------------------------------
@@ -215,7 +200,6 @@ alter table analyst auto_increment = 2000;
 alter table user auto_increment = 3000;
 alter table complaint auto_increment = 4000;
 alter table feedback_response auto_increment = 6000;
-alter table secret_questions auto_increment = 7000;
 alter table u_sq_questions auto_increment = 8000;
 alter table email_analyst auto_increment = 9000;
 alter table email_user auto_increment = 10000;
