@@ -27,7 +27,6 @@ import com.cts.proj.service.ComplaintService;
 import com.cts.proj.service.UserService;
 import com.cts.proj.validate.ComplaintValidator;
 
-
 @Controller
 public class ComplaintController {
 
@@ -36,7 +35,7 @@ public class ComplaintController {
 
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
 	AnalystService analystService;
 
@@ -47,9 +46,9 @@ public class ComplaintController {
 	public String goToComplaintPage(@ModelAttribute("complaint") Complaint complaint, BindingResult result,
 			@RequestParam("userId") long userId, ModelMap model) {
 
-		User user =  userService.getUser(userId);
+		User user = userService.getUser(userId);
 		Analyst analyst = analystService.getAnalyst(2001);
-		
+
 		long complaintId = complaintService.getLastId() + 1;
 		Complaint baseComplaint = new Complaint(complaintId, "Select Category", 0, "Please Fill The Description",
 				"Active", new Date(), "please Fill Suggestios", user, analyst);
@@ -78,10 +77,10 @@ public class ComplaintController {
 		User user = userService.getUser(userId);
 		System.out.println(complaint);
 		complaintService.addComplaint(baseComplaint);
-		
+
 		model.put("submittedComplaint", baseComplaint);
 		model.put("user", user);
-		
+
 		return "complaint-submission-user";
 	}
 
@@ -94,26 +93,66 @@ public class ComplaintController {
 		return "complaint-notification-user";
 	}
 
+//	@RequestMapping(value = "/admin-login/page/{pageNumber}", method = RequestMethod.GET)
+//	public String viewAnotherPageAdminComplaintList(@Validated @ModelAttribute("admin") Admin admin,
+//			BindingResult result, ModelMap model, @PathVariable("pageNumber") int pageNumber,
+//			@Param("sortBy") String sortBy, @Param("sortDir") String sortDir, String keyword, String date) {
+//
+//		Page<Complaint> pages = complaintService.getAllComplaint(pageNumber - 1, 4, sortBy, sortDir);
+//		List<Complaint> complaintList = pages.getContent();
+//		long totalComplaints = pages.getTotalElements();
+//		int totalPages = pages.getTotalPages();
+//		model.put("complaintListAdmin", complaintList);
+//
+//		model.put("currentPage", pageNumber);
+//		if (keyword != null && !keyword.isEmpty()) {
+//			model.addAttribute("complaintListAdmin", complaintService.findByKeyword(keyword));
+//		}
+//
+//		if (date != null && !date.isEmpty()) {
+//			model.addAttribute("complaintListAdmin", complaintService.findDate(date));
+//		}
+//		model.put("totalComplaints", totalComplaints);
+//		model.put("totalPages", totalPages);
+//		model.put("sortBy", sortBy);
+//		model.put("sortDir", sortDir);
+//		model.put("keyword", keyword);
+//		model.put("date", date);
+//		String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
+//		model.put("reverseSortDir", reverseSortDir);
+//		return "complaint-notification-admin";
+//
+//	}
 
+	/*
+	 * 
+	 */
 	@RequestMapping(value = "/admin-login/page/{pageNumber}", method = RequestMethod.GET)
 	public String viewAnotherPageAdminComplaintList(@Validated @ModelAttribute("admin") Admin admin,
 			BindingResult result, ModelMap model, @PathVariable("pageNumber") int pageNumber,
 			@Param("sortBy") String sortBy, @Param("sortDir") String sortDir, String keyword, String date) {
 
-		Page<Complaint> pages = complaintService.getAllComplaint(pageNumber - 1, 4, sortBy, sortDir);
-		List<Complaint> complaintList = pages.getContent();
-		long totalComplaints = pages.getTotalElements();
-		int totalPages = pages.getTotalPages();
-		model.put("complaintListAdmin", complaintList);
-
+//		Page<Complaint> pages = complaintService.getAllComplaint(pageNumber - 1, 4, sortBy, sortDir);
+//		List<Complaint> complaintList = pages.getContent();
+//		long totalComplaints = pages.getTotalElements();
+//		int totalPages = pages.getTotalPages();
+//		model.put("complaintListAdmin", complaintList);
+//
+//		model.put("currentPage", pageNumber);
+//		if (keyword != null && !keyword.isEmpty()) {
+//			model.addAttribute("complaintListAdmin", complaintService.findByKeyword(keyword));
+//		}
+//
+//		if (date != null && !date.isEmpty()) {
+//			model.addAttribute("complaintListAdmin", complaintService.findDate(date));
+//		}
 		model.put("currentPage", pageNumber);
-		if (keyword != null && !keyword.isEmpty()) {
-			model.addAttribute("complaintListAdmin", complaintService.findByKeyword(keyword));
-		}
-
-		if (date != null && !date.isEmpty()) {
-			model.addAttribute("complaintListAdmin", complaintService.findDate(date));
-		}
+		Page<Complaint> allFilteredPages = complaintService.getAllComplaintKeyword(keyword, date, pageNumber - 1, 4,
+				sortBy, sortDir);
+		List<Complaint> complaintListNew = allFilteredPages.getContent();
+		long totalComplaints = allFilteredPages.getTotalElements();
+		int totalPages = allFilteredPages.getTotalPages();
+		model.put("complaintListAdmin", complaintListNew);
 		model.put("totalComplaints", totalComplaints);
 		model.put("totalPages", totalPages);
 		model.put("sortBy", sortBy);
@@ -125,6 +164,9 @@ public class ComplaintController {
 		return "complaint-notification-admin";
 
 	}
+	/*
+	 * 
+	 */
 
 	@RequestMapping(value = "/analyst-login/page/{pageNumber}", method = RequestMethod.GET)
 	public String viewAnotherPageAnalystComplaintList(@Validated @ModelAttribute("analyst") Analyst analyst,

@@ -32,5 +32,11 @@ public interface ComplaintRepository extends PagingAndSortingRepository<Complain
 	@Query(value="select * from complaint c where complaint_id=:complaintId ", nativeQuery=true)
 	List<Complaint> findComplaintId(@Param("complaintId") String complaintId);
 		
+	/*
+	 * 
+	 */
+	@Query("select c from Complaint c where category like ?1 and date_of_complaint like ?2")
+//	@Query(value="select * from complaint c where category like %:keyword% and date(date_of_complaint)=:date", nativeQuery=true)
+	Page<Complaint> findByKeywordPageanation(Pageable pageable , String keyword, String date);
 
 }

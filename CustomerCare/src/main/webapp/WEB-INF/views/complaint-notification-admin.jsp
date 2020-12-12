@@ -61,7 +61,7 @@
 								<c:forEach var="i" begin="1" end="${totalPages}">
 									<li class="page-item"><h5>
 											<a class="page-link"
-												href="/admin-login/page/${i}?sortBy=${sortBy}&sortDir=${sortDir}">${i}</a>
+												href="/admin-login/page/${i}?sortBy=${sortBy}&sortDir=${sortDir}&keyword=${keyword}&date=${date}">${i}</a>
 										</h5></li>
 								</c:forEach>
 							</ul>
@@ -139,7 +139,7 @@
 								<c:forEach var="i" begin="1" end="${totalPages}">
 									<li class="page-item"><h5>
 											<a class="page-link"
-												href="/admin-login/page/${i}?sortBy=${sortBy}&sortDir=${sortDir}">${i}</a>
+												href="/admin-login/page/${i}?sortBy=${sortBy}&sortDir=${sortDir}&keyword=${keyword}&date=${date}">${i}</a>
 										</h5></li>
 								</c:forEach>
 							</ul>
