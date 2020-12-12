@@ -1,30 +1,29 @@
 package com.cts.proj.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "feedback")
+@Table(name = "feedback_response")
 public class Feedback {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "response_id")
-	private int responseId;
+	@Column(name = "feedback_response_id")
+	private long responseId;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "question_id")
-	private FeedbackQuestions feedBackQuestion;
+	@Column(name = "question")
+	private String question;	
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "complaint_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "complaint_complaint_id")
 	private Complaint complaint;
 
 	@Column(name = "answer")
@@ -34,14 +33,15 @@ public class Feedback {
 		super();
 	}
 
-	public Feedback(int responseId, String answer, FeedbackQuestions feedBackQuestion) {
+	public Feedback(int responseId, String question, Complaint complaint, String answer) {
 		super();
 		this.responseId = responseId;
+		this.question = question;
+		this.complaint = complaint;
 		this.answer = answer;
-		this.feedBackQuestion = feedBackQuestion;
 	}
 
-	public int getResponseId() {
+	public long getResponseId() {
 		return responseId;
 	}
 
@@ -57,19 +57,29 @@ public class Feedback {
 		this.answer = answer;
 	}
 
-	public FeedbackQuestions getFeedBackQuestion() {
-		return feedBackQuestion;
+	public String getQuestion() {
+		return question;
 	}
 
-	public void setFeedBackQuestionList(FeedbackQuestions feedBackQuestion) {
-		this.feedBackQuestion = feedBackQuestion;
+	public void setQuestion(String question) {
+		this.question = question;
 	}
+
+	public Complaint getComplaint() {
+		return complaint;
+	}
+
+	public void setComplaint(Complaint complaint) {
+		this.complaint = complaint;
+	}
+
+
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + responseId;
+		result = prime * result + (int) (responseId ^ (responseId >>> 32));
 		return result;
 	}
 
@@ -89,10 +99,7 @@ public class Feedback {
 
 	@Override
 	public String toString() {
-		return "Feedback [responseId=" + responseId + ", feedBackQuestion=" + feedBackQuestion + ", complaint="
-				+ complaint + ", answer=" + answer + "]";
+		return "Feedback [responseId=" + responseId + ", question=" + question + ", answer=" + answer + "]";
 	}
-
-
 
 }

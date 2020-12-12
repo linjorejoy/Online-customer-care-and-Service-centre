@@ -3,6 +3,7 @@ package com.cts.proj.controller;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -30,12 +31,12 @@ import com.cts.proj.model.Admin;
 import com.cts.proj.model.Analyst;
 import com.cts.proj.model.Complaint;
 import com.cts.proj.model.EmailAnalyst;
-import com.cts.proj.model.FeedbackQuestions;
-import com.cts.proj.model.User;
+import com.cts.proj.model.Feedback;
 import com.cts.proj.service.AdminService;
 import com.cts.proj.service.AnalystService;
 import com.cts.proj.service.ComplaintService;
 import com.cts.proj.service.EmailAnalystService;
+import com.cts.proj.service.FeedbackService;
 import com.cts.proj.service.UserService;
 
 @Controller
@@ -55,24 +56,55 @@ public class AdminController {
 	@Autowired
 	EmailAnalystService emailAnalystService;
 
+	@Autowired
+	FeedbackService feedbackService;
+
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
 	}
-	
+
 	@RequestMapping(value = "/admin-home", method = RequestMethod.GET)
 	public String goToAdminHome(ModelMap model) {
 		model.put("admin", adminService.getAdmin(1001));
 		return "admin-home";
 	}
-	
+
 	@RequestMapping(value = "/admin-create-feedback", method = RequestMethod.GET)
-	public String gotoFeedBackAdmin(@ModelAttribute FeedbackQuestions feedbackQuestions ) {
+	public String gotoFeedBackAdmin(@ModelAttribute Feedback feedback, @RequestParam("complaintId") long complaintId,
+			ModelMap model) {
+
+		List<Feedback> feedbackList = complaintService.getComplaint(complaintId).getFeedbackList();
+		model.put("feedbackList", feedbackList);
+		model.put("complaintId", complaintId);
 		return "feedback-creation-admin";
-		
+
 	}
-	
+
+	@RequestMapping(value = "/addFeedback", method = RequestMethod.POST)
+	public String addFeedBack(@ModelAttribute("feedback") Feedback feedback,
+			@RequestParam("complaintId") long complaintId, ModelMap model) {
+
+		feedback.setComplaint(complaintService.getComplaint(complaintId));
+		feedbackService.addFeedBack(feedback);
+		List<Feedback> feedbackList = complaintService.getComplaint(complaintId).getFeedbackList();
+		model.put("feedbackList", feedbackList);
+		model.put("complaintId", complaintId);
+		return "feedback-creation-admin";
+	}
+
+	@RequestMapping(value = "/delete-question", method = RequestMethod.GET)
+	public String deleteQuestion(@ModelAttribute("feedback") Feedback feedback,
+			@RequestParam("responseId") long responseId, @RequestParam("complaintId") long complaintId,
+			ModelMap model) {
+		feedbackService.deleteFeedback(responseId);
+		List<Feedback> feedbackList = complaintService.getComplaint(complaintId).getFeedbackList();
+		model.put("feedbackList", feedbackList);
+		model.put("complaintId", complaintId);
+		return "feedback-creation-admin";
+	}
+
 	@RequestMapping(value = "/show-all-complaint-admin", method = RequestMethod.GET)
 	public String adminAfterLogin(@Validated @ModelAttribute("admin") Admin admin, BindingResult result,
 			ModelMap model) {
@@ -132,7 +164,6 @@ public class AdminController {
 		emailToAnalyst.setSentDate(new Date());
 		emailToAnalyst.setReceived(false);
 //		System.out.println(emailToAnalyst.getAdmin());
-
 
 		String[] messageTemplate = mailMessage();
 		String mailMessage = messageTemplate[0] + emailToAnalyst.getAnalyst().getFirstName() + "\n\n";
