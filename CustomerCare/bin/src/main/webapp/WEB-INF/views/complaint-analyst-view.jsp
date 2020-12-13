@@ -6,44 +6,45 @@
 			<h1>Complaint Details</h1>
 		</div>
 		<div class="form-complaint-status-user">
-		<form:form action="/" modelAttribute="complaint" method="get">
-			<div>
-				<div>
-					<label>Complaint Id : </label> <label>${complaint.complaintId}</label>
-				</div>
-				<div>
-					<label>User Id : </label>
-					<label>${complaint.user.userId}</label>
-				</div>
-				<div>
-					<label>Phone Number : </label>
-					<label>${complaint.phoneNumber}</label>
-				</div>
-				<div>
-					<label>Category : </label>
-					<label>${complaint.category}</label>
-				</div>
-				<div>
-					<form:label path="status">Status:</form:label>
-					<form:select path="status" id="status" items="${status}" />
-				</div>
-				<div>
-					<form:label path="">Assigned Analyst:</form:label>
-					<form:select path="" id="" items="${supportLevel}"/>
-				</div>
-				<div>
-					<label>Description : </label>
-					<label>${complaint.description}</label>
-				</div>
-				<div>
-					<button onclick="#">Submit</button>
-				</div>
-				
-
-
-
+				<form:form action="/update-complaint-analyst" modelAttribute="complaint" method="POST">
+			<div class="complaint-view-inputs">
+				<form:label path="complaintId">Complaint Id :</form:label>
+				<form:input path="complaintId" value="${complaint.complaintId}"/>
 			</div>
-			</form:form>
+			<div class="complaint-view-inputs">
+				<form:label path="user.userId">User Id :</form:label>
+				<form:input path="user.userId" value="${complaint.user.userId}"/>
+			</div>
+			<div class="complaint-view-inputs">
+				<form:label path="phoneNumber">Phone Number :</form:label>
+				<form:input path="phoneNumber" value="${complaint.phoneNumber}"/>
+			</div>
+			<div class="complaint-view-inputs">
+				<form:label path="user.emailId">Email Id :</form:label>
+				<form:input path="user.emailId" value="${complaint.user.emailId}"/>
+			</div>
+			<div class="complaint-view-inputs">
+				<form:label path="category">Category :</form:label>
+				<form:select path="category" items="${category}"/>
+			</div>
+			<div class="complaint-view-inputs">
+				<form:label path="status">Status</form:label>
+				<form:select path="status" items="${status}"></form:select>
+			</div>
+			<div class="complaint-view-inputs">
+				<form:label path="analyst.analystId">Assigned Analyst</form:label>
+				<form:select path="analyst.analystId" items="${supportLevelWithId}"/>
+			</div>
+			<div class="complaint-view-inputs">
+				<form:label path="complaintId">Complaint Id :</form:label>
+				<form:textarea path="description" value="${complaint.description}"/>
+			</div>
+			<div class="complaint-view-inputs-assign">
+				<input type="submit" value="Assign">
+				<a href="/download/complaint.xlsx?complaintId=${complaint.complaintId}">Download</a>
+			</div>
+			
+		</form:form>
 
 		</div>
 

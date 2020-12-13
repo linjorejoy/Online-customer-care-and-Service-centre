@@ -2,25 +2,30 @@
 <div class="container">
 	<%@ include file="common/nav-bar-analyst.jspf"%>
 	<div class="center-div-analyst-all-emails">
-		
-		<table>
-			<tr>
-				<th>Email Id</th>
-				<th>Date</th>
-				<th>Description</th>
-				<th></th>
-			</tr>
-			
-			<!-- forEach -->
+
+		<table class="table">
+			<thead class="thead-dark">
 				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<th>Email Number</th>
+					<th>Date</th>
+					<th>Description</th>
+					<th></th>
 				</tr>
-			<!-- end -->
+			</thead>
+			<!-- forEach -->
+			<c:forEach var="email" items="${analyst.emailList}">
+
+
+				<tr>
+					<td><div class="overflow-hidden">${email.emailId}</div></td>
+					<td><div class="overflow-hidden">${email.sentDate}</div></td>
+					<td><div>${fn:substring(email.description,0, 80)}...............</div></td>
+					<td><a href="/view-email-analyst?emailId=${email.emailId}">View</a></td>
+				</tr>
+				<!-- end -->
+			</c:forEach>
 		</table>
-		
+
 	</div>
 	<%@ include file="common/footer-analyst.jspf"%>
 </div>

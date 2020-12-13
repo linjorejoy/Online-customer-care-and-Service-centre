@@ -5,41 +5,45 @@
 		<div class="complaint-view-heading">Complaint</div>
 
 		<div class="complaint-view-form"></div>
-		<form:form action="/" modelAttribute="complaint" method="GET">
+		<form:form action="/update-complaint-admin" modelAttribute="complaint" method="POST">
 			<div class="complaint-view-inputs">
-				<label>Complaint ID:</label> <label>${complaint.complaintId}</label>
+				<form:label path="complaintId">Complaint Id :</form:label>
+				<form:input path="complaintId" value="${complaint.complaintId}"/>
 			</div>
 			<div class="complaint-view-inputs">
-				<label>User ID:</label> <label>${complaint.user.userId}</label>
+				<form:label path="user.userId">User Id :</form:label>
+				<form:input path="user.userId" value="${complaint.user.userId}"/>
 			</div>
 			<div class="complaint-view-inputs">
-				<label>Phone number:</label> <label>${complaint.phoneNumber}</label>
+				<form:label path="phoneNumber">Phone Number :</form:label>
+				<form:input path="phoneNumber" value="${complaint.phoneNumber}"/>
 			</div>
 			<div class="complaint-view-inputs">
-				<label>Email ID:</label> <label>${complaint.user.emailId}</label>
+				<form:label path="user.emailId">Email Id :</form:label>
+				<form:input path="user.emailId" value="${complaint.user.emailId}"/>
 			</div>
 			<div class="complaint-view-inputs">
-				<label>Category:</label><label>${category}</label>
+				<form:label path="category">Category :</form:label>
+				<form:select path="category" items="${category}"/>
 			</div>
 			<div class="complaint-view-inputs">
 				<form:label path="status">Status</form:label>
 				<form:select path="status" items="${status}"></form:select>
 			</div>
 			<div class="complaint-view-inputs">
-				<form:label path="analyst.supportLevel">Assigned Analyst</form:label>
-				<form:select path="analyst.supportLevel" items="${supportLevel}" />
+				<form:label path="analyst.analystId">Assigned Analyst</form:label>
+				<form:select path="analyst.analystId" items="${supportLevelWithId}"/>
 			</div>
 			<div class="complaint-view-inputs">
-				<label>Description:</label> <label>${complaint.description}</label>
+				<form:label path="complaintId">Complaint Id :</form:label>
+				<form:textarea path="description" value="${complaint.description}"/>
 			</div>
 			<div class="complaint-view-inputs-assign">
-				<button onclick="#">Assign</button>
+				<input type="submit" value="Assign">
+				<a href="/download/complaint.xlsx?complaintId=${complaint.complaintId}">Download</a>
 			</div>
-			<div class="div-download-btn">
-				<a href="/download/complaint.xlsx">Download</a>
-			</div>
+			
 		</form:form>
-
 	</div>
 	<%@ include file="common/footer-admin.jspf"%>
 </div>

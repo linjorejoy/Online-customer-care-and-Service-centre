@@ -6,16 +6,16 @@
 			<h1 class="heading-user-h1">User Login</h1>
 		</div>
 		<div class="form-div-user">
-			<form:form action="/user-login" modelAttribute="complaint" method="post">
+			<form:form action="/user-login" modelAttribute="user" method="post">
 				<div class="form-input-div-user">
-					<form:label path="user.userId"> User Id</form:label>
-					<form:input path="user.userId" id="user-userid" />
-					<form:errors path="user.userId"></form:errors>
+					<form:label path="userId"> User Id</form:label>
+					<form:input path="userId" id="user-userid" />
+					<form:errors path="userId"></form:errors>
 				</div>
 				<div class="form-input-div-user">
-					<form:label path="user.tempPassword">Password</form:label>
-					<form:input path="user.tempPassword" id="tempPassword" type="password" />
-					<form:errors path="user.tempPassword"></form:errors>
+					<form:label path="tempPassword">Password</form:label>
+					<form:input path="tempPassword" id="tempPassword" type="password" />
+					<form:errors path="tempPassword"></form:errors>
 				</div>
 				<div class="form-group">
 					<a href="/">Forgot User Id</a> <a href="/">Forgot Password</a>
