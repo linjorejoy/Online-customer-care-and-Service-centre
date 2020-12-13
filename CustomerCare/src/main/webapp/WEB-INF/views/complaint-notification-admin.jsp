@@ -122,6 +122,9 @@
 								<a
 									href="/show-user-complaint-admin?complaintId=${complaint.complaintId}"
 									class="btn btn-primary">View</a>
+								<a
+									href="/admin-create-feedback?complaintId=${complaint.complaintId}"
+									class="btn btn-primary">Create Feedback</a>
 								<!-- <a href="#"
 									class="btn btn-primary">Go somewhere</a> -->
 							</div>
