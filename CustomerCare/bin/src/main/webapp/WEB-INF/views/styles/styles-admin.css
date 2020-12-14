@@ -94,7 +94,10 @@ label {
 	flex:1;
 	
 }
-
+.div-complaints-notification-admin{
+	height: 50vh;
+	overflow: scroll;
+}
 
 .div-complaint-notification{
 	margin: auto;
@@ -118,6 +121,8 @@ label {
 	background-color: #B088F9;
 	margin: auto;
 	text-align: left;
+	height: 50px;
+	overflow: hidden;
 }
 
 .complaint-description-admin label{

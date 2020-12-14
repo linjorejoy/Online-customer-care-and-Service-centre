@@ -1,8 +1,28 @@
-<%@ include file="common/header-admin.jspf"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<style>
+	<%@ include file="styles/styles-admin.css" %>
+</style>
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Righteous&display=swap"
+	rel="stylesheet">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Customer Care</title>
+</head>
+<body>
 <div class="container-my">
 	<%@ include file="common/nav-bar-admin.jspf"%>
 	<div class="center-div-complaint-admin">
-		<div class="centering-">
+		<div class="centering">
 			<div class="heading">
 				<h1>Complaint Notifications</h1>
 			</div>
@@ -10,41 +30,42 @@
 				<div class="label-sort">Sort By</div>
 				<div class="sort-btn">
 					<a
-						href="/admin-login/page/${currentPage}?sortBy=complaintId&sortDir=${reverseSortDir}">Complaint
+						href="/admin-login/page/${currentPage}?sortBy=complaintId&sortDir=${reverseSortDir}&keyword=${keyword}&date=${date}">Complaint
 						Id</a>
 				</div>
 				<div class="sort-btn">
 					<a
-						href="/admin-login/page/${currentPage}?sortBy=analyst.analystId&sortDir=${reverseSortDir}">Analyst
-						Id</a>
+						href="/admin-login/page/${currentPage}?sortBy=dateOfComplaint&sortDir=${reverseSortDir}&keyword=${keyword}&date=${date}">Date</a>
 				</div>
 				<div class="sort-btn">
 					<a
-						href="/admin-login/page/${currentPage}?sortBy=dateOfComplaint&sortDir=${reverseSortDir}">Date</a>
-				</div>
-				<div class="sort-btn">
-					<a
-						href="/admin-login/page/${currentPage}?sortBy=category&sortDir=${reverseSortDir}">Category</a>
+						href="/admin-login/page/${currentPage}?sortBy=category&sortDir=${reverseSortDir}&keyword=${keyword}&date=${date}">Category</a>
 				</div>
 			</div>
-
+			
 			<div class="div-filter-complaints-admin">
 				<div class="div-filter-complaints-admin-sub">
-					<form action="/admin-view-filter-category" method="get">
+					<form:form action="/admin-login/page/${currentPage}" method="get">
 						<input id="txtSearch" type="text" name="keyword"
 							placeholder="Enter category">
-						<button type="submit">Search</button>
-					</form>
+						<input type="hidden" name="sortBy" value="${sortBy}"/>
+						<input type="hidden" name="sortDir" value="${reverseSortDir}"/>
+						<input type="hidden" name="date" value="${date}"/>
+						<input type="submit" value="Search"/>
+						<!-- <button type="submit">Search</button> -->
+					</form:form>
 				</div>
 				<div class="div-filter-complaints-admin-sub">
-					<form action="/admin-view-filter-date" method="get">
+					<form:form action="/admin-login/page/${currentPage}" method="get">
 						<input id="txtSearch" type="text" name="date"
 							placeholder="YYYY-MM-DD" required>
+						<input type="hidden" name="sortBy" value="${sortBy}"/>
+						<input type="hidden" name="sortDir" value="${reverseSortDir}"/>
+						<input type="hidden" name="keyword" value="${keyword}"/>
 						<button type="submit">Search</button>
-					</form>
+					</form:form>
 				</div>
 			</div>
-
 
 			<div class="pagination-details">
 				<div>Total Complaints : ${totalComplaints}</div>
@@ -69,7 +90,7 @@
 							<p>${complaint.description}</p>
 						</div>
 						<div class="complaint-view-admin-each-submit">
-							<input type="submit" id="Submit" value="View" onsubmit="/" />
+							<a href="/show-user-complaint?complaintId=${complaint.complaintId}">View</a>
 						</div>
 					</div>
 				</c:forEach>
