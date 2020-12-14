@@ -1,6 +1,33 @@
 <%@ include file="common/header-role-selection.jspf"%>
 <div class="container-fluid flex-column p-0">
-	<%@ include file="common/nav-bar-role-selection.jspf"%>
+	<nav class="navbar navbar-inverse navbar-dark bg-primary">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/roleSelectionPage">Customer Care</a>
+			</div>
+			<!-- <ul class="nav navbar-nav navbar-right">
+
+				<li><a href="/admin-login"><span
+						class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+			</ul> -->
+			<div class="dropdown">
+				<button class="btn btn-light dropdown-toggle" type="button"
+					id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false">
+					Menu<span class="badge badge-danger ml-2">${emailCount}</span>
+				</button>
+				<div class="dropdown-menu dropdown-menu-right"
+					aria-labelledby="dropdownMenuButton">
+					<a href="/user-login" class="dropdown-item"> Logout</a> <a
+						class="dropdown-item" href="#">Mail<span
+						class="badge badge-danger ml-2">${emailCount}</span></a> <a
+						class="dropdown-item"
+						href="/user-home?userId=${user.userId}">Home</a> <a class="dropdown-item" href="#">View Profile</a>
+					<!-- <a class="dropdown-item" href="#">Something	else here</a> -->
+				</div>
+			</div>
+		</div>
+	</nav>
 
 
 	<div
@@ -85,7 +112,7 @@
 									<!-- First name -->
 									<input type="text" id="defaultRegisterFormFirstName"
 										class="form-control" placeholder="Search by User Id"
-										 name="userId" value="${userId}">
+										name="userId" value="${userId}">
 								</div>
 								<input type="hidden" name="sortBy" value="${sortBy}" /> <input
 									type="hidden" name="sortDir" value="${reverseSortDir}" /> <input
@@ -101,7 +128,8 @@
 								<div class="col">
 									<!-- Last name -->
 									<input id="txtSearch" type="text" name="complaintId"
-										placeholder="Enter complaintId" class="form-control" value="${complaintId}" required>
+										placeholder="Enter complaintId" class="form-control"
+										value="${complaintId}" required>
 								</div>
 								<input type="hidden" name="sortBy" value="${sortBy}" /> <input
 									type="hidden" name="sortDir" value="${reverseSortDir}" /> <input

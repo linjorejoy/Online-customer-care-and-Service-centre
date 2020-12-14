@@ -13,7 +13,7 @@
 				</div>
 				<div>
 					<label>User Id : </label>
-					<label>${submittedComplaint.user.userId}</label>
+					<label>${userId}</label>
 				</div>
 				<div>
 					<label>Phone Number : </label>
@@ -29,8 +29,8 @@
 				</div>
 				
 				<div>
-					<button onclick="#">Edit</button>
-					<button onclick="#">Go to Home</button>
+					<a href="#">Edit</a>					
+					<a href="/user-home?userId=${userId}">Go To Home</a>
 				</div>
 			</div>
 		</div>

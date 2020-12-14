@@ -33,18 +33,20 @@ public class ComplaintService {
 		return true;
 	}
 
-//	public Page<Complaint> getAllComplaint(int pageNumber, int count, String sortBy, String sortDir) {
-//		Sort sort = null;
-//		if (sortDir.equalsIgnoreCase("asc")) {
-//			sort = Sort.by(sortBy).ascending();
-//		} else if (sortDir.equalsIgnoreCase("desc")) {
-//			sort = Sort.by(sortBy).descending();
-//		} else {
-//			sort = Sort.by(sortBy).ascending();
-//		}
-//		Pageable pageable = PageRequest.of(pageNumber, count, sort);
-//		return complaintRepository.findAll(pageable);
-//	}
+	public Page<Complaint> getAllComplaintForUser(long userId, int pageNumber, int count, String sortBy,
+			String sortDir) {
+		Sort sort = null;
+		if (sortDir.equalsIgnoreCase("asc")) {
+			sort = Sort.by(sortBy).ascending();
+		} else if (sortDir.equalsIgnoreCase("desc")) {
+			sort = Sort.by(sortBy).descending();
+		} else {
+			sort = Sort.by(sortBy).ascending();
+		}
+		Pageable pageable = PageRequest.of(pageNumber, count, sort);
+
+		return complaintRepository.findComplaintByUserIdPaged(pageable, userId);
+	}
 
 	public Page<Complaint> getAllComplaint(int pageNumber, int count, String sortBy, String sortDir) {
 		Sort sort = null;
@@ -59,18 +61,17 @@ public class ComplaintService {
 		return complaintRepository.findAll(pageable);
 	}
 
-	public Page<Complaint> getAllComplaintKeyword(String keyword, String date, int pageNumber, int count, String sortBy,
+	public Page<Complaint> getAllComplaintFiltered(String keyword, String date, int pageNumber, int count, String sortBy,
 			String sortDir) {
 		if (keyword == null || keyword.isEmpty()) {
 			keyword = "%";
 		}
 		if (date == null || date.isEmpty()) {
 			date = "%";
-		}else {
+		} else {
 			date += "%";
 		}
-		
-		
+
 		Sort sort = null;
 		if (sortDir.equalsIgnoreCase("asc")) {
 			sort = Sort.by(sortBy).ascending();
@@ -80,7 +81,7 @@ public class ComplaintService {
 			sort = Sort.by(sortBy).ascending();
 		}
 		Pageable pageable = PageRequest.of(pageNumber, count, sort);
-		return complaintRepository.findByKeywordPageanation(pageable, keyword, date);
+		return complaintRepository.findByFiltersPageanation(pageable, keyword, date);
 	}
 
 	public Complaint getComplaint(long complaintId) {
