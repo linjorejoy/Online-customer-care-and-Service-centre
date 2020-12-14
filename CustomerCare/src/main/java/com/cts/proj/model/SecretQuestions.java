@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,7 +18,13 @@ public class SecretQuestions {
 	private long questionId;
 	@Column(name = "question_description")
     private String description;
+	
+	@OneToOne(mappedBy = "secret_questions")
+	private User user;
 
+	@OneToOne(mappedBy = "secret_questions")
+	private Analyst analyst;
+	
     public SecretQuestions() {
         super();
     }

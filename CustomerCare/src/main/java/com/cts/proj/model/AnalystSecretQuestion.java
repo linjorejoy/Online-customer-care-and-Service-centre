@@ -1,27 +1,23 @@
 package com.cts.proj.model;
 
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "u_sq_questions")
-public class UserSecretQuestion {
+@Table(name = "a_sq_questions")
+public class AnalystSecretQuestion {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "u_sq_id")
-	private long userSqId;
+	@Column(name = "a_sq_id")
+	private long analystSqId;
 
 	@Column(name = "answer")
 	private String answer;
@@ -31,23 +27,24 @@ public class UserSecretQuestion {
 	private SecretQuestions secretQuestions;
 	
 	
-	public UserSecretQuestion() {
+
+	public AnalystSecretQuestion() {
 		super();
 	}
 
-	public UserSecretQuestion(long userSqId, String answer, SecretQuestions secretQuestions) {
+	public AnalystSecretQuestion(long analystSqId, String answer, SecretQuestions secretQuestions) {
 		super();
-		this.userSqId = userSqId;
+		this.analystSqId = analystSqId;
 		this.answer = answer;
 		this.secretQuestions = secretQuestions;
 	}
 
-	public long getUserSqId() {
-		return userSqId;
+	public long getAnalystSqId() {
+		return analystSqId;
 	}
 
-	public void setUserSqId(long userSqId) {
-		this.userSqId = userSqId;
+	public void setAnalystSqId(long analystSqId) {
+		this.analystSqId = analystSqId;
 	}
 
 	public String getAnswer() {
@@ -70,7 +67,7 @@ public class UserSecretQuestion {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (int) (userSqId ^ (userSqId >>> 32));
+		result = prime * result + (int) (analystSqId ^ (analystSqId >>> 32));
 		return result;
 	}
 
@@ -82,17 +79,19 @@ public class UserSecretQuestion {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		UserSecretQuestion other = (UserSecretQuestion) obj;
-		if (userSqId != other.userSqId)
+		AnalystSecretQuestion other = (AnalystSecretQuestion) obj;
+		if (analystSqId != other.analystSqId)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "UserSecretQuestion [userSqId=" + userSqId + ", answer=" + answer + ", secretQuestions="
+		return "AnalystSecretQuestion [analystSqId=" + analystSqId + ", answer=" + answer + ", secretQuestions="
 				+ secretQuestions.getDescription() + "]";
 	}
-
-
+	
+	
+	
+	
 }
