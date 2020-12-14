@@ -38,6 +38,10 @@ public class Admin {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "admin_id")
 	private List<EmailAnalyst> emailListAdmin;
+	
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "analyst_id")
+	List<AnalystSecretQuestion> analystSecretQuestionList;
 
 	public Admin() {
 		super();
