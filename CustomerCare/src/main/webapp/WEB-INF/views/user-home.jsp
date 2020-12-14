@@ -43,9 +43,20 @@
 			<div class="h-25  d-inline-block col-sm-6" style="height: 100px;">
 				<div class="card">
 					<div class="card-body">
+						<h5 class="card-title">View All Complaints</h5>
+						<p class="card-text">Any Complaints which other users has submitted.</p>
+						<a href="/user-complaint-list-view?userId=${user.userId}" class="btn btn-primary">View All Complaints</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="h-25  d-inline-block col-sm-6" style="height: 100px;">
+				<div class="card">
+					<div class="card-body">
 						<h5 class="card-title">View Submitted Complaints</h5>
 						<p class="card-text">Any Complaints which you may have previously submitted can be viewed here.</p>
-						<a href="/user-complaint-list-view?userId=${user.userId}" class="btn btn-primary">View All Complaints</a>
+						<a href="/user-complaint-list-personal?userId=${user.userId}" class="btn btn-primary">View Submitted Complaints</a>
 					</div>
 				</div>
 			</div>

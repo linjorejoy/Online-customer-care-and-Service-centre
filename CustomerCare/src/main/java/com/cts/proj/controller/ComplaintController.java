@@ -93,36 +93,6 @@ public class ComplaintController {
 		return "complaint-notification-user";
 	}
 
-//	@RequestMapping(value = "/admin-login/page/{pageNumber}", method = RequestMethod.GET)
-//	public String viewAnotherPageAdminComplaintList(@Validated @ModelAttribute("admin") Admin admin,
-//			BindingResult result, ModelMap model, @PathVariable("pageNumber") int pageNumber,
-//			@Param("sortBy") String sortBy, @Param("sortDir") String sortDir, String keyword, String date) {
-//
-//		Page<Complaint> pages = complaintService.getAllComplaint(pageNumber - 1, 4, sortBy, sortDir);
-//		List<Complaint> complaintList = pages.getContent();
-//		long totalComplaints = pages.getTotalElements();
-//		int totalPages = pages.getTotalPages();
-//		model.put("complaintListAdmin", complaintList);
-//
-//		model.put("currentPage", pageNumber);
-//		if (keyword != null && !keyword.isEmpty()) {
-//			model.addAttribute("complaintListAdmin", complaintService.findByKeyword(keyword));
-//		}
-//
-//		if (date != null && !date.isEmpty()) {
-//			model.addAttribute("complaintListAdmin", complaintService.findDate(date));
-//		}
-//		model.put("totalComplaints", totalComplaints);
-//		model.put("totalPages", totalPages);
-//		model.put("sortBy", sortBy);
-//		model.put("sortDir", sortDir);
-//		model.put("keyword", keyword);
-//		model.put("date", date);
-//		String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
-//		model.put("reverseSortDir", reverseSortDir);
-//		return "complaint-notification-admin";
-//
-//	}
 
 	/*
 	 * 
@@ -132,22 +102,8 @@ public class ComplaintController {
 			BindingResult result, ModelMap model, @PathVariable("pageNumber") int pageNumber,
 			@Param("sortBy") String sortBy, @Param("sortDir") String sortDir, String keyword, String date) {
 
-//		Page<Complaint> pages = complaintService.getAllComplaint(pageNumber - 1, 4, sortBy, sortDir);
-//		List<Complaint> complaintList = pages.getContent();
-//		long totalComplaints = pages.getTotalElements();
-//		int totalPages = pages.getTotalPages();
-//		model.put("complaintListAdmin", complaintList);
-//
-//		model.put("currentPage", pageNumber);
-//		if (keyword != null && !keyword.isEmpty()) {
-//			model.addAttribute("complaintListAdmin", complaintService.findByKeyword(keyword));
-//		}
-//
-//		if (date != null && !date.isEmpty()) {
-//			model.addAttribute("complaintListAdmin", complaintService.findDate(date));
-//		}
 		model.put("currentPage", pageNumber);
-		Page<Complaint> allFilteredPages = complaintService.getAllComplaintKeyword(keyword, date, pageNumber - 1, 4,
+		Page<Complaint> allFilteredPages = complaintService.getAllComplaintFiltered(keyword, date, pageNumber - 1, 4,
 				sortBy, sortDir);
 		List<Complaint> complaintListNew = allFilteredPages.getContent();
 		long totalComplaints = allFilteredPages.getTotalElements();
