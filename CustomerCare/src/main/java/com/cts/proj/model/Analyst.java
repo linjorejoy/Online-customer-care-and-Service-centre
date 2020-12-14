@@ -48,6 +48,10 @@ public class Analyst implements Comparable<Analyst> {
 	@JoinColumn(name = "analyst_id")
 	private List<EmailAnalyst> emailList;
 
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "analyst_id")
+	private List<AnalystSecretQuestion> analystSecretQuestions;
+	
 	public Analyst() {
 		super();
 	}

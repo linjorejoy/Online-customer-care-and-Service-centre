@@ -10,6 +10,11 @@
 			<c:set var="isAnalyst" value="${analystActive}"></c:set>
 			<c:set var="isAdmin" value="${adminActive}"></c:set>
 
+
+
+
+
+
 			<div
 				class="container text-center d-flex align-items-center justify-content-center">
 				<ul class="nav nav-pills mb-1" id="pills-tab" role="tablist">
@@ -27,7 +32,69 @@
 						role="tab" aria-controls="pills-admin" aria-selected="false"><h3>Admin</h3></a></li>
 				</ul>
 			</div>
+
+
+
+
+
+
 			<div class="tab-content pt-2 pl-1" id="pills-tabContent">
+
+				<ul class="stepper horizontal" id="horizontal-stepper">
+					<li class="step active">
+						<div class="step-title waves-effect waves-dark">Step 1</div>
+						<div class="step-new-content">
+							<div class="row">
+								<div class="md-form col-12 ml-auto">
+									<input id="email-horizontal" type="email"
+										class="validate form-control" required> <label
+										for="email-horizontal">Email</label>
+								</div>
+							</div>
+							<div class="step-actions">
+								<button
+									class="waves-effect waves-dark btn btn-sm btn-primary next-step"
+									data-feedback="someFunction21">CONTINUE</button>
+							</div>
+						</div>
+					</li>
+					<li class="step">
+						<div class="step-title waves-effect waves-dark">Step 2</div>
+						<div class="step-new-content">
+							<div class="row">
+								<div class="md-form col-12 ml-auto">
+									<input id="password-horizontal" type="password"
+										class="validate form-control" required> <label
+										for="password-horizontal">Your password</label>
+								</div>
+							</div>
+							<div class="step-actions">
+								<button
+									class="waves-effect waves-dark btn btn-sm btn-primary next-step"
+									data-feedback="someFunction21">CONTINUE</button>
+								<button
+									class="waves-effect waves-dark btn btn-sm btn-secondary previous-step">BACK</button>
+							</div>
+						</div>
+					</li>
+					<li class="step">
+						<div class="step-title waves-effect waves-dark">Step 3</div>
+						<div class="step-new-content">
+							Finish!
+							<div class="step-actions">
+								<button
+									class="waves-effect waves-dark btn-sm btn btn-primary m-0 mt-4"
+									type="button">SUBMIT</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+
+
+
+
+
+
 				<div class='tab-pane fade <c:if test="${isUser}">active show</c:if>'
 					id="pills-user" role="tabpanel" aria-labelledby="pills-user-tab">
 					<form:form action="/register-user" modelAttribute="user"
@@ -114,10 +181,11 @@
 							</div>
 						</div>
 						<div class="form-buttons-div">
-							<input type="submit" class="btn btn-info my-4 btn-block bg-primary text-light"
+							<input type="submit"
+								class="btn btn-info my-4 btn-block bg-primary text-light"
 								name="Submit" value="Register" /> OR<a
 								class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect bg-success text-light"
-								href="/user-login">Login</a> 
+								href="/user-login">Login</a>
 						</div>
 					</form:form>
 				</div>
@@ -232,10 +300,11 @@
 							</div>
 						</div>
 						<div class="form-buttons-div">
-							<input type="submit" class="btn btn-info my-4 btn-block bg-primary text-light"
+							<input type="submit"
+								class="btn btn-info my-4 btn-block bg-primary text-light"
 								name="Submit" value="Register" />OR <a
 								class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect bg-success text-light"
-								href="/analyst-login">Login</a> 
+								href="/analyst-login">Login</a>
 						</div>
 					</form:form>
 				</div>
@@ -280,7 +349,8 @@
 						</div>
 
 						<div class="form-buttons-div">
-							<input type="submit" class="btn btn-info my-4 btn-block bg-success text-light"
+							<input type="submit"
+								class="btn btn-info my-4 btn-block bg-success text-light"
 								name="Submit" value="Login" />
 						</div>
 					</form:form>
