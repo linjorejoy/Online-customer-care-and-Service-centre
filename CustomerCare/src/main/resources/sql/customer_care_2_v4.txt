@@ -184,7 +184,16 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
-
+-- -----------------------------------------------------
+-- Table `customer_care_4`.`login_details`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `customer_care_4`.`login_details` (
+  `login_details_id` INT NOT NULL AUTO_INCREMENT,
+  `user_name` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `roles` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`login_details_id`))
+ENGINE = InnoDB;
 
 
 
@@ -200,6 +209,7 @@ alter table analyst auto_increment = 2000;
 alter table user auto_increment = 3000;
 alter table complaint auto_increment = 4000;
 alter table feedback_response auto_increment = 6000;
+alter table login_details auto_increment = 7000;
 alter table u_sq_questions auto_increment = 8000;
 alter table email_analyst auto_increment = 9000;
 alter table email_user auto_increment = 10000;
@@ -236,6 +246,11 @@ insert into complaint (complaint_id, complaint_user_id, assigned_analyst_id, cat
 values
 (4001, 3001, 2001, 'L0', '1212121212', 'Put description Here', 'Opened', now(), 'Provide any Suggestions');
 
+
+insert into login_details(user_name, password, roles) 
+values ('3001', 'Aa1@qwerty', 'USER')
+,('2001', 'Aa1@qwerty', 'ANALYST')
+,('1001', 'Aa1@qwerty', 'ADMIN');
 
 
 -- -----------------------------------------------------
