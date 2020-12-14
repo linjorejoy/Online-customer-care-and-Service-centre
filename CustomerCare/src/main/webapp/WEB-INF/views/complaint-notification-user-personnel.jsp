@@ -1,6 +1,7 @@
-<%@ include file="common/header-role-selection.jspf"%>
+<%@ include file="common/header-user.jspf"%>
 <div class="container-fluid flex-column p-0">
 	<nav class="navbar navbar-inverse navbar-dark bg-primary">
+
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="/roleSelectionPage">Customer Care</a>
@@ -21,8 +22,8 @@
 					<a href="/user-login" class="dropdown-item"> Logout</a> <a
 						class="dropdown-item" href="#">Mail<span
 						class="badge badge-danger ml-2">${emailCount}</span></a> <a
-						class="dropdown-item"
-						href="/user-home?userId=${user.userId}">Home</a> <a class="dropdown-item" href="#">View Profile</a>
+						class="dropdown-item" href="/user-home?userId=${user.userId}">Home</a>
+					<a class="dropdown-item" href="#">View Profile</a>
 					<!-- <a class="dropdown-item" href="#">Something	else here</a> -->
 				</div>
 			</div>
@@ -42,12 +43,12 @@
 						<li class="nav-item"><a class="nav-link disabled" href="#">Sort
 								by :</a></li>
 						<li class="nav-item"><a class="nav-link active"
-							href="/user-complaint-list-view/page/${currentPage}?sortBy=complaintId&sortDir=${reverseSortDir}&keyword=${keyword}&date=${date}">Complaint
+							href="/user-complaint-list-personal/page/${currentPage}?userId=${userId}&sortBy=complaintId&sortDir=${reverseSortDir}&keyword=${keyword}&date=${date}">Complaint
 								Id</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="/user-complaint-list-view/page/${currentPage}?sortBy=dateOfComplaint&sortDir=${reverseSortDir}&keyword=${keyword}&date=${date}">Date</a></li>
+							href="/user-complaint-list-personal/page/${currentPage}?userId=${userId}&sortBy=dateOfComplaint&sortDir=${reverseSortDir}&keyword=${keyword}&date=${date}">Date</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="/user-complaint-list-view/page/${currentPage}?sortBy=category&sortDir=${reverseSortDir}&keyword=${keyword}&date=${date}">Category</a>
+							href="/user-complaint-list-personal/page/${currentPage}?userId=${userId}&sortBy=category&sortDir=${reverseSortDir}&keyword=${keyword}&date=${date}">Category</a>
 							<!-- <li class="nav-item"><a class="nav-link" href="#">Link</a></li> -->
 					</ul>
 				</div>
@@ -63,7 +64,7 @@
 								<c:forEach var="i" begin="1" end="${totalPages}">
 									<li class="page-item"><h5>
 											<a class="page-link"
-												href="/user-complaint-list-view/page/${i}?sortBy=${sortBy}&sortDir=${sortDir}">${i}</a>
+												href="/user-complaint-list-personal/page/${i}?userId=${userId}&sortBy=${sortBy}&sortDir=${sortDir}">${i}</a>
 										</h5></li>
 								</c:forEach>
 							</ul>
@@ -72,7 +73,8 @@
 
 					<div
 						class="container text-center d-flex align-items-center justify-content-center">
-						<form:form action="/user-complaint-list-view/page/${currentPage}"
+						<form:form
+							action="/user-complaint-list-personal/page/${currentPage}?userId=${userId}"
 							class="text-center border border-light" method="get">
 
 							<div class="form-row mb-4">
@@ -89,7 +91,8 @@
 							<button type="submit" class="btn btn-primary mb-2">Search</button>
 						</form:form>
 
-						<form:form action="/user-complaint-list-view/page/${currentPage}"
+						<form:form
+							action="/user-complaint-list-personal/page/${currentPage}?userId=${userId}"
 							class="text-center border border-light" method="get">
 
 							<div class="form-row mb-4">
@@ -104,7 +107,8 @@
 							</div>
 							<button type="submit" class="btn btn-primary mb-2">Search</button>
 						</form:form>
-						<form:form action="/user-complaint-list-view/page/${currentPage}"
+						<form:form
+							action="/user-complaint-list-personal/page/${currentPage}?userId=${userId}"
 							class="text-center border border-light" method="get">
 
 							<div class="form-row mb-4">
@@ -121,7 +125,8 @@
 							<button type="submit" class="btn btn-primary mb-2">Search</button>
 						</form:form>
 
-						<form:form action="/user-complaint-list-view/page/${currentPage}"
+						<form:form
+							action="/user-complaint-list-personal/page/${currentPage}?userId=${userId}"
 							class="text-center border border-light" method="get">
 
 							<div class="form-row mb-4">
@@ -139,7 +144,7 @@
 						</form:form>
 					</div>
 
-					<c:forEach var="complaint" items="${complaintListAdmin}">
+					<c:forEach var="complaint" items="${complaintListUser}">
 
 
 						<!-- Card content -->
@@ -154,6 +159,12 @@
 							<!-- Text -->
 							<p class="card-text">${complaint.description}</p>
 							<div class="span2 text-right">
+								<c:if test="${fn:length(complaint.feedbackList) > 0}">
+									<a
+										href="/submit-user-feedback?userId=${userId}&complaintId=${complaint.complaintId}"
+										class="btn btn-primary">Submit FeedBack</a>
+								</c:if>
+
 								<a
 									href="/show-user-complaint-admin?complaintId=${complaint.complaintId}"
 									class="btn btn-primary">View</a>
@@ -174,7 +185,7 @@
 								<c:forEach var="i" begin="1" end="${totalPages}">
 									<li class="page-item"><h5>
 											<a class="page-link"
-												href="/user-complaint-list-view/page/${i}?sortBy=${sortBy}&sortDir=${sortDir}">${i}</a>
+												href="/user-complaint-list-personal/page/${i}?userId=${userId}&sortBy=${sortBy}&sortDir=${sortDir}">${i}</a>
 										</h5></li>
 								</c:forEach>
 							</ul>
