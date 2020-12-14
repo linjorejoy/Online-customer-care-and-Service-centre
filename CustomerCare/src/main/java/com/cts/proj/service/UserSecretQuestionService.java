@@ -27,5 +27,12 @@ public class UserSecretQuestionService {
 
 		return lastId;
 	}
+	
+	public boolean addSecretQUestion(UserSecretQuestion question) {
+		
+		userSecretQuestionRepository.save(question);
+		
+		return true;
+	}
 
 }

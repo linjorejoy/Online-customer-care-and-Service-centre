@@ -13,6 +13,18 @@ public class UserService {
 
 	@Autowired
 	UserRepository userRepository;
+	
+	public long getLastId() {
+		long lastId = 3000;
+		
+		for(User user : userRepository.findAll()) {
+			if(user.getUserId() > lastId) {
+				lastId = user.getUserId();
+			}
+		}
+		
+		return lastId;
+	}
 
 	public User getUser(long userId) {
 

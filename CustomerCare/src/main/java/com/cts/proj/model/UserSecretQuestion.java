@@ -102,9 +102,11 @@ public class UserSecretQuestion {
 
 	@Override
 	public String toString() {
-		return "UserSecretQuestion [userSqId=" + userSqId + ", answer=" + answer + ", secretQuestions="
-				+ secretQuestions + "]";
+		return "UserSecretQuestion [userSqId=" + userSqId + ", user=" + user.getUserId() + ", secretQuestions=" + secretQuestions
+				+ ", answer=" + answer + "]";
 	}
+
+
 
 
 }

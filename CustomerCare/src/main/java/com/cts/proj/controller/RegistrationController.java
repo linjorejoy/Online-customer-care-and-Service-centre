@@ -27,6 +27,7 @@ import com.cts.proj.model.UserSecretQuestion;
 import com.cts.proj.security.SecureWithSHA256;
 import com.cts.proj.service.AdminService;
 import com.cts.proj.service.AnalystService;
+import com.cts.proj.service.SecretQuestionService;
 import com.cts.proj.service.UserSecretQuestionService;
 import com.cts.proj.service.UserService;
 import com.cts.proj.validate.AnalystValidator;
@@ -47,6 +48,8 @@ public class RegistrationController {
 	UserValidator userValidator;
 	@Autowired
 	UserSecretQuestionService userSecretQuestionService;
+	@Autowired
+	SecretQuestionService secretQuestionService;
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -62,9 +65,9 @@ public class RegistrationController {
 	@RequestMapping(value = "/register-analyst", method = RequestMethod.POST)
 	public String registerAnalyst(@Validated @ModelAttribute("analyst") Analyst analyst, BindingResult result,
 			ModelMap model) {
-		
+
 		analystValidator.validate(analyst, result);
-		
+
 		if (result.hasErrors()) {
 			model.put("user", new User());
 			model.put("admin", new Admin());
@@ -92,10 +95,10 @@ public class RegistrationController {
 
 	@RequestMapping(value = "/register-user", method = RequestMethod.POST)
 	public String registerUser(@Validated @ModelAttribute User user, BindingResult result, ModelMap model) {
-		
+
 		System.out.println("Hello");
-		System.out.println(user);
-		
+//		System.out.println(user);
+
 		userValidator.validate(user, result);
 		if (result.hasErrors()) {
 			System.out.println(result);
@@ -112,14 +115,34 @@ public class RegistrationController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		long uSqIdStarting = userSecretQuestionService.getLastId();
 		
-		for(UserSecretQuestion question : user.getSecretQuestionList()) {
-			question.setUserSqId(uSqIdStarting);
-			uSqIdStarting += 1;
-		}
-		System.out.println("User After " + user);
+		long lastUserId = userService.getLastId();
+		user.setUserId(lastUserId + 1);
+		
+		long lastSqId = userSecretQuestionService.getLastId();
+
+		UserSecretQuestion qsn1 = new UserSecretQuestion(++lastSqId, user.getSecretQuestionList().get(0).getAnswer(),
+				secretQuestionService.getQuestionById(9001));
+		qsn1.setUser(user);
+		UserSecretQuestion qsn2 = new UserSecretQuestion(++lastSqId, user.getSecretQuestionList().get(1).getAnswer(),
+				secretQuestionService.getQuestionById(9002));
+		qsn2.setUser(user);
+		UserSecretQuestion qsn3 = new UserSecretQuestion(++lastSqId, user.getSecretQuestionList().get(2).getAnswer(),
+				secretQuestionService.getQuestionById(9003));
+		qsn3.setUser(user);
+		
+		List<UserSecretQuestion> questionList = new ArrayList<>();
+		questionList.add(qsn1);
+		questionList.add(qsn2);
+		questionList.add(qsn3);
+		
+		user.setSecretQuestionList(questionList);
+		System.out.println("\n\nBefore Adding : " + user);
 		userService.addUser(user);
+
+
+		System.out.println("\n\n" + qsn1);
+
 		model.put("isRegisrered", true);
 		model.put("userId", user.getUserId());
 		return "user-reg-status";
@@ -135,7 +158,7 @@ public class RegistrationController {
 	}
 
 	@ModelAttribute("supportLevel")
-	public Map<String, String> getCategories(){
+	public Map<String, String> getCategories() {
 		Map<String, String> categories = new HashMap<>();
 		categories.put("L1", "Level 1");
 		categories.put("L2", "Level 2");

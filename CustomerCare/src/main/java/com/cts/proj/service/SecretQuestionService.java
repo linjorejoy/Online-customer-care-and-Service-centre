@@ -17,6 +17,11 @@ public class SecretQuestionService {
 	@Autowired
 	SecretQuestionRepository secretQuestionRepository;
 	
+	public SecretQuestions getQuestionById(long questionId) {
+		
+		return secretQuestionRepository.getOne(questionId);
+	}
+	
 	public List<SecretQuestions> getAllQuestions(){
 		
 		return secretQuestionRepository.findAll();
