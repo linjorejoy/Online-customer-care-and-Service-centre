@@ -19,11 +19,11 @@ public class SecretQuestions {
 	@Column(name = "question_description")
     private String description;
 	
-	@OneToOne(mappedBy = "secret_questions")
-	private User user;
+	@OneToOne(mappedBy = "secretQuestions")
+	private UserSecretQuestion userSecretQuestion;
 
-	@OneToOne(mappedBy = "secret_questions")
-	private Analyst analyst;
+	@OneToOne(mappedBy = "secretQuestions")
+	private AnalystSecretQuestion analystSecretQuestion;
 	
     public SecretQuestions() {
         super();
@@ -51,7 +51,23 @@ public class SecretQuestions {
         this.description = description;
     }
 
-    @Override
+    public UserSecretQuestion getUserSecretQuestion() {
+		return userSecretQuestion;
+	}
+
+	public void setUserSecretQuestion(UserSecretQuestion userSecretQuestion) {
+		this.userSecretQuestion = userSecretQuestion;
+	}
+
+	public AnalystSecretQuestion getAnalystSecretQuestion() {
+		return analystSecretQuestion;
+	}
+
+	public void setAnalystSecretQuestion(AnalystSecretQuestion analystSecretQuestion) {
+		this.analystSecretQuestion = analystSecretQuestion;
+	}
+
+	@Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
@@ -75,5 +91,12 @@ public class SecretQuestions {
             return false;
         return true;
     }
+
+	@Override
+	public String toString() {
+		return "SecretQuestions [questionId=" + questionId + ", description=" + description + "]";
+	}
+    
+    
 
 }
