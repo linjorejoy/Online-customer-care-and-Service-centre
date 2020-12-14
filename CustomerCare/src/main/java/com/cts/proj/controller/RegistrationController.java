@@ -23,9 +23,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.cts.proj.model.Admin;
 import com.cts.proj.model.Analyst;
 import com.cts.proj.model.User;
+import com.cts.proj.model.UserSecretQuestion;
 import com.cts.proj.security.SecureWithSHA256;
 import com.cts.proj.service.AdminService;
 import com.cts.proj.service.AnalystService;
+import com.cts.proj.service.UserSecretQuestionService;
 import com.cts.proj.service.UserService;
 import com.cts.proj.validate.AnalystValidator;
 import com.cts.proj.validate.UserValidator;
@@ -43,6 +45,8 @@ public class RegistrationController {
 	AnalystValidator analystValidator;
 	@Autowired
 	UserValidator userValidator;
+	@Autowired
+	UserSecretQuestionService userSecretQuestionService;
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -108,6 +112,13 @@ public class RegistrationController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		long uSqIdStarting = userSecretQuestionService.getLastId();
+		
+		for(UserSecretQuestion question : user.getSecretQuestionList()) {
+			question.setUserSqId(uSqIdStarting);
+			uSqIdStarting += 1;
+		}
+		System.out.println("User After " + user);
 		userService.addUser(user);
 		model.put("isRegisrered", true);
 		model.put("userId", user.getUserId());

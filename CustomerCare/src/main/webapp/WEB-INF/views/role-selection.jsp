@@ -139,7 +139,17 @@
 
 
 							</div>
-							<div class="col">${secretQuestions}</div>
+							<div class="col align-items-center justify-contents-center">
+								<%-- <form:select path="secretQuestionList" items="${secretQuestions}"></form:select> --%>
+								<h5 class="text-muted">Some Security Questions for Password Recovery</h5>
+								<c:forEach var="question" items="${secretQuestions}" varStatus="i">
+									<div class="container w-75">
+									${question}
+									<form:hidden path="secretQuestionList[${i.index}].secretQuestions.questionId" value = "${i.index + 9001}"/>
+									<form:input class="form-control mb-5" path="secretQuestionList[${i.index}].answer"/>
+									</div>
+								</c:forEach>
+							</div>
 						</div>
 					</form:form>
 
@@ -162,105 +172,112 @@
 
 						<div class="form-row mb-2">
 							<div class="col">
-								<!-- First name -->
-								<form:input class="form-control" placeholder="First name"
-									path="firstName" />
-								<small id="defaultRegisterFormPhoneHelpBlock"
-									class="form-text text-warning mb-1"><form:errors
-										path="firstName"></form:errors></small>
-							</div>
-							<div class="col">
-								<!-- Last name -->
-								<form:input class="form-control" placeholder="Last name"
-									path="lastName" />
-								<small id="defaultRegisterFormPhoneHelpBlock"
-									class="form-text text-warning mb-1"><form:errors
-										path="lastName"></form:errors></small>
-							</div>
-						</div>
-						<div class="form-row mb-1">
-							<div class="col">
-								<small id="defaultRegisterFormPhoneHelpBlock"
-									class="form-text text-muted mb-0"> Phone Number </small>
-								<form:input path="phoneNumber" class="form-control"
-									placeholder="Phone number"
-									aria-describedby="defaultRegisterFormPhoneHelpBlock" />
-								<small id="defaultRegisterFormPhoneHelpBlock"
-									class="form-text text-muted mb-0"> <form:errors
-										class="form-text text-warning mb-0" path="phoneNumber"></form:errors></small>
-							</div>
-							<div class="col">
-								<small id="defaultRegisterFormPhoneHelpBlock"
-									class="form-text text-muted mb-0"> Email </small>
-								<form:input class="form-control mb-2" placeholder="E-mail"
-									path="emailId" />
-								<small id="defaultRegisterFormPhoneHelpBlock"
-									class="form-text text-warning mb-0"><form:errors
-										path="emailId"></form:errors></small>
-							</div>
-						</div>
+								<div class="form-row mb-2">
+									<div class="col">
+										<!-- First name -->
+										<form:input class="form-control" placeholder="First name"
+											path="firstName" />
+										<small id="defaultRegisterFormPhoneHelpBlock"
+											class="form-text text-warning mb-1"><form:errors
+												path="firstName"></form:errors></small>
+									</div>
+									<div class="col">
+										<!-- Last name -->
+										<form:input class="form-control" placeholder="Last name"
+											path="lastName" />
+										<small id="defaultRegisterFormPhoneHelpBlock"
+											class="form-text text-warning mb-1"><form:errors
+												path="lastName"></form:errors></small>
+									</div>
+								</div>
+								<div class="form-row mb-1">
+									<div class="col">
+										<small id="defaultRegisterFormPhoneHelpBlock"
+											class="form-text text-muted mb-0"> Phone Number </small>
+										<form:input path="phoneNumber" class="form-control"
+											placeholder="Phone number"
+											aria-describedby="defaultRegisterFormPhoneHelpBlock" />
+										<small id="defaultRegisterFormPhoneHelpBlock"
+											class="form-text text-muted mb-0"> <form:errors
+												class="form-text text-warning mb-0" path="phoneNumber"></form:errors></small>
+									</div>
+									<div class="col">
+										<small id="defaultRegisterFormPhoneHelpBlock"
+											class="form-text text-muted mb-0"> Email </small>
+										<form:input class="form-control mb-2" placeholder="E-mail"
+											path="emailId" />
+										<small id="defaultRegisterFormPhoneHelpBlock"
+											class="form-text text-warning mb-0"><form:errors
+												path="emailId"></form:errors></small>
+									</div>
+								</div>
 
-						<div class="form-row mb-1">
-							<div class="col">
-								<small id="defaultRegisterFormPhoneHelpBlock"
-									class="form-text text-muted mb-1"> Date Of Birth </small>
-								<form:input path="dateOfBirth" class="form-control mb-2"
-									placeholder="Date Of Birth" />
-								<small id="defaultRegisterFormPhoneHelpBlock"
-									class="form-text text-warning mb-1"><form:errors
-										path="dateOfBirth"></form:errors></small>
+								<div class="form-row mb-1">
+									<div class="col">
+										<small id="defaultRegisterFormPhoneHelpBlock"
+											class="form-text text-muted mb-1"> Date Of Birth </small>
+										<form:input path="dateOfBirth" class="form-control mb-2"
+											placeholder="Date Of Birth" />
+										<small id="defaultRegisterFormPhoneHelpBlock"
+											class="form-text text-warning mb-1"><form:errors
+												path="dateOfBirth"></form:errors></small>
 
-							</div>
-							<div class="col">
-								<small id="defaultRegisterFormPhoneHelpBlock"
-									class="form-text text-muted mb-1"> Gender </small>
-								<form:select class="form-control mb-2" path="gender"
-									items="${genderList}"></form:select>
-								<small id="defaultRegisterFormPhoneHelpBlock"
-									class="form-text text-warning mb-1"><form:errors
-										path="gender"></form:errors></small>
-							</div>
-						</div>
+									</div>
+									<div class="col">
+										<small id="defaultRegisterFormPhoneHelpBlock"
+											class="form-text text-muted mb-1"> Gender </small>
+										<form:select class="form-control mb-2" path="gender"
+											items="${genderList}"></form:select>
+										<small id="defaultRegisterFormPhoneHelpBlock"
+											class="form-text text-warning mb-1"><form:errors
+												path="gender"></form:errors></small>
+									</div>
+								</div>
 
-						<div class="form-row mb-2">
-							<small id="defaultRegisterFormPhoneHelpBlock"
-								class="form-text text-muted mb-1"> Support Level </small>
-							<form:select class="form-control mb-2" path="supportLevel"
-								items="${supportLevel}"></form:select>
-							<small id="defaultRegisterFormPhoneHelpBlock"
-								class="form-text text-warning mb-1"><form:errors
-									path="supportLevel"></form:errors></small>
-						</div>
-						<%-- <div class="form-div-inputs">
+								<div class="form-row mb-2">
+									<small id="defaultRegisterFormPhoneHelpBlock"
+										class="form-text text-muted mb-1"> Support Level </small>
+									<form:select class="form-control mb-2" path="supportLevel"
+										items="${supportLevel}"></form:select>
+									<small id="defaultRegisterFormPhoneHelpBlock"
+										class="form-text text-warning mb-1"><form:errors
+											path="supportLevel"></form:errors></small>
+								</div>
+								<%-- <div class="form-div-inputs">
 							<form:label path="supportLevel">Support Level</form:label>
 							<form:select path="supportLevel" id="supportLevel"
 								items="${supportLevel}" />
 							<form:errors path="supportLevel"></form:errors>
 						</div> --%>
-						<div class="form-row mb-2">
-							<div class="col">
-								<form:input class="form-control mb-1" placeholder="Password"
-									type="password" path="password" />
-								<small id="defaultRegisterFormPhoneHelpBlock"
-									class="form-text text-warning mb-1"><form:errors
-										path="password"></form:errors></small>
+								<div class="form-row mb-2">
+									<div class="col">
+										<form:input class="form-control mb-1" placeholder="Password"
+											type="password" path="password" />
+										<small id="defaultRegisterFormPhoneHelpBlock"
+											class="form-text text-warning mb-1"><form:errors
+												path="password"></form:errors></small>
 
+									</div>
+									<div class="col">
+										<form:input class="form-control mb-1"
+											placeholder="Confirm Password" type="password"
+											path="tempPassword" />
+										<small id="defaultRegisterFormPhoneHelpBlock"
+											class="form-text text-warning mb-1"><form:errors
+												path="tempPassword"></form:errors></small>
+									</div>
+								</div>
+								<div class="form-buttons-div">
+									<input type="submit"
+										class="btn btn-info my-4 btn-block bg-primary text-light"
+										name="Submit" value="Register" />OR <a
+										class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect bg-success text-light"
+										href="/analyst-login">Login</a>
+								</div>
 							</div>
 							<div class="col">
-								<form:input class="form-control mb-1"
-									placeholder="Confirm Password" type="password"
-									path="tempPassword" />
-								<small id="defaultRegisterFormPhoneHelpBlock"
-									class="form-text text-warning mb-1"><form:errors
-										path="tempPassword"></form:errors></small>
+								${secretQuestions}
 							</div>
-						</div>
-						<div class="form-buttons-div">
-							<input type="submit"
-								class="btn btn-info my-4 btn-block bg-primary text-light"
-								name="Submit" value="Register" />OR <a
-								class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect bg-success text-light"
-								href="/analyst-login">Login</a>
 						</div>
 					</form:form>
 				</div>
@@ -275,42 +292,43 @@
 				<div
 					class='tab-pane fade <c:if test="${isAdmin}">show active</c:if>'
 					id="pills-admin" role="tabpanel" aria-labelledby="pills-admin-tab">
-					<form:form action="/admin-login" modelAttribute="admin"
-						method="POST" cssClass="form">
-						<div class="form-row mb-2">
-							<small id="defaultRegisterFormPhoneHelpBlock"
-								class="form-text text-muted mb-1"> Admin Id </small>
-							<form:input class="form-control mb-4" placeholder="Admin Id"
-								path="adminId" id="adminId" />
-							<small id="defaultRegisterFormPhoneHelpBlock"
-								class="form-text text-warning mb-1"><form:errors
-									path="adminId"></form:errors></small>
-						</div>
-						<div class="form-row mb-2">
-							<form:input class="form-control mb-2" placeholder="Password"
-								path="tempPassword" type="password" id="password" />
-							<br> <small id="defaultRegisterFormPhoneHelpBlock"
-								class="form-text text-warning mb-1"><form:errors
-									cssClass="text-warning" path="tempPassword"></form:errors></small>
-						</div>
-						<div class="d-flex justify-content-around form-row mb-2">
-							<div>
-								<!-- Forgot password -->
-								<a href="">Forgot User Id?</a>
+					<div class="container w-50">
+						<form:form action="/admin-login" modelAttribute="admin"
+							method="POST" cssClass="form">
+							<div class="form-row mb-2">
+								<small id="defaultRegisterFormPhoneHelpBlock"
+									class="form-text text-muted mb-1"> Admin Id </small>
+								<form:input class="form-control mb-4" placeholder="Admin Id"
+									path="adminId" id="adminId" />
+								<small id="defaultRegisterFormPhoneHelpBlock"
+									class="form-text text-warning mb-1"><form:errors
+										path="adminId"></form:errors></small>
 							</div>
-							<div>
-								<!-- Forgot password -->
-								<a href="">Forgot password?</a>
+							<div class="form-row mb-2">
+								<form:input class="form-control mb-2" placeholder="Password"
+									path="tempPassword" type="password" id="password" />
+								<br> <small id="defaultRegisterFormPhoneHelpBlock"
+									class="form-text text-warning mb-1"><form:errors
+										cssClass="text-warning" path="tempPassword"></form:errors></small>
 							</div>
-						</div>
+							<div class="d-flex justify-content-around form-row mb-2">
+								<div>
+									<!-- Forgot password -->
+									<a href="">Forgot User Id?</a>
+								</div>
+								<div>
+									<!-- Forgot password -->
+									<a href="">Forgot password?</a>
+								</div>
+							</div>
 
-						<div class="form-buttons-div">
-							<input type="submit"
-								class="btn btn-info my-4 btn-block bg-success text-light"
-								name="Submit" value="Login" />
-						</div>
-					</form:form>
-
+							<div class="form-buttons-div">
+								<input type="submit"
+									class="btn btn-info my-4 btn-block bg-success text-light"
+									name="Submit" value="Login" />
+							</div>
+						</form:form>
+					</div>
 				</div>
 			</div>
 		</div>

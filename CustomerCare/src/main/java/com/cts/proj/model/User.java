@@ -213,8 +213,12 @@ public class User implements Comparable<User> {
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber="
-				+ phoneNumber + ", emailId=" + emailId + ", dateOfBirth=" + dateOfBirth + ", gender=" + gender + "]";
+		return "User [userId=" + userId + ", password=" + password + ", tempPassword=" + tempPassword + ", firstName="
+				+ firstName + ", lastName=" + lastName + ", phoneNumber=" + phoneNumber + ", emailId=" + emailId
+				+ ", dateOfBirth=" + dateOfBirth + ", gender=" + gender + ", secretQuestionList=" + secretQuestionList
+				+ "]";
 	}
+
+
 
 }

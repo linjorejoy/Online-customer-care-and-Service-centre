@@ -22,6 +22,10 @@ public class UserSecretQuestion {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "u_sq_id")
 	private long userSqId;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
+	private User user;
 
 	@Column(name = "answer")
 	private String answer;
@@ -66,6 +70,14 @@ public class UserSecretQuestion {
 		this.secretQuestions = secretQuestions;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -91,7 +103,7 @@ public class UserSecretQuestion {
 	@Override
 	public String toString() {
 		return "UserSecretQuestion [userSqId=" + userSqId + ", answer=" + answer + ", secretQuestions="
-				+ secretQuestions.getDescription() + "]";
+				+ secretQuestions + "]";
 	}
 
 
