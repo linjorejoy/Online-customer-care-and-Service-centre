@@ -89,7 +89,8 @@ public class UserService {
 		String sq1 = list.get(0).getAnswer();
 		String sq2 = list.get(1).getAnswer();
 		String sq3 = list.get(2).getAnswer();
-		if (sq1.equals(ans1) && sq2.equals(ans2) && sq3.equals(ans3)) {
+		if (sq1.trim().equalsIgnoreCase(ans1.trim()) && sq2.trim().equalsIgnoreCase(ans2.trim())
+				&& sq3.trim().equalsIgnoreCase(ans3.trim())) {
 			return true;
 		}
 		return false;
