@@ -3,11 +3,11 @@
 <form:form action="/reset-password-user/${userId}"  method="get">
 
 	<div>
-		<label>sq1</label> <input id="ans1" type="text" name="ans1"
+		<label>What is your Childhood pets Name?</label> <input id="ans1" type="text" name="ans1"
 			placeholder="Type Your Answer" value="${ans1}"><br>	
-		<label>sq2</label> <input id="ans2" type="text" name="ans2"
+		<label>What is your mothers maiden name?</label> <input id="ans2" type="text" name="ans2"
 			placeholder="Type Your Answer" value="${ans2}"><br>	
-		<label>sq3</label> <input id="ans3" type="text" name="ans3"
+		<label>What is the name of the city you grew up on?</label> <input id="ans3" type="text" name="ans3"
 			placeholder="Type Your Answer" value="${ans3}"><br>	
 				
 	</div>
