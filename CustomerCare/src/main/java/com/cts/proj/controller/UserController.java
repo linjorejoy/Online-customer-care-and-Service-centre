@@ -242,9 +242,6 @@ public class UserController {
 		}
 
 	}
-<<<<<<< HEAD
-
-=======
 	@RequestMapping(value="/forgot-userID-mail",method=RequestMethod.GET)
 	public String showForgotUserId() {
 		return "forgot-user-id";
@@ -280,6 +277,4 @@ public class UserController {
 		}
 	}
 	
-	
->>>>>>> 14b8f9c9bd6209bd20be6e2ee165ae9056fb05e3
 }
