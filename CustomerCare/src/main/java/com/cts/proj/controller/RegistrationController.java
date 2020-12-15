@@ -107,6 +107,8 @@ public class RegistrationController {
 			model.put("userActive", true);
 			model.put("analystActive", false);
 			model.put("adminActive", false);
+			List<String> questions = secretQuestionService.getAllQuestionDescription();
+			model.put("secretQuestions", questions);
 			return "role-selection";
 		}
 		try {
