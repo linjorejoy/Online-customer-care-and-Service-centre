@@ -1,30 +1,91 @@
 <%@ include file="common/header-user.jspf"%>
 <div class="container">
 	<%@ include file="common/nav-bar-user.jspf"%>
-	<div class="center-div-complaint-user">
-		<div class="complaints-heading-user">
-			<h1>Complaint Notifications</h1>
-		</div>
-		<div class="div-sorting-complaints-user">
-			Sort By:
-			<div class="div-drop-down"></div>
-		</div>
+<div
+		class="container text-center d-flex align-items-center justify-content-center">
+		<!-- <div class="complaint-view-heading">Complaint</div> -->
 
-		<div class="div-complaints-notification-user">
-			<c:forEach var="complaint" items="${complaintListUser}">
-
-				<div class="div-complaint-notification">
-					${complaint.complaintId}
-					<div class="complaint-description-user">
-						${complaint.description}
-						<div class="complaint-view-user">
-							<input type="submit" id="Submit" value="View" onsubmit="/" />
-						</div>
-					</div>
-
+		<div class="complaint-view-form"></div>
+		<form:form class="text-center border border-light p-5"
+			action="/update-complaint-user" modelAttribute="complaint"
+			method="POST">
+			<h1>Complaint View</h1>
+			<div class="form-row mb-2">
+				<div class="col">
+					<form:label class="form-control" path="complaintId">Complaint Id :</form:label>
 				</div>
-			</c:forEach>
-		</div>
+				<div class="col">
+					<form:input class="form-control" path="complaintId"
+						value="${complaint.complaintId}" />
+				</div>
+			</div>
+			<div class="form-row mb-2">
+				<div class="col">
+					<form:label class="form-control" path="user.userId">User Id :</form:label>
+				</div>
+				<div class="col">
+					<form:input class="form-control" path="user.userId"
+						value="${complaint.user.userId}" />
+				</div>
+			</div>
+			<div class="form-row mb-2">
+				<div class="col">
+					<form:label class="form-control" path="phoneNumber">Phone Number :</form:label>
+				</div>
+				<div class="col">
+					<form:input class="form-control" path="phoneNumber"
+						value="${complaint.phoneNumber}" />
+				</div>
+			</div>
+			<div class="form-row mb-2">
+				<div class="col">
+					<form:label class="form-control" path="user.emailId">Email Id :</form:label>
+				</div>
+				<div class="col">
+					<form:input class="form-control" path="user.emailId"
+						value="${complaint.user.emailId}" />
+				</div>
+			</div>
+			<div class="form-row mb-2">
+				<div class="col">
+					<form:label class="form-control" path="category">Category :</form:label>
+				</div>
+				<div class="col">
+					<form:input class="form-control" path="user.emailId"
+						value="${complaint.category}" />
+				</div>
+			</div>
+			<div class="form-row mb-2">
+				<div class="col">
+					<form:label class="form-control" path="status">Status</form:label>
+				</div>
+				<div class="col">
+					<form:select class="form-control" path="status" items="${status}"></form:select>
+				</div>
+			</div>
+			<div class="form-row mb-2">
+				<div class="col">
+					<form:label class="form-control" path="analyst.analystId">Assigned Analyst</form:label>
+				</div>
+				<div class="col">
+				<form:input class="form-control" path="user.emailId"
+						value="${complaint.analyst.supportLevel}" />
+					
+				</div>
+			</div>
+			<div class="form-group shadow-textarea">
+				<label for="exampleFormControlTextarea6">Description</label>
+				<form:textarea path="description" class="form-control z-depth-1 p-4"
+					id="exampleFormControlTextarea6" rows="4" cols="100"
+					value="${complaint.description}"></form:textarea>
+				<form:errors path="description"></form:errors>
+			</div>
+			<div class="complaint-view-inputs-assign">
+				<input class="btn btn-success" type="submit" value="Submit">
+				 
+			</div>
+
+		</form:form>
 	</div>
 	<%@ include file="common/footer-user.jspf"%>
 </div>

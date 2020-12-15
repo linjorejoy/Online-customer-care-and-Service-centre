@@ -33,7 +33,7 @@
 				<div class="d-flex justify-content-around p-4">
 					<div>
 						<!-- Forgot password -->
-						<a href="#" class="mb-4 p-2">Forgot user id?</a>
+						<a href="/forgot-userID-mail" class="mb-4 p-2">Forgot user id?</a>
 					</div>
 					<div>
 						<!-- Forgot password -->

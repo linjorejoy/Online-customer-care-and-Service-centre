@@ -12,12 +12,15 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 
 import com.cts.proj.model.Analyst;
+import com.cts.proj.model.AnalystSecretQuestion;
 import com.cts.proj.model.Complaint;
 import com.cts.proj.model.EmailAnalyst;
 import com.cts.proj.model.User;
@@ -178,6 +181,38 @@ public class AnalystController {
 		return "complaint-notification-analyst";
 	}
 
+	@RequestMapping(value = "/forgot-id" , method = RequestMethod.GET)
+	public String forgotAnalystId( ModelMap model) {
+		return "forgot-analyst-Id";
+	}
+	
+	@RequestMapping(value = "/forgot-analyst-id-secret-question" , method = RequestMethod.GET)
+	public  String forgotAnalystIdSecretQuestion( ModelMap model ,String mail) {
+		Analyst analyst = analystService.getAnalystFromMail(mail);
+		if(analyst!= null ) {
+			model.addAttribute("analyst" ,analyst);
+			model.put("analystId",analyst.getAnalystId() );
+		     return "forgot-analyst-id-sq-question";
+		}
+		else {
+			return "forgot-analyst-Id";
+			
+		}
+	}
+	
+	@RequestMapping(value = "/submit-secret-question/{analystId}" , method = RequestMethod.GET)
+	public String secretQuestions(ModelMap model , @PathVariable long analystId , String ans1 , String ans2 , String ans3) {
+		Analyst analyst = analystService.getAnalyst(analystId);
+		List<AnalystSecretQuestion> list = analyst.getSecretQuestionList();
+		if(analystService.checkSecurityQuestions(list, ans1, ans2, ans3)) {
+			model.put("analystId", analyst.getAnalystId());
+			return "display-analyst-id";
+		}
+		else
+		    return "forgot-analyst-id-sq-question";
+		
+	}
+	
 	@ModelAttribute(name = "category")
 	public Map<String, String> getCategory() {
 		Map<String, String> category = new HashMap<>();

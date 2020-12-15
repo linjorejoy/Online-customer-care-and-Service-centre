@@ -8,12 +8,11 @@
 		</div>
 
 		<div class="form-div-sq-question">
-			<form:form modelAttribute="analyst" method="GET" action="/">
+			<form:form modelAttribute="analyst" method="GET" action="/submit-secret-question/${analystId}">
 				<div class="div-security-questions">
-					<c:forEach var="secretQuestion" items="${analyst.analystSecretQuestions}">
-						<form:label path="secretQuestion.secretQuestions.description">${secretQuestion.secretQuestions.description}</form:label>
-						<form:input path="secretQuestion.answer" />
-					</c:forEach>
+					<label>What is your Childhood pets Name?</label><input id="ans1" name="ans1" value="${ans1}"><br>
+					<label>What is your mothers maiden name?</label><input id="ans2" name="ans2" value="${ans2}"><br>
+					<label>What is the name of the city you grew up on?</label><input id="ans3" name="ans3" value="${ans3}">
 				</div>
 				<div class="div-security-question-submit">
 					<input type="submit" value="Submit">

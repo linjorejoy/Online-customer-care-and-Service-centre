@@ -155,7 +155,7 @@
 							<p class="card-text">${complaint.description}</p>
 							<div class="span2 text-right">
 								<a
-									href="/show-user-complaint-admin?complaintId=${complaint.complaintId}"
+									href="/show-user-complaint-user?complaintId=${complaint.complaintId}"
 									class="btn btn-primary">View</a>
 								<!-- <a href="#"
 									class="btn btn-primary">Go somewhere</a> -->

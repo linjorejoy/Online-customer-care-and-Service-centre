@@ -220,6 +220,72 @@ public class AdminController {
 		}
 		return "complaint-notification-admin";
 	}
+	
+	
+	
+	
+	@RequestMapping(value = "/show-user-complaint-user", method = RequestMethod.GET)
+	public String showUserComplaints(@RequestParam long complaintId, ModelMap model) {
+		Complaint complaint = complaintService.getComplaint(complaintId);
+		List<Analyst> analystList = analystService.getAllAnalyst();
+		Map<String, String> supportLevelWithId = new HashMap<String, String>();
+		model.put("complaint", complaint);
+		return "complaint-view-user";
+
+	}
+	
+	@RequestMapping(value = "/update-complaint-user", method = RequestMethod.POST)
+	public String updateComplaintUser(@Validated @ModelAttribute("complaint") Complaint complaint,
+			BindingResult result, ModelMap model) {
+		if (result.hasErrors()) {
+			return "complaint-admin-view";
+		}
+		Complaint originalComplaint = complaintService.getComplaint(complaint.getComplaintId());
+		//System.out.println(originalComplaint);
+		//originalComplaint.setCategory(complaint.getCategory());
+		originalComplaint.setStatus(complaint.getStatus());
+		long analystId = originalComplaint.getAnalyst().getAnalystId();
+
+		originalComplaint.setAnalyst(analystService.getAnalyst(analystId));
+		long emailId = emailAnalystService.getLastId() + 1;
+
+		complaintService.addComplaint(originalComplaint);
+
+		EmailAnalyst emailToAnalyst = new EmailAnalyst();
+		emailToAnalyst.setEmailId(emailId);
+		emailToAnalyst.setAnalyst(analystService.getAnalyst(analystId));
+		emailToAnalyst.setAdmin(adminService.getAdmin(1001));
+		emailToAnalyst.setSentDate(new Date());
+		emailToAnalyst.setReceived(false);
+		//System.out.println(emailToAnalyst.getAdmin());
+
+		String[] messageTemplate = mailMessage();
+		String mailMessage = messageTemplate[0] + emailToAnalyst.getAnalyst().getFirstName() + "\n\n";
+		mailMessage += messageTemplate[1] + originalComplaint.getUser().getFirstName() + messageTemplate[2] + "\n";
+		mailMessage += messageTemplate[3] + "\n";
+		mailMessage += messageTemplate[4] + "\n" + emailToAnalyst.getAdmin().getFirstName();
+
+		emailToAnalyst.setDescription(mailMessage);
+
+		emailAnalystService.addEmail(emailToAnalyst);
+
+//		System.out.println(emailToAnalyst);
+		model.put("complaint", originalComplaint);
+		model.put("emailAnalyst", emailToAnalyst);
+//		model.put("message", mailMessage);
+		return "user-to-analyst-mail";
+
+	}
+	
+	@RequestMapping(value = "/user-sent-email-to-analyst", method = RequestMethod.POST)
+	public String sentEmailUser(@ModelAttribute("emailAnalyst") EmailAnalyst emailAnalyst, BindingResult results,
+			ModelMap model) {
+		EmailAnalyst originalEmail = emailAnalystService.getEmailAnalyst(emailAnalyst.getEmailId());
+		originalEmail.setDescription(emailAnalyst.getDescription());
+		emailAnalystService.addEmail(originalEmail);
+		return "user-home";
+	}
+	
 
 	@ModelAttribute(name = "category")
 	public Map<String, String> getCategory() {
