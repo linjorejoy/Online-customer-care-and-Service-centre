@@ -210,6 +210,40 @@ public class UserController {
 		return "password-recovery-user";
 		
 	}
+	@RequestMapping(value="/forgot-userID-mail",method=RequestMethod.GET)
+	public String showForgotUserId() {
+		return "forgot-user-id";
+		
+	}
+	@RequestMapping(value="/forgot-userID-secretquestions",method=RequestMethod.GET)
+	public String showSecretQuestions(ModelMap model,String email) {
+		User user=userService.findUserId(email);
+		//System.out.println("hi");
+		if(user==null) {
+			//System.out.println(user);
+			return "forgot-user-id";
+			
+		}
+		else {
+			model.addAttribute("user", user);
+			model.put("userId", user.getUserId());
+			return "forgot-user-id-sq-question";
+		}
+		
+		
+	}
+	@RequestMapping(value="/show-user-id/{userId}", method=RequestMethod.GET)
+	public String showUserId(ModelMap model,@PathVariable long userId,String ans1,String ans2,String ans3) {
+		User user=userService.getUser(userId);
+		List<UserSecretQuestion> secretQuestionList = user.getSecretQuestionList();
+		if(userService.validateAnswer(secretQuestionList, ans1, ans2, ans3)) {
+			model.put("userId", user.getUserId());
+			return "show-user-id";
+		}
+		else {
+			return "forgot-user-id-sq-question";
+		}
+	}
 	
 	
 }
