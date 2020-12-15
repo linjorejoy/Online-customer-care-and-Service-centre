@@ -31,12 +31,7 @@ public class RoleSelectionController {
 		model.put("userActive", true);
 		model.put("analystActive", false);
 		model.put("adminActive", false);
-		List<String> questions = new ArrayList<>();
-		questions.add("What is");
-		questions.add("Who is");
-		questions.add("When is");
-		
-//		List<String> questions = secretQuestionService.getAllQuestionDescription();
+		List<String> questions = secretQuestionService.getAllQuestionDescription();
 		model.put("secretQuestions", questions);
 		return "role-selection";
 	}

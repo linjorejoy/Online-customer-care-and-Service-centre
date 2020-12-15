@@ -1,6 +1,10 @@
 package com.cts.proj.controller;
 
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,7 +23,9 @@ import com.cts.proj.model.Complaint;
 import com.cts.proj.model.Feedback;
 import com.cts.proj.model.User;
 import com.cts.proj.model.UserSecretQuestion;
+import com.cts.proj.security.SecureWithSHA256;
 import com.cts.proj.service.ComplaintService;
+import com.cts.proj.service.SecretQuestionService;
 import com.cts.proj.service.UserService;
 
 @Controller
@@ -30,6 +36,9 @@ public class UserController {
 
 	@Autowired
 	ComplaintService complaintService;
+	
+	@Autowired
+	SecretQuestionService secretQuestionService;
 
 	@RequestMapping(value = "/user-home")
 	public String userGoToHome(@RequestParam("userId") long userId, ModelMap model) {
@@ -181,35 +190,57 @@ public class UserController {
 		model.addAttribute("userId", userId);
 		return "user-home";
 	}
-	
-	@RequestMapping(value="/forgot-password", method=RequestMethod.GET)
-	public String recoverPassword(ModelMap model,String userId,String mob,String email) {
 
-		User user=userService.findUser(userId, mob, email);
-		if(user==null) {
+	@RequestMapping(value = "/forgot-password", method = RequestMethod.GET)
+	public String recoverPassword(ModelMap model, String userId, String mob, String email) {
+
+		User user = userService.findUser(userId, mob, email);
+		if (user == null) {
 			return "forgot-password-user";
+		} else {
+			model.addAttribute("user", user);
+			model.put("userId", user.getUserId());
+
+			return "password-recovery-user";
 		}
-		else {
-		model.addAttribute("user",user);
-		model.put("userId", user.getUserId());
-		
-		return "password-recovery-user";
+	}
+
+	@RequestMapping(value = "/reset-password-user/{userId}", method = RequestMethod.GET)
+	public String verifySecretQuestion(ModelMap model, @PathVariable long userId, String ans1, String ans2,
+			String ans3) {
+
+		User user = userService.getUser(userId);
+		List<UserSecretQuestion> secretQuestionList = user.getSecretQuestionList();
+
+		model.put("userId", userId);
+		if (userService.checkAnswer(secretQuestionList, ans1, ans2, ans3)) {
+			return "set-new-pwd-user";
+		} else
+			return "password-recovery-user";
+
+	}
+
+	@RequestMapping(value = "/change-password", method = RequestMethod.POST)
+	public String changePassword(String newPwd, String confirmPwd, long userId, ModelMap model) {
+		Pattern pattern = Pattern
+				.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$@!%&*?])[A-Za-z\\d#$@!%&*?]{6,}$");
+		Matcher matcher = pattern.matcher(newPwd);
+
+		if (newPwd.equals(confirmPwd) && matcher.matches()) {
+			User user = userService.getUser(userId);
+			try {
+				user.setPassword(SecureWithSHA256.getSHA(newPwd));
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			user.setTempPassword(confirmPwd);
+			userService.addUser(user);
+			return "user-home";
+		}else {
+			return "set-new-pwd-user";
 		}
+
 	}
-	
-	@RequestMapping(value="/reset-password-user/{userId}", method=RequestMethod.GET)
-	public String verifySecretQuestion( ModelMap model,@PathVariable long userId,String ans1,String ans2,String ans3) {
-	
-	User user=userService.getUser(userId);
-	List<UserSecretQuestion> secretQuestionList = user.getSecretQuestionList();
-	
-	if(userService.checkAnswer(secretQuestionList, ans1, ans2, ans3)) {
-		return "set-new-pwd-user";
-	}
-	else	
-		return "password-recovery-user";
-		
-	}
-	
-	
+
 }
