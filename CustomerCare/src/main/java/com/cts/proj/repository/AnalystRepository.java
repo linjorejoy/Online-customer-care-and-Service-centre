@@ -23,4 +23,7 @@ public interface AnalystRepository extends JpaRepository<Analyst, Long> {
 	@Query("select a from Analyst a where support_level < ?1")
 	List<Analyst> getAllAnalystLessThanSupportLevel(String supportLevel);
 	
+	@Query("select a from Analyst a where email_id = ?1")
+	Analyst getAnalystFromMailId(String mailId);
+	
 }

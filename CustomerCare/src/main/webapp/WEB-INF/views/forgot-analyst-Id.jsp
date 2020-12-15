@@ -9,13 +9,13 @@
 	</nav>
 	<div class="center-div-analyst">
 	
-	<form:form action="#" method="get">
+	<form:form action="/forgot-analyst-id-secret-question" method="get" >
 	<div>
 	<label>Enter Your Email ID:</label>
-	<input id="mail"></input><br>
+	<input id="mail" name="mail" value="${mail}"></input><br>
 	</div>
 	<div>
-	<input type="submit" id="submit" value="submit"></input>
+	<input type="submit" id="submit" value="Submit"></input>
 	</div>
 	</form:form>
 	
