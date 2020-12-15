@@ -37,7 +37,7 @@
 					</div>
 					<div>
 						<!-- Forgot password -->
-						<a href="#" class="mb-4 p-2">Forgot password?</a>
+						<a href="/forgot-password" class="mb-4 p-2">Forgot password?</a>
 					</div>
 				</div>
 				<p>

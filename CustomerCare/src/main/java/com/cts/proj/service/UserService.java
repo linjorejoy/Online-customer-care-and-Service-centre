@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cts.proj.model.User;
+import com.cts.proj.model.UserSecretQuestion;
 import com.cts.proj.repository.UserRepository;
 
 @Service
@@ -57,6 +58,22 @@ public class UserService {
 
 	public String getPasswordSHA(long userId) {
 		return userRepository.getOne(userId).getPassword();
+	}
+	public User findUser(String userId,String mob,String email){
+		return userRepository.findUser(userId, mob, email);
+	}
+	public boolean checkAnswer(List<UserSecretQuestion> list,String ans1,String ans2,String ans3){
+		
+		String sq1=list.get(0).getAnswer();
+		String sq2=list.get(1).getAnswer();
+		String sq3=list.get(2).getAnswer();
+//		String sq1="aa";
+//		String sq2="bb";
+//		String sq3="cc";
+		if(sq1.equals(ans1) && sq2.equals(ans2) && sq3.equals(ans3)) {
+			return true;
+		}
+		return false;
 	}
 
 }

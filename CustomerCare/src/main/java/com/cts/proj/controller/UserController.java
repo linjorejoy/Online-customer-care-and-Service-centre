@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.cts.proj.model.Complaint;
 import com.cts.proj.model.Feedback;
 import com.cts.proj.model.User;
+import com.cts.proj.model.UserSecretQuestion;
 import com.cts.proj.service.ComplaintService;
 import com.cts.proj.service.UserService;
 
@@ -180,4 +181,35 @@ public class UserController {
 		model.addAttribute("userId", userId);
 		return "user-home";
 	}
+	
+	@RequestMapping(value="/forgot-password", method=RequestMethod.GET)
+	public String recoverPassword(ModelMap model,String userId,String mob,String email) {
+
+		User user=userService.findUser(userId, mob, email);
+		if(user==null) {
+			return "forgot-password-user";
+		}
+		else {
+		model.addAttribute("user",user);
+		model.put("userId", user.getUserId());
+		
+		return "password-recovery-user";
+		}
+	}
+	
+	@RequestMapping(value="/reset-password-user/{userId}", method=RequestMethod.GET)
+	public String verifySecretQuestion( ModelMap model,@PathVariable long userId,String ans1,String ans2,String ans3) {
+	
+	User user=userService.getUser(userId);
+	List<UserSecretQuestion> secretQuestionList = user.getSecretQuestionList();
+	
+	if(userService.checkAnswer(secretQuestionList, ans1, ans2, ans3)) {
+		return "set-new-pwd-user";
+	}
+	else	
+		return "password-recovery-user";
+		
+	}
+	
+	
 }
