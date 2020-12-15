@@ -290,9 +290,9 @@ values
 
 
 insert into login_details(user_name, password, roles) 
-values ('3001', 'Aa1@qwerty', 'USER')
-,('2001', 'Aa1@qwerty', 'ANALYST')
-,('1001', 'Aa1@qwerty', 'ADMIN');
+values ('3001', 'Aa1@qwerty', 'ROLE_USER')
+,('2001', 'Aa1@qwerty', 'ROLE_ANALYST')
+,('1001', 'Aa1@qwerty', 'ROLE_ADMIN');
 
 
 

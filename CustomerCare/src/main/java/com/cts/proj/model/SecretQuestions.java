@@ -1,10 +1,15 @@
 package com.cts.proj.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -19,11 +24,13 @@ public class SecretQuestions {
 	@Column(name = "question_description")
 	private String description;
 
-	@OneToOne(mappedBy = "secretQuestions")
-	private UserSecretQuestion userSecretQuestion;
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "question_id")
+	private List<UserSecretQuestion> userSecretQuestionList;
 
-	@OneToOne(mappedBy = "secretQuestions")
-	private AnalystSecretQuestion analystSecretQuestion;
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "question_id")
+	private List<AnalystSecretQuestion> analystSecretQuestionList;
 
 	public SecretQuestions() {
 		super();
@@ -51,20 +58,20 @@ public class SecretQuestions {
 		this.description = description;
 	}
 
-	public UserSecretQuestion getUserSecretQuestion() {
-		return userSecretQuestion;
+	public List<UserSecretQuestion> getUserSecretQuestionList() {
+		return userSecretQuestionList;
 	}
 
-	public void setUserSecretQuestion(UserSecretQuestion userSecretQuestion) {
-		this.userSecretQuestion = userSecretQuestion;
+	public void setUserSecretQuestionList(List<UserSecretQuestion> userSecretQuestionList) {
+		this.userSecretQuestionList = userSecretQuestionList;
 	}
 
-	public AnalystSecretQuestion getAnalystSecretQuestion() {
-		return analystSecretQuestion;
+	public List<AnalystSecretQuestion> getAnalystSecretQuestionList() {
+		return analystSecretQuestionList;
 	}
 
-	public void setAnalystSecretQuestion(AnalystSecretQuestion analystSecretQuestion) {
-		this.analystSecretQuestion = analystSecretQuestion;
+	public void setAnalystSecretQuestionList(List<AnalystSecretQuestion> analystSecretQuestionList) {
+		this.analystSecretQuestionList = analystSecretQuestionList;
 	}
 
 	@Override

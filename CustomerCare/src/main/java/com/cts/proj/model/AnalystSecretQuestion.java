@@ -28,8 +28,8 @@ public class AnalystSecretQuestion {
 	@Column(name = "answer")
 	private String answer;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "question_id", referencedColumnName = "question_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "question_id")
 	private SecretQuestions secretQuestions;
 
 	public AnalystSecretQuestion() {
