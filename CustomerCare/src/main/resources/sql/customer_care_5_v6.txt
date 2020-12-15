@@ -300,9 +300,7 @@ insert into secret_questions (question_description)
 values
 ('What is your Childhood pets Name?'),
 ('What is your mothers maiden name?'),
-('What is the name of the city you grew up on?'),
-('Where did you go to high school/college?'),
-('What city were you born in?');
+('What is the name of the city you grew up on?');
 
 
 
