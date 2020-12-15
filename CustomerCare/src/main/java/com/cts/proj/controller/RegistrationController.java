@@ -22,10 +22,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.cts.proj.model.Admin;
 import com.cts.proj.model.Analyst;
+import com.cts.proj.model.AnalystSecretQuestion;
 import com.cts.proj.model.User;
 import com.cts.proj.model.UserSecretQuestion;
 import com.cts.proj.security.SecureWithSHA256;
 import com.cts.proj.service.AdminService;
+import com.cts.proj.service.AnalystSecretQuestionService;
 import com.cts.proj.service.AnalystService;
 import com.cts.proj.service.SecretQuestionService;
 import com.cts.proj.service.UserSecretQuestionService;
@@ -49,6 +51,8 @@ public class RegistrationController {
 	@Autowired
 	UserSecretQuestionService userSecretQuestionService;
 	@Autowired
+	AnalystSecretQuestionService analystSecretQuestionService;
+	@Autowired
 	SecretQuestionService secretQuestionService;
 
 	@InitBinder
@@ -57,10 +61,10 @@ public class RegistrationController {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
 	}
 
-	@RequestMapping(value = "/analyst-registration", method = RequestMethod.GET)
-	public String analystRegistration(@ModelAttribute Analyst analyst) {
-		return "analyst-reg";
-	}
+//	@RequestMapping(value = "/analyst-registration", method = RequestMethod.GET)
+//	public String analystRegistration(@ModelAttribute Analyst analyst) {
+//		return "analyst-reg";
+//	}
 
 	@RequestMapping(value = "/register-analyst", method = RequestMethod.POST)
 	public String registerAnalyst(@Validated @ModelAttribute("analyst") Analyst analyst, BindingResult result,
@@ -74,6 +78,8 @@ public class RegistrationController {
 			model.put("analystActive", true);
 			model.put("userActive", false);
 			model.put("adminActive", false);
+			List<String> questions = secretQuestionService.getAllQuestionDescription();
+			model.put("secretQuestions", questions);
 			return "role-selection";
 		}
 		try {
@@ -82,6 +88,31 @@ public class RegistrationController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		long lastAnalystId = analystService.getLastId();
+		analyst.setAnalystId(lastAnalystId + 1);
+
+		long lastSqId = analystSecretQuestionService.getLastId();
+
+		AnalystSecretQuestion qsn1 = new AnalystSecretQuestion(++lastSqId,
+				analyst.getSecretQuestionList().get(0).getAnswer(), secretQuestionService.getQuestionById(9001));
+		qsn1.setAnalyst(analyst);
+		AnalystSecretQuestion qsn2 = new AnalystSecretQuestion(++lastSqId,
+				analyst.getSecretQuestionList().get(1).getAnswer(), secretQuestionService.getQuestionById(9002));
+		qsn2.setAnalyst(analyst);
+		AnalystSecretQuestion qsn3 = new AnalystSecretQuestion(++lastSqId,
+				analyst.getSecretQuestionList().get(2).getAnswer(), secretQuestionService.getQuestionById(9003));
+		qsn3.setAnalyst(analyst);
+
+		List<AnalystSecretQuestion> questionList = new ArrayList<>();
+		questionList.add(qsn1);
+		questionList.add(qsn2);
+		questionList.add(qsn3);
+
+		analyst.setSecretQuestionList(questionList);
+		
+		
+		
 		analystService.addAnalyst(analyst);
 		model.put("isRegisrered", true);
 		model.put("analystId", analyst.getAnalystId());
@@ -117,10 +148,10 @@ public class RegistrationController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		long lastUserId = userService.getLastId();
 		user.setUserId(lastUserId + 1);
-		
+
 		long lastSqId = userSecretQuestionService.getLastId();
 
 		UserSecretQuestion qsn1 = new UserSecretQuestion(++lastSqId, user.getSecretQuestionList().get(0).getAnswer(),
@@ -132,16 +163,15 @@ public class RegistrationController {
 		UserSecretQuestion qsn3 = new UserSecretQuestion(++lastSqId, user.getSecretQuestionList().get(2).getAnswer(),
 				secretQuestionService.getQuestionById(9003));
 		qsn3.setUser(user);
-		
+
 		List<UserSecretQuestion> questionList = new ArrayList<>();
 		questionList.add(qsn1);
 		questionList.add(qsn2);
 		questionList.add(qsn3);
-		
+
 		user.setSecretQuestionList(questionList);
 		System.out.println("\n\nBefore Adding : " + user);
 		userService.addUser(user);
-
 
 		System.out.println("\n\n" + qsn1);
 

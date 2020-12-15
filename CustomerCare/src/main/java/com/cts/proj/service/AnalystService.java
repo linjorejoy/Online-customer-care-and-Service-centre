@@ -6,12 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cts.proj.model.Analyst;
+import com.cts.proj.model.User;
 import com.cts.proj.repository.AnalystRepository;
 
 @Service
 public class AnalystService {
 	@Autowired
 	AnalystRepository analystRepository;
+	
+	public long getLastId() {
+		long lastId = 3000;
+		
+		for(Analyst analyst : analystRepository.findAll()) {
+			if(analyst.getAnalystId() > lastId) {
+				lastId = analyst.getAnalystId();
+			}
+		}
+		
+		return lastId;
+	}
 
 	public boolean addAnalyst(Analyst analyst) {
 		analystRepository.save(analyst);

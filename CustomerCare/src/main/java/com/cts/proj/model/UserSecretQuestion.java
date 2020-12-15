@@ -22,7 +22,7 @@ public class UserSecretQuestion {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "u_sq_id")
 	private long userSqId;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;
@@ -33,8 +33,7 @@ public class UserSecretQuestion {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "question_id", referencedColumnName = "question_id")
 	private SecretQuestions secretQuestions;
-	
-	
+
 	public UserSecretQuestion() {
 		super();
 	}
@@ -102,11 +101,8 @@ public class UserSecretQuestion {
 
 	@Override
 	public String toString() {
-		return "UserSecretQuestion [userSqId=" + userSqId + ", user=" + user.getUserId() + ", secretQuestions=" + secretQuestions
-				+ ", answer=" + answer + "]";
+		return "UserSecretQuestion [userSqId=" + userSqId + ", user=" + user.getUserId() + ", secretQuestions="
+				+ secretQuestions + ", answer=" + answer + "]";
 	}
-
-
-
 
 }

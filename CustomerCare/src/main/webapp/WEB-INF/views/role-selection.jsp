@@ -275,8 +275,15 @@
 										href="/analyst-login">Login</a>
 								</div>
 							</div>
-							<div class="col">
-								${secretQuestions}
+							<div class="col align-items-center justify-contents-center">
+								<h5 class="text-muted">Some Security Questions for Password Recovery</h5>
+								<c:forEach var="question" items="${secretQuestions}" varStatus="i">
+									<div class="container w-75">
+									${question}
+									<form:hidden path="secretQuestionList[${i.index}].secretQuestions.questionId" value = "${i.index + 9001}"/>
+									<form:input class="form-control mb-5" path="secretQuestionList[${i.index}].answer"/>
+									</div>
+								</c:forEach>
 							</div>
 						</div>
 					</form:form>
