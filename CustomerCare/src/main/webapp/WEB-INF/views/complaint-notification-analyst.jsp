@@ -19,7 +19,7 @@
 				</button>
 				<div class="dropdown-menu dropdown-menu-right"
 					aria-labelledby="dropdownMenuButton">
-					<a href="/analyst-login" class="dropdown-item"> Logout</a> <a
+					<a href="/logout" class="dropdown-item"> Logout</a> <a
 						class="dropdown-item"
 						href="/analyst-emails?analystId=${analyst.analystId}">Mail<span
 						class="badge badge-danger ml-2">${fn:length(analyst.emailList)}</span></a>

@@ -8,6 +8,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -41,11 +43,21 @@ public class ComplaintController {
 
 	@Autowired
 	ComplaintValidator complaintValidator;
+	
+
+	private String getName(ModelMap model) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal instanceof UserDetails) {
+			return ((UserDetails) principal).getUsername();
+		}
+		return principal.toString();
+	}
 
 	@RequestMapping(value = "/create-complaint", method = RequestMethod.GET)
 	public String goToComplaintPage(@ModelAttribute("complaint") Complaint complaint, BindingResult result,
-			@RequestParam("userId") long userId, ModelMap model) {
+			ModelMap model) {
 
+		long userId = Long.parseLong(getName(model));
 		User user = userService.getUser(userId);
 		Analyst analyst = analystService.getAnalyst(2001);
 
@@ -63,8 +75,9 @@ public class ComplaintController {
 
 	@RequestMapping(value = "/register-complaint", method = RequestMethod.POST)
 	public String registerComplaint(@Validated @ModelAttribute("complaint") Complaint complaint, BindingResult result,
-			@RequestParam("userId") long userId, @RequestParam("complaintId") long complaintId, ModelMap model) {
+			@RequestParam("complaintId") long complaintId, ModelMap model) {
 
+		long userId = Long.parseLong(getName(model));
 		complaintValidator.validate(complaint, result);
 		if (result.hasErrors()) {
 			System.out.println(result.getAllErrors());
@@ -88,7 +101,8 @@ public class ComplaintController {
 	public String viewAllComplaintUser(@ModelAttribute("complaint") Complaint complaint, BindingResult result,
 			ModelMap model) {
 
-		List<Complaint> complaintList = complaintService.getAllComplaintOfUser(complaint.getUser().getUserId());
+		long userId = Long.parseLong(getName(model));
+		List<Complaint> complaintList = complaintService.getAllComplaintOfUser(userId);
 		model.addAttribute("complaintList", complaintList);
 		return "complaint-notification-user";
 	}
@@ -127,8 +141,9 @@ public class ComplaintController {
 	@RequestMapping(value = "/analyst-login/page/{pageNumber}", method = RequestMethod.GET)
 	public String viewAnotherPageAnalystComplaintList(@Validated @ModelAttribute("analyst") Analyst analyst,
 			BindingResult result, ModelMap model, @PathVariable("pageNumber") int pageNumber,
-			@Param("analystId") long analystId, @Param("sortBy") String sortBy, @Param("sortDir") String sortDir) {
+			@Param("sortBy") String sortBy, @Param("sortDir") String sortDir) {
 
+		long analystId = Long.parseLong(getName(model));
 		System.out.println("Analyst Id is : " + analystId);
 		Page<Complaint> pages = complaintService.getAllComplaintForAnalyst(analystId, pageNumber - 1, 4, sortBy,
 				sortDir);

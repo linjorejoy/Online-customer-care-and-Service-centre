@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -45,7 +47,46 @@ public class LoginController {
 
 	@Autowired
 	AdminPasswordValidator adminPasswordValidator;
+	
 
+    private String getName(ModelMap model) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(principal instanceof UserDetails) {
+            return ((UserDetails)principal).getUsername();
+        }
+        return principal.toString();
+    }
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(ModelMap model, String error, String logout) {
+//        if (error != null)
+//            model.addAttribute("errorMsg", "Your username and password are invalid.");
+//
+//        if (logout != null)
+//            model.addAttribute("msg", "You have been logged out successfully.");
+
+        return "login";
+    }
+	
+	@RequestMapping(value = "/")
+	public String redirect(ModelMap model) {
+		System.out.println(getName(model));
+		long registeredId = Long.parseLong(getName(model));
+		
+		if(registeredId > 1000 && registeredId < 2000) {
+			
+			return "admin-home";
+		}else if(registeredId > 2000 && registeredId < 3000) {
+			
+			return "analyst-home";
+		}else if(registeredId > 3000 && registeredId < 4000) {
+			
+			return "user-home";
+		}
+		return "admin-home";
+		
+	}
+	
 	@RequestMapping(value = "/user-login", method = RequestMethod.GET)
 	public String userLogin(@Validated @ModelAttribute("user") User user, BindingResult result) {
 

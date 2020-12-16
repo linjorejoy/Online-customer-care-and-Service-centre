@@ -16,7 +16,7 @@
 					aria-expanded="false">Menu</button>
 				<div class="dropdown-menu dropdown-menu-right"
 					aria-labelledby="dropdownMenuButton">
-					<a href="/roleSelectionPage" class="dropdown-item"> Logout</a> <a
+					<a href="/logout" class="dropdown-item"> Logout</a> <a
 						class="dropdown-item" href="#">Mail</a> <a class="dropdown-item"
 						href="/show-all-complaint-admin">Show All Complaints</a> <a class="dropdown-item"
 						href="/admin-create-feedback">Create Feedback</a>
@@ -54,4 +54,10 @@
 	</div>
 	<%@ include file="common/footer-admin.jspf"%>
 </div>
-<%@ include file="common/end-tags-admin.jspf"%>
+
+<script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+<script src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>

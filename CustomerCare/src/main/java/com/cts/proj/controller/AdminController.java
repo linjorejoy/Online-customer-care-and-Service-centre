@@ -15,6 +15,8 @@ import org.apache.commons.compress.utils.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -65,9 +67,18 @@ public class AdminController {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
 	}
 
+	private String getName(ModelMap model) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal instanceof UserDetails) {
+			return ((UserDetails) principal).getUsername();
+		}
+		return principal.toString();
+	}
+
 	@RequestMapping(value = "/admin-home", method = RequestMethod.GET)
 	public String goToAdminHome(ModelMap model) {
-		model.put("admin", adminService.getAdmin(1001));
+		long adminId = Long.parseLong(getName(model));
+		model.put("admin", adminService.getAdmin(adminId));
 		return "admin-home";
 	}
 
@@ -148,6 +159,7 @@ public class AdminController {
 		if (result.hasErrors()) {
 			return "complaint-admin-view";
 		}
+		long adminId = Long.parseLong(getName(model));
 		Complaint originalComplaint = complaintService.getComplaint(complaint.getComplaintId());
 		originalComplaint.setCategory(complaint.getCategory());
 		originalComplaint.setStatus(complaint.getStatus());
@@ -160,7 +172,7 @@ public class AdminController {
 		EmailAnalyst emailToAnalyst = new EmailAnalyst();
 		emailToAnalyst.setEmailId(emailId);
 		emailToAnalyst.setAnalyst(analystService.getAnalyst(analystId));
-		emailToAnalyst.setAdmin(adminService.getAdmin(1001));
+		emailToAnalyst.setAdmin(adminService.getAdmin(adminId));
 		emailToAnalyst.setSentDate(new Date());
 		emailToAnalyst.setReceived(false);
 //		System.out.println(emailToAnalyst.getAdmin());
@@ -221,9 +233,7 @@ public class AdminController {
 		return "complaint-notification-admin";
 	}
 	
-	
-	
-	
+
 	@RequestMapping(value = "/show-user-complaint-user", method = RequestMethod.GET)
 	public String showUserComplaints(@RequestParam long complaintId, ModelMap model) {
 		Complaint complaint = complaintService.getComplaint(complaintId);
@@ -285,7 +295,6 @@ public class AdminController {
 		emailAnalystService.addEmail(originalEmail);
 		return "user-home";
 	}
-	
 
 	@ModelAttribute(name = "category")
 	public Map<String, String> getCategory() {

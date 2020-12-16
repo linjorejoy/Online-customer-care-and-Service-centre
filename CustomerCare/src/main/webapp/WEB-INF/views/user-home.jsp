@@ -16,7 +16,7 @@
 					aria-expanded="false">Menu<span class="badge badge-danger ml-2">${emailCount}</span></button>
 				<div class="dropdown-menu dropdown-menu-right"
 					aria-labelledby="dropdownMenuButton">
-					<a href="/user-login" class="dropdown-item"> Logout</a> <a
+					<a href="/logout" class="dropdown-item"> Logout</a> <a
 						class="dropdown-item" href="#">Mail<span class="badge badge-danger ml-2">${emailCount}</span></a> <a class="dropdown-item"
 						href="/user-complaint-list-view?userId=${user.userId}">Show All Complaints</a>
 						<a class="dropdown-item" href="#">View Profile</a>

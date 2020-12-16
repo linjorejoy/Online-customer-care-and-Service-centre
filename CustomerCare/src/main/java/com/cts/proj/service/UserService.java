@@ -72,8 +72,7 @@ public class UserService {
 //		String sq1="aa";
 //		String sq2="bb";
 //		String sq3="cc";
-		if (sq1.trim().equalsIgnoreCase(ans1.trim()) && sq2.trim().equalsIgnoreCase(ans2.trim())
-				&& sq3.trim().equalsIgnoreCase(ans3.trim())) {
+		if (sq1.equals(ans1) && sq2.equals(ans2) && sq3.equals(ans3)) {
 			return true;
 		}
 		System.out.println(sq1 + " : " + ans1 + " : " + sq1.equals(ans1));
@@ -81,9 +80,11 @@ public class UserService {
 		System.out.println(sq3 + " : " + ans3 + " : " + sq3.equals(ans3));
 		return false;
 	}
+
 	public User findUserId(String email) {
 		return userRepository.findUser(email);
 	}
+
 	public boolean validateAnswer(List<UserSecretQuestion> list, String ans1, String ans2, String ans3) {
 
 		String sq1 = list.get(0).getAnswer();

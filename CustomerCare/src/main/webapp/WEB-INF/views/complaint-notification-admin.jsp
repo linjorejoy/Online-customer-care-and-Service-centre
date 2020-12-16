@@ -15,7 +15,7 @@
 					id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false">Menu</button>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-					<a href="/roleSelectionPage" class="dropdown-item"> Logout</a> 
+					<a href="/logout" class="dropdown-item"> Logout</a> 
 					<a class="dropdown-item" href="/admin-home">Home</a> 
 					<a class="dropdown-item" href="#">Mail</a> 
 					<a class="dropdown-item" href="#">Show All Complaints</a> 
