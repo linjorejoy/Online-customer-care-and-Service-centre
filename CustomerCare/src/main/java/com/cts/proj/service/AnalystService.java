@@ -16,7 +16,7 @@ public class AnalystService {
 	AnalystRepository analystRepository;
 
 	public long getLastId() {
-		long lastId = 3000;
+		long lastId = 2000;
 
 		for (Analyst analyst : analystRepository.findAll()) {
 			if (analyst.getAnalystId() > lastId) {
