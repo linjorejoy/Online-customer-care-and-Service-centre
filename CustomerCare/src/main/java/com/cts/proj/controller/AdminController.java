@@ -33,11 +33,13 @@ import com.cts.proj.model.Admin;
 import com.cts.proj.model.Analyst;
 import com.cts.proj.model.Complaint;
 import com.cts.proj.model.EmailAnalyst;
+import com.cts.proj.model.EmailUserAnalyst;
 import com.cts.proj.model.Feedback;
 import com.cts.proj.service.AdminService;
 import com.cts.proj.service.AnalystService;
 import com.cts.proj.service.ComplaintService;
 import com.cts.proj.service.EmailAnalystService;
+import com.cts.proj.service.EmailUserAnalystService;
 import com.cts.proj.service.FeedbackService;
 import com.cts.proj.service.UserService;
 
@@ -57,6 +59,9 @@ public class AdminController {
 
 	@Autowired
 	EmailAnalystService emailAnalystService;
+	
+	@Autowired
+	EmailUserAnalystService emailUserAnalystService;
 
 	@Autowired
 	FeedbackService feedbackService;
@@ -257,42 +262,55 @@ public class AdminController {
 		long analystId = originalComplaint.getAnalyst().getAnalystId();
 
 		originalComplaint.setAnalyst(analystService.getAnalyst(analystId));
-		long emailId = emailAnalystService.getLastId() + 1;
+		long emailId = emailUserAnalystService.getLastId() + 1;
 
 		complaintService.addComplaint(originalComplaint);
+		
+		EmailUserAnalyst email = new EmailUserAnalyst();
+		email.setEmailId(emailId);
+		email.setAnalyst(analystService.getAnalyst(analystId));
+		email.setUser(userService.getUser(Long.parseLong(getName(model))));
+		email.setSentDate(new Date());
+		email.setReceived(false);
 
-		EmailAnalyst emailToAnalyst = new EmailAnalyst();
-		emailToAnalyst.setEmailId(emailId);
-		emailToAnalyst.setAnalyst(analystService.getAnalyst(analystId));
-		emailToAnalyst.setAdmin(adminService.getAdmin(1001));
-		emailToAnalyst.setSentDate(new Date());
-		emailToAnalyst.setReceived(false);
+//		EmailAnalyst emailToAnalyst = new EmailAnalyst();
+//		emailToAnalyst.setEmailId(emailId);
+//		emailToAnalyst.setAnalyst(analystService.getAnalyst(analystId));
+//		emailToAnalyst.setAdmin(adminService.getAdmin(1001));
+//		emailToAnalyst.setSentDate(new Date());
+//		emailToAnalyst.setReceived(false);
 		//System.out.println(emailToAnalyst.getAdmin());
 
 		String[] messageTemplate = mailMessage();
-		String mailMessage = messageTemplate[0] + emailToAnalyst.getAnalyst().getFirstName() + "\n\n";
+		String mailMessage = messageTemplate[0] + email.getAnalyst().getFirstName() + "\n\n";
 		mailMessage += messageTemplate[1] + originalComplaint.getUser().getFirstName() + messageTemplate[2] + "\n";
 		mailMessage += messageTemplate[3] + "\n";
-		mailMessage += messageTemplate[4] + "\n" + emailToAnalyst.getAdmin().getFirstName();
+		mailMessage += messageTemplate[4] + "\n" + email.getUser().getFirstName();
 
-		emailToAnalyst.setDescription(mailMessage);
+//		emailToAnalyst.setDescription(mailMessage);
+		
+		email.setDescription(mailMessage);
 
-		emailAnalystService.addEmail(emailToAnalyst);
+//		emailAnalystService.addEmail(emailToAnalyst);
+		emailUserAnalystService.addEmail(email);
 
 //		System.out.println(emailToAnalyst);
 		model.put("complaint", originalComplaint);
-		model.put("emailAnalyst", emailToAnalyst);
+//		model.put("emailAnalyst", emailToAnalyst);
+		model.put("email", email);
 //		model.put("message", mailMessage);
 		return "user-to-analyst-mail";
 
 	}
 	
 	@RequestMapping(value = "/user-sent-email-to-analyst", method = RequestMethod.POST)
-	public String sentEmailUser(@ModelAttribute("emailAnalyst") EmailAnalyst emailAnalyst, BindingResult results,
+	public String sentEmailUser(@ModelAttribute("email") EmailUserAnalyst email, BindingResult results,
 			ModelMap model) {
-		EmailAnalyst originalEmail = emailAnalystService.getEmailAnalyst(emailAnalyst.getEmailId());
-		originalEmail.setDescription(emailAnalyst.getDescription());
-		emailAnalystService.addEmail(originalEmail);
+		System.out.println(email.getEmailId());
+		EmailUserAnalyst originalEmail = emailUserAnalystService.getEmail(email.getEmailId());
+		originalEmail.setDescription(email.getDescription());
+		emailUserAnalystService.addEmail(originalEmail);
+//		emailAnalystService.addEmail(originalEmail);
 		return "user-home";
 	}
 
