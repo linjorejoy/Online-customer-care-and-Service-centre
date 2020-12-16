@@ -81,9 +81,11 @@ public class UserService {
 		System.out.println(sq3 + " : " + ans3 + " : " + sq3.equals(ans3));
 		return false;
 	}
+
 	public User findUserId(String email) {
 		return userRepository.findUser(email);
 	}
+
 	public boolean validateAnswer(List<UserSecretQuestion> list, String ans1, String ans2, String ans3) {
 
 		String sq1 = list.get(0).getAnswer();
@@ -95,5 +97,4 @@ public class UserService {
 		}
 		return false;
 	}
-
 }
