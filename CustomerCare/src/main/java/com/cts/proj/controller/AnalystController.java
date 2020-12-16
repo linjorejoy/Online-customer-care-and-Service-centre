@@ -24,11 +24,13 @@ import com.cts.proj.model.Analyst;
 import com.cts.proj.model.AnalystSecretQuestion;
 import com.cts.proj.model.Complaint;
 import com.cts.proj.model.EmailAnalyst;
+import com.cts.proj.model.EmailUserAnalyst;
 import com.cts.proj.model.User;
 import com.cts.proj.service.AdminService;
 import com.cts.proj.service.AnalystService;
 import com.cts.proj.service.ComplaintService;
 import com.cts.proj.service.EmailAnalystService;
+import com.cts.proj.service.EmailUserAnalystService;
 import com.cts.proj.service.UserService;
 
 @Controller
@@ -47,6 +49,9 @@ public class AnalystController {
 
 	@Autowired
 	EmailAnalystService emailAnalystService;
+	
+	@Autowired
+	EmailUserAnalystService emailUserAnalystService;
 
 	private String getName(ModelMap model) {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -166,6 +171,17 @@ public class AnalystController {
 		model.put("email", email);
 		model.put("analyst", analystService.getAnalyst(analystId));
 		return "each-email-analyst";
+	}
+
+	@RequestMapping(value = "/view-email-analyst-from-user", method = RequestMethod.GET)
+	public String viewEachEmailAnalystFromUser(@RequestParam("emailId") long emailId, ModelMap model) {
+		long analystId = Long.parseLong(getName(model));
+		EmailUserAnalyst email 	= emailUserAnalystService.getEmail(emailId);
+//		EmailAnalyst email = emailAnalystService.getEmailAnalyst(emailId);
+
+		model.put("email", email);
+//		model.put("analyst", analystService.getAnalyst(analystId));
+		return "each-email-analyst-from-user";
 	}
 
 	@RequestMapping(value = "/analyst-view-all", method = RequestMethod.GET)

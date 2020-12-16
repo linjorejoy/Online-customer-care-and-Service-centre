@@ -24,6 +24,17 @@
 				</tr>
 				<!-- end -->
 			</c:forEach>
+			<c:forEach var="email" items="${analyst.emailUserAnalyst}">
+
+
+				<tr>
+					<td><div class="overflow-hidden">${email.emailId}</div></td>
+					<td><div class="overflow-hidden">${email.sentDate}</div></td>
+					<td><div>${fn:substring(email.description,0, 80)}...............</div></td>
+					<td><a href="/view-email-analyst-from-user?emailId=${email.emailId}">View</a></td>
+				</tr>
+				<!-- end -->
+			</c:forEach>
 		</table>
 
 	</div>

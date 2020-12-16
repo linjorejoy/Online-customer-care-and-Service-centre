@@ -47,6 +47,10 @@ public class Analyst implements Comparable<Analyst> {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "analyst_id")
 	private List<EmailAnalyst> emailList;
+	
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "analyst_id")
+	private List<EmailUserAnalyst> emailUserAnalyst;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "analyst_id")
@@ -173,6 +177,14 @@ public class Analyst implements Comparable<Analyst> {
 
 	public void setSecretQuestionList(List<AnalystSecretQuestion> secretQuestionList) {
 		this.secretQuestionList = secretQuestionList;
+	}
+
+	public List<EmailUserAnalyst> getEmailUserAnalyst() {
+		return emailUserAnalyst;
+	}
+
+	public void setEmailUserAnalyst(List<EmailUserAnalyst> emailUserAnalyst) {
+		this.emailUserAnalyst = emailUserAnalyst;
 	}
 
 	@Override

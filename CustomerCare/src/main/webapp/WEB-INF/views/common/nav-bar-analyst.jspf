@@ -22,7 +22,7 @@
 					class="badge badge-danger ml-2">${emailCount}</span></a>
 				<a class="dropdown-item" href="#">Show All Complaints</a> <a
 					class="dropdown-item" href="#">View Profile</a>
-				<!-- <a class="dropdown-item" href="#">Something	else here</a> -->
+				<a class="dropdown-item" href="/analyst-home">Home</a> 
 			</div>
 		</div>
 	</div>
