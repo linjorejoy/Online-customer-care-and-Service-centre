@@ -28,6 +28,8 @@
 	<div class="container">
 
 		<h2>Welcome ${analyst.firstName}</h2>
+		<div class="p-5 text-center bg-image"
+			style="background-image: url('https://raw.githubusercontent.com/linjorejoy/host-images-for-projects/b8b24b8c78d7ea2401779f33a04551f895b739e4/svg/undraw_at_home_octe.svg'); width: 400px; height: 400px; background-size: contain; background-repeat: no-repeat; position: absolute; left: 50%; top: 80%; transform: translate(-50%, -50%);"></div>
 		<%-- <a href="/create-complaint?userId=${user.userId}">Create Complaint</a> --%>
 
 		<div class="row">

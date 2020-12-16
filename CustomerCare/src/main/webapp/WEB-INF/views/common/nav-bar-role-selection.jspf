@@ -3,9 +3,5 @@
 		<div class="navbar-header">
 			<a class="navbar-brand" href="/roleSelectionPage">Customer Care</a>
 		</div>
-		<ul class="nav navbar-nav navbar-right">
-			<li><a href="/logout"><span
-					class="glyphicon glyphicon-log-in nav-link text-light">Logout</span> </a></li>
-		</ul>
 	</div>
 </nav>

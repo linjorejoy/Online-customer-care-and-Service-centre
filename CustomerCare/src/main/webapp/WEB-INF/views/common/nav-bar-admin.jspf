@@ -13,6 +13,8 @@
 						class="dropdown-item" href="#">Mail</a> <a class="dropdown-item"
 						href="/show-all-complaint-admin">Show All Complaints</a> <a class="dropdown-item"
 						href="/admin-create-feedback">Create Feedback</a>
+						<a class="dropdown-item"
+						href="/admin-home">Home</a>
 
 				</div>
 			</div>
