@@ -54,10 +54,4 @@ public class RoleSelectionController {
 		return categories;
 	}
 	
-	
-	public List<String> getSecretQuestions(){
-		
-		
-		return null;
-	}
 }

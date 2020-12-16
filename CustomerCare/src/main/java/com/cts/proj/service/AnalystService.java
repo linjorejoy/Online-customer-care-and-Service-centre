@@ -77,16 +77,18 @@ public class AnalystService {
 			return true;
 		return false;
 	}
-    public Analyst findAnalyst(String analystId,String mob,String email){
+
+	public Analyst findAnalyst(String analystId, String mob, String email) {
 		return analystRepository.findAnalyst(analystId, mob, email);
 	}
-	public boolean checkAnswer(List<AnalystSecretQuestion> list,String ans1,String ans2,String ans3){
-		
-		String sq1=list.get(0).getAnswer();
-		String sq2=list.get(1).getAnswer();
-		String sq3=list.get(2).getAnswer();
 
-		if(sq1.equals(ans1) && sq2.equals(ans2) && sq3.equals(ans3)) {
+	public boolean checkAnswer(List<AnalystSecretQuestion> list, String ans1, String ans2, String ans3) {
+
+		String sq1 = list.get(0).getAnswer();
+		String sq2 = list.get(1).getAnswer();
+		String sq3 = list.get(2).getAnswer();
+
+		if (sq1.equals(ans1) && sq2.equals(ans2) && sq3.equals(ans3)) {
 			return true;
 		}
 		return false;

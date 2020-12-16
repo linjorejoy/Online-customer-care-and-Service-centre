@@ -23,12 +23,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.cts.proj.model.Admin;
 import com.cts.proj.model.Analyst;
 import com.cts.proj.model.AnalystSecretQuestion;
+import com.cts.proj.model.LoginDetails;
 import com.cts.proj.model.User;
 import com.cts.proj.model.UserSecretQuestion;
 import com.cts.proj.security.SecureWithSHA256;
 import com.cts.proj.service.AdminService;
 import com.cts.proj.service.AnalystSecretQuestionService;
 import com.cts.proj.service.AnalystService;
+import com.cts.proj.service.LoginDetailsService;
 import com.cts.proj.service.SecretQuestionService;
 import com.cts.proj.service.UserSecretQuestionService;
 import com.cts.proj.service.UserService;
@@ -54,6 +56,8 @@ public class RegistrationController {
 	AnalystSecretQuestionService analystSecretQuestionService;
 	@Autowired
 	SecretQuestionService secretQuestionService;
+	@Autowired
+	LoginDetailsService loginDetailsService;
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -110,10 +114,10 @@ public class RegistrationController {
 		questionList.add(qsn3);
 
 		analyst.setSecretQuestionList(questionList);
-		
-		
-		
+
 		analystService.addAnalyst(analyst);
+		loginDetailsService.addLoginDetails(
+				new LoginDetails(Long.toString(analyst.getAnalystId()), analyst.getTempPassword(), "ROLE_ANALYST"));
 		model.put("isRegisrered", true);
 		model.put("analystId", analyst.getAnalystId());
 		return "analyst-reg-status";
@@ -172,6 +176,8 @@ public class RegistrationController {
 		user.setSecretQuestionList(questionList);
 		System.out.println("\n\nBefore Adding : " + user);
 		userService.addUser(user);
+		loginDetailsService.addLoginDetails(
+				new LoginDetails(Long.toString(user.getUserId()), user.getTempPassword(), "ROLE_USER"));
 
 		System.out.println("\n\n" + qsn1);
 

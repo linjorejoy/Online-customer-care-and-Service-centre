@@ -7,6 +7,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -16,7 +18,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 
 import com.cts.proj.model.Analyst;
@@ -47,9 +48,17 @@ public class AnalystController {
 	@Autowired
 	EmailAnalystService emailAnalystService;
 
-	@RequestMapping(value = "/analyst-home")
-	public String analystGoToHome(@RequestParam("analystId") long analystId, ModelMap model) {
+	private String getName(ModelMap model) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal instanceof UserDetails) {
+			return ((UserDetails) principal).getUsername();
+		}
+		return principal.toString();
+	}
 
+	@RequestMapping(value = "/analyst-home")
+	public String analystGoToHome(ModelMap model) {
+		long analystId = Long.parseLong(getName(model));
 		Analyst analyst = analystService.getAnalyst(analystId);
 		model.put("emailCount", analyst.getEmailList().size());
 		model.put("analystId", analystId);
@@ -69,8 +78,9 @@ public class AnalystController {
 	}
 
 	@RequestMapping(value = "/analyst-emails")
-	public String viewAnalystEmails(@RequestParam("analystId") long analystId, ModelMap model) {
+	public String viewAnalystEmails(ModelMap model) {
 
+		long analystId = Long.parseLong(getName(model));
 		model.put("analyst", analystService.getAnalyst(analystId));
 
 		return "emails-analyst";
@@ -137,7 +147,8 @@ public class AnalystController {
 
 	@RequestMapping(value = "/sent-email-analyst-to-analyst", method = RequestMethod.POST)
 	public String sentEmail(@ModelAttribute("emailAnalyst") EmailAnalyst emailAnalyst, BindingResult results,
-			ModelMap model, @RequestParam("analystId") long analystId) {
+			ModelMap model) {
+		long analystId = Long.parseLong(getName(model));
 		EmailAnalyst originalEmail = emailAnalystService.getEmailAnalyst(emailAnalyst.getEmailId());
 		originalEmail.setDescription(emailAnalyst.getDescription());
 		emailAnalystService.addEmail(originalEmail);
@@ -148,8 +159,8 @@ public class AnalystController {
 	}
 
 	@RequestMapping(value = "/view-email-analyst", method = RequestMethod.GET)
-	public String viewEachEmailAnalyst(@RequestParam("emailId") long emailId, @RequestParam("analystId") long analystId,
-			ModelMap model) {
+	public String viewEachEmailAnalyst(@RequestParam("emailId") long emailId, ModelMap model) {
+		long analystId = Long.parseLong(getName(model));
 		EmailAnalyst email = emailAnalystService.getEmailAnalyst(emailId);
 
 		model.put("email", email);
@@ -160,18 +171,19 @@ public class AnalystController {
 	@RequestMapping(value = "/analyst-view-all", method = RequestMethod.GET)
 	public String analystAfterLogin(@Validated @ModelAttribute("analyst") Analyst analyst, BindingResult result,
 			ModelMap model) {
+		long analystId = Long.parseLong(getName(model));
 //		System.out.println(complaint);
 //		System.out.println(complaint);
 		int currentPage = 1;
-		Page<Complaint> pages = complaintService.getAllComplaintForAnalyst(analyst.getAnalystId(), currentPage - 1, 4,
-				"complaintId", "asc");
+		Page<Complaint> pages = complaintService.getAllComplaintForAnalyst(analystId, currentPage - 1, 4, "complaintId",
+				"asc");
 		List<Complaint> complaintList = pages.getContent();
 		long totalComplaints = pages.getTotalElements();
 		int totalPages = pages.getTotalPages();
 
 //		System.out.println(complaint);
 
-		model.put("analystId", analyst.getAnalystId());
+		model.put("analystId", analystId);
 		model.put("currentPage", currentPage);
 		model.put("complaintListAnalyst", complaintList);
 		model.put("totalComplaints", totalComplaints);
@@ -181,68 +193,64 @@ public class AnalystController {
 		return "complaint-notification-analyst";
 	}
 
-	@RequestMapping(value = "/forgot-id" , method = RequestMethod.GET)
-	public String forgotAnalystId( ModelMap model) {
+	@RequestMapping(value = "/forgot-id", method = RequestMethod.GET)
+	public String forgotAnalystId(ModelMap model) {
 		return "forgot-analyst-Id";
 	}
-	
-	@RequestMapping(value = "/forgot-analyst-id-secret-question" , method = RequestMethod.GET)
-	public  String forgotAnalystIdSecretQuestion( ModelMap model ,String mail) {
+
+	@RequestMapping(value = "/forgot-analyst-id-secret-question", method = RequestMethod.GET)
+	public String forgotAnalystIdSecretQuestion(ModelMap model, String mail) {
 		Analyst analyst = analystService.getAnalystFromMail(mail);
-		if(analyst!= null ) {
-			model.addAttribute("analyst" ,analyst);
-			model.put("analystId",analyst.getAnalystId() );
-		     return "forgot-analyst-id-sq-question";
-		}
-		else {
+		if (analyst != null) {
+			model.addAttribute("analyst", analyst);
+			model.put("analystId", analyst.getAnalystId());
+			return "forgot-analyst-id-sq-question";
+		} else {
 			return "forgot-analyst-Id";
-			
+
 		}
 	}
-	
-	@RequestMapping(value = "/submit-secret-question/{analystId}" , method = RequestMethod.GET)
-	public String secretQuestions(ModelMap model , @PathVariable long analystId , String ans1 , String ans2 , String ans3) {
+
+	@RequestMapping(value = "/submit-secret-question/{analystId}", method = RequestMethod.GET)
+	public String secretQuestions(ModelMap model, @PathVariable long analystId, String ans1, String ans2, String ans3) {
 		Analyst analyst = analystService.getAnalyst(analystId);
 		List<AnalystSecretQuestion> list = analyst.getSecretQuestionList();
-		if(analystService.checkSecurityQuestions(list, ans1, ans2, ans3)) {
+		if (analystService.checkSecurityQuestions(list, ans1, ans2, ans3)) {
 			model.put("analystId", analyst.getAnalystId());
 			return "display-analyst-id";
-		}
-		else
-		    return "forgot-analyst-id-sq-question";
-		
-	}
-	
-	
-	@RequestMapping(value="/forgot-password-analyst", method=RequestMethod.GET)
-	public String recoverPassword(ModelMap model,String analystId,String mob,String email) {
+		} else
+			return "forgot-analyst-id-sq-question";
 
-		Analyst analyst=analystService.findAnalyst(analystId, mob, email);
-		if(analyst==null) {
+	}
+
+	@RequestMapping(value = "/forgot-password-analyst", method = RequestMethod.GET)
+	public String recoverPassword(ModelMap model, String analystId, String mob, String email) {
+
+		Analyst analyst = analystService.findAnalyst(analystId, mob, email);
+		if (analyst == null) {
 			return "forgot-password-analyst";
-		}
-		else {
-		model.addAttribute("analyst",analyst);
-		model.put("analystId", analyst.getAnalystId());
-		
-		return "password-recovery-analyst";
+		} else {
+			model.addAttribute("analyst", analyst);
+			model.put("analystId", analyst.getAnalystId());
+
+			return "password-recovery-analyst";
 		}
 	}
-	
-	@RequestMapping(value="/reset-password-analyst/{analystId}", method=RequestMethod.GET)
-	public String verifySecretQuestion( ModelMap model,@PathVariable long analystId,String ans1,String ans2,String ans3) {
-	
-		Analyst analyst=analystService.getAnalyst(analystId);
+
+	@RequestMapping(value = "/reset-password-analyst/{analystId}", method = RequestMethod.GET)
+	public String verifySecretQuestion(ModelMap model, @PathVariable long analystId, String ans1, String ans2,
+			String ans3) {
+
+		Analyst analyst = analystService.getAnalyst(analystId);
 		List<AnalystSecretQuestion> secretQuestionList = analyst.getSecretQuestionList();
-	
-	if(analystService.checkAnswer(secretQuestionList, ans1, ans2, ans3)) {
-		return "set-new-pwd-analyst";
+
+		if (analystService.checkAnswer(secretQuestionList, ans1, ans2, ans3)) {
+			return "set-new-pwd-analyst";
+		} else
+			return "password-recovery-analyst";
+
 	}
-	else	
-		return "password-recovery-analyst";
-		
-	}
-	
+
 	@ModelAttribute(name = "category")
 	public Map<String, String> getCategory() {
 		Map<String, String> category = new HashMap<>();

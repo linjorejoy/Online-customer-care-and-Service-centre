@@ -39,11 +39,11 @@
 				<div class="d-flex justify-content-around p-4">
 					<div>
 						<!-- Forgot password -->
-						<a href="/forgot-id" class="mb-4 p-2">Forgot analyst id?</a>
+						<a href="#" class="mb-4 p-2">Forgot analyst id?</a>
 					</div>
 					<div>
 						<!-- Forgot password -->
-						<a href="/forgot-password-analyst" class="mb-4 p-2">Forgot password?</a>
+						<a href="#" class="mb-4 p-2">Forgot password?</a>
 					</div>
 				</div>
 				<p>

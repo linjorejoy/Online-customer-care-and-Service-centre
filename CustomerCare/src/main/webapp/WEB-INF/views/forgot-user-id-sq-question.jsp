@@ -1,26 +1,38 @@
 <%@ include file="common/header-user.jspf"%>
-<div class="container">
+<div class="container-fluid p-0">
 	<%@ include file="common/nav-bar-user.jspf"%>
-	<div class="center-forgot-user-id">
-		<div class="heading-div">
-			<h1>Security Questions</h1>
-		</div>
+	<div
+		class="container text-center d-flex align-items-center justify-content-center">
+
 
 		<div class="form-div-sq-question">
+			<div class="heading-div">
+				<h1>Security Questions</h1>
+			</div>
 			<form:form method="get" action="/show-user-id/${userId}">
 				<div>
-					<label>What is your Childhood pets Name?</label> <input id="ans1"
-						type="text" name="ans1" placeholder="Type Your Answer"
-						value="${ans1}"><br> <label>What is your
-						mothers maiden name?</label> <input id="ans2" type="text" name="ans2"
-						placeholder="Type Your Answer" value="${ans2}"><br> <label>What
-						is the name of the city you grew up on?</label> <input id="ans3"
-						type="text" name="ans3" placeholder="Type Your Answer"
-						value="${ans3}"><br>
+					<table>
+						<tr>
+							<td><label>What is your Childhood pets Name?</label></td>
+							<td><input id="ans1" type="text" name="ans1"
+								placeholder="Type Your Answer" value="${ans1}"></td>
+						</tr>
+						<tr>
+							<td><label>What is your mothers maiden name?</label></td>
+							<td><input id="ans2" type="text" name="ans2"
+								placeholder="Type Your Answer" value="${ans2}"></td>
+						</tr>
+						<tr>
+							<td><label>What is the name of the city you grew up
+									on?</label></td>
+							<td><input id="ans3" type="text" name="ans3"
+								placeholder="Type Your Answer" value="${ans3}"></td>
+						</tr>
+					</table>
 
 				</div>
 				<div>
-					<input type="submit" id="submit" value="submit"></input>
+					<input type="submit" id="submit" value="Submit" class="btn btn-success"></input>
 				</div>
 			</form:form>
 		</div>

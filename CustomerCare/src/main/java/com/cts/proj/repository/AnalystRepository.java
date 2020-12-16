@@ -1,6 +1,7 @@
 package com.cts.proj.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -23,6 +24,9 @@ public interface AnalystRepository extends JpaRepository<Analyst, Long> {
 
 	@Query("select a from Analyst a where support_level < ?1")
 	List<Analyst> getAllAnalystLessThanSupportLevel(String supportLevel);
+	
+	@Query("select a from Analyst a where analyst_id = ?1")
+	Optional<Analyst> findAnalystById(long analystId);
 	
 	@Query("select a from Analyst a where email_id = ?1")
 	Analyst getAnalystFromMailId(String mailId);

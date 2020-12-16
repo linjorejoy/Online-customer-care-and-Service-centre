@@ -134,7 +134,11 @@
 										class="btn btn-info my-4 btn-block bg-primary text-light"
 										name="Submit" value="Register" /> OR<a
 										class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect bg-success text-light"
-										href="/user-login">Login</a>
+										href="/user-home">Login</a>
+								</div>
+								<div class="form-buttons-div">
+										<a href="/forgot-userID-mail" class="mr-2 ml-2">Forgot User Id?</a>
+										<a href="/forgot-password" class="mr-2 ml-2">Forgot Password?</a>
 								</div>
 
 
@@ -272,7 +276,11 @@
 										class="btn btn-info my-4 btn-block bg-primary text-light"
 										name="Submit" value="Register" />OR <a
 										class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect bg-success text-light"
-										href="/analyst-login">Login</a>
+										href="/analyst-home">Login</a>
+								</div>
+								<div class="form-buttons-div">
+										<a href="/forgot-id"" class="mr-2 ml-2">Forgot User Id?</a>
+										<a href="/forgot-password-analyst" class="mr-2 ml-2">Forgot Password?</a>
 								</div>
 							</div>
 							<div class="col align-items-center justify-contents-center">
@@ -299,42 +307,7 @@
 				<div
 					class='tab-pane fade <c:if test="${isAdmin}">show active</c:if>'
 					id="pills-admin" role="tabpanel" aria-labelledby="pills-admin-tab">
-					<div class="container w-50">
-						<form:form action="/admin-login" modelAttribute="admin"
-							method="POST" cssClass="form">
-							<div class="form-row mb-2">
-								<small id="defaultRegisterFormPhoneHelpBlock"
-									class="form-text text-muted mb-1"> Admin Id </small>
-								<form:input class="form-control mb-4" placeholder="Admin Id"
-									path="adminId" id="adminId" />
-								<small id="defaultRegisterFormPhoneHelpBlock"
-									class="form-text text-warning mb-1"><form:errors
-										path="adminId"></form:errors></small>
-							</div>
-							<div class="form-row mb-2">
-								<form:input class="form-control mb-2" placeholder="Password"
-									path="tempPassword" type="password" id="password" />
-								<br> <small id="defaultRegisterFormPhoneHelpBlock"
-									class="form-text text-warning mb-1"><form:errors
-										cssClass="text-warning" path="tempPassword"></form:errors></small>
-							</div>
-							<div class="d-flex justify-content-around form-row mb-2">
-								<div>
-									<!-- Forgot password -->
-									<a href="">Forgot User Id?</a>
-								</div>
-								<div>
-									<!-- Forgot password -->
-									<a href="">Forgot password?</a>
-								</div>
-							</div>
-
-							<div class="form-buttons-div">
-								<input type="submit"
-									class="btn btn-info my-4 btn-block bg-success text-light"
-									name="Submit" value="Login" />
-							</div>
-						</form:form>
+						<a href="/admin-home" class="btn btn-success btn-lg">Login</a>
 					</div>
 				</div>
 			</div>
