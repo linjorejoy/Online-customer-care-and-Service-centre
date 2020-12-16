@@ -1,9 +1,12 @@
 package com.cts.proj.controller;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,12 +28,15 @@ import com.cts.proj.model.AnalystSecretQuestion;
 import com.cts.proj.model.Complaint;
 import com.cts.proj.model.EmailAnalyst;
 import com.cts.proj.model.EmailUserAnalyst;
+import com.cts.proj.model.LoginDetails;
 import com.cts.proj.model.User;
+import com.cts.proj.security.SecureWithSHA256;
 import com.cts.proj.service.AdminService;
 import com.cts.proj.service.AnalystService;
 import com.cts.proj.service.ComplaintService;
 import com.cts.proj.service.EmailAnalystService;
 import com.cts.proj.service.EmailUserAnalystService;
+import com.cts.proj.service.LoginDetailsService;
 import com.cts.proj.service.UserService;
 
 @Controller
@@ -52,6 +58,9 @@ public class AnalystController {
 	
 	@Autowired
 	EmailUserAnalystService emailUserAnalystService;
+	
+	@Autowired
+	LoginDetailsService loginDetailsService;
 
 	private String getName(ModelMap model) {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -264,6 +273,31 @@ public class AnalystController {
 			return "set-new-pwd-analyst";
 		} else
 			return "password-recovery-analyst";
+
+	}
+	@RequestMapping(value = "/change-password-analyst", method = RequestMethod.POST)
+	public String changePassword(String newPwd, String confirmPwd, long analystId, ModelMap model) {
+		Pattern pattern = Pattern
+				.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$@!%&*?])[A-Za-z\\d#$@!%&*?]{6,}$");
+		Matcher matcher = pattern.matcher(newPwd);
+
+		if (newPwd.equals(confirmPwd) && matcher.matches()) {
+			Analyst analyst = analystService.getAnalyst(analystId);
+			try {
+				analyst.setPassword(SecureWithSHA256.getSHA(newPwd));
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			analyst.setTempPassword(confirmPwd);
+			analystService.addAnalyst(analyst);
+			LoginDetails thisAnalyst = loginDetailsService.getLoginDetailsByRegisteredId(analyst.getAnalystId());
+			thisAnalyst.setPassword(newPwd);
+			loginDetailsService.addLoginDetails(thisAnalyst);
+			return "analyst-home";
+		}else {
+			return "set-new-pwd-analyst";
+		}
 
 	}
 

@@ -251,6 +251,7 @@ public class UserController {
 			userService.addUser(user);
 			LoginDetails thisUser = loginDetailsService.getLoginDetailsByRegisteredId(user.getUserId());
 			thisUser.setPassword(newPwd);
+			loginDetailsService.addLoginDetails(thisUser);
 			return "user-home";
 		}else {
 			return "set-new-pwd-user";
