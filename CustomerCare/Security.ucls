@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
+  realizations="true" associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="com.cts.proj.security.SecurityConfiguration" project="CustomerCare" 
+    file="/CustomerCare/src/main/java/com/cts/proj/security/SecurityConfiguration.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="160" width="285" x="102" y="169"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="com.cts.proj.security.SecureWithSHA256" project="CustomerCare" 
+    file="/CustomerCare/src/main/java/com/cts/proj/security/SecureWithSHA256.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="106" width="160" x="763" y="169"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.cts.proj.security.MyUserDetailsService" project="CustomerCare" 
+    file="/CustomerCare/src/main/java/com/cts/proj/security/MyUserDetailsService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="124" width="296" x="427" y="169"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.cts.proj.security.MyUserDetails" project="CustomerCare" 
+    file="/CustomerCare/src/main/java/com/cts/proj/security/MyUserDetails.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="286" width="350" x="427" y="369"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <dependency id="5">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
