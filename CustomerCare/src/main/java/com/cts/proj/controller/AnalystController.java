@@ -213,6 +213,36 @@ public class AnalystController {
 		
 	}
 	
+	
+	@RequestMapping(value="/forgot-password-analyst", method=RequestMethod.GET)
+	public String recoverPassword(ModelMap model,String analystId,String mob,String email) {
+
+		Analyst analyst=analystService.findAnalyst(analystId, mob, email);
+		if(analyst==null) {
+			return "forgot-password-analyst";
+		}
+		else {
+		model.addAttribute("analyst",analyst);
+		model.put("analystId", analyst.getAnalystId());
+		
+		return "password-recovery-analyst";
+		}
+	}
+	
+	@RequestMapping(value="/reset-password-analyst/{analystId}", method=RequestMethod.GET)
+	public String verifySecretQuestion( ModelMap model,@PathVariable long analystId,String ans1,String ans2,String ans3) {
+	
+		Analyst analyst=analystService.getAnalyst(analystId);
+		List<AnalystSecretQuestion> secretQuestionList = analyst.getSecretQuestionList();
+	
+	if(analystService.checkAnswer(secretQuestionList, ans1, ans2, ans3)) {
+		return "set-new-pwd-analyst";
+	}
+	else	
+		return "password-recovery-analyst";
+		
+	}
+	
 	@ModelAttribute(name = "category")
 	public Map<String, String> getCategory() {
 		Map<String, String> category = new HashMap<>();
