@@ -1,5 +1,5 @@
 <%@ include file="common/header-analyst.jspf"%>
-<div class="container-fluid">
+<div class="container-fluid p-0">
 	<nav class="navbar navbar-inverse navbar-dark bg-primary">
 		<div class="container-fluid">
 			<div class="navbar-header">

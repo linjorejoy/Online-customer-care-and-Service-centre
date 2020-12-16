@@ -10,7 +10,8 @@
 				<li><a href="/admin-login"><span
 						class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 			</ul> -->
-			<div class="dropdown">
+			<div class="dropdown"><a
+						class="btn btn-light" href="/admin-home">Home</a>
 				<button class="btn btn-light dropdown-toggle" type="button"
 					id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false">Menu</button>
@@ -115,9 +116,22 @@
 								<strong>Complaint Id : ${complaint.complaintId}</strong>
 							</h4>
 							<!-- Subtitle -->
-							<h6 class="font-weight-bold indigo-text py-2">Description</h6>
+							<div class="form-row">
+								<div class="col">
+									<h6 class="font-weight-bold indigo-text py-2">Description</h6>
+								</div>
+									Complaint Created By : <strong>${complaint.user.userId}</strong> 
+								<div class="col">
+									Assigned Analyst Id <strong>${complaint.analyst.analystId}</strong> 
+								</div>
+								<div class="col">
+									<label class="btn btn-info">${complaint.status}</label>
+								</div>
+							</div>
+							
 							<!-- Text -->
 							<p class="card-text">${complaint.description}</p>
+							
 							<div class="span2 text-right">
 								<a
 									href="/show-user-complaint-admin?complaintId=${complaint.complaintId}"

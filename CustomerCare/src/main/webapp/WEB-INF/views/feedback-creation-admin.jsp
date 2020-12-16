@@ -23,7 +23,6 @@
 						<tr>
 							<th scope="col">#</th>
 							<th scope="col">Question Description</th>
-							<th scope="col">Edit</th>
 							<th scope="col">Remove</th>
 						</tr>
 					</thead>
@@ -32,7 +31,6 @@
 						<tr>
 							<th scope="row">${loop.index + 1}</th>
 							<td>${feedbackQuestion.question}</td>
-							<td>Edit</td>
 							<td><a
 								href="/delete-question?responseId=${feedbackQuestion.responseId}&complaintId=${complaintId}">Delete</a></td>
 						</tr>

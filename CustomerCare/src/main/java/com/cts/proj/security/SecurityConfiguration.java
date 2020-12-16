@@ -84,7 +84,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.formLogin()
 				.and()
 				.logout().invalidateHttpSession(true)
-				.clearAuthentication(true);
+				.clearAuthentication(true)
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.logoutSuccessUrl("/roleSelectionPage").permitAll();
 	}
 
 	@Bean

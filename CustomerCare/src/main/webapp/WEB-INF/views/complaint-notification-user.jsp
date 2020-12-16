@@ -10,7 +10,8 @@
 				<li><a href="/admin-login"><span
 						class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 			</ul> -->
-			<div class="dropdown">
+			<div class="dropdown"><a
+						class="btn btn-light" href="/user-home">Home</a>
 				<button class="btn btn-light dropdown-toggle" type="button"
 					id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false">
