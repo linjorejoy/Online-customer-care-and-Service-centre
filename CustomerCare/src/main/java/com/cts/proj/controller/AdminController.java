@@ -121,6 +121,32 @@ public class AdminController {
 		return "feedback-creation-admin";
 	}
 
+	
+	@RequestMapping(value = "/show-all-feedback-admin", method = RequestMethod.GET)
+	public String allFeedbackView(ModelMap model) {
+		
+		List<Feedback> allFeedBack = feedbackService.getAllFeedbacks();
+		System.out.println(allFeedBack);
+		Map<Complaint, List<Feedback>> feedbackSorted = new HashMap<Complaint, List<Feedback>>();
+		for(Feedback feedback : allFeedBack) {
+			
+			if(feedbackSorted.containsKey(feedback.getComplaint())) {
+				List<Feedback> thisComplaintFeedbacks = feedbackSorted.get(feedback.getComplaint());
+				thisComplaintFeedbacks.add(feedback);
+				feedbackSorted.put(feedback.getComplaint(), thisComplaintFeedbacks);
+			}else {
+				List<Feedback> thisComplaintFeedbacks = new ArrayList<Feedback>();
+				thisComplaintFeedbacks.add(feedback);
+				feedbackSorted.put(feedback.getComplaint(), thisComplaintFeedbacks);
+				
+			}
+		}
+		System.out.println(feedbackSorted);
+		model.put("feedbacksMap", feedbackSorted);
+		return "submitted-feedback-view-admin";
+	}
+	
+	
 	@RequestMapping(value = "/show-all-complaint-admin", method = RequestMethod.GET)
 	public String adminAfterLogin(@Validated @ModelAttribute("admin") Admin admin, BindingResult result,
 			ModelMap model) {
