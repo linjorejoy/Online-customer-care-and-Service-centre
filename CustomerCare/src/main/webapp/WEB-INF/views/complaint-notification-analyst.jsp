@@ -11,7 +11,8 @@
 				<li><a href="/admin-login"><span
 						class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 			</ul> -->
-			<div class="dropdown">
+			<div class="dropdown"><a
+						class="btn btn-light" href="/analyst-home">Home</a>
 				<button class="btn  btn-light dropdown-toggle" type="button"
 					id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false">
@@ -19,7 +20,7 @@
 				</button>
 				<div class="dropdown-menu dropdown-menu-right"
 					aria-labelledby="dropdownMenuButton">
-					<a href="/analyst-login" class="dropdown-item"> Logout</a> <a
+					<a href="/logout" class="dropdown-item"> Logout</a> <a
 						class="dropdown-item"
 						href="/analyst-emails?analystId=${analyst.analystId}">Mail<span
 						class="badge badge-danger ml-2">${fn:length(analyst.emailList)}</span></a>

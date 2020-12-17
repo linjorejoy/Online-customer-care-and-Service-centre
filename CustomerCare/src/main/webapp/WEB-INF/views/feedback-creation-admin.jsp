@@ -3,6 +3,8 @@
 	<%@ include file="common/nav-bar-admin.jspf"%>
 	<div class="container">
 		<div class="centering">
+		<div class="p-5 text-center bg-image"
+			style="background-image: url('https://raw.githubusercontent.com/linjorejoy/host-images-for-projects/b8b24b8c78d7ea2401779f33a04551f895b739e4/svg/undraw_survey_05s5.svg'); width: 200px; height: 200px; background-size: contain; background-repeat: no-repeat; position: absolute; right: 0; top: 50%; transform: translate(0%, -50%);"></div>
 
 			<div class="form-row mb-0 container-fluid pt-5">
 				<div class="col-7">
@@ -23,7 +25,6 @@
 						<tr>
 							<th scope="col">#</th>
 							<th scope="col">Question Description</th>
-							<th scope="col">Edit</th>
 							<th scope="col">Remove</th>
 						</tr>
 					</thead>
@@ -32,7 +33,6 @@
 						<tr>
 							<th scope="row">${loop.index + 1}</th>
 							<td>${feedbackQuestion.question}</td>
-							<td>Edit</td>
 							<td><a
 								href="/delete-question?responseId=${feedbackQuestion.responseId}&complaintId=${complaintId}">Delete</a></td>
 						</tr>

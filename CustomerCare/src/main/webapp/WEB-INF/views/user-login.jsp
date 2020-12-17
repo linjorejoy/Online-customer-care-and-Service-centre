@@ -1,6 +1,17 @@
 <%@ include file="common/header-user.jspf"%>
 <div class="container-fluid p-0">
-	<%@ include file="common/nav-bar-user.jspf"%>
+	<nav class="navbar navbar-inverse navbar-dark bg-primary">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/roleSelectionPage">Customer Care</a>
+			</div>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="/user-home"><span
+						class="glyphicon glyphicon-log-in nav-link text-light">Login</span>
+				</a></li>
+			</ul>
+		</div>
+	</nav>
 	<div
 		class="container text-center d-flex align-items-center justify-content-center mt-3">
 		<!-- Default form login -->
@@ -27,8 +38,8 @@
 						path="tempPassword"></form:errors> </small>
 
 				<div class="d-flex justify-content-around">
-					<input class="btn btn-info btn-block my-4 bg-primary text-light" type="Submit"
-						name="submit" value="Submit" />	
+					<input class="btn btn-info btn-block my-4 bg-primary text-light"
+						type="Submit" name="submit" value="Submit" />
 				</div>
 				<div class="d-flex justify-content-around p-4">
 					<div>

@@ -18,8 +18,14 @@
 <link
 	href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css"
 	rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 <script
 	src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 <title>Customer Care</title>
+
+ <link rel = "icon" href =  
+"https://raw.githubusercontent.com/linjorejoy/host-images-for-projects/master/favicon_io/favicon-16x16.png" 
+        >
 </head>
 <body>

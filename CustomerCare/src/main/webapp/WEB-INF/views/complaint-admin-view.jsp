@@ -1,5 +1,5 @@
 <%@ include file="common/header-admin.jspf"%>
-<div class="container-fluid">
+<div class="container-fluid p-0">
 	<%@ include file="common/nav-bar-admin.jspf"%>
 	<div
 		class="container text-center d-flex align-items-center justify-content-center">
@@ -18,8 +18,6 @@
 					<form:input class="form-control" path="complaintId"
 						value="${complaint.complaintId}" />
 				</div>
-			</div>
-			<div class="form-row mb-2">
 				<div class="col">
 					<form:label class="form-control" path="user.userId">User Id :</form:label>
 				</div>
@@ -36,8 +34,6 @@
 					<form:input class="form-control" path="phoneNumber"
 						value="${complaint.phoneNumber}" />
 				</div>
-			</div>
-			<div class="form-row mb-2">
 				<div class="col">
 					<form:label class="form-control" path="user.emailId">Email Id :</form:label>
 				</div>
@@ -54,8 +50,6 @@
 					<form:select class="form-control" path="category"
 						items="${category}" />
 				</div>
-			</div>
-			<div class="form-row mb-2">
 				<div class="col">
 					<form:label class="form-control" path="status">Status</form:label>
 				</div>
@@ -80,8 +74,13 @@
 				<form:errors path="description"></form:errors>
 			</div>
 			<div class="complaint-view-inputs-assign">
-				<input class="btn btn-success" type="submit" value="Assign"> <a
-					href="/download/complaint.xlsx?complaintId=${complaint.complaintId}">Download Excel File</a>
+				<input class="btn btn-success" type="submit" value="Assign">
+				
+				<a class="btn btn-primary
+				" 
+					href="/download/complaint.xlsx?complaintId=${complaint.complaintId}">Download
+					Excel File<span class="material-icons"> get_app </span>
+				</a>
 			</div>
 
 		</form:form>

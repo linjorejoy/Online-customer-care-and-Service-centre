@@ -4,7 +4,8 @@
       <a class="navbar-brand" href="/roleSelectionPage">Customer Care</a>
     </div>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="/user-login"><span class="glyphicon glyphicon-log-in nav-link text-light">Login</span> </a></li>
+      <li><a href="/user-home"><span class="glyphicon glyphicon-log-in nav-link text-light">Home</span> </a></li>
+      <li><a href="/logout"><span class="glyphicon glyphicon-log-in nav-link text-light">Logout</span> </a></li>
     </ul>
   </div>
 </nav>

@@ -23,8 +23,7 @@
 				<p>${email.description}</p>
 			</div>
 			<div class="info">
-
-				<input type="submit" value="Mark As Received"/>
+				<a href="/set-received?emailId=${email.emailId}" class="btn btn-success">Mark as Received</a>
 			</div>
 		</div>
 

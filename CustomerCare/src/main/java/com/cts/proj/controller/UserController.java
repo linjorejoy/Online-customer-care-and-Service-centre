@@ -1,10 +1,15 @@
 package com.cts.proj.controller;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -17,9 +22,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cts.proj.model.Complaint;
 import com.cts.proj.model.Feedback;
+import com.cts.proj.model.LoginDetails;
 import com.cts.proj.model.User;
 import com.cts.proj.model.UserSecretQuestion;
+import com.cts.proj.security.SecureWithSHA256;
 import com.cts.proj.service.ComplaintService;
+import com.cts.proj.service.LoginDetailsService;
 import com.cts.proj.service.UserService;
 
 @Controller
@@ -27,13 +35,24 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
-
 	@Autowired
 	ComplaintService complaintService;
+	@Autowired
+	LoginDetailsService loginDetailsService;
 
+
+    private String getName(ModelMap model) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(principal instanceof UserDetails) {
+            return ((UserDetails)principal).getUsername();
+        }
+        return principal.toString();
+    }
+    
 	@RequestMapping(value = "/user-home")
-	public String userGoToHome(@RequestParam("userId") long userId, ModelMap model) {
+	public String userGoToHome(ModelMap model) {
 
+		long userId = Long.parseLong(getName(model));
 		User user = userService.getUser(userId);
 		model.put("emailCount", user.getEmailList().size());
 		model.put("userId", userId);
@@ -42,8 +61,9 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/user-complaint-list-personal")
-	public String userListThisUsers(@RequestParam("userId") long userId, ModelMap model) {
+	public String userListThisUsers( ModelMap model) {
 
+		long userId = Long.parseLong(getName(model));
 		int currentPage = 1;
 		Page<Complaint> pages = complaintService.getAllComplaintForUser(userId, currentPage - 1, 4, "complaintId",
 				"asc");
@@ -63,10 +83,11 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/user-complaint-list-personal/page/{pageNumber}")
-	public String userListThisUsersNextPage(@RequestParam("userId") long userId, ModelMap model,
+	public String userListThisUsersNextPage(ModelMap model,
 			@PathVariable("pageNumber") int pageNumber, @Param("sortBy") String sortBy,
 			@Param("sortDir") String sortDir, String keyword, String date, String complaintId) {
-
+		
+		long userId = Long.parseLong(getName(model));
 		int currentPage = 1;
 		Page<Complaint> pages = complaintService.getAllComplaintForUser(userId, currentPage - 1, 4, sortBy, sortDir);
 		List<Complaint> complaintList = pages.getContent();
@@ -144,9 +165,10 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/submit-user-feedback", method = RequestMethod.GET)
-	public String submitFeedback(@ModelAttribute("complaint") Complaint complaint, @RequestParam("userId") long userId,
+	public String submitFeedback(@ModelAttribute("complaint") Complaint complaint,
 			@RequestParam("complaintId") long complaintId, ModelMap model) {
 
+		long userId = Long.parseLong(getName(model));
 		Complaint originalComplaint = complaintService.getComplaint(complaintId);
 		List<Feedback> feedbackList = originalComplaint.getFeedbackList();
 
@@ -162,8 +184,8 @@ public class UserController {
 
 	@RequestMapping(value = "/submit-feedback", method = RequestMethod.POST)
 	public String afterSubmitFeedBack(@ModelAttribute("complaint") Complaint complaint, BindingResult result,
-			@RequestParam("userId") long userId, ModelMap model) {
-
+			 ModelMap model) {
+		long userId = Long.parseLong(getName(model));
 		System.out.println(complaint.getFeedbackList());
 
 		Complaint originalComplaint = complaintService.getComplaint(complaint.getComplaintId());
@@ -209,6 +231,66 @@ public class UserController {
 	else	
 		return "password-recovery-user";
 		
+	}
+
+	@RequestMapping(value = "/change-password", method = RequestMethod.POST)
+	public String changePassword(String newPwd, String confirmPwd, long userId, ModelMap model) {
+		Pattern pattern = Pattern
+				.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$@!%&*?])[A-Za-z\\d#$@!%&*?]{6,}$");
+		Matcher matcher = pattern.matcher(newPwd);
+
+		if (newPwd.equals(confirmPwd) && matcher.matches()) {
+			User user = userService.getUser(userId);
+			try {
+				user.setPassword(SecureWithSHA256.getSHA(newPwd));
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			user.setTempPassword(confirmPwd);
+			userService.addUser(user);
+			LoginDetails thisUser = loginDetailsService.getLoginDetailsByRegisteredId(user.getUserId());
+			thisUser.setPassword(newPwd);
+			loginDetailsService.addLoginDetails(thisUser);
+			return "user-home";
+		}else {
+			return "set-new-pwd-user";
+		}
+
+	}
+	@RequestMapping(value="/forgot-userID-mail",method=RequestMethod.GET)
+	public String showForgotUserId() {
+		return "forgot-user-id";
+		
+	}
+	@RequestMapping(value="/forgot-userID-secretquestions",method=RequestMethod.GET)
+	public String showSecretQuestions(ModelMap model,String email) {
+		User user=userService.findUserId(email);
+		//System.out.println("hi");
+		if(user==null) {
+			//System.out.println(user);
+			return "forgot-user-id";
+			
+		}
+		else {
+			model.addAttribute("user", user);
+			model.put("userId", user.getUserId());
+			return "forgot-user-id-sq-question";
+		}
+		
+		
+	}
+	@RequestMapping(value="/show-user-id/{userId}", method=RequestMethod.GET)
+	public String showUserId(ModelMap model,@PathVariable long userId,String ans1,String ans2,String ans3) {
+		User user=userService.getUser(userId);
+		List<UserSecretQuestion> secretQuestionList = user.getSecretQuestionList();
+		if(userService.validateAnswer(secretQuestionList, ans1, ans2, ans3)) {
+			model.put("userId", user.getUserId());
+			return "show-user-id";
+		}
+		else {
+			return "forgot-user-id-sq-question";
+		}
 	}
 	
 	

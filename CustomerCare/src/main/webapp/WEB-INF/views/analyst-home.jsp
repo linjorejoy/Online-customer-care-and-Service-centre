@@ -1,5 +1,5 @@
 <%@ include file="common/header-analyst.jspf"%>
-<div class="container-fluid">
+<div class="container-fluid p-0">
 	<nav class="navbar navbar-inverse navbar-dark bg-primary">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -16,7 +16,7 @@
 					aria-expanded="false">Menu<span class="badge badge-danger ml-2">${emailCount}</span></button>
 				<div class="dropdown-menu dropdown-menu-right"
 					aria-labelledby="dropdownMenuButton">
-					<a href="/analyst-login" class="dropdown-item"> Logout</a> <a
+					<a href="/logout" class="dropdown-item"> Logout</a> <a
 						class="dropdown-item" href="/analyst-emails?analystId=${analyst.analystId}">Mail<span class="badge badge-danger ml-2">${emailCount}</span></a> <a class="dropdown-item"
 						href="#">Show All Complaints</a>
 						<a class="dropdown-item" href="#">View Profile</a>
@@ -28,6 +28,8 @@
 	<div class="container">
 
 		<h2>Welcome ${analyst.firstName}</h2>
+		<div class="p-5 text-center bg-image"
+			style="background-image: url('https://raw.githubusercontent.com/linjorejoy/host-images-for-projects/b8b24b8c78d7ea2401779f33a04551f895b739e4/svg/undraw_at_home_octe.svg'); width: 400px; height: 400px; background-size: contain; background-repeat: no-repeat; position: absolute; left: 50%; top: 80%; transform: translate(-50%, -50%);"></div>
 		<%-- <a href="/create-complaint?userId=${user.userId}">Create Complaint</a> --%>
 
 		<div class="row">

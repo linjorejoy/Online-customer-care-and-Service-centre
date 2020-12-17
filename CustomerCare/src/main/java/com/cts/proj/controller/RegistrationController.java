@@ -23,12 +23,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.cts.proj.model.Admin;
 import com.cts.proj.model.Analyst;
 import com.cts.proj.model.AnalystSecretQuestion;
+import com.cts.proj.model.LoginDetails;
 import com.cts.proj.model.User;
 import com.cts.proj.model.UserSecretQuestion;
 import com.cts.proj.security.SecureWithSHA256;
 import com.cts.proj.service.AdminService;
 import com.cts.proj.service.AnalystSecretQuestionService;
 import com.cts.proj.service.AnalystService;
+import com.cts.proj.service.LoginDetailsService;
 import com.cts.proj.service.SecretQuestionService;
 import com.cts.proj.service.UserSecretQuestionService;
 import com.cts.proj.service.UserService;
@@ -54,6 +56,8 @@ public class RegistrationController {
 	AnalystSecretQuestionService analystSecretQuestionService;
 	@Autowired
 	SecretQuestionService secretQuestionService;
+	@Autowired
+	LoginDetailsService loginDetailsService;
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -92,28 +96,32 @@ public class RegistrationController {
 		long lastAnalystId = analystService.getLastId();
 		analyst.setAnalystId(lastAnalystId + 1);
 
+		System.out.println("last A Id : " + lastAnalystId);
 		long lastSqId = analystSecretQuestionService.getLastId();
 
 		AnalystSecretQuestion qsn1 = new AnalystSecretQuestion(++lastSqId,
-				analyst.getSecretQuestionList().get(0).getAnswer(), secretQuestionService.getQuestionById(9001));
+				analyst.getSecretQuestionList().get(0).getAnswer(), secretQuestionService.getQuestionById(9000));
 		qsn1.setAnalyst(analyst);
 		AnalystSecretQuestion qsn2 = new AnalystSecretQuestion(++lastSqId,
-				analyst.getSecretQuestionList().get(1).getAnswer(), secretQuestionService.getQuestionById(9002));
+				analyst.getSecretQuestionList().get(1).getAnswer(), secretQuestionService.getQuestionById(9001));
 		qsn2.setAnalyst(analyst);
 		AnalystSecretQuestion qsn3 = new AnalystSecretQuestion(++lastSqId,
-				analyst.getSecretQuestionList().get(2).getAnswer(), secretQuestionService.getQuestionById(9003));
+				analyst.getSecretQuestionList().get(2).getAnswer(), secretQuestionService.getQuestionById(9002));
 		qsn3.setAnalyst(analyst);
 
 		List<AnalystSecretQuestion> questionList = new ArrayList<>();
 		questionList.add(qsn1);
 		questionList.add(qsn2);
 		questionList.add(qsn3);
+		
+		System.out.println("\n\n" + qsn1 + "\n" + qsn2 + "\n" + qsn3 + "\n\n");
 
 		analyst.setSecretQuestionList(questionList);
-		
-		
-		
+
+		System.out.println(analyst);
 		analystService.addAnalyst(analyst);
+		loginDetailsService.addLoginDetails(
+				new LoginDetails(Long.toString(analyst.getAnalystId()), analyst.getTempPassword(), "ROLE_ANALYST"));
 		model.put("isRegisrered", true);
 		model.put("analystId", analyst.getAnalystId());
 		return "analyst-reg-status";
@@ -155,13 +163,13 @@ public class RegistrationController {
 		long lastSqId = userSecretQuestionService.getLastId();
 
 		UserSecretQuestion qsn1 = new UserSecretQuestion(++lastSqId, user.getSecretQuestionList().get(0).getAnswer(),
-				secretQuestionService.getQuestionById(9001));
+				secretQuestionService.getQuestionById(9000));
 		qsn1.setUser(user);
 		UserSecretQuestion qsn2 = new UserSecretQuestion(++lastSqId, user.getSecretQuestionList().get(1).getAnswer(),
-				secretQuestionService.getQuestionById(9002));
+				secretQuestionService.getQuestionById(9001));
 		qsn2.setUser(user);
 		UserSecretQuestion qsn3 = new UserSecretQuestion(++lastSqId, user.getSecretQuestionList().get(2).getAnswer(),
-				secretQuestionService.getQuestionById(9003));
+				secretQuestionService.getQuestionById(9002));
 		qsn3.setUser(user);
 
 		List<UserSecretQuestion> questionList = new ArrayList<>();
@@ -172,6 +180,8 @@ public class RegistrationController {
 		user.setSecretQuestionList(questionList);
 		System.out.println("\n\nBefore Adding : " + user);
 		userService.addUser(user);
+		loginDetailsService.addLoginDetails(
+				new LoginDetails(Long.toString(user.getUserId()), user.getTempPassword(), "ROLE_USER"));
 
 		System.out.println("\n\n" + qsn1);
 

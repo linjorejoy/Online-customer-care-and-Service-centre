@@ -15,6 +15,8 @@ import org.apache.commons.compress.utils.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -31,11 +33,13 @@ import com.cts.proj.model.Admin;
 import com.cts.proj.model.Analyst;
 import com.cts.proj.model.Complaint;
 import com.cts.proj.model.EmailAnalyst;
+import com.cts.proj.model.EmailUserAnalyst;
 import com.cts.proj.model.Feedback;
 import com.cts.proj.service.AdminService;
 import com.cts.proj.service.AnalystService;
 import com.cts.proj.service.ComplaintService;
 import com.cts.proj.service.EmailAnalystService;
+import com.cts.proj.service.EmailUserAnalystService;
 import com.cts.proj.service.FeedbackService;
 import com.cts.proj.service.UserService;
 
@@ -55,6 +59,9 @@ public class AdminController {
 
 	@Autowired
 	EmailAnalystService emailAnalystService;
+	
+	@Autowired
+	EmailUserAnalystService emailUserAnalystService;
 
 	@Autowired
 	FeedbackService feedbackService;
@@ -65,9 +72,18 @@ public class AdminController {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
 	}
 
+	private String getName(ModelMap model) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal instanceof UserDetails) {
+			return ((UserDetails) principal).getUsername();
+		}
+		return principal.toString();
+	}
+
 	@RequestMapping(value = "/admin-home", method = RequestMethod.GET)
 	public String goToAdminHome(ModelMap model) {
-		model.put("admin", adminService.getAdmin(1001));
+		long adminId = Long.parseLong(getName(model));
+		model.put("admin", adminService.getAdmin(adminId));
 		return "admin-home";
 	}
 
@@ -148,6 +164,7 @@ public class AdminController {
 		if (result.hasErrors()) {
 			return "complaint-admin-view";
 		}
+		long adminId = Long.parseLong(getName(model));
 		Complaint originalComplaint = complaintService.getComplaint(complaint.getComplaintId());
 		originalComplaint.setCategory(complaint.getCategory());
 		originalComplaint.setStatus(complaint.getStatus());
@@ -160,7 +177,7 @@ public class AdminController {
 		EmailAnalyst emailToAnalyst = new EmailAnalyst();
 		emailToAnalyst.setEmailId(emailId);
 		emailToAnalyst.setAnalyst(analystService.getAnalyst(analystId));
-		emailToAnalyst.setAdmin(adminService.getAdmin(1001));
+		emailToAnalyst.setAdmin(adminService.getAdmin(adminId));
 		emailToAnalyst.setSentDate(new Date());
 		emailToAnalyst.setReceived(false);
 //		System.out.println(emailToAnalyst.getAdmin());
@@ -219,6 +236,82 @@ public class AdminController {
 			model.addAttribute("complaintListAdmin", complaintService.findDate(date));
 		}
 		return "complaint-notification-admin";
+	}
+	
+
+	@RequestMapping(value = "/show-user-complaint-user", method = RequestMethod.GET)
+	public String showUserComplaints(@RequestParam long complaintId, ModelMap model) {
+		Complaint complaint = complaintService.getComplaint(complaintId);
+		List<Analyst> analystList = analystService.getAllAnalyst();
+		Map<String, String> supportLevelWithId = new HashMap<String, String>();
+		model.put("complaint", complaint);
+		return "complaint-view-user";
+
+	}
+	
+	@RequestMapping(value = "/update-complaint-user", method = RequestMethod.POST)
+	public String updateComplaintUser(@Validated @ModelAttribute("complaint") Complaint complaint,
+			BindingResult result, ModelMap model) {
+		if (result.hasErrors()) {
+			return "complaint-admin-view";
+		}
+		Complaint originalComplaint = complaintService.getComplaint(complaint.getComplaintId());
+		//System.out.println(originalComplaint);
+		//originalComplaint.setCategory(complaint.getCategory());
+		originalComplaint.setStatus(complaint.getStatus());
+		long analystId = originalComplaint.getAnalyst().getAnalystId();
+
+		originalComplaint.setAnalyst(analystService.getAnalyst(analystId));
+		long emailId = emailUserAnalystService.getLastId() + 1;
+
+		complaintService.addComplaint(originalComplaint);
+		
+		EmailUserAnalyst email = new EmailUserAnalyst();
+		email.setEmailId(emailId);
+		email.setAnalyst(analystService.getAnalyst(analystId));
+		email.setUser(userService.getUser(Long.parseLong(getName(model))));
+		email.setSentDate(new Date());
+		email.setReceived(false);
+
+//		EmailAnalyst emailToAnalyst = new EmailAnalyst();
+//		emailToAnalyst.setEmailId(emailId);
+//		emailToAnalyst.setAnalyst(analystService.getAnalyst(analystId));
+//		emailToAnalyst.setAdmin(adminService.getAdmin(1001));
+//		emailToAnalyst.setSentDate(new Date());
+//		emailToAnalyst.setReceived(false);
+		//System.out.println(emailToAnalyst.getAdmin());
+
+		String[] messageTemplate = mailMessage();
+		String mailMessage = messageTemplate[0] + email.getAnalyst().getFirstName() + "\n\n";
+		mailMessage += messageTemplate[1] + originalComplaint.getUser().getFirstName() + messageTemplate[2] + "\n";
+		mailMessage += messageTemplate[3] + "\n";
+		mailMessage += messageTemplate[4] + "\n" + email.getUser().getFirstName();
+
+//		emailToAnalyst.setDescription(mailMessage);
+		
+		email.setDescription(mailMessage);
+
+//		emailAnalystService.addEmail(emailToAnalyst);
+		emailUserAnalystService.addEmail(email);
+
+//		System.out.println(emailToAnalyst);
+		model.put("complaint", originalComplaint);
+//		model.put("emailAnalyst", emailToAnalyst);
+		model.put("email", email);
+//		model.put("message", mailMessage);
+		return "user-to-analyst-mail";
+
+	}
+	
+	@RequestMapping(value = "/user-sent-email-to-analyst", method = RequestMethod.POST)
+	public String sentEmailUser(@ModelAttribute("email") EmailUserAnalyst email, BindingResult results,
+			ModelMap model) {
+		System.out.println(email.getEmailId());
+		EmailUserAnalyst originalEmail = emailUserAnalystService.getEmail(email.getEmailId());
+		originalEmail.setDescription(email.getDescription());
+		emailUserAnalystService.addEmail(originalEmail);
+//		emailAnalystService.addEmail(originalEmail);
+		return "user-home";
 	}
 
 	@ModelAttribute(name = "category")

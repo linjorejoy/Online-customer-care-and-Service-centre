@@ -11,10 +11,6 @@
 			<c:set var="isAdmin" value="${adminActive}"></c:set>
 
 
-
-
-
-
 			<div
 				class="container text-center d-flex align-items-center justify-content-center">
 				<ul class="nav nav-pills mb-1" id="pills-tab" role="tablist">
@@ -43,6 +39,8 @@
 
 				<div class='tab-pane fade <c:if test="${isUser}">active show</c:if>'
 					id="pills-user" role="tabpanel" aria-labelledby="pills-user-tab">
+					<div class="p-5 text-center bg-image"
+						style="background-image: url('https://raw.githubusercontent.com/linjorejoy/host-images-for-projects/4146c9b7082d1dc797109ea2b66b287e76c597d7/svg/undraw_maintenance_cn7j.svg'); width: 200px; height: 200px; background-size: contain; background-repeat: no-repeat; position: absolute; left: 20px; top: 250px;"></div>
 					<form:form action="/register-user" modelAttribute="user"
 						method="POST" cssClass="text-center border border-light p-5">
 						<div class="form-row mb-2">
@@ -55,7 +53,7 @@
 										<form:input class="form-control" placeholder="First name"
 											path="firstName" />
 										<small id="defaultRegisterFormPhoneHelpBlock"
-											class="form-text text-warning mb-0"><form:errors
+											class="form-text text-danger mb-0"><form:errors
 												path="firstName"></form:errors></small>
 									</div>
 									<div class="col">
@@ -63,7 +61,7 @@
 										<form:input class="form-control" placeholder="Last name"
 											path="lastName" />
 										<small id="defaultRegisterFormPhoneHelpBlock"
-											class="form-text text-warning mb-0"><form:errors
+											class="form-text text-danger mb-0"><form:errors
 												path="lastName"></form:errors></small>
 									</div>
 								</div>
@@ -76,7 +74,7 @@
 											aria-describedby="defaultRegisterFormPhoneHelpBlock" />
 										<small id="defaultRegisterFormPhoneHelpBlock"
 											class="form-text text-muted mb-0"> <form:errors
-												class="form-text text-warning mb-0" path="phoneNumber"></form:errors></small>
+												class="form-text text-danger mb-0" path="phoneNumber"></form:errors></small>
 									</div>
 									<div class="col">
 										<small id="defaultRegisterFormPhoneHelpBlock"
@@ -84,7 +82,7 @@
 										<form:input class="form-control mb-2" placeholder="E-mail"
 											path="emailId" />
 										<small id="defaultRegisterFormPhoneHelpBlock"
-											class="form-text text-warning mb-0"><form:errors
+											class="form-text text-danger mb-0"><form:errors
 												path="emailId"></form:errors></small>
 									</div>
 								</div>
@@ -95,9 +93,9 @@
 										<small id="defaultRegisterFormPhoneHelpBlock"
 											class="form-text text-muted mb-1"> Date Of Birth </small>
 										<form:input path="dateOfBirth" class="form-control mb-2"
-											placeholder="Date Of Birth" />
+											placeholder="Date Of Birth" id="dateOfBirth" />
 										<small id="defaultRegisterFormPhoneHelpBlock"
-											class="form-text text-warning mb-0"><form:errors
+											class="form-text text-danger mb-0"><form:errors
 												path="dateOfBirth"></form:errors></small>
 
 									</div>
@@ -107,7 +105,7 @@
 										<form:select class="form-control mb-2" path="gender"
 											items="${genderList}"></form:select>
 										<small id="defaultRegisterFormPhoneHelpBlock"
-											class="form-text text-warning mb-0"><form:errors
+											class="form-text text-danger mb-0"><form:errors
 												path="gender"></form:errors></small>
 									</div>
 								</div>
@@ -116,7 +114,7 @@
 										<form:input class="form-control mb-1" placeholder="Password"
 											type="password" path="password" />
 										<small id="defaultRegisterFormPhoneHelpBlock"
-											class="form-text text-warning mb-0"><form:errors
+											class="form-text text-danger mb-0"><form:errors
 												path="password"></form:errors></small>
 
 									</div>
@@ -125,7 +123,7 @@
 											placeholder="Confirm Password" type="password"
 											path="tempPassword" />
 										<small id="defaultRegisterFormPhoneHelpBlock"
-											class="form-text text-warning mb-0"><form:errors
+											class="form-text text-danger mb-0"><form:errors
 												path="tempPassword"></form:errors></small>
 									</div>
 								</div>
@@ -134,19 +132,29 @@
 										class="btn btn-info my-4 btn-block bg-primary text-light"
 										name="Submit" value="Register" /> OR<a
 										class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect bg-success text-light"
-										href="/user-login">Login</a>
+										href="/user-home">Login</a>
+								</div>
+								<div class="form-buttons-div">
+									<a href="/forgot-userID-mail" class="mr-2 ml-2">Forgot User
+										Id?</a> <a href="/forgot-password" class="mr-2 ml-2">Forgot
+										Password?</a>
 								</div>
 
 
 							</div>
 							<div class="col align-items-center justify-contents-center">
 								<%-- <form:select path="secretQuestionList" items="${secretQuestions}"></form:select> --%>
-								<h5 class="text-muted">Some Security Questions for Password Recovery</h5>
-								<c:forEach var="question" items="${secretQuestions}" varStatus="i">
+								<h5 class="text-muted">Some Security Questions for Password
+									Recovery</h5>
+								<c:forEach var="question" items="${secretQuestions}"
+									varStatus="i">
 									<div class="container w-75">
-									${question}
-									<form:hidden path="secretQuestionList[${i.index}].secretQuestions.questionId" value = "${i.index + 9001}"/>
-									<form:input class="form-control mb-5" path="secretQuestionList[${i.index}].answer"/>
+										${question}
+										<form:hidden
+											path="secretQuestionList[${i.index}].secretQuestions.questionId"
+											value="${i.index + 9001}" />
+										<form:input class="form-control mb-5"
+											path="secretQuestionList[${i.index}].answer" />
 									</div>
 								</c:forEach>
 							</div>
@@ -166,7 +174,8 @@
 					class='tab-pane fade <c:if test="${isAnalyst}">active show</c:if>'
 					id="pills-analyst" role="tabpanel"
 					aria-labelledby="pills-analyst-tab">
-
+					<div class="p-5 text-center bg-image"
+						style="background-image: url('https://raw.githubusercontent.com/linjorejoy/host-images-for-projects/51de82b8736f7d92e4c2abd0a61b56d5dc369c04/svg/undraw_programmer_imem.svg'); width: 200px; height: 200px; background-size: contain; background-repeat: no-repeat; position: absolute; left: 20px; top: 250px;"></div>
 					<form:form action="/register-analyst" modelAttribute="analyst"
 						method="POST" cssClass="form-div-my">
 
@@ -178,7 +187,7 @@
 										<form:input class="form-control" placeholder="First name"
 											path="firstName" />
 										<small id="defaultRegisterFormPhoneHelpBlock"
-											class="form-text text-warning mb-1"><form:errors
+											class="form-text text-danger mb-1"><form:errors
 												path="firstName"></form:errors></small>
 									</div>
 									<div class="col">
@@ -186,7 +195,7 @@
 										<form:input class="form-control" placeholder="Last name"
 											path="lastName" />
 										<small id="defaultRegisterFormPhoneHelpBlock"
-											class="form-text text-warning mb-1"><form:errors
+											class="form-text text-danger mb-1"><form:errors
 												path="lastName"></form:errors></small>
 									</div>
 								</div>
@@ -199,7 +208,7 @@
 											aria-describedby="defaultRegisterFormPhoneHelpBlock" />
 										<small id="defaultRegisterFormPhoneHelpBlock"
 											class="form-text text-muted mb-0"> <form:errors
-												class="form-text text-warning mb-0" path="phoneNumber"></form:errors></small>
+												class="form-text text-danger mb-0" path="phoneNumber"></form:errors></small>
 									</div>
 									<div class="col">
 										<small id="defaultRegisterFormPhoneHelpBlock"
@@ -207,7 +216,7 @@
 										<form:input class="form-control mb-2" placeholder="E-mail"
 											path="emailId" />
 										<small id="defaultRegisterFormPhoneHelpBlock"
-											class="form-text text-warning mb-0"><form:errors
+											class="form-text text-danger mb-0"><form:errors
 												path="emailId"></form:errors></small>
 									</div>
 								</div>
@@ -217,9 +226,9 @@
 										<small id="defaultRegisterFormPhoneHelpBlock"
 											class="form-text text-muted mb-1"> Date Of Birth </small>
 										<form:input path="dateOfBirth" class="form-control mb-2"
-											placeholder="Date Of Birth" />
+											placeholder="Date Of Birth" id="dateOfBirth" />
 										<small id="defaultRegisterFormPhoneHelpBlock"
-											class="form-text text-warning mb-1"><form:errors
+											class="form-text text-danger mb-1"><form:errors
 												path="dateOfBirth"></form:errors></small>
 
 									</div>
@@ -229,7 +238,7 @@
 										<form:select class="form-control mb-2" path="gender"
 											items="${genderList}"></form:select>
 										<small id="defaultRegisterFormPhoneHelpBlock"
-											class="form-text text-warning mb-1"><form:errors
+											class="form-text text-danger mb-1"><form:errors
 												path="gender"></form:errors></small>
 									</div>
 								</div>
@@ -240,7 +249,7 @@
 									<form:select class="form-control mb-2" path="supportLevel"
 										items="${supportLevel}"></form:select>
 									<small id="defaultRegisterFormPhoneHelpBlock"
-										class="form-text text-warning mb-1"><form:errors
+										class="form-text text-danger mb-1"><form:errors
 											path="supportLevel"></form:errors></small>
 								</div>
 								<%-- <div class="form-div-inputs">
@@ -254,7 +263,7 @@
 										<form:input class="form-control mb-1" placeholder="Password"
 											type="password" path="password" />
 										<small id="defaultRegisterFormPhoneHelpBlock"
-											class="form-text text-warning mb-1"><form:errors
+											class="form-text text-danger mb-1"><form:errors
 												path="password"></form:errors></small>
 
 									</div>
@@ -263,7 +272,7 @@
 											placeholder="Confirm Password" type="password"
 											path="tempPassword" />
 										<small id="defaultRegisterFormPhoneHelpBlock"
-											class="form-text text-warning mb-1"><form:errors
+											class="form-text text-danger mb-1"><form:errors
 												path="tempPassword"></form:errors></small>
 									</div>
 								</div>
@@ -272,16 +281,26 @@
 										class="btn btn-info my-4 btn-block bg-primary text-light"
 										name="Submit" value="Register" />OR <a
 										class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect bg-success text-light"
-										href="/analyst-login">Login</a>
+										href="/analyst-home">Login</a>
+								</div>
+								<div class="form-buttons-div">
+									<a href="/forgot-id" " class="mr-2 ml-2">Forgot User Id?</a> <a
+										href="/forgot-password-analyst" class="mr-2 ml-2">Forgot
+										Password?</a>
 								</div>
 							</div>
 							<div class="col align-items-center justify-contents-center">
-								<h5 class="text-muted">Some Security Questions for Password Recovery</h5>
-								<c:forEach var="question" items="${secretQuestions}" varStatus="i">
+								<h5 class="text-muted">Some Security Questions for Password
+									Recovery</h5>
+								<c:forEach var="question" items="${secretQuestions}"
+									varStatus="i">
 									<div class="container w-75">
-									${question}
-									<form:hidden path="secretQuestionList[${i.index}].secretQuestions.questionId" value = "${i.index + 9001}"/>
-									<form:input class="form-control mb-5" path="secretQuestionList[${i.index}].answer"/>
+										${question}
+										<form:hidden
+											path="secretQuestionList[${i.index}].secretQuestions.questionId"
+											value="${i.index + 9001}" />
+										<form:input class="form-control mb-5"
+											path="secretQuestionList[${i.index}].answer" />
 									</div>
 								</c:forEach>
 							</div>
@@ -299,47 +318,14 @@
 				<div
 					class='tab-pane fade <c:if test="${isAdmin}">show active</c:if>'
 					id="pills-admin" role="tabpanel" aria-labelledby="pills-admin-tab">
-					<div class="container w-50">
-						<form:form action="/admin-login" modelAttribute="admin"
-							method="POST" cssClass="form">
-							<div class="form-row mb-2">
-								<small id="defaultRegisterFormPhoneHelpBlock"
-									class="form-text text-muted mb-1"> Admin Id </small>
-								<form:input class="form-control mb-4" placeholder="Admin Id"
-									path="adminId" id="adminId" />
-								<small id="defaultRegisterFormPhoneHelpBlock"
-									class="form-text text-warning mb-1"><form:errors
-										path="adminId"></form:errors></small>
-							</div>
-							<div class="form-row mb-2">
-								<form:input class="form-control mb-2" placeholder="Password"
-									path="tempPassword" type="password" id="password" />
-								<br> <small id="defaultRegisterFormPhoneHelpBlock"
-									class="form-text text-warning mb-1"><form:errors
-										cssClass="text-warning" path="tempPassword"></form:errors></small>
-							</div>
-							<div class="d-flex justify-content-around form-row mb-2">
-								<div>
-									<!-- Forgot password -->
-									<a href="">Forgot User Id?</a>
-								</div>
-								<div>
-									<!-- Forgot password -->
-									<a href="">Forgot password?</a>
-								</div>
-							</div>
-
-							<div class="form-buttons-div">
-								<input type="submit"
-									class="btn btn-info my-4 btn-block bg-success text-light"
-									name="Submit" value="Login" />
-							</div>
-						</form:form>
-					</div>
+					<div class="p-5 text-center bg-image"
+						style="background-image: url('https://raw.githubusercontent.com/linjorejoy/host-images-for-projects/51de82b8736f7d92e4c2abd0a61b56d5dc369c04/svg/undraw_programming_2svr.svg'); width: 500px; height: 500px; background-size: contain; background-repeat: no-repeat; position: absolute; left: 50%; top: 75%; transform: translate(-50%, -50%);"></div>
+					<a href="/admin-home" class="btn btn-success btn-lg">Login</a>
 				</div>
 			</div>
 		</div>
 	</div>
-	<%@ include file="common/footer-role-selection.jspf"%>
+</div>
+<%@ include file="common/footer-role-selection.jspf"%>
 </div>
 <%@ include file="common/end-tags-role-selection.jspf"%>

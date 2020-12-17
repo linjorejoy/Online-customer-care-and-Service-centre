@@ -11,7 +11,8 @@
 				<li><a href="/admin-login"><span
 						class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 			</ul> -->
-			<div class="dropdown">
+			<div class="dropdown"><a
+						class="btn btn-light" href="/user-home">Home</a>
 				<button class="btn btn-light dropdown-toggle" type="button"
 					id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false">
@@ -19,10 +20,9 @@
 				</button>
 				<div class="dropdown-menu dropdown-menu-right"
 					aria-labelledby="dropdownMenuButton">
-					<a href="/user-login" class="dropdown-item"> Logout</a> <a
+					<a href="/logout" class="dropdown-item"> Logout</a> <a
 						class="dropdown-item" href="#">Mail<span
-						class="badge badge-danger ml-2">${emailCount}</span></a> <a
-						class="dropdown-item" href="/user-home?userId=${user.userId}">Home</a>
+						class="badge badge-danger ml-2">${emailCount}</span></a> 
 					<a class="dropdown-item" href="#">View Profile</a>
 					<!-- <a class="dropdown-item" href="#">Something	else here</a> -->
 				</div>
@@ -166,7 +166,7 @@
 								</c:if>
 
 								<a
-									href="/show-user-complaint-admin?complaintId=${complaint.complaintId}"
+									href="/show-user-complaint-user?complaintId=${complaint.complaintId}"
 									class="btn btn-primary">View</a>
 								<!-- <a href="#"
 									class="btn btn-primary">Go somewhere</a> -->
