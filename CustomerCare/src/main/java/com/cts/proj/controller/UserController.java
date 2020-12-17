@@ -163,6 +163,15 @@ public class UserController {
 		return "complaint-notification-user";
 
 	}
+	
+	@RequestMapping(value = "/close-complaint-user", method = RequestMethod.GET )
+	public String closeComplaintUser(@RequestParam("complaintId")long complaintId) {
+		
+		Complaint complaint = complaintService.getComplaint(complaintId);		
+		complaint.setStatus("closed");
+		complaintService.addComplaint(complaint);
+		return "redirect:/user-complaint-list-view";
+	}
 
 	@RequestMapping(value = "/submit-user-feedback", method = RequestMethod.GET)
 	public String submitFeedback(@ModelAttribute("complaint") Complaint complaint,

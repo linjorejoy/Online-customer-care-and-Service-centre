@@ -18,8 +18,6 @@
 					<form:input class="form-control" path="complaintId"
 						value="${complaint.complaintId}" />
 				</div>
-			</div>
-			<div class="form-row mb-2">
 				<div class="col">
 					<form:label class="form-control" path="user.userId">User Id :</form:label>
 				</div>
@@ -36,8 +34,6 @@
 					<form:input class="form-control" path="phoneNumber"
 						value="${complaint.phoneNumber}" />
 				</div>
-			</div>
-			<div class="form-row mb-2">
 				<div class="col">
 					<form:label class="form-control" path="user.emailId">Email Id :</form:label>
 				</div>
@@ -54,8 +50,6 @@
 					<form:select class="form-control" path="category"
 						items="${category}" />
 				</div>
-			</div>
-			<div class="form-row mb-2">
 				<div class="col">
 					<form:label class="form-control" path="status">Status</form:label>
 				</div>
@@ -74,15 +68,21 @@
 			<div class="form-group shadow-textarea">
 				<label for="exampleFormControlTextarea6">Description</label>
 				<form:textarea path="description" class="form-control z-depth-1 p-4"
-					id="exampleFormControlTextarea6" rows="4" cols="100"
+					id="exampleFormControlTextarea6" rows="3" cols="100"
 					value="${complaint.description}"></form:textarea>
 				<form:errors path="description"></form:errors>
 			</div>
-			<div class="complaint-view-inputs-assign">
-				<input class="btn btn-success" type="submit" value="ReOpen">
-				
-			</div>
+			<div class="form-row mb-2">
+				<div class="col mr-4">
+					<input class="btn btn-primary" type="submit" value="ReOpen">
 
+				</div>
+				<div class="col ml-4">
+					<a
+						href="/close-complaint-user?complaintId=${complaint.complaintId}"
+						class="btn btn-success">Close Complaint</a>
+				</div>
+			</div>
 		</form:form>
 	</div>
 	<%@ include file="common/footer-user.jspf"%>

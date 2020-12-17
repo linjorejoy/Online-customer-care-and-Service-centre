@@ -74,7 +74,8 @@ public class AnalystController {
 	public String analystGoToHome(ModelMap model) {
 		long analystId = Long.parseLong(getName(model));
 		Analyst analyst = analystService.getAnalyst(analystId);
-		model.put("emailCount", analyst.getEmailList().size());
+		
+		model.put("emailCount", analyst.getEmailList().size() + analyst.getEmailUserAnalyst().size());
 		model.put("analystId", analystId);
 		model.put("analyst", analyst);
 //		User user = userService.getUser(userId);
@@ -180,6 +181,23 @@ public class AnalystController {
 		model.put("email", email);
 		model.put("analyst", analystService.getAnalyst(analystId));
 		return "each-email-analyst";
+	}
+	
+	@RequestMapping(value = "/mark-email-received", method = RequestMethod.GET)
+	public String markEmailAnalystReceived(@RequestParam("emailId")long emailId) {
+		EmailAnalyst email = emailAnalystService.getEmailAnalyst(emailId);
+		email.setReceived(true);
+		emailAnalystService.addEmail(email);		
+		return "redirect:/analyst-emails";
+	}
+
+	
+	@RequestMapping(value = "/mark-email-user-received", method = RequestMethod.GET)
+	public String markEmailFromUserAnalystReceived(@RequestParam("emailId")long emailId) {
+		EmailUserAnalyst email = emailUserAnalystService.getEmail(emailId);
+		email.setReceived(true);
+		emailUserAnalystService.addEmail(email);		
+		return "redirect:/analyst-emails";
 	}
 
 	@RequestMapping(value = "/view-email-analyst-from-user", method = RequestMethod.GET)

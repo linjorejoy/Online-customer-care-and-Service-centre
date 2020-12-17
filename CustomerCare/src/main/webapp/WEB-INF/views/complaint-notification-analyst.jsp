@@ -35,6 +35,8 @@
 
 	<div
 		class="container text-center d-flex align-items-center justify-content-center mt-3">
+		<div class="p-5 text-center bg-image"
+			style="background-image: url('https://raw.githubusercontent.com/linjorejoy/host-images-for-projects/b8b24b8c78d7ea2401779f33a04551f895b739e4/svg/undraw_Selection_re_poer.svg'); width: 300px; height: 300px; background-size: contain; background-repeat: no-repeat; position: absolute; right: 2%; top: 50%; transform: translate(10%, -50%);"></div>
 		<div class="centering">
 			<div class="heading">
 				<h1>Complaint Notifications</h1>

@@ -10,8 +10,8 @@
 				<li><a href="/admin-login"><span
 						class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 			</ul> -->
-			<div class="dropdown"><a
-						class="btn btn-light" href="/user-home">Home</a>
+			<div class="dropdown">
+				<a class="btn btn-light" href="/user-home">Home</a>
 				<button class="btn btn-light dropdown-toggle" type="button"
 					id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false">
@@ -22,8 +22,8 @@
 					<a href="/logout" class="dropdown-item"> Logout</a> <a
 						class="dropdown-item" href="#">Mail<span
 						class="badge badge-danger ml-2">${emailCount}</span></a> <a
-						class="dropdown-item"
-						href="/user-home?userId=${user.userId}">Home</a> <a class="dropdown-item" href="#">View Profile</a>
+						class="dropdown-item" href="/user-home?userId=${user.userId}">Home</a>
+					<a class="dropdown-item" href="#">View Profile</a>
 					<!-- <a class="dropdown-item" href="#">Something	else here</a> -->
 				</div>
 			</div>
@@ -33,6 +33,8 @@
 
 	<div
 		class="container text-center d-flex align-items-center justify-content-center">
+		<div class="p-5 text-center bg-image"
+			style="background-image: url('https://raw.githubusercontent.com/linjorejoy/host-images-for-projects/b8b24b8c78d7ea2401779f33a04551f895b739e4/svg/undraw_Selection_re_poer.svg'); width: 300px; height: 300px; background-size: contain; background-repeat: no-repeat; position: absolute; right: 2%; top: 50%; transform: translate(10%, -50%);"></div>
 		<div class="centering">
 			<div class="heading">
 				<h1>Complaint Notifications</h1>
@@ -151,16 +153,27 @@
 								<strong>Complaint Id : ${complaint.complaintId}</strong>
 							</h4>
 							<!-- Subtitle -->
-							<h6 class="font-weight-bold indigo-text py-2">Description</h6>
+							<div class="form-row">
+								<div class="col">
+									<h6 class="font-weight-bold indigo-text py-2">Description</h6>
+								</div>
+								Complaint Created By : <strong>${complaint.user.userId}</strong>
+								<div class="col">
+									Assigned Analyst Id <strong>${complaint.analyst.analystId}</strong>
+								</div>
+								<div class="col">
+									<label class="btn btn-info">${complaint.status}</label>
+								</div>
+							</div>
 							<!-- Text -->
 							<p class="card-text">${complaint.description}</p>
-							<div class="span2 text-right">
+							<%-- <div class="span2 text-right">
 								<a
 									href="/show-user-complaint-user?complaintId=${complaint.complaintId}"
 									class="btn btn-primary">View</a>
 								<!-- <a href="#"
 									class="btn btn-primary">Go somewhere</a> -->
-							</div>
+							</div> --%>
 						</div>
 
 					</c:forEach>

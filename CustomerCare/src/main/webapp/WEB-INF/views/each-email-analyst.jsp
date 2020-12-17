@@ -5,7 +5,7 @@
 		<div class="email-div">
 			<div class="info">
 				<label for="" class="label-email">Sent By : </label>
-				<label for="" class="output-email"></label>
+				<label for="" class="output-email">${email.admin.adminId}</label>
 			</div>
 			<div class="info">
 
@@ -23,7 +23,7 @@
 				<p>${email.description}</p>
 			</div>
 			<div class="info">
-				<a href="/set-received?emailId=${email.emailId}" class="btn btn-success">Mark as Received</a>
+				<a href="/mark-email-received?emailId=${email.emailId}" class="btn btn-success">Mark as Received</a>
 			</div>
 		</div>
 

@@ -15,23 +15,25 @@
 			<!-- forEach -->
 			<c:forEach var="email" items="${analyst.emailList}">
 
-
-				<tr>
+				<c:set var="received" value="${!email.received}"></c:set>
+				<tr <c:if test="${received}">style='font-weight: bold;'</c:if> >
 					<td><div class="overflow-hidden">${email.emailId}</div></td>
 					<td><div class="overflow-hidden">${email.sentDate}</div></td>
 					<td><div>${fn:substring(email.description,0, 80)}...............</div></td>
-					<td><a href="/view-email-analyst?emailId=${email.emailId}&analystId=${analyst.analystId}">View</a></td>
+					<td><a
+						href="/view-email-analyst?emailId=${email.emailId}&analystId=${analyst.analystId}">View</a></td>
 				</tr>
 				<!-- end -->
 			</c:forEach>
 			<c:forEach var="email" items="${analyst.emailUserAnalyst}">
 
-
-				<tr>
+				<c:set var="received" value="${!email.received}"></c:set>
+				<tr  <c:if test="${received}">style='font-weight: bold;'</c:if> >
 					<td><div class="overflow-hidden">${email.emailId}</div></td>
 					<td><div class="overflow-hidden">${email.sentDate}</div></td>
 					<td><div>${fn:substring(email.description,0, 80)}...............</div></td>
-					<td><a href="/view-email-analyst-from-user?emailId=${email.emailId}">View</a></td>
+					<td><a
+						href="/view-email-analyst-from-user?emailId=${email.emailId}">View</a></td>
 				</tr>
 				<!-- end -->
 			</c:forEach>

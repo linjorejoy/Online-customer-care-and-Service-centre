@@ -14,7 +14,7 @@
   <class id="2" language="java" name="com.cts.proj.service.UserSecretQuestionService" project="CustomerCare" 
     file="/CustomerCare/src/main/java/com/cts/proj/service/UserSecretQuestionService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="272" y="673"/>    
+    <position height="-1" width="-1" x="269" y="591"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -23,7 +23,7 @@
   </class>  
   <class id="3" language="java" name="com.cts.proj.service.EmailUserService" project="CustomerCare" 
     file="/CustomerCare/src/main/java/com/cts/proj/service/EmailUserService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="224" y="325"/>    
+    <position height="-1" width="-1" x="246" y="295"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -32,7 +32,7 @@
   </class>  
   <class id="4" language="java" name="com.cts.proj.service.AnalystService" project="CustomerCare" 
     file="/CustomerCare/src/main/java/com/cts/proj/service/AnalystService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="907" y="1082"/>    
+    <position height="-1" width="-1" x="750" y="767"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -41,7 +41,7 @@
   </class>  
   <class id="5" language="java" name="com.cts.proj.service.UserService" project="CustomerCare" 
     file="/CustomerCare/src/main/java/com/cts/proj/service/UserService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="909" y="614"/>    
+    <position height="-1" width="-1" x="699" y="413"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -51,7 +51,7 @@
   <class id="6" language="java" name="com.cts.proj.service.AnalystSecretQuestionService" project="CustomerCare" 
     file="/CustomerCare/src/main/java/com/cts/proj/service/AnalystSecretQuestionService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="274" y="1132"/>    
+    <position height="-1" width="-1" x="268" y="930"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -60,7 +60,7 @@
   </class>  
   <class id="7" language="java" name="com.cts.proj.service.ComplaintService" project="CustomerCare" 
     file="/CustomerCare/src/main/java/com/cts/proj/service/ComplaintService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1511" y="1002"/>    
+    <position height="-1" width="-1" x="1248" y="698"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -70,7 +70,7 @@
   <class id="8" language="java" name="com.cts.proj.service.LoginDetailsService" project="CustomerCare" 
     file="/CustomerCare/src/main/java/com/cts/proj/service/LoginDetailsService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1408" y="275"/>    
+    <position height="-1" width="-1" x="981" y="150"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -80,7 +80,7 @@
   <class id="9" language="java" name="com.cts.proj.service.SecretQuestionService" project="CustomerCare" 
     file="/CustomerCare/src/main/java/com/cts/proj/service/SecretQuestionService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="272" y="919"/>    
+    <position height="-1" width="-1" x="269" y="765"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -89,7 +89,7 @@
   </class>  
   <class id="10" language="java" name="com.cts.proj.service.FeedbackService" project="CustomerCare" 
     file="/CustomerCare/src/main/java/com/cts/proj/service/FeedbackService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1407" y="550"/>    
+    <position height="-1" width="-1" x="1092" y="391"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -99,7 +99,7 @@
   <class id="11" language="java" name="com.cts.proj.service.EmailUserAnalystService" project="CustomerCare" 
     file="/CustomerCare/src/main/java/com/cts/proj/service/EmailUserAnalystService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="258" y="486"/>    
+    <position height="-1" width="-1" x="268" y="424"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -108,7 +108,7 @@
   </class>  
   <class id="12" language="java" name="com.cts.proj.service.AdminService" project="CustomerCare" 
     file="/CustomerCare/src/main/java/com/cts/proj/service/AdminService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="859" y="209"/>    
+    <position height="-1" width="-1" x="655" y="148"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
