@@ -1,6 +1,10 @@
 <%@ include file="common/header-analyst.jspf"%>
 <div class="container-fluid p-0">
 
+	<%@ include file="common/nav-bar-analyst.jspf"%>
+     <h2>Your Analyst Id is : ${analystId}</h2>
+
+
 	<nav class="navbar navbar-inverse navbar-dark bg-primary">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -26,6 +30,7 @@
 		</div>
 	</nav>
 	<h2>Your Analyst Id is : ${analystId }</h2>
+
 
 	<%@ include file="common/footer-analyst.jspf"%>
 </div>
