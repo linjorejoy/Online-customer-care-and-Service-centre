@@ -11,8 +11,8 @@
 				<li><a href="/admin-login"><span
 						class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 			</ul> -->
-			<div class="dropdown"><a
-						class="btn btn-light" href="/analyst-home">Home</a>
+			<div class="dropdown">
+				<a class="btn btn-light" href="/analyst-home">Home</a>
 				<button class="btn  btn-light dropdown-toggle" type="button"
 					id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false">
@@ -24,9 +24,9 @@
 						class="dropdown-item"
 						href="/analyst-emails?analystId=${analyst.analystId}">Mail<span
 						class="badge badge-danger ml-2">${fn:length(analyst.emailList)}</span></a>
-					<a class="dropdown-item" href="#">Show All Complaints</a> <a
-						class="dropdown-item" href="#">View Profile</a>
-					<a class="dropdown-item" href="/analyst-home?analystId=${analyst.analystId}">Home</a>
+					<a class="dropdown-item" href="#">Show All Complaints</a>  <a
+						class="dropdown-item"
+						href="/analyst-home?analystId=${analyst.analystId}">Home</a>
 				</div>
 			</div>
 		</div>
@@ -88,7 +88,18 @@
 								<strong>Complaint Id : ${complaint.complaintId}</strong>
 							</h4>
 							<!-- Subtitle -->
-							<h6 class="font-weight-bold indigo-text py-2">Description</h6>
+							<div class="form-row">
+								<div class="col">
+									<h6 class="font-weight-bold indigo-text py-2">Description</h6>
+								</div>
+								Complaint Created By : <strong>${complaint.user.userId}</strong>
+								<div class="col">
+									Assigned Analyst Id <strong>${complaint.analyst.analystId}</strong>
+								</div>
+								<div class="col">
+									<label class="btn btn-info">${complaint.status}</label>
+								</div>
+							</div>
 							<!-- Text -->
 							<p class="card-text">${complaint.description}</p>
 							<div class="span2 text-right">

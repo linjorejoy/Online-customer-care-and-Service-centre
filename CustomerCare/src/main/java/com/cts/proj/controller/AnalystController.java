@@ -160,6 +160,15 @@ public class AnalystController {
 
 	}
 
+	@RequestMapping(value = "/close-complaint-analyst", method = RequestMethod.GET )
+	public String closeComplaintAnalyst(@RequestParam("complaintId")long complaintId) {
+		
+		Complaint complaint = complaintService.getComplaint(complaintId);		
+		complaint.setStatus("closed");
+		complaintService.addComplaint(complaint);
+		return "redirect:/analyst-view-all";
+	}
+
 	@RequestMapping(value = "/sent-email-analyst-to-analyst", method = RequestMethod.POST)
 	public String sentEmail(@ModelAttribute("emailAnalyst") EmailAnalyst emailAnalyst, BindingResult results,
 			ModelMap model) {

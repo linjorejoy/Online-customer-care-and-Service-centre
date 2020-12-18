@@ -80,8 +80,9 @@
 				<form:errors path="description"></form:errors>
 			</div>
 			<div class="complaint-view-inputs-assign">
-				<input class="btn btn-success" type="submit" value="Assign"> <a
-					href="/download/complaint.xlsx?complaintId=${complaint.complaintId}">Download Excel File</a>
+				<input class="btn btn-success" type="submit" value="Assign"> <a class="btn btn-primary"
+					href="/download/complaint.xlsx?complaintId=${complaint.complaintId}">Download Excel File<span class="material-icons"> get_app </span></a>
+					<a class="btn btn-success" href="/close-complaint-analyst?complaintId=${complaint.complaintId}">Close Complaint</a>
 			</div>
 
 		</form:form>

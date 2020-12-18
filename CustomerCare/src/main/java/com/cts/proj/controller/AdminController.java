@@ -226,6 +226,17 @@ public class AdminController {
 
 	}
 
+
+	@RequestMapping(value = "/close-complaint-admin", method = RequestMethod.GET )
+	public String closeComplaintAdmin(@RequestParam("complaintId")long complaintId) {
+		
+		Complaint complaint = complaintService.getComplaint(complaintId);		
+		complaint.setStatus("closed");
+		complaintService.addComplaint(complaint);
+		return "redirect:/show-all-complaint-admin";
+	}
+	
+
 	@RequestMapping(value = "/sent-email-to-analyst", method = RequestMethod.POST)
 	public String sentEmail(@ModelAttribute("emailAnalyst") EmailAnalyst emailAnalyst, BindingResult results,
 			ModelMap model) {

@@ -75,12 +75,14 @@
 			</div>
 			<div class="complaint-view-inputs-assign">
 				<input class="btn btn-success" type="submit" value="Assign">
-				
+
 				<a class="btn btn-primary
-				" 
+				"
 					href="/download/complaint.xlsx?complaintId=${complaint.complaintId}">Download
 					Excel File<span class="material-icons"> get_app </span>
-				</a>
+				</a> <a
+					href="/close-complaint-admin?complaintId=${complaint.complaintId}"
+					class="btn btn-success">Close Complaint</a>
 			</div>
 
 		</form:form>

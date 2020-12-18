@@ -8,12 +8,12 @@
 				<tr>
 					<td><label>New Password</label></td>
 					<td><input id="newPwd" type="text" name="newPwd"
-						placeholder="New Password"></td>
+						placeholder="New Password" type="password"></td>
 				</tr>
 				<tr>
 					<td><label>Confirm New Password</label></td>
 					<td><input id="confirmPwd" type="text" name="confirmPwd"
-						placeholder="Confirm Password"></td>
+						placeholder="Confirm Password" type="password"></td>
 				</tr>
 
 			</table>
