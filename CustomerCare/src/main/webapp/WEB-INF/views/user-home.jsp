@@ -29,12 +29,12 @@
 
 		<h2>Welcome ${user.firstName}</h2>
 		<div class="p-5 text-center bg-image"
-			style="background-image: url('https://raw.githubusercontent.com/linjorejoy/host-images-for-projects/b8b24b8c78d7ea2401779f33a04551f895b739e4/svg/undraw_at_home_octe.svg'); width: 400px; height: 400px; background-size: contain; background-repeat: no-repeat; position: absolute; left: 80%; top: 80%; transform: translate(-50%, -50%);"></div>
+			style="background-image: url('https://raw.githubusercontent.com/linjorejoy/host-images-for-projects/b8b24b8c78d7ea2401779f33a04551f895b739e4/svg/undraw_at_home_octe.svg'); width: 400px; height: 200px; background-size: contain; background-repeat: no-repeat; position: absolute; left: 80%; top: 60%; transform: translate(-50%, -50%);"></div>
 		<%-- <a href="/create-complaint?userId=${user.userId}">Create Complaint</a> --%>
 
 		<div class="row">
 			<div class="d-inline-block col-sm-6" style="height: 200px;">
-				<div class="card">
+				<div class="card my-shadow">
 					<div class="card-body">
 						<h5 class="card-title">Create A Complaint</h5>
 						<p class="card-text">Submit Your complaint by clicking here.</p>
@@ -43,7 +43,7 @@
 				</div>
 			</div>
 			<div class="h-25  d-inline-block col-sm-6" style="height: 100px;">
-				<div class="card">
+				<div class="card my-shadow">
 					<div class="card-body">
 						<h5 class="card-title">View All Complaints</h5>
 						<p class="card-text">Any Complaints which other users has submitted.</p>
@@ -54,7 +54,7 @@
 		</div>
 		<div class="row">
 			<div class="h-25  d-inline-block col-sm-6" style="height: 100px;">
-				<div class="card">
+				<div class="card my-shadow">
 					<div class="card-body">
 						<h5 class="card-title">View Submitted Complaints</h5>
 						<p class="card-text">Any Complaints which you may have previously submitted can be viewed here.</p>

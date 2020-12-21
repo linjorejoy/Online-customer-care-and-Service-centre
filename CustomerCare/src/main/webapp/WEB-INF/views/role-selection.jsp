@@ -42,7 +42,7 @@
 					<div class="p-5 text-center bg-image"
 						style="background-image: url('https://raw.githubusercontent.com/linjorejoy/host-images-for-projects/4146c9b7082d1dc797109ea2b66b287e76c597d7/svg/undraw_maintenance_cn7j.svg'); width: 200px; height: 200px; background-size: contain; background-repeat: no-repeat; position: absolute; left: 20px; top: 250px;"></div>
 					<form:form action="/register-user" modelAttribute="user"
-						method="POST" cssClass="text-center border border-light p-5">
+						method="POST" cssClass="text-center p-5">
 						<div class="form-row mb-2">
 							<div class="col">
 
@@ -319,7 +319,7 @@
 					class='tab-pane fade <c:if test="${isAdmin}">show active</c:if>'
 					id="pills-admin" role="tabpanel" aria-labelledby="pills-admin-tab">
 					<div class="p-5 text-center bg-image"
-						style="background-image: url('https://raw.githubusercontent.com/linjorejoy/host-images-for-projects/51de82b8736f7d92e4c2abd0a61b56d5dc369c04/svg/undraw_programming_2svr.svg'); width: 500px; height: 500px; background-size: contain; background-repeat: no-repeat; position: absolute; left: 50%; top: 75%; transform: translate(-50%, -50%);"></div>
+						style="background-image: url('https://raw.githubusercontent.com/linjorejoy/host-images-for-projects/51de82b8736f7d92e4c2abd0a61b56d5dc369c04/svg/undraw_programming_2svr.svg'); width: 500px; height: 300px; background-size: contain; background-repeat: no-repeat; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);"></div>
 					<a href="/admin-home" class="btn btn-success btn-lg">Login</a>
 				</div>
 			</div>
