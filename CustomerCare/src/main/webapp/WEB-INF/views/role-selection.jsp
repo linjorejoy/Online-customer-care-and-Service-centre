@@ -135,8 +135,8 @@
 										href="/user-home">Login</a>
 								</div>
 								<div class="form-buttons-div">
-									<a href="/forgot-userID-mail" class="mr-2 ml-2">Forgot User
-										Id?</a> <a href="/forgot-password" class="mr-2 ml-2">Forgot
+									<a href="/forgot-userID-mail" class="mr-2 ml-2 text-white">Forgot User
+										Id?</a> <a href="/forgot-password" class="mr-2 ml-2 text-white">Forgot
 										Password?</a>
 								</div>
 
@@ -284,8 +284,8 @@
 										href="/analyst-home">Login</a>
 								</div>
 								<div class="form-buttons-div">
-									<a href="/forgot-id" " class="mr-2 ml-2">Forgot User Id?</a> <a
-										href="/forgot-password-analyst" class="mr-2 ml-2">Forgot
+									<a href="/forgot-id" " class="mr-2 ml-2 text-white">Forgot User Id?</a> <a
+										href="/forgot-password-analyst" class="mr-2 ml-2 text-white">Forgot
 										Password?</a>
 								</div>
 							</div>

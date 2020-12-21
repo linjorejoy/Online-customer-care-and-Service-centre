@@ -19,7 +19,7 @@
 					<a href="/logout" class="dropdown-item"> Logout</a> <a
 						class="dropdown-item" href="#">Mail<span class="badge badge-danger ml-2">${emailCount}</span></a> <a class="dropdown-item"
 						href="/user-complaint-list-view?userId=${user.userId}">Show All Complaints</a>
-						<a class="dropdown-item" href="#">View Profile</a>
+						<!-- <a class="dropdown-item" href="#">View Profile</a> -->
 					<!-- <a class="dropdown-item" href="#">Something	else here</a> -->
 				</div>
 			</div>

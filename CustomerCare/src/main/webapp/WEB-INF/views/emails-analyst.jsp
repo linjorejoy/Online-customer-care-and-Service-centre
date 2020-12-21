@@ -1,7 +1,7 @@
 <%@ include file="common/header-analyst.jspf"%>
 <div class="container-fluid p-0">
 	<%@ include file="common/nav-bar-analyst.jspf"%>
-	<div class="container mt-5">
+	<div class="container mt-5 my-shadow">
 
 		<table class="table">
 			<thead class="thead-dark">

@@ -17,11 +17,7 @@
 				<div class="dropdown-menu dropdown-menu-right"
 					aria-labelledby="dropdownMenuButton">
 					<a href="/admin-home" class="dropdown-item"> Home</a> <a
-						href="/logout" class="dropdown-item"> Logout</a> <a
-						class="dropdown-item" href="#">Mail</a> <a class="dropdown-item"
-						href="/show-all-complaint-admin">Show All Complaints</a> <a
-						class="dropdown-item" href="/admin-create-feedback">Create
-						Feedback</a>
+						href="/logout" class="dropdown-item"> Logout</a>
 
 				</div>
 			</div>

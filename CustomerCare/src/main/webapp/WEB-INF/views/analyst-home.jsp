@@ -19,7 +19,6 @@
 					<a href="/logout" class="dropdown-item"> Logout</a> <a
 						class="dropdown-item" href="/analyst-emails?analystId=${analyst.analystId}">Mail<span class="badge badge-danger ml-2">${emailCount}</span></a> <a class="dropdown-item"
 						href="#">Show All Complaints</a>
-						<a class="dropdown-item" href="#">View Profile</a>
 					<!-- <a class="dropdown-item" href="#">Something	else here</a> -->
 				</div>
 			</div>
@@ -43,7 +42,7 @@
 				</div>
 			</div> --%>
 			<div class="h-25  d-inline-block col-sm-6" style="height: 100px;">
-				<div class="card">
+				<div class="card my-shadow">
 					<div class="card-body">
 						<h5 class="card-title">View All Complaints</h5>
 						<p class="card-text">Any Complaints which you may have previously submitted can be viewed here.</p>

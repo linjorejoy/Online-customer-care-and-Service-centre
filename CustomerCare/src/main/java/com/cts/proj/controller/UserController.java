@@ -261,7 +261,7 @@ public class UserController {
 			LoginDetails thisUser = loginDetailsService.getLoginDetailsByRegisteredId(user.getUserId());
 			thisUser.setPassword(newPwd);
 			loginDetailsService.addLoginDetails(thisUser);
-			return "user-home";
+			return "redirect:/roleSelectionPage";
 		}else {
 			return "set-new-pwd-user";
 		}
