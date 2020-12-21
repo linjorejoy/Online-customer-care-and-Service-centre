@@ -321,7 +321,7 @@ public class AnalystController {
 			LoginDetails thisAnalyst = loginDetailsService.getLoginDetailsByRegisteredId(analyst.getAnalystId());
 			thisAnalyst.setPassword(newPwd);
 			loginDetailsService.addLoginDetails(thisAnalyst);
-			return "analyst-home";
+			return "redirect:/roleSelectionPage";
 		}else {
 			return "set-new-pwd-analyst";
 		}
