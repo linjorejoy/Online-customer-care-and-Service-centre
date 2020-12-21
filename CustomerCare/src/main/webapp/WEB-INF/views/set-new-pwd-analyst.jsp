@@ -7,12 +7,12 @@
 			<table>
 				<tr>
 					<td><label>New Password</label></td>
-					<td><input id="newPwd" type="text" name="newPwd"
+					<td><input id="newPwd" type="password" name="newPwd"
 						placeholder="New Password" type="password"></td>
 				</tr>
 				<tr>
 					<td><label>Confirm New Password</label></td>
-					<td><input id="confirmPwd" type="text" name="confirmPwd"
+					<td><input id="confirmPwd" type="password" name="confirmPwd"
 						placeholder="Confirm Password" type="password"></td>
 				</tr>
 
